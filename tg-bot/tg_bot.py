@@ -1,152 +1,170 @@
 ﻿# -*- coding: utf-8 -*-
 import telegram
-from telegram.ext import CommandHandler, MessageHandler, Filters, Updater
-from telegram import ReplyKeyboardMarkup
+import random
+from telegram.ext import CommandHandler, MessageHandler, Filters, Updater, CallbackQueryHandler, CallbackContext
+from telegram import ReplyKeyboardMarkup, InlineKeyboardMarkup, InlineKeyboardButton, Update
 
 token = "5873796392:AAEE1i9cwQ5Y2T6Mk-TJkTHruANhCmPr_uU"
 bot = telegram.Bot(token=token)
 updater = Updater(token=token, use_context=True)
 
-Bot_txt = open("Bot.txt", "r", encoding="utf-8").readlines(0)
-Command_txt = open("Commands.txt", "r", encoding="utf-8")
-Info = open("Info.txt", "r", encoding="utf-8").readlines(0)
+menu = InlineKeyboardButton("Меню", callback_data="/back")
+menudel = InlineKeyboardButton("Меню", callback_data="/backdel")
 
-sticker_links = {'fifticent' : open("links/fifticent.txt").readlines(0), 'lilpeep' : open("links/lilpeep.txt").readlines(0),
-         'gecs' : open("links/100gecs.txt").readlines(0), 'egorcreed' : open("links/egorcreed.txt").readlines(0)
-         }
+conflict = False
 
-Ypiter_txt = open("Ypiter.txt", "r", encoding="utf-8").readlines(0)
-Ypi_All = open("YpiAll.txt", "r", encoding="utf-8").readlines(0)
-Ypi_14 = open("Ypi14.txt", "r", encoding="utf-8").readlines(0)
-Ypi_15 = open("Ypi15.txt", "r", encoding="utf-8").readlines(0)
+mem_m = ['', '', '', '', '']
 
-Game1_Description = open("Description1.txt", "r", encoding="utf-8").readlines(0)
-#Game2_Description = open("", "r", encoding="utf-8").readlines(0)
-#Game3_Description = open("", "r", encoding="utf-8").readlines(0)
-#Game4_Description = open("", "r", encoding="utf-8").readlines(0)
+ypiterFAQ = [[InlineKeyboardButton("Общее", callback_data='all'), InlineKeyboardButton("14 лет", callback_data='14'), InlineKeyboardButton("15 лет", callback_data='15')],
+             [menudel]]
 
-Commands_txt = []
-for i in range(4):
-    Commands_txt.append(Command_txt.readlines(i))
+FAQ = [[InlineKeyboardButton("О боте", callback_data="botinfo"), InlineKeyboardButton("О ypiter", callback_data="ypiinfo")],
+       [menudel]]
 
-Commands_txt = str(Commands_txt[0][0]) + "\n" + str(Commands_txt[0][1]) + "\n" + str(Commands_txt[0][2]) + "\n" + str(Commands_txt[0][3]) + "\n" + str(Commands_txt[0][4])
+back = [[menu]]
+backdel = [[menudel]]
 
-ypiterFAQ = ["Общее", "Info-14", "Info-15", "/back"]
+rap = [[InlineKeyboardButton("50 Cent", callback_data="50 Cent"), InlineKeyboardButton("Lil Peep", callback_data="Lil Peep"),
+        InlineKeyboardButton("Egor Creed", callback_data="Egor Creed"), InlineKeyboardButton("100 gecs", callback_data="100 gecs")],
+       [menu]]
 
-def create_keyboard(options):
-    keyboard = []
-    for option in options:
-        keyboard.append([option])
-    return ReplyKeyboardMarkup(keyboard, resize_keyboard=True)
-
-def autoClose_keyboard(options):# FOR MORE INFO ANY NUMBERS
-    keyboard = []
-    for option in options:
-        keyboard.append([option])
-    return ReplyKeyboardMarkup(keyboard, resize_keyboard=True, one_time_keyboard=True)
-
-def back_keyboard():
-    keyboard = []
-    options = ["/back"]
-    for option in options:
-        keyboard.append([option])
-    return ReplyKeyboardMarkup(keyboard, resize_keyboard=True)
+start_key = [[InlineKeyboardButton("FAQ", callback_data="faq"), InlineKeyboardButton("Инфо", callback_data="info"), InlineKeyboardButton("Команды", callback_data="commands")],
+             [InlineKeyboardButton("Обратная связь", callback_data="helper")]]
 
 def start_handler(update, context):
-    context.bot.send_message(chat_id=update.message.chat_id, text='Тебя приветсвует текстовый помощник ypite, здесь собрана вся информация о моем создателе - Ypiter"e')
-    context.bot.send_message(chat_id=update.message.chat_id, text='Воспользуйся командами или клавиатурой для взаимодействия со мной.\nЕсли есть вопросы, пиши: /menu')
+    context.bot.send_message(chat_id=update.message.chat_id, text='Тебя приветсвует текстовый помощник ypite, здесь собрана вся информация о моем создателе - Ypiter"e\nВоспользуйся командами или клавиатурой для взаимодействия со мной',
+                             reply_markup=InlineKeyboardMarkup(start_key))
 
 def help_handler(update, context):
-    context.bot.send_message(chat_id=update.message.chat_id, text="По всем вопросам вы можете обратиться к @ypite_nk")
+    context.bot.send_message(chat_id=update.message.chat_id, text="По всем вопросам вы можете обратиться к @ypite_nk", reply_markup=InlineKeyboardMarkup(backdel))
 
 def faq_handler(update, context):
-    update.message.reply_text("Какой тип информации вас интерисует?", reply_markup=create_keyboard(["О боте", "О ypiter", "/back"]))
+    update.message.reply_text("Какой тип информации вас интересует?", reply_markup=InlineKeyboardMarkup(FAQ))
 
 def fun_handler(update, context):
-    anw = update.message.reply_text
-    anw("Смотри, есть 4 игры на выбор. Пиши /game1 или /game2 и т.д.", reply_markup=autoClose_keyboard(["/game1", "/game2", "/game3", "/game4", "/back"]))
-    anw("Дополнительная ифнормация об играх: /funinfo")
+    answer = update.message.reply_text
+    key = [
+            [
+             InlineKeyboardButton("rap", callback_data="rap"), InlineKeyboardButton("mem", callback_data="mem"),
+             InlineKeyboardButton("3", callback_data="3"), InlineKeyboardButton("4", callback_data="4")
+            ],
+            [menu]
+           ]
+    answer("Смотри, есть 4 игры на выбор.\n/rap - стикер = репер\n/mem - рандомный мемас из базы\n", reply_markup=InlineKeyboardMarkup(key))
 
 def link_handler(update, context):
-    pass
-
-def funInfo_handler(update, context):
-    pass
+    answer = update.message.reply_text
+    button = [
+                [InlineKeyboardButton(text="Вконтакте", url="https://vk.com/ypite")],
+                [InlineKeyboardButton(text="Youtube", url="https://www.youtube.com/channel/UCQunVaPHyI2MvS0rU56_MhA")],
+                [InlineKeyboardButton(text="TikTok", url="https://vm.tiktok.com/ZT81sSebh/")],
+                [InlineKeyboardButton(text="Группа Вк", url="https://vk.com/cloud_ypiter")],
+                [menu]
+             ]
+    answer("\n".join(open("Mylink.txt", "r", encoding="utf-8").readlines(0)), reply_markup=InlineKeyboardMarkup(button))
 
 def echo_handler(update, context):
-    print(update.message.text)
-    if update.message.text == "FAQ":
-        update.message.reply_text("Какой тип информации вас интересует?", reply_markup=create_keyboard(["О боте", "О ypiter", "/back"]))
-    elif update.message.text == "О боте":
-        update.message.reply_text(str(Bot_txt[0]))
-    elif update.message.text == "О ypiter":
-        update.message.reply_text(str(Ypiter_txt[0]), reply_markup=autoClose_keyboard(ypiterFAQ))
-    
-    elif update.message.text == "Общее":
-        update.message.reply_text(str(Ypi_All[0]), reply_markup=autoClose_keyboard(ypiterFAQ))
-    elif update.message.text == "Info-14":
-        update.message.reply_text(str(Ypi_14[0]), reply_markup=autoClose_keyboard(ypiterFAQ))
-    elif update.message.text == "Info-15":
-        update.message.reply_text(str(Ypi_15[0]), reply_markup=autoClose_keyboard(ypiterFAQ))
-    
-    elif update.message.text == "Обратная связь":
-        update.message.reply_text("Если у вас есть вопросы, которые не решились в /FAQ, то напишите @ypite_nk")
-
-    elif update.message.text == "Инфо":
-        update.message.reply_text(str(Info[0]))
-
-    elif update.message.text == "Команды":
-        update.message.reply_text(Commands_txt)
-
-    elif update.message.text == "50 Cent":
-        update.message.reply_sticker(sticker_links['fifticent'][0])
-
-    elif update.message.text == "Lil Peep":
-        update.message.reply_sticker(sticker_links['lilpeep'][0])
-
-    elif update.message.text == "Egor Creed":
-        update.message.reply_sticker(sticker_links['egorcreed'][0])
-
-    elif update.message.text == "100 gecs":
-        update.message.reply_sticker(sticker_links['gecs'][0])
-
-def stick_handler(update, context):
-    update.message.reply_sticker("https://raw.githubusercontent.com/ypite-nk/Sticker/main/5413715884726300309.webp")
+    message = update.message.text
+    update.message.reply_text("Пожалуйста, воспользуйтесь интерфейсом или командами. Если у вас есть вопросы: /help")
 
 def back_handler(update, context):
-    options = ['FAQ', 'Обратная связь', 'Инфо', 'Команды']
-    keyboard = create_keyboard(options)
-    update.message.reply_text("Меню", reply_markup=keyboard)
-
-def game1_handler(update, context):
-    update.message.reply_text(str(Game1_Description[0]), reply_markup=create_keyboard(["50 Cent", "Lil Peep", "Egor Creed", "100 gecs", "/back"]))
+    options = ['FAQ', 'Инфо', 'Команды', 'Обратная связь']
+    update.message.reply_text("Меню", reply_markup=InlineKeyboardMarkup(start_key))
 
 def game2_handler(update, context):
-    pass
+    global mem_m
+    mem_links = open("mem_links.txt", "r", encoding="utf-8").readlines(0)
+    mem_n = str(random.choice(mem_links))
+    while mem_n == mem_m[0] or mem_n == mem_m[1] or mem_n == mem_m[2] or mem_n == mem_m[3] or mem_n == mem_m[4]:
+        mem_n = str(random.choice(mem_links))
+    update.callback_query.message.reply_photo(mem_n, reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Мем", callback_data="mem"), menu]]))
+    mem_m[4] = mem_m[3]
+    mem_m[3] = mem_m[2]
+    mem_m[2] = mem_m[1]
+    mem_m[1] = mem_m[0]
+    mem_m[0] = mem_n
 
-def game3_handler(update, context):
-    pass
+def change(update, context):
+    global message_id
+    message_id = update.callback_query.message.message_id
+    chat_id = update.callback_query.message.chat_id
+    context.bot.delete_message(chat_id, message_id)
 
-def game4_handler(update, context):
-    pass
+def echo_button(update, context):
+    global conflict
+    sticker_links = {'fifticent' : open("links/fifticent.txt").readlines(0), 'lilpeep' : open("links/lilpeep.txt").readlines(0),
+                    'gecs' : open("links/100gecs.txt").readlines(0), 'egorcreed' : open("links/egorcreed.txt").readlines(0)
+                    }
+    conflict = True
+    match update.callback_query['data']:
+        case "/back":
+            update.callback_query.message.reply_text('Меню', reply_markup=InlineKeyboardMarkup(start_key))
+
+        case "all":
+            update.callback_query.message.reply_text("\n".join(open("YpiAll.txt", "r", encoding="utf-8").readlines(0)), reply_markup=InlineKeyboardMarkup(ypiterFAQ))
+        case "14":
+            update.callback_query.message.reply_text("\n".join(open("Ypi14.txt", "r", encoding="utf-8").readlines(0)), reply_markup=InlineKeyboardMarkup(ypiterFAQ))
+        case "15":
+            update.callback_query.message.reply_text("\n".join(open("Ypi15.txt", "r", encoding="utf-8").readlines(0)), reply_markup=InlineKeyboardMarkup(ypiterFAQ))
+
+        case "mem":
+            game2_handler(update, context)
+
+        case _:
+            conflict = False
+
+    if not conflict:
+        change(update, context)
+    
+    match update.callback_query['data']:
+        case "/backdel":
+            new_message_id = update.callback_query.message.reply_text('Меню', reply_markup=InlineKeyboardMarkup(start_key)).message_id
+
+        case "botinfo":
+            new_message_id = update.callback_query.message.reply_text("\n".join(open("Bot.txt", "r", encoding="utf-8").readlines(0)), reply_markup=InlineKeyboardMarkup(back)).message_id
+        case "ypiinfo":
+            new_message_id = update.callback_query.message.reply_text("\n".join(open("Ypiter.txt", "r", encoding="utf-8").readlines(0)), reply_markup=InlineKeyboardMarkup(ypiterFAQ)).message_id
+        
+        case "rap":
+            new_message_id = update.callback_query.message.reply_text(str(open("Description1.txt", "r", encoding="utf-8").readlines(0)[0]), reply_markup=InlineKeyboardMarkup(rap)).message_id
+        case "50 Cent":
+            new_message_id = update.callback_query.message.reply_sticker(sticker_links['fifticent'][0]).message_id
+        case "Lil Peep":
+            new_message_id = update.callback_query.message.reply_sticker(sticker_links['lilpeep'][0]).message_id
+        case "Egor Creed":
+            new_message_id = update.callback_query.message.reply_sticker(sticker_links['egorcreed'][0]).message_id
+        case "100 gecs":
+            new_message_id = update.callback_query.message.reply_sticker(sticker_links['gecs'][0]).message_id
+
+        case "faq":
+            new_message_id = update.callback_query.message.reply_text("Какой тип информации вас интересует?", reply_markup=InlineKeyboardMarkup(FAQ)).message_id
+        case "info":
+            new_message_id = update.callback_query.message.reply_text("\n".join(open("Info.txt", "r", encoding="utf-8").readlines(0)), reply_markup=InlineKeyboardMarkup(backdel)).message_id
+        case "commands":
+            new_message_id = update.callback_query.message.reply_text("\n".join(open("Commands.txt", "r", encoding="utf-8").readlines(0)), reply_markup=InlineKeyboardMarkup(backdel)).message_id
+        case "helper":
+            new_message_id = update.callback_query.message.reply_text("Если у вас есть вопросы, которые не решились в /FAQ, то напишите @ypite_nk", reply_markup=InlineKeyboardMarkup(backdel)).message_id
+    if not conflict:
+        context.chat_data['message_id'] = new_message_id
+
+    conflict = False
 
 updater.dispatcher.add_handler(CommandHandler('start', start_handler))
 updater.dispatcher.add_handler(CommandHandler('help', help_handler))
 updater.dispatcher.add_handler(CommandHandler('FAQ', faq_handler))
 updater.dispatcher.add_handler(CommandHandler('fun', fun_handler))
 updater.dispatcher.add_handler(CommandHandler('links', link_handler))
-updater.dispatcher.add_handler(CommandHandler('funinfo', funInfo_handler))
 
 updater.dispatcher.add_handler(MessageHandler(Filters.text & (~Filters.command), echo_handler))
-updater.dispatcher.add_handler(MessageHandler(Filters.sticker, stick_handler))
 
 updater.dispatcher.add_handler(CommandHandler('menu', back_handler))
 updater.dispatcher.add_handler(CommandHandler("back", back_handler))
 
-updater.dispatcher.add_handler(CommandHandler('game1', game1_handler))
-updater.dispatcher.add_handler(CommandHandler('game2', game2_handler))
-updater.dispatcher.add_handler(CommandHandler('game3', game3_handler))
-updater.dispatcher.add_handler(CommandHandler('game4', game4_handler))
+updater.dispatcher.add_handler(CommandHandler('mem', game2_handler))
+#updater.dispatcher.add_handler(CommandHandler('game3', game3_handler))
+#updater.dispatcher.add_handler(CommandHandler('game4', game4_handler))
+
+updater.dispatcher.add_handler(CallbackQueryHandler(echo_button))
 
 updater.start_polling()
 updater.idle()
