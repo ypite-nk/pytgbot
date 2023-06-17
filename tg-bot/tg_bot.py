@@ -18,60 +18,60 @@ mem_m = ['', '', '', '', '']
 LikeCount = 0
 DisLikeCount = 0
 
-ypiterFAQ = [[InlineKeyboardButton("Общее", callback_data='all'), InlineKeyboardButton("14 лет", callback_data='14'), InlineKeyboardButton("15 лет", callback_data='15')],
-             [menudel]]
+ypiterFAQ = [[InlineKeyboardButton("Общее", callback_data='all'), InlineKeyboardButton("Рецензии", callback_data='marks')],
+             [InlineKeyboardButton("14 лет", callback_data='14'), InlineKeyboardButton("15 лет", callback_data='15')],
+             [InlineKeyboardButton("Назад", callback_data="faq"), menudel]]
 
 FAQ = [[InlineKeyboardButton("О боте", callback_data="botinfo"), InlineKeyboardButton("О ypiter", callback_data="ypiinfo")],
        [menudel]]
 
-back = [[menu]]
+#back = [[menu]]
 backdel = [[menudel]]
 
 rap = [[InlineKeyboardButton("50 Cent", callback_data="50 Cent"), InlineKeyboardButton("Lil Peep", callback_data="Lil Peep"),
         InlineKeyboardButton("Egor Creed", callback_data="Egor Creed"), InlineKeyboardButton("100 gecs", callback_data="100 gecs")],
-       [menu]]
+       [InlineKeyboardButton("Назад", callback_data="/fun"), menudel]]
 
 start_key = [[InlineKeyboardButton("FAQ", callback_data="faq"), InlineKeyboardButton("Инфо", callback_data="info"), InlineKeyboardButton("Команды", callback_data="commands")],
              [InlineKeyboardButton("Обратная связь", callback_data="helper")]]
 
-def echo(update, context):
-    print(update.callback_query['data'])
-    print(update.callback_query.message.chat['username'])
+marks = [[InlineKeyboardButton("1::A", callback_data="A-1"), InlineKeyboardButton("2::A", callback_data="A-2"), InlineKeyboardButton("3::A", callback_data="A-3")],
+         [InlineKeyboardButton("Назад", callback_data="ypiinfo"), menudel]]
+
+marks_openLIST = ["MARKS-", "A", "N"]
+
+def echo(update, context): # ОТЛАДКА
+    print(update.callback_query['data'] + " from " + update.callback_query.message.chat['username'])
+    print(context)
 
 def start_handler(update, context):
-    context.bot.send_message(chat_id=update.message.chat_id, text='Тебя приветсвует текстовый помощник ypite, здесь собрана вся информация о моем создателе - Ypiter"e\nВоспользуйся командами или клавиатурой для взаимодействия со мной',
+    context.bot.send_message(chat_id=update.message.chat_id, text="\n".join(open("start_description.txt", "r", encoding="utf-8").readlines(0)),
                              reply_markup=InlineKeyboardMarkup(start_key))
 
 def help_handler(update, context):
-    context.bot.send_message(chat_id=update.message.chat_id, text="По всем вопросам вы можете обратиться к @ypite_nk", reply_markup=InlineKeyboardMarkup(backdel))
+    context.bot.send_message(chat_id=update.message.chat_id, text="По всем вопросам вы можете обратиться к @ypite_nk",
+                             reply_markup=InlineKeyboardMarkup(backdel))
 
 def faq_handler(update, context):
     update.message.reply_text("Какой тип информации вас интересует?", reply_markup=InlineKeyboardMarkup(FAQ))
 
 def fun_handler(update, context):
-    answer = update.message.reply_text
-    key = [
-            [
-             InlineKeyboardButton("rap", callback_data="rap"), InlineKeyboardButton("mem", callback_data="mem"),
-             InlineKeyboardButton("3", callback_data="3"), InlineKeyboardButton("4", callback_data="4")
-            ],
-            [menu]
-           ]
-    answer("Смотри, есть 4 игры на выбор.\n/rap - стикер = репер\n/mem - рандомный мемас из базы\n", reply_markup=InlineKeyboardMarkup(key))
+    key = [[InlineKeyboardButton("rap", callback_data="rap"), InlineKeyboardButton("mem", callback_data="mem"),
+            InlineKeyboardButton("3", callback_data="3"), InlineKeyboardButton("4", callback_data="4")],
+            [menu]]
+    update.message.reply_text("Смотри, есть 4 игры на выбор.\n/rap - стикер = репер\n/mem - рандомный мемас из базы\n",
+                              reply_markup=InlineKeyboardMarkup(key))
 
 def link_handler(update, context):
-    answer = update.message.reply_text
-    button = [
-                [InlineKeyboardButton(text="Вконтакте", url="https://vk.com/ypite")],
-                [InlineKeyboardButton(text="Youtube", url="https://www.youtube.com/channel/UCQunVaPHyI2MvS0rU56_MhA")],
-                [InlineKeyboardButton(text="TikTok", url="https://vm.tiktok.com/ZT81sSebh/")],
-                [InlineKeyboardButton(text="Группа Вк", url="https://vk.com/cloud_ypiter")],
-                [menu]
-             ]
-    answer("\n".join(open("Mylink.txt", "r", encoding="utf-8").readlines(0)), reply_markup=InlineKeyboardMarkup(button))
+    button = [[InlineKeyboardButton(text="Вконтакте", url="https://vk.com/ypite")],
+              [InlineKeyboardButton(text="Youtube", url="https://www.youtube.com/channel/UCQunVaPHyI2MvS0rU56_MhA")],
+              [InlineKeyboardButton(text="TikTok", url="https://vm.tiktok.com/ZT81sSebh/")],
+              [InlineKeyboardButton(text="Группа Вк", url="https://vk.com/cloud_ypiter")],
+              [menu]]
+    update.message.reply_text("\n".join(open("Mylink.txt", "r", encoding="utf-8").readlines(0)),
+                              reply_markup=InlineKeyboardMarkup(button))
 
 def echo_handler(update, context):
-    message = update.message.text
     update.message.reply_text("Пожалуйста, воспользуйтесь интерфейсом или командами. Если у вас есть вопросы: /help")
 
 def back_handler(update, context):
@@ -99,7 +99,7 @@ def game2_handler(update, context):
                 [InlineKeyboardButton("Мем", callback_data="mem"),
                  InlineKeyboardButton(str(LikeCount), callback_data="like-" + str(LikeCount)),
                  InlineKeyboardButton(str(DisLikeCount), callback_data="dislike-" + str(DisLikeCount))],
-                [menu]]))
+                [InlineKeyboardButton("Назад", callback_data="/fun"), menu]]))
     mem_m[4] = mem_m[3]
     mem_m[3] = mem_m[2]
     mem_m[2] = mem_m[1]
@@ -124,6 +124,11 @@ def echo_button(update, context):
             active_mem.change_raiting(int(value) + 1, int(DisLikeCount))
         elif action == "dislike":
             active_mem.change_raiting(int(LikeCount), int(value) + 1)
+
+        if action == "A":
+            update.callback_query.message.reply_text("\n".join(open(marks_openLIST[0] + value + "-" + action + ".txt", "r", encoding="utf-8").readlines(0)),
+                                                     reply_markup=InlineKeyboardMarkup(marks))
+
         conflict = False
     else:
         echo(update, context) #ОТЛАДКА
@@ -131,12 +136,8 @@ def echo_button(update, context):
             case "/back":
                 update.callback_query.message.reply_text('Меню', reply_markup=InlineKeyboardMarkup(start_key))
 
-            case "all":
-                update.callback_query.message.reply_text("\n".join(open("YpiAll.txt", "r", encoding="utf-8").readlines(0)), reply_markup=InlineKeyboardMarkup(ypiterFAQ))
-            case "14":
-                update.callback_query.message.reply_text("\n".join(open("Ypi14.txt", "r", encoding="utf-8").readlines(0)), reply_markup=InlineKeyboardMarkup(ypiterFAQ))
-            case "15":
-                update.callback_query.message.reply_text("\n".join(open("Ypi15.txt", "r", encoding="utf-8").readlines(0)), reply_markup=InlineKeyboardMarkup(ypiterFAQ))
+            case "/fun":
+                fun_handler(update.callback_query, context)
 
             case "mem":
                 game2_handler(update, context)
@@ -149,32 +150,58 @@ def echo_button(update, context):
     
         match update.callback_query['data']:
             case "/backdel":
-                new_message_id = update.callback_query.message.reply_text('Меню', reply_markup=InlineKeyboardMarkup(start_key)).message_id
+                new_message_id = update.callback_query.message.reply_text('Меню',
+                                                                          reply_markup=InlineKeyboardMarkup(start_key)).message_id
 
             case "botinfo":
-                new_message_id = update.callback_query.message.reply_text("\n".join(open("Bot.txt", "r", encoding="utf-8").readlines(0)), reply_markup=InlineKeyboardMarkup(back)).message_id
+                new_message_id = update.callback_query.message.reply_text("\n".join(open("Bot.txt", "r", encoding="utf-8").readlines(0)),
+                                                                          reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Назад", callback_data="faq"), menudel]])).message_id
             case "ypiinfo":
-                new_message_id = update.callback_query.message.reply_text("\n".join(open("Ypiter.txt", "r", encoding="utf-8").readlines(0)), reply_markup=InlineKeyboardMarkup(ypiterFAQ)).message_id
+                new_message_id = update.callback_query.message.reply_text("\n".join(open("Ypiter.txt", "r", encoding="utf-8").readlines(0)),
+                                                                          reply_markup=InlineKeyboardMarkup(ypiterFAQ)).message_id
+
+            case "all":
+                 new_message_id = update.callback_query.message.reply_text("\n".join(open("YpiAll.txt", "r", encoding="utf-8").readlines(0)),
+                                                         reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Назад", callback_data="ypiinfo"), menudel]])).message_id
+            case "14":
+                 new_message_id = update.callback_query.message.reply_text("\n".join(open("Ypi14.txt", "r", encoding="utf-8").readlines(0)),
+                                                         reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Назад", callback_data="ypiinfo"), menudel]])).message_id
+            case "15":
+                 new_message_id = update.callback_query.message.reply_text("\n".join(open("Ypi15.txt", "r", encoding="utf-8").readlines(0)),
+                                                         reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Назад", callback_data="ypiinfo"), menudel]])).message_id
+
+            case "marks":
+                new_message_id = update.callback_query.message.reply_text("Выберите номер рецензии:",
+                                                                          reply_markup=InlineKeyboardMarkup(marks))
         
             case "rap":
-                new_message_id = update.callback_query.message.reply_text(str(open("Description1.txt", "r", encoding="utf-8").readlines(0)[0]), reply_markup=InlineKeyboardMarkup(rap)).message_id
+                new_message_id = update.callback_query.message.reply_text(str(open("Game_Description1.txt", "r", encoding="utf-8").readlines(0)[0]),
+                                                                          reply_markup=InlineKeyboardMarkup(rap)).message_id
             case "50 Cent":
-                new_message_id = update.callback_query.message.reply_sticker(sticker_links['fifticent'][0]).message_id
+                new_message_id = update.callback_query.message.reply_sticker(sticker_links['fifticent'][0],
+                                                                             reply_markup=InlineKeyboardMarkup(rap)).message_id
             case "Lil Peep":
-                new_message_id = update.callback_query.message.reply_sticker(sticker_links['lilpeep'][0]).message_id
+                new_message_id = update.callback_query.message.reply_sticker(sticker_links['lilpeep'][0],
+                                                                             reply_markup=InlineKeyboardMarkup(rap)).message_id
             case "Egor Creed":
-                new_message_id = update.callback_query.message.reply_sticker(sticker_links['egorcreed'][0], reply_markup=InlineKeyboardMarkup()).message_id
+                new_message_id = update.callback_query.message.reply_sticker(sticker_links['egorcreed'][0],
+                                                                             reply_markup=InlineKeyboardMarkup(rap)).message_id
             case "100 gecs":
-                new_message_id = update.callback_query.message.reply_sticker(sticker_links['gecs'][0]).message_id 
+                new_message_id = update.callback_query.message.reply_sticker(sticker_links['gecs'][0],
+                                                                             reply_markup=InlineKeyboardMarkup(rap)).message_id 
 
             case "faq":
-                new_message_id = update.callback_query.message.reply_text("Какой тип информации вас интересует?", reply_markup=InlineKeyboardMarkup(FAQ)).message_id
+                new_message_id = update.callback_query.message.reply_text("Какой тип информации вас интересует?",
+                                                                          reply_markup=InlineKeyboardMarkup(FAQ)).message_id
             case "info":
-                new_message_id = update.callback_query.message.reply_text("\n".join(open("Info.txt", "r", encoding="utf-8").readlines(0)), reply_markup=InlineKeyboardMarkup(backdel)).message_id
+                new_message_id = update.callback_query.message.reply_text("\n".join(open("Info.txt", "r", encoding="utf-8").readlines(0)),
+                                                                          reply_markup=InlineKeyboardMarkup(backdel)).message_id
             case "commands":
-                new_message_id = update.callback_query.message.reply_text("\n".join(open("Commands.txt", "r", encoding="utf-8").readlines(0)), reply_markup=InlineKeyboardMarkup(backdel)).message_id
+                new_message_id = update.callback_query.message.reply_text("\n".join(open("Commands.txt", "r", encoding="utf-8").readlines(0)),
+                                                                          reply_markup=InlineKeyboardMarkup(backdel)).message_id
             case "helper":
-                new_message_id = update.callback_query.message.reply_text("Если у вас есть вопросы, которые не решились в /FAQ, то напишите @ypite_nk", reply_markup=InlineKeyboardMarkup(backdel)).message_id
+                new_message_id = update.callback_query.message.reply_text("Если у вас есть вопросы, которые не решились в /FAQ, то напишите @ypite_nk",
+                                                                          reply_markup=InlineKeyboardMarkup(backdel)).message_id
         if not conflict:
             context.chat_data['message_id'] = new_message_id
     conflict = False
