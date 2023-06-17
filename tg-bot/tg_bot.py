@@ -1,16 +1,19 @@
 ﻿# -*- coding: utf-8 -*-
+from token import COMMA
 import telegram
 import random
 from telegram.ext import CommandHandler, MessageHandler, Filters, Updater, CallbackQueryHandler, CallbackContext
-from telegram import ReplyKeyboardMarkup, InlineKeyboardMarkup, InlineKeyboardButton, Update
-import used_class as US
+from telegram import ReplyKeyboardMarkup, InlineKeyboardMarkup, InlineKeyboardButton, Update, ParseMode
+import used_class
 
 token = "5873796392:AAEE1i9cwQ5Y2T6Mk-TJkTHruANhCmPr_uU"
 bot = telegram.Bot(token=token)
 updater = Updater(token=token, use_context=True)
 
-menu = InlineKeyboardButton("Меню", callback_data="/back")
 menudel = InlineKeyboardButton("Меню", callback_data="/backdel")
+backdel = [[menudel]]
+
+marks_openLIST = ["MARKS-", "A", "N"]
 
 conflict = False
 
@@ -23,10 +26,7 @@ ypiterFAQ = [[InlineKeyboardButton("Общее", callback_data='all'), InlineKey
              [InlineKeyboardButton("Назад", callback_data="faq"), menudel]]
 
 FAQ = [[InlineKeyboardButton("О боте", callback_data="botinfo"), InlineKeyboardButton("О ypiter", callback_data="ypiinfo")],
-       [menudel]]
-
-#back = [[menu]]
-backdel = [[menudel]]
+       [InlineKeyboardButton("Команды", callback_data="commands"), menudel]]
 
 rap = [[InlineKeyboardButton("50 Cent", callback_data="50 Cent"), InlineKeyboardButton("Lil Peep", callback_data="Lil Peep"),
         InlineKeyboardButton("Egor Creed", callback_data="Egor Creed"), InlineKeyboardButton("100 gecs", callback_data="100 gecs")],
@@ -38,19 +38,22 @@ start_key = [[InlineKeyboardButton("FAQ", callback_data="faq"), InlineKeyboardBu
 marks = [[InlineKeyboardButton("1::A", callback_data="A-1"), InlineKeyboardButton("2::A", callback_data="A-2"), InlineKeyboardButton("3::A", callback_data="A-3")],
          [InlineKeyboardButton("Назад", callback_data="ypiinfo"), menudel]]
 
-marks_openLIST = ["MARKS-", "A", "N"]
+commands_out = [[InlineKeyboardButton("Команды", callback_data="commands"), menudel]]
 
 def echo(update, context): # ОТЛАДКА
     print(update.callback_query['data'] + " from " + update.callback_query.message.chat['username'])
     print(context)
 
 def start_handler(update, context):
-    context.bot.send_message(chat_id=update.message.chat_id, text="\n".join(open("start_description.txt", "r", encoding="utf-8").readlines(0)),
+    context.bot.send_message(chat_id=update.message.chat_id, text="".join(open("start_description.txt", "r", encoding="utf-8").readlines(0)),
                              reply_markup=InlineKeyboardMarkup(start_key))
+
+def info_handler(update, context):
+    update.message.reply_text("".join(open("info_handler.txt", "r", encoding="utf-8").readlines(0)), reply_markup=InlineKeyboardMarkup(commands_out))
 
 def help_handler(update, context):
     context.bot.send_message(chat_id=update.message.chat_id, text="По всем вопросам вы можете обратиться к @ypite_nk",
-                             reply_markup=InlineKeyboardMarkup(backdel))
+                             reply_markup=InlineKeyboardMarkup(commands_out))
 
 def faq_handler(update, context):
     update.message.reply_text("Какой тип информации вас интересует?", reply_markup=InlineKeyboardMarkup(FAQ))
@@ -58,18 +61,24 @@ def faq_handler(update, context):
 def fun_handler(update, context):
     key = [[InlineKeyboardButton("rap", callback_data="rap"), InlineKeyboardButton("mem", callback_data="mem"),
             InlineKeyboardButton("3", callback_data="3"), InlineKeyboardButton("4", callback_data="4")],
-            [menu]]
+            [InlineKeyboardButton("Команды", callback_data="commands"), menudel]]
     update.message.reply_text("Смотри, есть 4 игры на выбор.\n/rap - стикер = репер\n/mem - рандомный мемас из базы\n",
                               reply_markup=InlineKeyboardMarkup(key))
 
+def pack_handler(update, context):
+    update.message.reply_text("".join(open("pack.txt", "r", encoding="utf-8").readlines(0)), reply_markup=InlineKeyboardMarkup(commands_out), parse_mode=telegram.ParseMode.HTML)
+
 def link_handler(update, context):
-    button = [[InlineKeyboardButton(text="Вконтакте", url="https://vk.com/ypite")],
-              [InlineKeyboardButton(text="Youtube", url="https://www.youtube.com/channel/UCQunVaPHyI2MvS0rU56_MhA")],
-              [InlineKeyboardButton(text="TikTok", url="https://vm.tiktok.com/ZT81sSebh/")],
-              [InlineKeyboardButton(text="Группа Вк", url="https://vk.com/cloud_ypiter")],
-              [menu]]
-    update.message.reply_text("\n".join(open("Mylink.txt", "r", encoding="utf-8").readlines(0)),
+    button = [[InlineKeyboardButton(text="Вконтакте", url="https://vk.com/ypite"), InlineKeyboardButton(text="Группа Вк", url="https://vk.com/cloud_ypiter")],
+              [InlineKeyboardButton(text="Youtube", url="https://www.youtube.com/channel/UCQunVaPHyI2MvS0rU56_MhA"), InlineKeyboardButton(text="TikTok", url="https://vm.tiktok.com/ZT81sSebh/")],
+              [InlineKeyboardButton("Команды", callback_data="commands"), menudel]]
+    update.message.reply_text("".join(open("Mylink.txt", "r", encoding="utf-8").readlines(0)),
                               reply_markup=InlineKeyboardMarkup(button))
+
+def support_handler(update, context):
+    support = [[InlineKeyboardButton(text="Поддержать", url="https://pay.freekassa.ru/?m=&oa=&o=&s=6813a8f3dde2603e317b5b405dd3c4c3&currency=RUB")],
+               [InlineKeyboardButton("Команды", callback_data="commands"), menudel]]
+    update.message.reply_text("".join(open("support.txt", "r", encoding="utf-8").readlines(0)), reply_markup=InlineKeyboardMarkup(support))
 
 def echo_handler(update, context):
     update.message.reply_text("Пожалуйста, воспользуйтесь интерфейсом или командами. Если у вас есть вопросы: /help")
@@ -85,7 +94,7 @@ def game2_handler(update, context):
     
     mem_n = []
     for i in range(len(open("mem_links.txt", "r", encoding="utf-8").readlines(0))):
-        mem_n.append(US.Mem(i))
+        mem_n.append(used_class.Mem(i))
     
     active_mem = random.choice(mem_n)
     
@@ -99,7 +108,7 @@ def game2_handler(update, context):
                 [InlineKeyboardButton("Мем", callback_data="mem"),
                  InlineKeyboardButton(str(LikeCount), callback_data="like-" + str(LikeCount)),
                  InlineKeyboardButton(str(DisLikeCount), callback_data="dislike-" + str(DisLikeCount))],
-                [InlineKeyboardButton("Назад", callback_data="/fun"), menu]]))
+                [InlineKeyboardButton("Назад", callback_data="/fun"), menudel]]))
     mem_m[4] = mem_m[3]
     mem_m[3] = mem_m[2]
     mem_m[2] = mem_m[1]
@@ -126,7 +135,7 @@ def echo_button(update, context):
             active_mem.change_raiting(int(LikeCount), int(value) + 1)
 
         if action == "A":
-            update.callback_query.message.reply_text("\n".join(open(marks_openLIST[0] + value + "-" + action + ".txt", "r", encoding="utf-8").readlines(0)),
+            update.callback_query.message.reply_text("".join(open(marks_openLIST[0] + value + "-" + action + ".txt", "r", encoding="utf-8").readlines(0)),
                                                      reply_markup=InlineKeyboardMarkup(marks))
 
         conflict = False
@@ -154,20 +163,20 @@ def echo_button(update, context):
                                                                           reply_markup=InlineKeyboardMarkup(start_key)).message_id
 
             case "botinfo":
-                new_message_id = update.callback_query.message.reply_text("\n".join(open("Bot.txt", "r", encoding="utf-8").readlines(0)),
+                new_message_id = update.callback_query.message.reply_text("".join(open("Bot.txt", "r", encoding="utf-8").readlines(0)),
                                                                           reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Назад", callback_data="faq"), menudel]])).message_id
             case "ypiinfo":
-                new_message_id = update.callback_query.message.reply_text("\n".join(open("Ypiter.txt", "r", encoding="utf-8").readlines(0)),
+                new_message_id = update.callback_query.message.reply_text("".join(open("Ypiter.txt", "r", encoding="utf-8").readlines(0)),
                                                                           reply_markup=InlineKeyboardMarkup(ypiterFAQ)).message_id
 
             case "all":
-                 new_message_id = update.callback_query.message.reply_text("\n".join(open("YpiAll.txt", "r", encoding="utf-8").readlines(0)),
+                 new_message_id = update.callback_query.message.reply_text("".join(open("YpiAll.txt", "r", encoding="utf-8").readlines(0)),
                                                          reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Назад", callback_data="ypiinfo"), menudel]])).message_id
             case "14":
-                 new_message_id = update.callback_query.message.reply_text("\n".join(open("Ypi14.txt", "r", encoding="utf-8").readlines(0)),
+                 new_message_id = update.callback_query.message.reply_text("".join(open("Ypi14.txt", "r", encoding="utf-8").readlines(0)),
                                                          reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Назад", callback_data="ypiinfo"), menudel]])).message_id
             case "15":
-                 new_message_id = update.callback_query.message.reply_text("\n".join(open("Ypi15.txt", "r", encoding="utf-8").readlines(0)),
+                 new_message_id = update.callback_query.message.reply_text("".join(open("Ypi15.txt", "r", encoding="utf-8").readlines(0)),
                                                          reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Назад", callback_data="ypiinfo"), menudel]])).message_id
 
             case "marks":
@@ -194,10 +203,10 @@ def echo_button(update, context):
                 new_message_id = update.callback_query.message.reply_text("Какой тип информации вас интересует?",
                                                                           reply_markup=InlineKeyboardMarkup(FAQ)).message_id
             case "info":
-                new_message_id = update.callback_query.message.reply_text("\n".join(open("Info.txt", "r", encoding="utf-8").readlines(0)),
+                new_message_id = update.callback_query.message.reply_text("".join(open("Info.txt", "r", encoding="utf-8").readlines(0)),
                                                                           reply_markup=InlineKeyboardMarkup(backdel)).message_id
             case "commands":
-                new_message_id = update.callback_query.message.reply_text("\n".join(open("Commands.txt", "r", encoding="utf-8").readlines(0)),
+                new_message_id = update.callback_query.message.reply_text("".join(open("Commands.txt", "r", encoding="utf-8").readlines(0)),
                                                                           reply_markup=InlineKeyboardMarkup(backdel)).message_id
             case "helper":
                 new_message_id = update.callback_query.message.reply_text("Если у вас есть вопросы, которые не решились в /FAQ, то напишите @ypite_nk",
@@ -207,10 +216,13 @@ def echo_button(update, context):
     conflict = False
 
 updater.dispatcher.add_handler(CommandHandler('start', start_handler))
+updater.dispatcher.add_handler(CommandHandler('info', info_handler))
 updater.dispatcher.add_handler(CommandHandler('help', help_handler))
 updater.dispatcher.add_handler(CommandHandler('FAQ', faq_handler))
 updater.dispatcher.add_handler(CommandHandler('fun', fun_handler))
+updater.dispatcher.add_handler(CommandHandler('pack', pack_handler))
 updater.dispatcher.add_handler(CommandHandler('links', link_handler))
+updater.dispatcher.add_handler(CommandHandler('support', support_handler))
 
 updater.dispatcher.add_handler(MessageHandler(Filters.text & (~Filters.command), echo_handler))
 
