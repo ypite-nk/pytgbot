@@ -21,7 +21,10 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="book.py" />
+    <Compile Include="config.py" />
     <Compile Include="freekass.py" />
+    <Compile Include="keyboard.py" />
     <Compile Include="used_class.py" />
     <Compile Include="tg_bot.py" />
   </ItemGroup>

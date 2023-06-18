@@ -1,0 +1,13 @@
+Приключения
+
+10 лучших книг в жанре Приключения:
+1) <a href=''>{name}</a>
+2) <a href=''>{name}</a>
+3) <a href=''>{name}</a>
+4) <a href=''>{name}</a>
+5) <a href=''>{name}</a>
+6) <a href=''>{name}</a>
+7) <a href=''>{name}</a>
+8) <a href=''>{name}</a>
+9) <a href=''>{name}</a>
+10) <a href=''>{name}</a>

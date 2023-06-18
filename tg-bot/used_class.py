@@ -1,4 +1,5 @@
-links = open("mem_links.txt", "r", encoding="utf-8").readlines(0)
+# -*- coding: utf-8 -*-
+links = open("links/mem_links.txt", "r", encoding="utf-8").readlines(0)
 len_data = len(links)
 
 class Mem():
