@@ -1,11 +1,15 @@
 ﻿# -*- coding: utf-8 -*-
 import telegram
 import random
-from telegram.ext import CommandHandler, MessageHandler, Filters, Updater, CallbackQueryHandler, CallbackContext
-from telegram import ReplyKeyboardMarkup, InlineKeyboardMarkup, InlineKeyboardButton, Update
+
+from telegram.ext import CommandHandler, MessageHandler, Filters, Updater, CallbackQueryHandler, CallbackContext, InlineQueryHandler, ContextTypes
+from telegram import ReplyKeyboardMarkup, InlineKeyboardMarkup, InlineKeyboardButton, Update, InlineQueryResultArticle, InputTextMessageContent
+from uuid import uuid4
+from html import escape
+
 import used_class
 
-token = "5873796392:AAEE1i9cwQ5Y2T6Mk-TJkTHruANhCmPr_uU"
+token = "6143246892:AAEQGuhkqKZ-6Hsn7cvvbUMwOW0rNOHHGSE"
 bot = telegram.Bot(token=token)
 updater = Updater(token=token, use_context=True)
 
@@ -433,6 +437,26 @@ def echo_button(update, context):
     conflict = False
     echo(update, context) #ОТЛАДКА
 
+def inline_query(update, context):
+    query = update.inline_query.query
+
+    if not query:
+        return
+
+    result = [
+        InlineQueryResultArticle(id=str(uuid4()), title="Caps",
+                                 input_message_content=InputTextMessageContent(query.upper())
+                                 ),
+        InlineQueryResultArticle(id=str(uuid4()), title="Bold",
+                                 input_message_content=InputTextMessageContent(f"<b>{escape(query)}</b>", parse_mode=telegram.ParseMode.HTML)
+                                 ),
+        InlineQueryResultArticle(id=str(uuid4()), title="Italic",
+                                 input_message_content=InputTextMessageContent(f"<i>{escape(query)}</i>", parse_mode=telegram.ParseMode.HTML)
+                                 ),
+        ]
+
+    update.inline_query.answer(result)
+
 updater.dispatcher.add_handler(CommandHandler('start', start_handler))
 updater.dispatcher.add_handler(CommandHandler('info', info_handler))
 updater.dispatcher.add_handler(CommandHandler('help', help_handler))
@@ -453,6 +477,7 @@ updater.dispatcher.add_handler(CommandHandler('mem', game2_handler))
 #updater.dispatcher.add_handler(CommandHandler('game4', game4_handler))
 
 updater.dispatcher.add_handler(CallbackQueryHandler(echo_button))
+updater.dispatcher.add_handler(InlineQueryHandler(inline_query))
 
 updater.start_polling()
 updater.idle()
