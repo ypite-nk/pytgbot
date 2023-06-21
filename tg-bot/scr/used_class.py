@@ -6,16 +6,16 @@ class Mem():
     def __init__(self, iden):
         self.id = int(iden)
         self.link = links[self.id]
-        with open("likecount.txt", "r", encoding="utf-8") as lc:
+        with open("count/likecount.txt", "r", encoding="utf-8") as lc:
             self.like_count = lc.readlines(0)[self.id]
-        with open("dislikecount.txt", "r", encoding="utf-8") as dlc:
+        with open("count/dislikecount.txt", "r", encoding="utf-8") as dlc:
             self.dislike_count = dlc.readlines(0)[self.id]
         self.raitng = int(self.like_count) - int(self.dislike_count)
 
     def update(self):
-        with open("likecount.txt", "r", encoding="utf-8") as lc:
+        with open("count/likecount.txt", "r", encoding="utf-8") as lc:
             self.like_count = lc.readlines(0)[self.id]
-        with open("dislikecount.txt", "r", encoding="utf-8") as dlc:
+        with open("count/dislikecount.txt", "r", encoding="utf-8") as dlc:
             self.dislike_count = dlc.readlines(0)[self.id]
 
     def data(self):
@@ -25,10 +25,10 @@ class Mem():
 
     def change_raiting(self, like_count, dislike_count):
         self.update()
-        with open("likecount.txt", "r",  encoding="utf-8") as file:
+        with open("count/likecount.txt", "r",  encoding="utf-8") as file:
             Like = file.readlines()
             Like[self.id] = like_count
-        with open("likecount.txt", "w",  encoding="utf-8") as file:
+        with open("count/likecount.txt", "w",  encoding="utf-8") as file:
             print(str(Like))
             for i in range(len_data):
                 if Like[i] == like_count:
@@ -37,10 +37,10 @@ class Mem():
                 else:
                     file.write(str(Like[i]))
 
-        with open("dislikecount.txt", "r",  encoding="utf-8") as file:
+        with open("count/dislikecount.txt", "r",  encoding="utf-8") as file:
             Dislike = file.readlines()
             Dislike[self.id] = dislike_count
-        with open("dislikecount.txt", "w",  encoding="utf-8") as file:
+        with open("count/dislikecount.txt", "w",  encoding="utf-8") as file:
             for i in range(len_data):
                 if Dislike[i] == dislike_count:
                     file.write(str(Dislike[i]) + "\n")
@@ -51,9 +51,8 @@ class Mem():
         self.dislike_count = dislike_count
 
         self.raiting = int(self.like_count) - int(self.dislike_count)
-        print("Well done!!")
-
-
+'''
+                                    FOR ANY DATA BLOCK
 class Data():
     def __init__(self, iden, link):
         self.id = int(iden)
@@ -61,3 +60,5 @@ class Data():
 
     def return_link(self):
         return self.link
+
+'''

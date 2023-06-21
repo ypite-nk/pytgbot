@@ -6,6 +6,7 @@ import functions as func
 
 from case import echo_button, fun_handler, game2_handler
 from inline import inline_query
+
 # BOT INIT
 token = "6143246892:AAEQGuhkqKZ-6Hsn7cvvbUMwOW0rNOHHGSE"
 bot = telegram.Bot(token=token)
