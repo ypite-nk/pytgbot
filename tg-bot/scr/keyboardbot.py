@@ -53,40 +53,40 @@ it = [[InlineKeyboardButton("Программирование", callback_data="c
 coding = [[InlineKeyboardButton("Python", callback_data="py"), InlineKeyboardButton("C++", callback_data="+"), InlineKeyboardButton("JavaScript", callback_data="js")],
           [InlineKeyboardButton("...назад", callback_data="it"), menudel]]
 
-python = [[InlineKeyboardButton(text="Материалы", url="https://www.python.org/")], #        PYTHON
+python = [[InlineKeyboardButton(text="Материалы", url="https://www.python.org/")], #                                                                                            PYTHON
           [InlineKeyboardButton("...назад", callback_data="coding"), menudel]]
 
-cpp = [[InlineKeyboardButton(text="Материалы", url="https://learn.microsoft.com/ru-ru/cpp/cpp/cpp-language-reference?view=msvc-170")],#        C++
+cpp = [[InlineKeyboardButton(text="Материалы", url="https://learn.microsoft.com/ru-ru/cpp/cpp/cpp-language-reference?view=msvc-170")],#                                         C++
           [InlineKeyboardButton("...назад", callback_data="coding"), menudel]]
 
-js = [[InlineKeyboardButton(text="Материалы", url="https://learn.javascript.ru/")],#        JAVA SCRIPT
+js = [[InlineKeyboardButton(text="Материалы", url="https://learn.javascript.ru/")],#                                                                                            JAVA SCRIPT
           [InlineKeyboardButton("...назад", callback_data="coding"), menudel]]
 
 web = [[InlineKeyboardButton("HTML&CSS", callback_data="html_m"), InlineKeyboardButton("PHP", callback_data="php"), InlineKeyboardButton("django", callback_data="django")],
        [InlineKeyboardButton("...назад", callback_data="it"), menudel]]
 
-html_m = [[InlineKeyboardButton(text="Материалы", url="https://developer.mozilla.org/ru/docs/Learn/Getting_started_with_the_web/HTML_basics")],#        HTML
+html_m = [[InlineKeyboardButton(text="Материалы", url="https://developer.mozilla.org/ru/docs/Learn/Getting_started_with_the_web/HTML_basics")],#                                HTML
           [InlineKeyboardButton("...назад", callback_data="web"), menudel]]
 
-php = [[InlineKeyboardButton(text="Материалы", url="https://developer.mozilla.org/ru/docs/Learn/Getting_started_with_the_web/HTML_basics")],#        PHP
+php = [[InlineKeyboardButton(text="Материалы", url="https://developer.mozilla.org/ru/docs/Learn/Getting_started_with_the_web/HTML_basics")],#                                   PHP
           [InlineKeyboardButton("...назад", callback_data="web"), menudel]]
 
-django = [[InlineKeyboardButton(text="Материалы", url="https://developer.mozilla.org/ru/docs/Learn/Getting_started_with_the_web/HTML_basics")],#        DJANGO
+django = [[InlineKeyboardButton(text="Материалы", url="https://developer.mozilla.org/ru/docs/Learn/Getting_started_with_the_web/HTML_basics")],#                                DJANGO
           [InlineKeyboardButton("...назад", callback_data="web"), menudel]]
 
 admin = [[InlineKeyboardButton("Системный администратор", callback_data="s_admin"), InlineKeyboardButton("Data Sciens", callback_data="data_sciens")],
           [InlineKeyboardButton("...назад", callback_data="it"), menudel]]
 
-s_admin = [[InlineKeyboardButton(text="Материалы", url="https://habr.com/ru/companies/ruvds/articles/486204/")],#        ADMIN
+s_admin = [[InlineKeyboardButton(text="Материалы", url="https://habr.com/ru/companies/ruvds/articles/486204/")],#                                                               ADMIN
            [InlineKeyboardButton("...назад", callback_data="admin"), menudel]]
 
-data_sciens = [[InlineKeyboardButton(text="Материалы", url="https://habr.com/ru/articles/668428/")],#        DATA SCIENS
+data_sciens = [[InlineKeyboardButton(text="Материалы", url="https://habr.com/ru/articles/668428/")],#                                                                           DATA SCIENS
           [InlineKeyboardButton("...назад", callback_data="admin"), menudel]]
 
-sql = [[InlineKeyboardButton(text="Материалы", url="https://habr.com/ru/articles/564390/")],#        SQL
+sql = [[InlineKeyboardButton(text="Материалы", url="https://habr.com/ru/articles/564390/")],#                                                                                   SQL
        [InlineKeyboardButton("...назад", callback_data="it"), menudel]]
 
-modeling = [[InlineKeyboardButton(text="Материалы", url="https://habr.com/ru/companies/otus/articles/675410/")],#        MODELING
+modeling = [[InlineKeyboardButton(text="Материалы", url="https://habr.com/ru/companies/otus/articles/675410/")],#                                                               MODELING
             [InlineKeyboardButton("...назад", callback_data="learning"), menudel]]
 
 # IN DEF

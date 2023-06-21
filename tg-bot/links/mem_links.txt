@@ -1,3 +1,4 @@
+https://raw.githubusercontent.com/ypite-nk/Sticker/main/000.webp
 https://raw.githubusercontent.com/ypite-nk/Sticker/main/001.webp
 https://raw.githubusercontent.com/ypite-nk/Sticker/main/002.webp
 https://raw.githubusercontent.com/ypite-nk/Sticker/main/003.webp
@@ -20,4 +21,3 @@ https://raw.githubusercontent.com/ypite-nk/Sticker/main/019.webp
 https://raw.githubusercontent.com/ypite-nk/Sticker/main/020.webp
 https://raw.githubusercontent.com/ypite-nk/Sticker/main/021.webp
 https://raw.githubusercontent.com/ypite-nk/Sticker/main/022.webp
-https://raw.githubusercontent.com/ypite-nk/Sticker/main/023.webp

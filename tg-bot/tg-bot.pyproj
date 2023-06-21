@@ -25,7 +25,8 @@
     <Compile Include="scr\caseelse.py" />
     <Compile Include="scr\echo.py" />
     <Compile Include="scr\functions.py" />
-    <Compile Include="scr\keyboard.py" />
+    <Compile Include="scr\inline.py" />
+    <Compile Include="scr\keyboardbot.py" />
     <Compile Include="scr\tasklist.py" />
     <Compile Include="scr\used_class.py" />
     <Compile Include="scr\tg_bot.py" />
