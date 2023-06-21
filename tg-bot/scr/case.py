@@ -1,8 +1,9 @@
 ﻿# -*- coding: utf-8 -*-
 import random
-import keyboard as kb
-import functions as func
 import used_class
+
+import keyboardbot as kb
+import functions as func
 
 from echo import echo
 from telegram import InlineKeyboardMarkup, InlineKeyboardButton

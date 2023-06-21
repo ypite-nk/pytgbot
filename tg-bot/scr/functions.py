@@ -1,6 +1,6 @@
 ﻿# -*- coding: utf-8 -*-
 import telegram
-import keyboard as kb
+import keyboardbot as kb
 
 from telegram import InlineKeyboardMarkup
 
