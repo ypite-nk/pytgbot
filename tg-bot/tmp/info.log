@@ -1,0 +1,245 @@
+2023-06-24 03:32:30,788 DEBUG telegram.bot Entering: send_message
+2023-06-24 03:32:31,257 DEBUG telegram.bot {'entities': [], 'message_id': 405, 'text': 'Logg clear', 'date': 1687548750, 'new_chat_members': [], 'photo': [], 'caption_entities': [], 'group_chat_created': False, 'delete_chat_photo': False, 'supergroup_chat_created': False, 'channel_chat_created': False, 'new_chat_photo': [], 'chat': {'first_name': 'ypiter', 'username': 'r_ypiter', 'id': 1086638338, 'type': 'private'}, 'from': {'is_bot': True, 'first_name': 'ypite', 'username': 'ypitebot', 'id': 6143246892}}
+2023-06-24 03:32:31,258 DEBUG telegram.bot Exiting: send_message
+2023-06-24 03:32:33,739 DEBUG telegram.bot Getting updates: [458807807]
+2023-06-24 03:32:33,740 DEBUG telegram.bot [<telegram.update.Update object at 0x0000020468D9CBB0>]
+2023-06-24 03:32:33,740 DEBUG telegram.bot Exiting: get_updates
+2023-06-24 03:32:33,740 DEBUG telegram.bot Entering: get_updates
+2023-06-24 03:32:33,740 DEBUG telegram.ext.dispatcher Processing Update: {'update_id': 458807807, 'message': {'entities': [{'length': 12, 'type': 'bot_command', 'offset': 0}], 'message_id': 406, 'text': '/clearypiter', 'date': 1687548753, 'new_chat_members': [], 'photo': [], 'caption_entities': [], 'group_chat_created': False, 'delete_chat_photo': False, 'supergroup_chat_created': False, 'channel_chat_created': False, 'new_chat_photo': [], 'chat': {'first_name': 'ypiter', 'username': 'r_ypiter', 'id': 1086638338, 'type': 'private'}, 'from': {'is_bot': False, 'first_name': 'ypiter', 'username': 'r_ypiter', 'language_code': 'en', 'id': 1086638338}}}
+2023-06-24 03:32:43,875 DEBUG telegram.bot No new updates found.
+2023-06-24 03:32:43,876 DEBUG telegram.bot []
+2023-06-24 03:32:43,876 DEBUG telegram.bot Exiting: get_updates
+2023-06-24 03:32:43,876 DEBUG telegram.bot Entering: get_updates
+2023-06-24 03:32:54,010 DEBUG telegram.bot No new updates found.
+2023-06-24 03:32:54,010 DEBUG telegram.bot []
+2023-06-24 03:32:54,011 DEBUG telegram.bot Exiting: get_updates
+2023-06-24 03:32:54,011 DEBUG telegram.bot Entering: get_updates
+2023-06-24 03:33:04,145 DEBUG telegram.bot No new updates found.
+2023-06-24 03:33:04,146 DEBUG telegram.bot []
+2023-06-24 03:33:04,146 DEBUG telegram.bot Exiting: get_updates
+2023-06-24 03:33:04,146 DEBUG telegram.bot Entering: get_updates
+2023-06-24 03:35:20,024 DEBUG telegram.ext.dispatcher Setting singleton dispatcher as <telegram.ext.dispatcher.Dispatcher object at 0x000001B6675C3380>
+2023-06-24 03:35:20,026 INFO apscheduler.scheduler Scheduler started
+2023-06-24 03:35:20,028 DEBUG telegram.bot Entering: get_me
+2023-06-24 03:35:20,029 DEBUG apscheduler.scheduler Looking for jobs to run
+2023-06-24 03:35:20,030 DEBUG apscheduler.scheduler No jobs; waiting until a job is added
+2023-06-24 03:35:20,484 DEBUG telegram.bot {'username': 'ypitebot', 'id': 6143246892, 'can_join_groups': True, 'supports_inline_queries': True, 'is_bot': True, 'first_name': 'ypite', 'can_read_all_group_messages': False}
+2023-06-24 03:35:20,484 DEBUG telegram.bot Exiting: get_me
+2023-06-24 03:35:20,486 DEBUG telegram.ext.updater Bot:6143246892:dispatcher - started
+2023-06-24 03:35:20,487 DEBUG telegram.ext.updater Waiting for Dispatcher and polling to start
+2023-06-24 03:35:20,488 DEBUG telegram.ext.updater Bot:6143246892:updater - started
+2023-06-24 03:35:20,488 DEBUG telegram.ext.updater Updater thread started (polling)
+2023-06-24 03:35:20,488 DEBUG telegram.ext.updater Start network loop retry bootstrap del webhook
+2023-06-24 03:35:20,488 DEBUG telegram.ext.updater Deleting webhook
+2023-06-24 03:35:20,489 DEBUG telegram.bot Entering: delete_webhook
+2023-06-24 03:35:20,491 DEBUG telegram.ext.dispatcher Dispatcher started
+2023-06-24 03:35:20,635 DEBUG telegram.bot True
+2023-06-24 03:35:20,635 DEBUG telegram.bot Exiting: delete_webhook
+2023-06-24 03:35:20,635 DEBUG telegram.ext.updater Bootstrap done
+2023-06-24 03:35:20,635 DEBUG telegram.ext.updater Start network loop retry getting Updates
+2023-06-24 03:35:20,635 DEBUG telegram.bot Entering: get_updates
+2023-06-24 03:35:29,491 DEBUG telegram.bot Getting updates: [458807808]
+2023-06-24 03:35:29,495 DEBUG telegram.bot [<telegram.update.Update object at 0x000001B667650D50>]
+2023-06-24 03:35:29,495 DEBUG telegram.bot Exiting: get_updates
+2023-06-24 03:35:29,495 DEBUG telegram.bot Entering: get_updates
+2023-06-24 03:35:29,496 DEBUG telegram.ext.dispatcher Processing Update: {'callback_query': {'id': '4667076127309895271', 'chat_instance': '-6625121733648980751', 'data': 'faq', 'message': {'caption_entities': [], 'entities': [], 'reply_markup': {'inline_keyboard': [[{'text': 'FAQ', 'callback_data': 'faq'}, {'text': 'Инфо', 'callback_data': 'info'}, {'text': 'Команды', 'callback_data': 'commands'}], [{'text': 'Обратная связь', 'callback_data': 'helper'}]]}, 'channel_chat_created': False, 'delete_chat_photo': False, 'date': 1687547766, 'group_chat_created': False, 'new_chat_members': [], 'new_chat_photo': [], 'message_id': 397, 'photo': [], 'text': 'Меню:', 'supergroup_chat_created': False, 'chat': {'username': 'r_ypiter', 'id': 1086638338, 'type': 'private', 'first_name': 'ypiter'}, 'from': {'username': 'ypitebot', 'id': 6143246892, 'is_bot': True, 'first_name': 'ypite'}}, 'from': {'language_code': 'en', 'username': 'r_ypiter', 'id': 1086638338, 'is_bot': False, 'first_name': 'ypiter'}}, 'update_id': 458807808}
+2023-06-24 03:35:29,497 DEBUG telegram.bot Entering: delete_message
+2023-06-24 03:35:29,957 DEBUG telegram.bot True
+2023-06-24 03:35:29,958 DEBUG telegram.bot Exiting: delete_message
+2023-06-24 03:35:29,960 DEBUG telegram.bot Entering: send_message
+2023-06-24 03:35:30,140 DEBUG telegram.bot {'caption_entities': [], 'entities': [], 'reply_markup': {'inline_keyboard': [[{'text': 'О боте', 'callback_data': 'botinfo'}, {'text': 'О ypiter', 'callback_data': 'ypiinfo'}], [{'text': 'Команды', 'callback_data': 'commands'}, {'text': 'Меню', 'callback_data': '/backdel'}]]}, 'channel_chat_created': False, 'delete_chat_photo': False, 'date': 1687548929, 'group_chat_created': False, 'new_chat_members': [], 'new_chat_photo': [], 'message_id': 407, 'photo': [], 'text': 'О чем бы вы хотели узнать?', 'supergroup_chat_created': False, 'chat': {'username': 'r_ypiter', 'id': 1086638338, 'type': 'private', 'first_name': 'ypiter'}, 'from': {'username': 'ypitebot', 'id': 6143246892, 'is_bot': True, 'first_name': 'ypite'}}
+2023-06-24 03:35:30,141 DEBUG telegram.bot Exiting: send_message
+2023-06-24 03:35:31,829 DEBUG telegram.bot Getting updates: [458807809]
+2023-06-24 03:35:31,830 DEBUG telegram.bot [<telegram.update.Update object at 0x000001B667651090>]
+2023-06-24 03:35:31,830 DEBUG telegram.bot Exiting: get_updates
+2023-06-24 03:35:31,830 DEBUG telegram.bot Entering: get_updates
+2023-06-24 03:35:31,831 DEBUG telegram.ext.dispatcher Processing Update: {'callback_query': {'id': '4667076127436822412', 'chat_instance': '-6625121733648980751', 'data': '/backdel', 'message': {'caption_entities': [], 'entities': [], 'reply_markup': {'inline_keyboard': [[{'text': 'О боте', 'callback_data': 'botinfo'}, {'text': 'О ypiter', 'callback_data': 'ypiinfo'}], [{'text': 'Команды', 'callback_data': 'commands'}, {'text': 'Меню', 'callback_data': '/backdel'}]]}, 'channel_chat_created': False, 'delete_chat_photo': False, 'date': 1687548929, 'group_chat_created': False, 'new_chat_members': [], 'new_chat_photo': [], 'message_id': 407, 'photo': [], 'text': 'О чем бы вы хотели узнать?', 'supergroup_chat_created': False, 'chat': {'username': 'r_ypiter', 'id': 1086638338, 'type': 'private', 'first_name': 'ypiter'}, 'from': {'username': 'ypitebot', 'id': 6143246892, 'is_bot': True, 'first_name': 'ypite'}}, 'from': {'language_code': 'en', 'username': 'r_ypiter', 'id': 1086638338, 'is_bot': False, 'first_name': 'ypiter'}}, 'update_id': 458807809}
+2023-06-24 03:35:31,832 DEBUG telegram.bot Entering: delete_message
+2023-06-24 03:35:31,984 DEBUG telegram.bot True
+2023-06-24 03:35:31,985 DEBUG telegram.bot Exiting: delete_message
+2023-06-24 03:35:31,986 DEBUG telegram.bot Entering: send_message
+2023-06-24 03:35:32,170 DEBUG telegram.bot {'caption_entities': [], 'entities': [], 'reply_markup': {'inline_keyboard': [[{'text': 'FAQ', 'callback_data': 'faq'}, {'text': 'Инфо', 'callback_data': 'info'}, {'text': 'Команды', 'callback_data': 'commands'}], [{'text': 'Обратная связь', 'callback_data': 'helper'}]]}, 'channel_chat_created': False, 'delete_chat_photo': False, 'date': 1687548931, 'group_chat_created': False, 'new_chat_members': [], 'new_chat_photo': [], 'message_id': 408, 'photo': [], 'text': 'Меню:', 'supergroup_chat_created': False, 'chat': {'username': 'r_ypiter', 'id': 1086638338, 'type': 'private', 'first_name': 'ypiter'}, 'from': {'username': 'ypitebot', 'id': 6143246892, 'is_bot': True, 'first_name': 'ypite'}}
+2023-06-24 03:35:32,171 DEBUG telegram.bot Exiting: send_message
+2023-06-24 03:35:34,407 DEBUG telegram.bot Getting updates: [458807810]
+2023-06-24 03:35:34,408 DEBUG telegram.bot [<telegram.update.Update object at 0x000001B667650BB0>]
+2023-06-24 03:35:34,408 DEBUG telegram.bot Exiting: get_updates
+2023-06-24 03:35:34,408 DEBUG telegram.bot Entering: get_updates
+2023-06-24 03:35:34,409 DEBUG telegram.ext.dispatcher Processing Update: {'callback_query': {'id': '4667076127797211479', 'chat_instance': '-6625121733648980751', 'data': 'info', 'message': {'caption_entities': [], 'entities': [], 'reply_markup': {'inline_keyboard': [[{'text': 'FAQ', 'callback_data': 'faq'}, {'text': 'Инфо', 'callback_data': 'info'}, {'text': 'Команды', 'callback_data': 'commands'}], [{'text': 'Обратная связь', 'callback_data': 'helper'}]]}, 'channel_chat_created': False, 'delete_chat_photo': False, 'date': 1687548931, 'group_chat_created': False, 'new_chat_members': [], 'new_chat_photo': [], 'message_id': 408, 'photo': [], 'text': 'Меню:', 'supergroup_chat_created': False, 'chat': {'username': 'r_ypiter', 'id': 1086638338, 'type': 'private', 'first_name': 'ypiter'}, 'from': {'username': 'ypitebot', 'id': 6143246892, 'is_bot': True, 'first_name': 'ypite'}}, 'from': {'language_code': 'en', 'username': 'r_ypiter', 'id': 1086638338, 'is_bot': False, 'first_name': 'ypiter'}}, 'update_id': 458807810}
+2023-06-24 03:35:34,410 DEBUG telegram.bot Entering: delete_message
+2023-06-24 03:35:34,561 DEBUG telegram.bot True
+2023-06-24 03:35:34,561 DEBUG telegram.bot Exiting: delete_message
+2023-06-24 03:35:34,562 DEBUG telegram.bot Entering: send_message
+2023-06-24 03:35:34,746 DEBUG telegram.bot {'caption_entities': [], 'entities': [], 'reply_markup': {'inline_keyboard': [[{'text': 'Меню', 'callback_data': '/backdel'}]]}, 'channel_chat_created': False, 'delete_chat_photo': False, 'date': 1687548934, 'group_chat_created': False, 'new_chat_members': [], 'new_chat_photo': [], 'message_id': 409, 'photo': [], 'text': 'Этот бот кладись знаний обо всем, мини википедия так сказать...\nВерсия: BETA v.0.45\nСоздание: 13.06.23(00:15) => xx.xx.xx(xx:xx)', 'supergroup_chat_created': False, 'chat': {'username': 'r_ypiter', 'id': 1086638338, 'type': 'private', 'first_name': 'ypiter'}, 'from': {'username': 'ypitebot', 'id': 6143246892, 'is_bot': True, 'first_name': 'ypite'}}
+2023-06-24 03:35:34,747 DEBUG telegram.bot Exiting: send_message
+2023-06-24 03:35:36,481 DEBUG telegram.bot Getting updates: [458807811]
+2023-06-24 03:35:36,483 DEBUG telegram.bot [<telegram.update.Update object at 0x000001B667650EF0>]
+2023-06-24 03:35:36,484 DEBUG telegram.bot Exiting: get_updates
+2023-06-24 03:35:36,484 DEBUG telegram.bot Entering: get_updates
+2023-06-24 03:35:36,485 DEBUG telegram.ext.dispatcher Processing Update: {'callback_query': {'id': '4667076124499054118', 'chat_instance': '-6625121733648980751', 'data': '/backdel', 'message': {'caption_entities': [], 'entities': [], 'reply_markup': {'inline_keyboard': [[{'text': 'Меню', 'callback_data': '/backdel'}]]}, 'channel_chat_created': False, 'delete_chat_photo': False, 'date': 1687548934, 'group_chat_created': False, 'new_chat_members': [], 'new_chat_photo': [], 'message_id': 409, 'photo': [], 'text': 'Этот бот кладись знаний обо всем, мини википедия так сказать...\nВерсия: BETA v.0.45\nСоздание: 13.06.23(00:15) => xx.xx.xx(xx:xx)', 'supergroup_chat_created': False, 'chat': {'username': 'r_ypiter', 'id': 1086638338, 'type': 'private', 'first_name': 'ypiter'}, 'from': {'username': 'ypitebot', 'id': 6143246892, 'is_bot': True, 'first_name': 'ypite'}}, 'from': {'language_code': 'en', 'username': 'r_ypiter', 'id': 1086638338, 'is_bot': False, 'first_name': 'ypiter'}}, 'update_id': 458807811}
+2023-06-24 03:35:36,488 DEBUG telegram.bot Entering: delete_message
+2023-06-24 03:35:36,645 DEBUG telegram.bot True
+2023-06-24 03:35:36,645 DEBUG telegram.bot Exiting: delete_message
+2023-06-24 03:35:36,647 DEBUG telegram.bot Entering: send_message
+2023-06-24 03:35:36,821 DEBUG telegram.bot {'caption_entities': [], 'entities': [], 'reply_markup': {'inline_keyboard': [[{'text': 'FAQ', 'callback_data': 'faq'}, {'text': 'Инфо', 'callback_data': 'info'}, {'text': 'Команды', 'callback_data': 'commands'}], [{'text': 'Обратная связь', 'callback_data': 'helper'}]]}, 'channel_chat_created': False, 'delete_chat_photo': False, 'date': 1687548936, 'group_chat_created': False, 'new_chat_members': [], 'new_chat_photo': [], 'message_id': 410, 'photo': [], 'text': 'Меню:', 'supergroup_chat_created': False, 'chat': {'username': 'r_ypiter', 'id': 1086638338, 'type': 'private', 'first_name': 'ypiter'}, 'from': {'username': 'ypitebot', 'id': 6143246892, 'is_bot': True, 'first_name': 'ypite'}}
+2023-06-24 03:35:36,822 DEBUG telegram.bot Exiting: send_message
+2023-06-24 03:35:37,625 DEBUG telegram.bot Getting updates: [458807812]
+2023-06-24 03:35:37,626 DEBUG telegram.bot [<telegram.update.Update object at 0x000001B6676513D0>]
+2023-06-24 03:35:37,627 DEBUG telegram.bot Exiting: get_updates
+2023-06-24 03:35:37,627 DEBUG telegram.bot Entering: get_updates
+2023-06-24 03:35:37,628 DEBUG telegram.ext.dispatcher Processing Update: {'callback_query': {'id': '4667076127165803973', 'chat_instance': '-6625121733648980751', 'data': 'commands', 'message': {'caption_entities': [], 'entities': [], 'reply_markup': {'inline_keyboard': [[{'text': 'FAQ', 'callback_data': 'faq'}, {'text': 'Инфо', 'callback_data': 'info'}, {'text': 'Команды', 'callback_data': 'commands'}], [{'text': 'Обратная связь', 'callback_data': 'helper'}]]}, 'channel_chat_created': False, 'delete_chat_photo': False, 'date': 1687548936, 'group_chat_created': False, 'new_chat_members': [], 'new_chat_photo': [], 'message_id': 410, 'photo': [], 'text': 'Меню:', 'supergroup_chat_created': False, 'chat': {'username': 'r_ypiter', 'id': 1086638338, 'type': 'private', 'first_name': 'ypiter'}, 'from': {'username': 'ypitebot', 'id': 6143246892, 'is_bot': True, 'first_name': 'ypite'}}, 'from': {'language_code': 'en', 'username': 'r_ypiter', 'id': 1086638338, 'is_bot': False, 'first_name': 'ypiter'}}, 'update_id': 458807812}
+2023-06-24 03:35:37,631 DEBUG telegram.bot Entering: delete_message
+2023-06-24 03:35:37,785 DEBUG telegram.bot True
+2023-06-24 03:35:37,786 DEBUG telegram.bot Exiting: delete_message
+2023-06-24 03:35:37,788 DEBUG telegram.bot Entering: send_message
+2023-06-24 03:35:37,966 DEBUG telegram.bot {'caption_entities': [], 'entities': [{'type': 'bot_command', 'offset': 0, 'length': 6}, {'type': 'bot_command', 'offset': 25, 'length': 5}, {'type': 'bot_command', 'offset': 58, 'length': 5}, {'type': 'bot_command', 'offset': 76, 'length': 4}, {'type': 'bot_command', 'offset': 92, 'length': 4}, {'type': 'bot_command', 'offset': 111, 'length': 5}, {'type': 'bot_command', 'offset': 138, 'length': 6}, {'type': 'bot_command', 'offset': 154, 'length': 9}, {'type': 'bot_command', 'offset': 178, 'length': 8}], 'reply_markup': {'inline_keyboard': [[{'text': 'Меню', 'callback_data': '/backdel'}]]}, 'channel_chat_created': False, 'delete_chat_photo': False, 'date': 1687548937, 'group_chat_created': False, 'new_chat_members': [], 'new_chat_photo': [], 'message_id': 411, 'photo': [], 'text': '/start - Перезапуск бота\n/info - Очень краткая информация\n/help - Поддержка\n/FAQ - Обо всем\n/fun - Развлечения\n/pack - Советую стикерпаки\n/links - Ссылки\n/learning - Образование\n/support - Поддержать меня (Да, это донат)', 'supergroup_chat_created': False, 'chat': {'username': 'r_ypiter', 'id': 1086638338, 'type': 'private', 'first_name': 'ypiter'}, 'from': {'username': 'ypitebot', 'id': 6143246892, 'is_bot': True, 'first_name': 'ypite'}}
+2023-06-24 03:35:37,968 DEBUG telegram.bot Exiting: send_message
+2023-06-24 03:35:39,611 DEBUG telegram.bot Getting updates: [458807813]
+2023-06-24 03:35:39,612 DEBUG telegram.bot [<telegram.update.Update object at 0x000001B667650EF0>]
+2023-06-24 03:35:39,612 DEBUG telegram.bot Exiting: get_updates
+2023-06-24 03:35:39,613 DEBUG telegram.bot Entering: get_updates
+2023-06-24 03:35:39,614 DEBUG telegram.ext.dispatcher Processing Update: {'update_id': 458807813, 'message': {'caption_entities': [], 'entities': [{'type': 'bot_command', 'offset': 0, 'length': 8}], 'channel_chat_created': False, 'delete_chat_photo': False, 'date': 1687548938, 'group_chat_created': False, 'new_chat_members': [], 'new_chat_photo': [], 'message_id': 412, 'photo': [], 'text': '/support', 'supergroup_chat_created': False, 'chat': {'username': 'r_ypiter', 'id': 1086638338, 'type': 'private', 'first_name': 'ypiter'}, 'from': {'language_code': 'en', 'username': 'r_ypiter', 'id': 1086638338, 'is_bot': False, 'first_name': 'ypiter'}}}
+2023-06-24 03:35:39,622 DEBUG telegram.bot Entering: send_message
+2023-06-24 03:35:39,831 DEBUG telegram.bot {'caption_entities': [], 'entities': [], 'reply_markup': {'inline_keyboard': [[{'text': 'Поддержать', 'url': 'https://pay.freekassa.ru/?m=&oa=&o=&s=6813a8f3dde2603e317b5b405dd3c4c3&currency=RUB'}], [{'text': 'Команды', 'callback_data': 'commands'}, {'text': 'Меню', 'callback_data': '/backdel'}]]}, 'channel_chat_created': False, 'delete_chat_photo': False, 'date': 1687548939, 'group_chat_created': False, 'new_chat_members': [], 'new_chat_photo': [], 'message_id': 413, 'photo': [], 'text': 'Окно для доната.\nПоддержать ypiter и любой его проект вы можете отправив донат.\nВся оплата проходит через {X}\n\nДля доната выберите сумму на кнопках и нажмите подтвердить', 'supergroup_chat_created': False, 'chat': {'username': 'r_ypiter', 'id': 1086638338, 'type': 'private', 'first_name': 'ypiter'}, 'from': {'username': 'ypitebot', 'id': 6143246892, 'is_bot': True, 'first_name': 'ypite'}}
+2023-06-24 03:35:39,832 DEBUG telegram.bot Exiting: send_message
+2023-06-24 03:35:45,041 DEBUG telegram.bot Getting updates: [458807814]
+2023-06-24 03:35:45,042 DEBUG telegram.bot [<telegram.update.Update object at 0x000001B667651090>]
+2023-06-24 03:35:45,042 DEBUG telegram.bot Exiting: get_updates
+2023-06-24 03:35:45,042 DEBUG telegram.bot Entering: get_updates
+2023-06-24 03:35:45,043 DEBUG telegram.ext.dispatcher Processing Update: {'update_id': 458807814, 'message': {'caption_entities': [], 'entities': [{'type': 'bot_command', 'offset': 0, 'length': 9}], 'channel_chat_created': False, 'delete_chat_photo': False, 'date': 1687548944, 'group_chat_created': False, 'new_chat_members': [], 'new_chat_photo': [], 'message_id': 414, 'photo': [], 'text': '/learning', 'supergroup_chat_created': False, 'chat': {'username': 'r_ypiter', 'id': 1086638338, 'type': 'private', 'first_name': 'ypiter'}, 'from': {'language_code': 'en', 'username': 'r_ypiter', 'id': 1086638338, 'is_bot': False, 'first_name': 'ypiter'}}}
+2023-06-24 03:35:45,047 DEBUG telegram.bot Entering: send_message
+2023-06-24 03:35:45,232 DEBUG telegram.bot {'caption_entities': [], 'entities': [], 'reply_markup': {'inline_keyboard': [[{'text': 'Образование', 'callback_data': 'learning'}, {'text': 'Книги', 'callback_data': 'books'}], [{'text': 'Меню', 'callback_data': '/backdel'}]]}, 'channel_chat_created': False, 'delete_chat_photo': False, 'date': 1687548944, 'group_chat_created': False, 'new_chat_members': [], 'new_chat_photo': [], 'message_id': 415, 'photo': [], 'text': 'Здесь собраны материалы, карты для обучения различным мастерствам.\nТакже вы сможете найти для себя книгу на вечер как что-то творческое, так и что-то научное', 'supergroup_chat_created': False, 'chat': {'username': 'r_ypiter', 'id': 1086638338, 'type': 'private', 'first_name': 'ypiter'}, 'from': {'username': 'ypitebot', 'id': 6143246892, 'is_bot': True, 'first_name': 'ypite'}}
+2023-06-24 03:35:45,232 DEBUG telegram.bot Exiting: send_message
+2023-06-24 03:35:55,183 DEBUG telegram.bot No new updates found.
+2023-06-24 03:35:55,183 DEBUG telegram.bot []
+2023-06-24 03:35:55,183 DEBUG telegram.bot Exiting: get_updates
+2023-06-24 03:35:55,183 DEBUG telegram.bot Entering: get_updates
+2023-06-24 03:36:05,322 DEBUG telegram.bot No new updates found.
+2023-06-24 03:36:05,322 DEBUG telegram.bot []
+2023-06-24 03:36:05,322 DEBUG telegram.bot Exiting: get_updates
+2023-06-24 03:36:05,323 DEBUG telegram.bot Entering: get_updates
+2023-06-24 03:36:15,473 DEBUG telegram.bot No new updates found.
+2023-06-24 03:36:15,474 DEBUG telegram.bot []
+2023-06-24 03:36:15,474 DEBUG telegram.bot Exiting: get_updates
+2023-06-24 03:36:15,475 DEBUG telegram.bot Entering: get_updates
+2023-06-24 03:36:25,621 DEBUG telegram.bot No new updates found.
+2023-06-24 03:36:25,621 DEBUG telegram.bot []
+2023-06-24 03:36:25,621 DEBUG telegram.bot Exiting: get_updates
+2023-06-24 03:36:25,621 DEBUG telegram.bot Entering: get_updates
+2023-06-24 03:36:35,760 DEBUG telegram.bot No new updates found.
+2023-06-24 03:36:35,760 DEBUG telegram.bot []
+2023-06-24 03:36:35,760 DEBUG telegram.bot Exiting: get_updates
+2023-06-24 03:36:35,761 DEBUG telegram.bot Entering: get_updates
+2023-06-24 03:36:45,903 DEBUG telegram.bot No new updates found.
+2023-06-24 03:36:45,903 DEBUG telegram.bot []
+2023-06-24 03:36:45,903 DEBUG telegram.bot Exiting: get_updates
+2023-06-24 03:36:45,903 DEBUG telegram.bot Entering: get_updates
+2023-06-24 03:36:56,051 DEBUG telegram.bot No new updates found.
+2023-06-24 03:36:56,052 DEBUG telegram.bot []
+2023-06-24 03:36:56,052 DEBUG telegram.bot Exiting: get_updates
+2023-06-24 03:36:56,052 DEBUG telegram.bot Entering: get_updates
+2023-06-24 03:37:06,192 DEBUG telegram.bot No new updates found.
+2023-06-24 03:37:06,192 DEBUG telegram.bot []
+2023-06-24 03:37:06,192 DEBUG telegram.bot Exiting: get_updates
+2023-06-24 03:37:06,192 DEBUG telegram.bot Entering: get_updates
+2023-06-24 03:37:16,338 DEBUG telegram.bot No new updates found.
+2023-06-24 03:37:16,338 DEBUG telegram.bot []
+2023-06-24 03:37:16,338 DEBUG telegram.bot Exiting: get_updates
+2023-06-24 03:37:16,338 DEBUG telegram.bot Entering: get_updates
+2023-06-24 03:37:26,478 DEBUG telegram.bot No new updates found.
+2023-06-24 03:37:26,479 DEBUG telegram.bot []
+2023-06-24 03:37:26,479 DEBUG telegram.bot Exiting: get_updates
+2023-06-24 03:37:26,480 DEBUG telegram.bot Entering: get_updates
+2023-06-24 03:37:36,620 DEBUG telegram.bot No new updates found.
+2023-06-24 03:37:36,621 DEBUG telegram.bot []
+2023-06-24 03:37:36,621 DEBUG telegram.bot Exiting: get_updates
+2023-06-24 03:37:36,622 DEBUG telegram.bot Entering: get_updates
+2023-06-24 03:37:46,763 DEBUG telegram.bot No new updates found.
+2023-06-24 03:37:46,764 DEBUG telegram.bot []
+2023-06-24 03:37:46,764 DEBUG telegram.bot Exiting: get_updates
+2023-06-24 03:37:46,765 DEBUG telegram.bot Entering: get_updates
+2023-06-24 03:37:56,906 DEBUG telegram.bot No new updates found.
+2023-06-24 03:37:56,906 DEBUG telegram.bot []
+2023-06-24 03:37:56,907 DEBUG telegram.bot Exiting: get_updates
+2023-06-24 03:37:56,907 DEBUG telegram.bot Entering: get_updates
+2023-06-24 03:38:07,059 DEBUG telegram.bot No new updates found.
+2023-06-24 03:38:07,060 DEBUG telegram.bot []
+2023-06-24 03:38:07,060 DEBUG telegram.bot Exiting: get_updates
+2023-06-24 03:38:07,061 DEBUG telegram.bot Entering: get_updates
+2023-06-24 03:38:12,845 DEBUG telegram.ext.dispatcher Setting singleton dispatcher as <telegram.ext.dispatcher.Dispatcher object at 0x00000259CDEF7380>
+2023-06-24 03:38:12,847 INFO apscheduler.scheduler Scheduler started
+2023-06-24 03:38:12,848 DEBUG telegram.bot Entering: get_me
+2023-06-24 03:38:12,849 DEBUG apscheduler.scheduler Looking for jobs to run
+2023-06-24 03:38:12,851 DEBUG apscheduler.scheduler No jobs; waiting until a job is added
+2023-06-24 03:38:13,297 DEBUG telegram.bot {'first_name': 'ypite', 'can_join_groups': True, 'is_bot': True, 'id': 6143246892, 'can_read_all_group_messages': False, 'supports_inline_queries': True, 'username': 'ypitebot'}
+2023-06-24 03:38:13,297 DEBUG telegram.bot Exiting: get_me
+2023-06-24 03:38:13,299 DEBUG telegram.ext.updater Bot:6143246892:dispatcher - started
+2023-06-24 03:38:13,300 DEBUG telegram.ext.updater Waiting for Dispatcher and polling to start
+2023-06-24 03:38:13,301 DEBUG telegram.ext.updater Bot:6143246892:updater - started
+2023-06-24 03:38:13,301 DEBUG telegram.ext.updater Updater thread started (polling)
+2023-06-24 03:38:13,301 DEBUG telegram.ext.updater Start network loop retry bootstrap del webhook
+2023-06-24 03:38:13,301 DEBUG telegram.ext.updater Deleting webhook
+2023-06-24 03:38:13,301 DEBUG telegram.bot Entering: delete_webhook
+2023-06-24 03:38:13,305 DEBUG telegram.ext.dispatcher Dispatcher started
+2023-06-24 03:38:13,438 DEBUG telegram.bot True
+2023-06-24 03:38:13,438 DEBUG telegram.bot Exiting: delete_webhook
+2023-06-24 03:38:13,438 DEBUG telegram.ext.updater Bootstrap done
+2023-06-24 03:38:13,438 DEBUG telegram.ext.updater Start network loop retry getting Updates
+2023-06-24 03:38:13,439 DEBUG telegram.bot Entering: get_updates
+2023-06-24 03:38:16,668 DEBUG telegram.bot Getting updates: [458807815]
+2023-06-24 03:38:16,671 DEBUG telegram.bot [<telegram.update.Update object at 0x00000259CDF94D50>]
+2023-06-24 03:38:16,671 DEBUG telegram.bot Exiting: get_updates
+2023-06-24 03:38:16,671 DEBUG telegram.bot Entering: get_updates
+2023-06-24 03:38:16,672 DEBUG telegram.ext.dispatcher Processing Update: {'update_id': 458807815, 'callback_query': {'message': {'channel_chat_created': False, 'group_chat_created': False, 'chat': {'first_name': 'ypiter', 'username': 'r_ypiter', 'type': 'private', 'id': 1086638338}, 'text': 'Здесь собраны материалы, карты для обучения различным мастерствам.\nТакже вы сможете найти для себя книгу на вечер как что-то творческое, так и что-то научное', 'new_chat_photo': [], 'entities': [], 'message_id': 415, 'supergroup_chat_created': False, 'new_chat_members': [], 'photo': [], 'caption_entities': [], 'date': 1687548944, 'delete_chat_photo': False, 'reply_markup': {'inline_keyboard': [[{'text': 'Образование', 'callback_data': 'learning'}, {'text': 'Книги', 'callback_data': 'books'}], [{'text': 'Меню', 'callback_data': '/backdel'}]]}, 'from': {'first_name': 'ypite', 'is_bot': True, 'id': 6143246892, 'username': 'ypitebot'}}, 'id': '4667076126563809261', 'chat_instance': '-6625121733648980751', 'data': '/backdel', 'from': {'first_name': 'ypiter', 'is_bot': False, 'id': 1086638338, 'username': 'r_ypiter', 'language_code': 'en'}}}
+2023-06-24 03:38:16,673 DEBUG telegram.bot Entering: delete_message
+2023-06-24 03:38:17,125 DEBUG telegram.bot True
+2023-06-24 03:38:17,125 DEBUG telegram.bot Exiting: delete_message
+2023-06-24 03:38:17,127 DEBUG telegram.bot Entering: send_message
+2023-06-24 03:38:17,318 DEBUG telegram.bot {'channel_chat_created': False, 'group_chat_created': False, 'chat': {'first_name': 'ypiter', 'username': 'r_ypiter', 'type': 'private', 'id': 1086638338}, 'text': 'Меню:', 'new_chat_photo': [], 'entities': [], 'message_id': 416, 'supergroup_chat_created': False, 'new_chat_members': [], 'photo': [], 'caption_entities': [], 'date': 1687549096, 'delete_chat_photo': False, 'reply_markup': {'inline_keyboard': [[{'text': 'FAQ', 'callback_data': 'faq'}, {'text': 'Инфо', 'callback_data': 'info'}, {'text': 'Команды', 'callback_data': 'commands'}], [{'text': 'Обратная связь', 'callback_data': 'helper'}]]}, 'from': {'first_name': 'ypite', 'is_bot': True, 'id': 6143246892, 'username': 'ypitebot'}}
+2023-06-24 03:38:17,320 DEBUG telegram.bot Exiting: send_message
+2023-06-24 03:38:18,138 DEBUG telegram.bot Getting updates: [458807816]
+2023-06-24 03:38:18,139 DEBUG telegram.bot [<telegram.update.Update object at 0x00000259CDF94BB0>]
+2023-06-24 03:38:18,140 DEBUG telegram.bot Exiting: get_updates
+2023-06-24 03:38:18,140 DEBUG telegram.bot Entering: get_updates
+2023-06-24 03:38:18,141 DEBUG telegram.ext.dispatcher Processing Update: {'update_id': 458807816, 'callback_query': {'message': {'channel_chat_created': False, 'group_chat_created': False, 'chat': {'first_name': 'ypiter', 'username': 'r_ypiter', 'type': 'private', 'id': 1086638338}, 'text': 'Меню:', 'new_chat_photo': [], 'entities': [], 'message_id': 416, 'supergroup_chat_created': False, 'new_chat_members': [], 'photo': [], 'caption_entities': [], 'date': 1687549096, 'delete_chat_photo': False, 'reply_markup': {'inline_keyboard': [[{'text': 'FAQ', 'callback_data': 'faq'}, {'text': 'Инфо', 'callback_data': 'info'}, {'text': 'Команды', 'callback_data': 'commands'}], [{'text': 'Обратная связь', 'callback_data': 'helper'}]]}, 'from': {'first_name': 'ypite', 'is_bot': True, 'id': 6143246892, 'username': 'ypitebot'}}, 'id': '4667076126730317735', 'chat_instance': '-6625121733648980751', 'data': 'commands', 'from': {'first_name': 'ypiter', 'is_bot': False, 'id': 1086638338, 'username': 'r_ypiter', 'language_code': 'en'}}}
+2023-06-24 03:38:18,143 DEBUG telegram.bot Entering: delete_message
+2023-06-24 03:38:18,337 DEBUG telegram.bot True
+2023-06-24 03:38:18,337 DEBUG telegram.bot Exiting: delete_message
+2023-06-24 03:38:18,339 DEBUG telegram.bot Entering: send_message
+2023-06-24 03:38:18,558 DEBUG telegram.bot {'channel_chat_created': False, 'group_chat_created': False, 'chat': {'first_name': 'ypiter', 'username': 'r_ypiter', 'type': 'private', 'id': 1086638338}, 'text': '/start - Перезапуск бота\n/info - Очень краткая информация\n/help - Поддержка\n/FAQ - Обо всем\n/fun - Развлечения\n/pack - Советую стикерпаки\n/links - Ссылки\n/learning - Образование\n/support - Поддержать меня (Да, это донат)', 'new_chat_photo': [], 'entities': [{'length': 6, 'type': 'bot_command', 'offset': 0}, {'length': 5, 'type': 'bot_command', 'offset': 25}, {'length': 5, 'type': 'bot_command', 'offset': 58}, {'length': 4, 'type': 'bot_command', 'offset': 76}, {'length': 4, 'type': 'bot_command', 'offset': 92}, {'length': 5, 'type': 'bot_command', 'offset': 111}, {'length': 6, 'type': 'bot_command', 'offset': 138}, {'length': 9, 'type': 'bot_command', 'offset': 154}, {'length': 8, 'type': 'bot_command', 'offset': 178}], 'message_id': 417, 'supergroup_chat_created': False, 'new_chat_members': [], 'photo': [], 'caption_entities': [], 'date': 1687549097, 'delete_chat_photo': False, 'reply_markup': {'inline_keyboard': [[{'text': 'Меню', 'callback_data': '/backdel'}]]}, 'from': {'first_name': 'ypite', 'is_bot': True, 'id': 6143246892, 'username': 'ypitebot'}}
+2023-06-24 03:38:18,559 DEBUG telegram.bot Exiting: send_message
+2023-06-24 03:38:19,491 DEBUG telegram.bot Getting updates: [458807817]
+2023-06-24 03:38:19,492 DEBUG telegram.bot [<telegram.update.Update object at 0x00000259CDF94D50>]
+2023-06-24 03:38:19,492 DEBUG telegram.bot Exiting: get_updates
+2023-06-24 03:38:19,492 DEBUG telegram.bot Entering: get_updates
+2023-06-24 03:38:19,492 DEBUG telegram.ext.dispatcher Processing Update: {'update_id': 458807817, 'message': {'channel_chat_created': False, 'group_chat_created': False, 'chat': {'first_name': 'ypiter', 'username': 'r_ypiter', 'type': 'private', 'id': 1086638338}, 'text': '/support', 'new_chat_photo': [], 'entities': [{'length': 8, 'type': 'bot_command', 'offset': 0}], 'message_id': 418, 'supergroup_chat_created': False, 'new_chat_members': [], 'photo': [], 'caption_entities': [], 'date': 1687549098, 'delete_chat_photo': False, 'from': {'first_name': 'ypiter', 'is_bot': False, 'id': 1086638338, 'username': 'r_ypiter', 'language_code': 'en'}}}
+2023-06-24 03:38:19,493 DEBUG telegram.bot Entering: send_message
+2023-06-24 03:38:19,732 DEBUG telegram.bot {'channel_chat_created': False, 'group_chat_created': False, 'chat': {'first_name': 'ypiter', 'username': 'r_ypiter', 'type': 'private', 'id': 1086638338}, 'text': 'Окно для доната.\nПоддержать ypiter и любой его проект вы можете отправив донат.\nВся оплата проходит через {X}\n\nДля доната выберите сумму на кнопках и нажмите подтвердить', 'new_chat_photo': [], 'entities': [], 'message_id': 419, 'supergroup_chat_created': False, 'new_chat_members': [], 'photo': [], 'caption_entities': [], 'date': 1687549099, 'delete_chat_photo': False, 'reply_markup': {'inline_keyboard': [[{'text': 'Поддержать', 'url': 'https://www.donationalerts.com/r/ypiter_nk'}], [{'text': 'Команды', 'callback_data': 'commands'}, {'text': 'Меню', 'callback_data': '/backdel'}]]}, 'from': {'first_name': 'ypite', 'is_bot': True, 'id': 6143246892, 'username': 'ypitebot'}}
+2023-06-24 03:38:19,732 DEBUG telegram.bot Exiting: send_message
+2023-06-24 03:38:29,625 DEBUG telegram.bot No new updates found.
+2023-06-24 03:38:29,625 DEBUG telegram.bot []
+2023-06-24 03:38:29,625 DEBUG telegram.bot Exiting: get_updates
+2023-06-24 03:38:29,625 DEBUG telegram.bot Entering: get_updates
+2023-06-24 03:38:39,759 DEBUG telegram.bot No new updates found.
+2023-06-24 03:38:39,759 DEBUG telegram.bot []
+2023-06-24 03:38:39,759 DEBUG telegram.bot Exiting: get_updates
+2023-06-24 03:38:39,759 DEBUG telegram.bot Entering: get_updates
+2023-06-24 03:38:49,897 DEBUG telegram.bot No new updates found.
+2023-06-24 03:38:49,898 DEBUG telegram.bot []
+2023-06-24 03:38:49,898 DEBUG telegram.bot Exiting: get_updates
+2023-06-24 03:38:49,899 DEBUG telegram.bot Entering: get_updates
+2023-06-24 03:39:00,036 DEBUG telegram.bot No new updates found.
+2023-06-24 03:39:00,036 DEBUG telegram.bot []
+2023-06-24 03:39:00,036 DEBUG telegram.bot Exiting: get_updates
+2023-06-24 03:39:00,036 DEBUG telegram.bot Entering: get_updates
+2023-06-24 03:39:10,173 DEBUG telegram.bot No new updates found.
+2023-06-24 03:39:10,174 DEBUG telegram.bot []
+2023-06-24 03:39:10,174 DEBUG telegram.bot Exiting: get_updates
+2023-06-24 03:39:10,175 DEBUG telegram.bot Entering: get_updates
+2023-06-24 03:39:20,329 DEBUG telegram.bot No new updates found.
+2023-06-24 03:39:20,330 DEBUG telegram.bot []
+2023-06-24 03:39:20,330 DEBUG telegram.bot Exiting: get_updates
+2023-06-24 03:39:20,331 DEBUG telegram.bot Entering: get_updates
+2023-06-24 03:39:30,466 DEBUG telegram.bot No new updates found.
+2023-06-24 03:39:30,466 DEBUG telegram.bot []
+2023-06-24 03:39:30,467 DEBUG telegram.bot Exiting: get_updates
+2023-06-24 03:39:30,467 DEBUG telegram.bot Entering: get_updates
