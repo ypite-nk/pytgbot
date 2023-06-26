@@ -4,6 +4,3 @@ password = open("tmp/log.txt", "r").readlines(0)
 def clear(update, context):
     file.truncate(0)
     context.bot.send_message(chat_id=update.message.chat_id, text="Logg clear")
-
-for str_log in file.readlines(0):
-    print(str_log)

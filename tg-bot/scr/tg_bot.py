@@ -1,5 +1,4 @@
 ﻿# -*- coding: utf-8 -*-
-from venv import logger
 import telegram
 from telegram.ext import CommandHandler, MessageHandler, Filters, Updater, CallbackQueryHandler, InlineQueryHandler
 
@@ -51,5 +50,3 @@ while True:
     except ZeroDivisionError as err:
         logger.error(err)
         continue
-
-    logg

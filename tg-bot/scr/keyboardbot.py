@@ -138,9 +138,10 @@ key = [[InlineKeyboardButton("rap", callback_data="rap"), InlineKeyboardButton("
             InlineKeyboardButton("3", callback_data="3"), InlineKeyboardButton("4", callback_data="4")],
             [InlineKeyboardButton("Команды", callback_data="commands"), menudel]]
 
-button = [[InlineKeyboardButton(text="Вконтакте", url="https://vk.com/ypite"), InlineKeyboardButton(text="Группа Вк", url="https://vk.com/cloud_ypiter")],
-              [InlineKeyboardButton(text="Youtube", url="https://www.youtube.com/channel/UCQunVaPHyI2MvS0rU56_MhA"), InlineKeyboardButton(text="TikTok", url="https://vm.tiktok.com/ZT81sSebh/")],
-              [InlineKeyboardButton("Команды", callback_data="commands"), menudel]]
+link = [[InlineKeyboardButton(text="Канал ТГ", url="https://t.me/ypite"), InlineKeyboardButton(text="Группа Вк", url="https://vk.com/cloud_ypiter"), InlineKeyboardButton(text="GitHub", url="https://github.com/ypite-nk")],
+        [InlineKeyboardButton(text="Вконтакте", url="https://vk.com/ypite"), InlineKeyboardButton(text="Телеграмм", url="https://t.me/r_ypiter")],
+        [InlineKeyboardButton(text="Youtube", url="https://www.youtube.com/channel/UCQunVaPHyI2MvS0rU56_MhA"), InlineKeyboardButton(text="TikTok", url="https://vm.tiktok.com/ZT81sSebh/")],
+        [InlineKeyboardButton("Команды", callback_data="commands"), menudel]]
 
 def mem(LikeCount, DisLikeCount):
     mem = [[InlineKeyboardButton("Мем", callback_data="mem"),

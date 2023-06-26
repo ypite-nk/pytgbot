@@ -51,14 +51,3 @@ class Mem():
         self.dislike_count = dislike_count
 
         self.raiting = int(self.like_count) - int(self.dislike_count)
-'''
-                                    FOR ANY DATA BLOCK
-class Data():
-    def __init__(self, iden, link):
-        self.id = int(iden)
-        self.link = link
-
-    def return_link(self):
-        return self.link
-
-'''
