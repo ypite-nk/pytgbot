@@ -52,6 +52,7 @@ def change(update, context):
     context.bot.delete_message(chat_id, message_id)
 
 def echo_button(update, context):
+    global marks_namelist
     sticker_links = {'fifticent' : open("links/fifticent.txt").readlines(0), 'lilpeep' : open("links/lilpeep.txt").readlines(0),
                     'gecs' : open("links/100gecs.txt").readlines(0), 'egorcreed' : open("links/egorcreed.txt").readlines(0)
                     }
@@ -63,11 +64,10 @@ def echo_button(update, context):
         elif action == "dislike":
             active_mem.change_raiting(int(LikeCount), int(value) + 1)
 
-        if action == "A":
+        if action == "A" or "П":
             update.callback_query.message.reply_text(openf("info/ypiter/marks", "MARKS-" + value + "-" + action),
-                                                     reply_markup=InlineKeyboardMarkup(kb.marks))
+                                                     reply_markup=InlineKeyboardMarkup(kb.set_mark(marks_namelist)))
 
-        conflict = False
     else:
         match update.callback_query['data']:
             case "/back":
@@ -108,8 +108,18 @@ def echo_button(update, context):
                                                         reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Назад", callback_data="ypiinfo"), kb.menudel]])).message_id
 #   РЕЦЕНЗИИ
             case "marks":
+                with open("info/ypiter/marks/markslist.txt", "r", encoding="utf-8") as file:
+                    marks = file.readlines()
+                    marks_namelist = []
+                    for i in range(int(marks[0].split(";")[0])+1):
+                        if "-" in marks[0].split(";")[i]:
+                            marks_namelist.append(marks[0].split(";")[i])
                 new_message_id = update.callback_query.message.reply_text(openf("info/ypiter/marks", "marks"),
-                                                                          reply_markup=InlineKeyboardMarkup(kb.marks))
+                                                                          reply_markup=InlineKeyboardMarkup(kb.set_mark(marks_namelist))).message_id
+
+            case "getmark":
+                new_message_id = update.callback_query.message.reply_text(openf("info/ypiter/marks", "marksget"),
+                                                                          reply_markup=InlineKeyboardMarkup(kb.ypiterFAQ)).message_id
 #   GAME:RAP
             case "rap":
                 new_message_id = update.callback_query.message.reply_text(openf('descriptext', "Game_Description1"),

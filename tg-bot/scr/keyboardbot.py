@@ -18,8 +18,27 @@ rap = [[InlineKeyboardButton("50 Cent", callback_data="50 Cent"), InlineKeyboard
 start_key = [[InlineKeyboardButton("FAQ", callback_data="faq"), InlineKeyboardButton("Инфо", callback_data="info"), InlineKeyboardButton("Команды", callback_data="commands")],
              [InlineKeyboardButton("Обратная связь", callback_data="helper")]]
 
-marks = [[InlineKeyboardButton("1::A", callback_data="A-1"), InlineKeyboardButton("2::A", callback_data="A-2"), InlineKeyboardButton("3::A", callback_data="A-3")],
-         [InlineKeyboardButton("...назад", callback_data="ypiinfo"), menudel]]
+def set_mark(list):
+    marks = []
+    marks_span = []
+    nextline = False
+    for i in list:
+        if "-" in i:
+            if not nextline:
+                marks_span.append(InlineKeyboardButton(i.split("-")[1] + "::" + i.split("-")[0], callback_data=i))
+                if int(i.split("-")[1]) == 4:
+                    nextline = True
+            if nextline:
+                marks.append(marks_span)
+                marks_span = []
+                nextline = False
+    if not nextline:
+        marks.append(marks_span)
+    marks.append([InlineKeyboardButton("...назад", callback_data="ypiinfo"), menudel, InlineKeyboardButton("Оставить рецензию...", callback_data="getmark")])
+    return marks
+
+'''marks = [[InlineKeyboardButton("1::A", callback_data="A-1"), InlineKeyboardButton("2::A", callback_data="A-2"), InlineKeyboardButton("3::П", callback_data="П-3")],
+         [InlineKeyboardButton("...назад", callback_data="ypiinfo"), menudel]]'''
 
 commands_out = [[InlineKeyboardButton("Команды", callback_data="commands"), menudel]]
 
