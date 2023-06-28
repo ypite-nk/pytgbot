@@ -6,44 +6,78 @@ import keyboardbot as kb
 
 from echo import echo
 from openf import openf
+
 from telegram import InlineKeyboardMarkup, InlineKeyboardButton, ParseMode
 
-active_mem = 0
-LikeCount = 0
-DisLikeCount = 0
+mem_m = ['', '', '', '', '']
+video_mem = ['', '', '', '', '']
+joke_mem = ['', '', '', '', '']
+citaty_mem = ['', '', '', '', '']
 
 def fun_handler(update, context):
     update.message.reply_text(openf("descriptext", "fun"),
                               reply_markup=InlineKeyboardMarkup(kb.key))
 
-def game2_handler(update, context, typesend):
-    global active_mem, LikeCount, DisLikeCount
-    mem_m = ['', '', '', '', '']
+def game2_handler(update, context):
+    global active_mem, LikeCount, DisLikeCount, mem_m
     mem_n = []
     LikeCount, DisLikeCount = 0, 0
     active_mem = 0
     for i in range(len(open("links/mem_links.txt", "r", encoding="utf-8").readlines(0))):
         mem_n.append(used_class.Mem(i))
-    
     active_mem = random.choice(mem_n)
-    
-    while active_mem.data()[0] == mem_m[0] or active_mem.data()[0] == mem_m[1] or active_mem.data()[0] == mem_m[2] or active_mem.data()[0] == mem_m[3] or active_mem.data()[0] == mem_m[4]:
+    while active_mem.data()[0] in mem_m:
         active_mem = random.choice(mem_n)
-
     LikeCount = active_mem.data()[2]
     DisLikeCount = active_mem.data()[3]
-    if typesend:
-        update.callback_query.message.reply_photo(active_mem.data()[0],
-            reply_markup=InlineKeyboardMarkup(kb.mem(LikeCount, DisLikeCount)))
-    else:
-        while active_mem.data()[0] == mem_m[0] or active_mem.data()[0] == mem_m[1] or active_mem.data()[0] == mem_m[2] or active_mem.data()[0] == mem_m[3] or active_mem.data()[0] == mem_m[4]:
-            active_mem = random.choice(mem_n)
-        return active_mem.data()[0]
+    update.callback_query.message.reply_photo(active_mem.data()[0], reply_markup=InlineKeyboardMarkup(kb.mem(LikeCount, DisLikeCount)))
     mem_m[4] = mem_m[3]
     mem_m[3] = mem_m[2]
     mem_m[2] = mem_m[1]
     mem_m[1] = mem_m[0]
     mem_m[0] = active_mem.data()[0]
+
+def vid_handler(update, context):
+    global video_mem
+    with open("links/vid.txt", "r", encoding="utf-8") as file:
+        file = file.readlines()
+    active_video = random.choice(file).replace("\n", "")
+    while active_video in video_mem:
+        active_video = random.choice(file).replace("\n", "")
+    update.callback_query.message.reply_video(open(active_video, 'rb'), reply_markup=InlineKeyboardMarkup(kb.vid))
+    video_mem[4] = video_mem[3]
+    video_mem[3] = video_mem[2]
+    video_mem[2] = video_mem[1]
+    video_mem[1] = video_mem[0]
+    video_mem[0] = active_video
+
+def joke_handler(update, context):
+    global joke_mem
+    with open("data/joke.txt", "r", encoding="utf-8") as file:
+        file = file.readlines()
+    joke = random.choice(file).replace("\n", "")
+    while joke in joke_mem:
+        joke = random.choice(file).replace("\n", "")
+    update.callback_query.message.reply_text(joke, reply_markup=InlineKeyboardMarkup(kb.jokes))
+    joke_mem[4] = joke_mem[3]
+    joke_mem[3] = joke_mem[2]
+    joke_mem[2] = joke_mem[1]
+    joke_mem[1] = joke_mem[0]
+    joke_mem[0] = joke
+
+def citaty_handler(update, context):
+    global citaty_mem
+    with open("data/citaty.txt", "r", encoding="utf-8") as file:
+        file = file.readlines()
+    citaty = random.choice(file).replace("\n", "")
+    while citaty in citaty_mem:
+        citaty = random.choice(file).replace("\n", "")
+    update.callback_query.message.reply_text(citaty, reply_markup=InlineKeyboardMarkup(kb.citaty))
+    citaty_mem[4] = citaty_mem[3]
+    citaty_mem[3] = citaty_mem[2]
+    citaty_mem[2] = citaty_mem[1]
+    citaty_mem[1] = citaty_mem[0]
+    citaty_mem[0] = citaty
 
 def change(update, context):
     global message_id
@@ -54,7 +88,8 @@ def change(update, context):
 def echo_button(update, context):
     global marks_namelist
     sticker_links = {'fifticent' : open("links/fifticent.txt").readlines(0), 'lilpeep' : open("links/lilpeep.txt").readlines(0),
-                    'gecs' : open("links/100gecs.txt").readlines(0), 'egorcreed' : open("links/egorcreed.txt").readlines(0)
+                    'gecs' : open("links/100gecs.txt").readlines(0), 'egorcreed' : open("links/egorcreed.txt").readlines(0),
+                    'dog' : open("links/dog.txt").readlines(0)
                     }
     conflict = True
     if "-" in update.callback_query['data']:
@@ -76,8 +111,17 @@ def echo_button(update, context):
             case "/fun":
                 fun_handler(update.callback_query, context)
 
-            case "mem":
-                game2_handler(update, context, 1)
+            case "photomem":
+                game2_handler(update, context)
+
+            case "videomem":
+                vid_handler(update, context)
+
+            case "jokes":
+                joke_handler(update, context)
+
+            case "citaty":
+                citaty_handler(update, context)
 
             case _:
                 conflict = False
@@ -136,6 +180,9 @@ def echo_button(update, context):
             case "100 gecs":
                 new_message_id = update.callback_query.message.reply_sticker(sticker_links['gecs'][0],
                                                                              reply_markup=InlineKeyboardMarkup(kb.rap)).message_id 
+            case "dog":
+                new_message_id = update.callback_query.message.reply_sticker(sticker_links['dog'][0],
+                                                                             reply_markup=InlineKeyboardMarkup(kb.rap)).message_id
 #   MENU
             case "faq":
                 new_message_id = update.callback_query.message.reply_text(openf("descriptext", "faq"),

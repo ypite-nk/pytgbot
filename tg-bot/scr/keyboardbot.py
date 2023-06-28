@@ -12,7 +12,8 @@ FAQ = [[InlineKeyboardButton("О боте", callback_data="botinfo"), InlineKeyb
        [InlineKeyboardButton("Команды", callback_data="commands"), menudel]]
 
 rap = [[InlineKeyboardButton("50 Cent", callback_data="50 Cent"), InlineKeyboardButton("Lil Peep", callback_data="Lil Peep"),
-        InlineKeyboardButton("Egor Creed", callback_data="Egor Creed"), InlineKeyboardButton("100 gecs", callback_data="100 gecs")],
+        InlineKeyboardButton("Egor Creed", callback_data="Egor Creed"), InlineKeyboardButton("100 gecs", callback_data="100 gecs"),
+        InlineKeyboardButton("Snoop Dogg", callback_data="dog")],
        [InlineKeyboardButton("...назад", callback_data="/fun"), menudel]]
 
 start_key = [[InlineKeyboardButton("FAQ", callback_data="faq"), InlineKeyboardButton("Инфо", callback_data="info"), InlineKeyboardButton("Команды", callback_data="commands")],
@@ -36,9 +37,6 @@ def set_mark(list):
         marks.append(marks_span)
     marks.append([InlineKeyboardButton("...назад", callback_data="ypiinfo"), menudel, InlineKeyboardButton("Оставить рецензию...", callback_data="getmark")])
     return marks
-
-'''marks = [[InlineKeyboardButton("1::A", callback_data="A-1"), InlineKeyboardButton("2::A", callback_data="A-2"), InlineKeyboardButton("3::П", callback_data="П-3")],
-         [InlineKeyboardButton("...назад", callback_data="ypiinfo"), menudel]]'''
 
 commands_out = [[InlineKeyboardButton("Команды", callback_data="commands"), menudel]]
 
@@ -148,14 +146,13 @@ sql = [[InlineKeyboardButton(text="Материалы", url="https://habr.com/ru
 modeling = [[InlineKeyboardButton(text="Материалы", url="https://habr.com/ru/companies/otus/articles/675410/")],#                                                               MODELING
             [InlineKeyboardButton("...назад", callback_data="learning"), menudel]]
 
-# IN DEF
-
 support = [[InlineKeyboardButton(text="Поддержать", url="https://www.donationalerts.com/r/ypiter_nk")],
                [InlineKeyboardButton("Команды", callback_data="commands"), menudel]]
 
-key = [[InlineKeyboardButton("rap", callback_data="rap"), InlineKeyboardButton("mem", callback_data="mem"),
-            InlineKeyboardButton("3", callback_data="3"), InlineKeyboardButton("4", callback_data="4")],
-            [InlineKeyboardButton("Команды", callback_data="commands"), menudel]]
+key = [[InlineKeyboardButton("rap", callback_data="rap"), InlineKeyboardButton("Фото мем", callback_data="photomem"),
+        InlineKeyboardButton("Видео мем", callback_data="videomem"), InlineKeyboardButton("Анекдоты", callback_data="jokes"),
+        InlineKeyboardButton("Цитаты", callback_data="citaty")],
+       [InlineKeyboardButton("Команды", callback_data="commands"), menudel]]
 
 link = [[InlineKeyboardButton(text="Канал ТГ", url="https://t.me/ypite"), InlineKeyboardButton(text="Группа Вк", url="https://vk.com/cloud_ypiter"), InlineKeyboardButton(text="GitHub", url="https://github.com/ypite-nk")],
         [InlineKeyboardButton(text="Вконтакте", url="https://vk.com/ypite"), InlineKeyboardButton(text="Телеграмм", url="https://t.me/r_ypiter")],
@@ -163,9 +160,18 @@ link = [[InlineKeyboardButton(text="Канал ТГ", url="https://t.me/ypite"),
         [InlineKeyboardButton("Команды", callback_data="commands"), menudel]]
 
 def mem(LikeCount, DisLikeCount):
-    mem = [[InlineKeyboardButton("Мем", callback_data="mem"),
+    mem = [[InlineKeyboardButton("Мем", callback_data="photomem"),
         InlineKeyboardButton(str(LikeCount), callback_data="like-" + str(LikeCount)),
         InlineKeyboardButton(str(DisLikeCount), callback_data="dislike-" + str(DisLikeCount))],
        [InlineKeyboardButton("Назад", callback_data="/fun"), menudel]]
 
     return mem
+
+vid = [[InlineKeyboardButton("Видео", callback_data="videomem")],
+       [InlineKeyboardButton("Назад", callback_data="/fun"), menudel]]
+
+jokes = [[InlineKeyboardButton("Анекдот", callback_data="jokes")],
+         [InlineKeyboardButton("Назад", callback_data="/fun"), menudel]]
+
+citaty = [[InlineKeyboardButton("Цитата", callback_data="citaty")],
+          [InlineKeyboardButton("Назад", callback_data="/fun"), menudel]]

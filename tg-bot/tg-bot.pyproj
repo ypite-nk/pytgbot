@@ -22,7 +22,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="scr\case.py" />
-    <Compile Include="scr\caseelse.py" />
     <Compile Include="scr\echo.py" />
     <Compile Include="scr\functions.py" />
     <Compile Include="scr\inline.py" />

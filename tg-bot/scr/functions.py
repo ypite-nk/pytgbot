@@ -1,5 +1,7 @@
 ﻿# -*- coding: utf-8 -*-
 import telegram
+import random
+import used_class
 import keyboardbot as kb
 
 from telegram import InlineKeyboardMarkup
@@ -71,3 +73,49 @@ def echo_handler(update, context):
 def back_handler(update, context):
     echo(update, context)
     update.message.reply_text(openf("descriptext", "menu"), reply_markup=InlineKeyboardMarkup(kb.start_key))
+
+def fun_handler(update, context):
+    update.message.reply_text(openf("descriptext", "fun"),
+                              reply_markup=InlineKeyboardMarkup(kb.key))
+
+def game2_handler(update, context):
+    global active_mem, LikeCount, DisLikeCount
+    mem_m = ['', '', '', '', '']
+    mem_n = []
+    LikeCount, DisLikeCount = 0, 0
+    active_mem = 0
+    for i in range(len(open("links/mem_links.txt", "r", encoding="utf-8").readlines(0))):
+        mem_n.append(used_class.Mem(i))
+    
+    active_mem = random.choice(mem_n)
+    
+    while active_mem.data()[0] == mem_m[0] or active_mem.data()[0] == mem_m[1] or active_mem.data()[0] == mem_m[2] or active_mem.data()[0] == mem_m[3] or active_mem.data()[0] == mem_m[4]:
+        active_mem = random.choice(mem_n)
+    LikeCount = active_mem.data()[2]
+    DisLikeCount = active_mem.data()[3]
+
+    update.callback_query.message.reply_photo(active_mem.data()[0],
+            reply_markup=InlineKeyboardMarkup(kb.mem(LikeCount, DisLikeCount)))
+
+    mem_m[4] = mem_m[3]
+    mem_m[3] = mem_m[2]
+    mem_m[2] = mem_m[1]
+    mem_m[1] = mem_m[0]
+    mem_m[0] = active_mem.data()[0]
+
+def vid_handler(update, context):
+    video = []
+    video_mem = ['', '', '', '', '']
+    with open("links/vid.txt", "r", encoding="utf-8") as file:
+        file = file.readlines()
+        for i in file:
+            video.append(i)
+    active_video = random.choice(video).replace("\n", "")
+    while active_video in video_mem:
+        active_video = random.choice(video).replace("\n", "")
+    update.message.reply_video(open(active_video, 'rb'))
+    video_mem[4] = video_mem[3]
+    video_mem[3] = video_mem[2]
+    video_mem[2] = video_mem[1]
+    video_mem[1] = video_mem[0]
+    video_mem[0] = active_video
