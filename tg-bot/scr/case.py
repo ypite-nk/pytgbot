@@ -13,13 +13,16 @@ mem_m = ['', '', '', '', '']
 video_mem = ['', '', '', '', '']
 joke_mem = ['', '', '', '', '']
 citaty_mem = ['', '', '', '', '']
+old_message_id = 0
+likestat = False
+dislikestat = False
 
 def fun_handler(update, context):
     update.message.reply_text(openf("descriptext", "fun"),
                               reply_markup=InlineKeyboardMarkup(kb.key))
 
 def game2_handler(update, context):
-    global active_mem, LikeCount, DisLikeCount, mem_m
+    global active_mem, LikeCount, DisLikeCount, mem_m, edit_message_id
     mem_n = []
     LikeCount, DisLikeCount = 0, 0
     active_mem = 0
@@ -30,7 +33,8 @@ def game2_handler(update, context):
         active_mem = random.choice(mem_n)
     LikeCount = active_mem.data()[2]
     DisLikeCount = active_mem.data()[3]
-    update.callback_query.message.reply_photo(active_mem.data()[0], reply_markup=InlineKeyboardMarkup(kb.mem(LikeCount, DisLikeCount)))
+    print(active_mem.data()[0])
+    edit_message_id = update.callback_query.message.reply_photo(active_mem.data()[0], reply_markup=InlineKeyboardMarkup(kb.mem(LikeCount, DisLikeCount))).message_id
     mem_m[4] = mem_m[3]
     mem_m[3] = mem_m[2]
     mem_m[2] = mem_m[1]
@@ -87,6 +91,7 @@ def change(update, context):
 
 def echo_button(update, context):
     global marks_namelist
+    global old_message_id, likestat, dislikestat
     sticker_links = {'fifticent' : open("links/fifticent.txt").readlines(0), 'lilpeep' : open("links/lilpeep.txt").readlines(0),
                     'gecs' : open("links/100gecs.txt").readlines(0), 'egorcreed' : open("links/egorcreed.txt").readlines(0),
                     'dog' : open("links/dog.txt").readlines(0)
@@ -95,11 +100,38 @@ def echo_button(update, context):
     if "-" in update.callback_query['data']:
         action, value = update.callback_query.data.split("-")
         if action == "like":
-            active_mem.change_raiting(int(value) + 1, int(DisLikeCount))
+            if str(edit_message_id) != str(old_message_id) and dislikestat is not True:
+                active_mem.change_raiting(int(value) + 1, int(DisLikeCount))
+                context.bot.edit_message_reply_markup(chat_id=update.callback_query.message.chat_id, message_id=edit_message_id,
+                                                  reply_markup=InlineKeyboardMarkup(kb.mem(active_mem.data()[2], active_mem.data()[3]))
+                                                  )
+                old_message_id = edit_message_id
+                likestat = True
+            elif str(edit_message_id) == str(old_message_id) and dislikestat is not True:
+                active_mem.change_raiting(int(value) - 1, int(DisLikeCount))
+                context.bot.edit_message_reply_markup(chat_id=update.callback_query.message.chat_id, message_id=edit_message_id,
+                                                  reply_markup=InlineKeyboardMarkup(kb.mem(active_mem.data()[2], active_mem.data()[3]))
+                                                  )
+                old_message_id = ""
+                likestat = False
+            
         elif action == "dislike":
-            active_mem.change_raiting(int(LikeCount), int(value) + 1)
+            if str(edit_message_id) != str(old_message_id) and likestat is not True:
+                active_mem.change_raiting(int(LikeCount), int(value) + 1)
+                context.bot.edit_message_reply_markup(chat_id=update.callback_query.message.chat_id, message_id=edit_message_id,
+                                                  reply_markup=InlineKeyboardMarkup(kb.mem(active_mem.data()[2], active_mem.data()[3]))
+                                                  )
+                old_message_id = edit_message_id
+                dislikestat = True
+            elif str(edit_message_id) == str(old_message_id) and likestat is not True:
+                active_mem.change_raiting(int(LikeCount), int(value) - 1)
+                context.bot.edit_message_reply_markup(chat_id=update.callback_query.message.chat_id, message_id=edit_message_id,
+                                                  reply_markup=InlineKeyboardMarkup(kb.mem(active_mem.data()[2], active_mem.data()[3]))
+                                                  )
+                old_message_id = ""
+                dislikestat = False
 
-        if action == "A" or "П":
+        if action == "A" or action == "П":
             update.callback_query.message.reply_text(openf("info/ypiter/marks", "MARKS-" + value + "-" + action),
                                                      reply_markup=InlineKeyboardMarkup(kb.set_mark(marks_namelist)))
 

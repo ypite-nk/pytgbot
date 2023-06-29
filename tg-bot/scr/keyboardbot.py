@@ -161,8 +161,8 @@ link = [[InlineKeyboardButton(text="Канал ТГ", url="https://t.me/ypite"),
 
 def mem(LikeCount, DisLikeCount):
     mem = [[InlineKeyboardButton("Мем", callback_data="photomem"),
-        InlineKeyboardButton(str(LikeCount), callback_data="like-" + str(LikeCount)),
-        InlineKeyboardButton(str(DisLikeCount), callback_data="dislike-" + str(DisLikeCount))],
+        InlineKeyboardButton("👍  " + str(LikeCount), callback_data="like-" + str(LikeCount)),
+        InlineKeyboardButton("👎  " + str(DisLikeCount), callback_data="dislike-" + str(DisLikeCount))],
        [InlineKeyboardButton("Назад", callback_data="/fun"), menudel]]
 
     return mem
