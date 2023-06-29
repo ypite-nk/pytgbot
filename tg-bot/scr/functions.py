@@ -49,7 +49,7 @@ def echo_handler(update, context):
         file = file.readlines(0)
     hi = True
     if ";" in update.message.text:
-        if update.message.text.split(";")[0] == "РЕЦЕНЗИЯ":
+        if update.message.text.split(";")[0].lower() == "рецензия":
             if len(update.message.text.split(";")) == 5:
                 marksget = update.message.text.split(";")
                 context.bot.send_message(chat_id=-1001955905639, text="Type: " + marksget[0] + "\n" + 
@@ -57,16 +57,16 @@ def echo_handler(update, context):
                                                                         "Text: " + marksget[2] + "\n" + 
                                                                         "A: " + marksget[3] + "\n" + 
                                                                         "P: " + marksget[4] + "\n")
-                update.message.reply_text(openf("info/ypiter/marks", "markssucces"))
+                update.message.reply_text(openf("info/ypiter/marks", "markssucces"), reply_markup=InlineKeyboardMarkup(kb.backdel))
             else:
-                update.message.reply_text(openf("info/ypiter/marks", "markserror"))
+                update.message.reply_text(openf("info/ypiter/marks", "markserror"), reply_markup=InlineKeyboardMarkup(kb.backdel))
     else:
         for i in file:
             if i.replace("\n", "").lower() in update.message.text.lower():
-                update.message.reply_text(openf("info", "echohi"))
+                update.message.reply_text(openf("info", "echohi"), reply_markup=InlineKeyboardMarkup(kb.backdel))
                 hi = False
         if hi == True:
-            update.message.reply_text(openf("info", "echo"))
+            update.message.reply_text(openf("info", "echo"), reply_markup=InlineKeyboardMarkup(kb.backdel))
 
     hi = True
 

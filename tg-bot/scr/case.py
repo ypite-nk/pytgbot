@@ -143,7 +143,7 @@ def echo_button(update, context):
 #   О YPITER
             case "all":
                  new_message_id = update.callback_query.message.reply_text(openf("info/ypiter", "YpiAll"),
-                                                        reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Назад", callback_data="ypiinfo"), kb.menudel]])).message_id
+                                                        reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Назад", callback_data="ypiinfo"), kb.menudel]]), parse_mode=ParseMode.HTML).message_id
             case "14":
                  new_message_id = update.callback_query.message.reply_text(openf("info/ypiter", "Ypi14"),
                                                         reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Назад", callback_data="ypiinfo"), kb.menudel]])).message_id
