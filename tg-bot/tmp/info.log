@@ -20969,3 +20969,197 @@ AttributeError: 'NoneType' object has no attribute 'text'
 2023-06-30 23:57:31,687 DEBUG telegram.bot []
 2023-06-30 23:57:31,687 DEBUG telegram.bot Exiting: get_updates
 2023-06-30 23:57:31,688 DEBUG telegram.bot Entering: get_updates
+2023-06-30 23:59:04,500 DEBUG telegram.ext.dispatcher Setting singleton dispatcher as <telegram.ext.dispatcher.Dispatcher object at 0x000002647F215980>
+2023-06-30 23:59:04,503 INFO apscheduler.scheduler Scheduler started
+2023-06-30 23:59:04,504 DEBUG telegram.bot Entering: get_me
+2023-06-30 23:59:04,506 DEBUG apscheduler.scheduler Looking for jobs to run
+2023-06-30 23:59:04,507 DEBUG apscheduler.scheduler No jobs; waiting until a job is added
+2023-06-30 23:59:04,954 DEBUG telegram.bot {'can_read_all_group_messages': False, 'id': 6143246892, 'username': 'ypitebot', 'supports_inline_queries': True, 'first_name': 'ypite', 'can_join_groups': True, 'is_bot': True}
+2023-06-30 23:59:04,955 DEBUG telegram.bot Exiting: get_me
+2023-06-30 23:59:04,960 DEBUG telegram.ext.updater Bot:6143246892:dispatcher - started
+2023-06-30 23:59:04,965 DEBUG telegram.ext.updater Waiting for Dispatcher and polling to start
+2023-06-30 23:59:04,966 DEBUG telegram.ext.updater Bot:6143246892:updater - started
+2023-06-30 23:59:04,968 DEBUG telegram.ext.updater Updater thread started (polling)
+2023-06-30 23:59:04,969 DEBUG telegram.ext.updater Start network loop retry bootstrap del webhook
+2023-06-30 23:59:04,969 DEBUG telegram.ext.updater Deleting webhook
+2023-06-30 23:59:04,969 DEBUG telegram.bot Entering: delete_webhook
+2023-06-30 23:59:04,973 DEBUG telegram.ext.dispatcher Dispatcher started
+2023-06-30 23:59:05,093 DEBUG telegram.bot True
+2023-06-30 23:59:05,093 DEBUG telegram.bot Exiting: delete_webhook
+2023-06-30 23:59:05,094 DEBUG telegram.ext.updater Bootstrap done
+2023-06-30 23:59:05,095 DEBUG telegram.ext.updater Start network loop retry getting Updates
+2023-06-30 23:59:05,095 DEBUG telegram.bot Entering: get_updates
+2023-06-30 23:59:05,325 DEBUG telegram.bot Getting updates: [458808821]
+2023-06-30 23:59:05,327 DEBUG telegram.bot [<telegram.update.Update object at 0x000002647F2C54A0>]
+2023-06-30 23:59:05,327 DEBUG telegram.bot Exiting: get_updates
+2023-06-30 23:59:05,327 DEBUG telegram.bot Entering: get_updates
+2023-06-30 23:59:05,328 DEBUG telegram.ext.dispatcher Processing Update: {'message': {'new_chat_members': [], 'chat': {'id': 6058104589, 'username': 'Gifkaol', 'first_name': 'hijk', 'type': 'private'}, 'photo': [], 'new_chat_photo': [], 'message_id': 1459, 'text': 'Куку', 'supergroup_chat_created': False, 'date': 1688140745, 'entities': [], 'delete_chat_photo': False, 'channel_chat_created': False, 'caption_entities': [], 'group_chat_created': False, 'from': {'id': 6058104589, 'username': 'Gifkaol', 'first_name': 'hijk', 'language_code': 'ru', 'is_bot': False}}, 'update_id': 458808821}
+2023-06-30 23:59:05,333 DEBUG telegram.bot Entering: send_message
+2023-06-30 23:59:05,781 DEBUG telegram.bot {'new_chat_members': [], 'chat': {'id': 6058104589, 'username': 'Gifkaol', 'first_name': 'hijk', 'type': 'private'}, 'photo': [], 'new_chat_photo': [], 'message_id': 1460, 'text': 'И вам добрый вечер!\n\nПожалуйста, воспользуйтесь интерфейсом или командами. Для перезапуска бота используйте: /start', 'supergroup_chat_created': False, 'date': 1688140746, 'entities': [{'offset': 109, 'type': 'bot_command', 'length': 6}], 'delete_chat_photo': False, 'channel_chat_created': False, 'reply_markup': {'inline_keyboard': [[{'callback_data': '/backdel', 'text': 'Меню'}]]}, 'caption_entities': [], 'group_chat_created': False, 'from': {'id': 6143246892, 'username': 'ypitebot', 'first_name': 'ypite', 'is_bot': True}}
+2023-06-30 23:59:05,782 DEBUG telegram.bot Exiting: send_message
+2023-06-30 23:59:10,142 DEBUG telegram.bot Getting updates: [458808822]
+2023-06-30 23:59:10,143 DEBUG telegram.bot [<telegram.update.Update object at 0x000002647F2C5570>]
+2023-06-30 23:59:10,143 DEBUG telegram.bot Exiting: get_updates
+2023-06-30 23:59:10,143 DEBUG telegram.bot Entering: get_updates
+2023-06-30 23:59:10,143 DEBUG telegram.ext.dispatcher Processing Update: {'message': {'new_chat_members': [], 'chat': {'id': 6058104589, 'username': 'Gifkaol', 'first_name': 'hijk', 'type': 'private'}, 'photo': [], 'new_chat_photo': [], 'message_id': 1461, 'text': 'Серьёзно', 'supergroup_chat_created': False, 'date': 1688140750, 'entities': [], 'delete_chat_photo': False, 'channel_chat_created': False, 'caption_entities': [], 'group_chat_created': False, 'from': {'id': 6058104589, 'username': 'Gifkaol', 'first_name': 'hijk', 'language_code': 'ru', 'is_bot': False}}, 'update_id': 458808822}
+2023-06-30 23:59:10,149 DEBUG telegram.bot Entering: send_message
+2023-06-30 23:59:10,314 DEBUG telegram.bot {'new_chat_members': [], 'chat': {'id': 6058104589, 'username': 'Gifkaol', 'first_name': 'hijk', 'type': 'private'}, 'photo': [], 'new_chat_photo': [], 'message_id': 1462, 'text': 'Пожалуйста, воспользуйтесь интерфейсом или командами. Для перезапуска бота используйте: /start', 'supergroup_chat_created': False, 'date': 1688140750, 'entities': [{'offset': 88, 'type': 'bot_command', 'length': 6}], 'delete_chat_photo': False, 'channel_chat_created': False, 'reply_markup': {'inline_keyboard': [[{'callback_data': '/backdel', 'text': 'Меню'}]]}, 'caption_entities': [], 'group_chat_created': False, 'from': {'id': 6143246892, 'username': 'ypitebot', 'first_name': 'ypite', 'is_bot': True}}
+2023-06-30 23:59:10,315 DEBUG telegram.bot Exiting: send_message
+2023-06-30 23:59:20,266 DEBUG telegram.bot No new updates found.
+2023-06-30 23:59:20,266 DEBUG telegram.bot []
+2023-06-30 23:59:20,266 DEBUG telegram.bot Exiting: get_updates
+2023-06-30 23:59:20,266 DEBUG telegram.bot Entering: get_updates
+2023-06-30 23:59:30,390 DEBUG telegram.bot No new updates found.
+2023-06-30 23:59:30,391 DEBUG telegram.bot []
+2023-06-30 23:59:30,391 DEBUG telegram.bot Exiting: get_updates
+2023-06-30 23:59:30,391 DEBUG telegram.bot Entering: get_updates
+2023-06-30 23:59:40,517 DEBUG telegram.bot No new updates found.
+2023-06-30 23:59:40,518 DEBUG telegram.bot []
+2023-06-30 23:59:40,519 DEBUG telegram.bot Exiting: get_updates
+2023-06-30 23:59:40,519 DEBUG telegram.bot Entering: get_updates
+2023-06-30 23:59:50,643 DEBUG telegram.bot No new updates found.
+2023-06-30 23:59:50,644 DEBUG telegram.bot []
+2023-06-30 23:59:50,644 DEBUG telegram.bot Exiting: get_updates
+2023-06-30 23:59:50,645 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:00:00,770 DEBUG telegram.bot No new updates found.
+2023-07-01 00:00:00,770 DEBUG telegram.bot []
+2023-07-01 00:00:00,771 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:00:00,771 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:00:10,897 DEBUG telegram.bot No new updates found.
+2023-07-01 00:00:10,898 DEBUG telegram.bot []
+2023-07-01 00:00:10,898 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:00:10,899 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:00:21,023 DEBUG telegram.bot No new updates found.
+2023-07-01 00:00:21,024 DEBUG telegram.bot []
+2023-07-01 00:00:21,024 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:00:21,024 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:00:31,153 DEBUG telegram.bot No new updates found.
+2023-07-01 00:00:31,153 DEBUG telegram.bot []
+2023-07-01 00:00:31,153 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:00:31,154 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:00:41,277 DEBUG telegram.bot No new updates found.
+2023-07-01 00:00:41,277 DEBUG telegram.bot []
+2023-07-01 00:00:41,277 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:00:41,277 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:00:52,096 DEBUG telegram.ext.dispatcher Setting singleton dispatcher as <telegram.ext.dispatcher.Dispatcher object at 0x000001A6AA525980>
+2023-07-01 00:00:52,099 INFO apscheduler.scheduler Scheduler started
+2023-07-01 00:00:52,100 DEBUG telegram.bot Entering: get_me
+2023-07-01 00:00:52,101 DEBUG apscheduler.scheduler Looking for jobs to run
+2023-07-01 00:00:52,102 DEBUG apscheduler.scheduler No jobs; waiting until a job is added
+2023-07-01 00:00:52,560 DEBUG telegram.bot {'first_name': 'ypite', 'can_read_all_group_messages': False, 'can_join_groups': True, 'id': 6143246892, 'is_bot': True, 'supports_inline_queries': True, 'username': 'ypitebot'}
+2023-07-01 00:00:52,561 DEBUG telegram.bot Exiting: get_me
+2023-07-01 00:00:52,562 DEBUG telegram.ext.updater Bot:6143246892:dispatcher - started
+2023-07-01 00:00:52,564 DEBUG telegram.ext.updater Waiting for Dispatcher and polling to start
+2023-07-01 00:00:52,564 DEBUG telegram.ext.updater Bot:6143246892:updater - started
+2023-07-01 00:00:52,564 DEBUG telegram.ext.updater Updater thread started (polling)
+2023-07-01 00:00:52,564 DEBUG telegram.ext.updater Start network loop retry bootstrap del webhook
+2023-07-01 00:00:52,564 DEBUG telegram.ext.updater Deleting webhook
+2023-07-01 00:00:52,564 DEBUG telegram.bot Entering: delete_webhook
+2023-07-01 00:00:52,569 DEBUG telegram.ext.dispatcher Dispatcher started
+2023-07-01 00:00:52,726 DEBUG telegram.bot True
+2023-07-01 00:00:52,726 DEBUG telegram.bot Exiting: delete_webhook
+2023-07-01 00:00:52,727 DEBUG telegram.ext.updater Bootstrap done
+2023-07-01 00:00:52,727 DEBUG telegram.ext.updater Start network loop retry getting Updates
+2023-07-01 00:00:52,727 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:00:55,274 DEBUG telegram.bot Getting updates: [458808823]
+2023-07-01 00:00:55,278 DEBUG telegram.bot [<telegram.update.Update object at 0x000001A6AA5D5570>]
+2023-07-01 00:00:55,278 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:00:55,278 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:00:55,278 DEBUG telegram.ext.dispatcher Processing Update: {'update_id': 458808823, 'message': {'message_id': 1463, 'photo': [], 'new_chat_members': [], 'new_chat_photo': [], 'text': 'Куку', 'channel_chat_created': False, 'entities': [], 'date': 1688140855, 'caption_entities': [], 'delete_chat_photo': False, 'supergroup_chat_created': False, 'chat': {'type': 'private', 'id': 6058104589, 'username': 'Gifkaol', 'first_name': 'hijk'}, 'group_chat_created': False, 'from': {'language_code': 'ru', 'first_name': 'hijk', 'id': 6058104589, 'is_bot': False, 'username': 'Gifkaol'}}}
+2023-07-01 00:00:59,654 DEBUG telegram.bot Getting updates: [458808824]
+2023-07-01 00:00:59,655 DEBUG telegram.bot [<telegram.update.Update object at 0x000001A6AA5D5640>]
+2023-07-01 00:00:59,655 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:00:59,656 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:00:59,656 DEBUG telegram.ext.dispatcher Processing Update: {'update_id': 458808824, 'message': {'message_id': 1464, 'photo': [], 'new_chat_members': [], 'new_chat_photo': [], 'text': 'А ну да', 'channel_chat_created': False, 'entities': [], 'date': 1688140860, 'caption_entities': [], 'delete_chat_photo': False, 'supergroup_chat_created': False, 'chat': {'type': 'private', 'id': 6058104589, 'username': 'Gifkaol', 'first_name': 'hijk'}, 'group_chat_created': False, 'from': {'language_code': 'ru', 'first_name': 'hijk', 'id': 6058104589, 'is_bot': False, 'username': 'Gifkaol'}}}
+2023-07-01 00:01:09,808 DEBUG telegram.bot No new updates found.
+2023-07-01 00:01:09,808 DEBUG telegram.bot []
+2023-07-01 00:01:09,808 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:01:09,809 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:01:19,947 DEBUG telegram.bot No new updates found.
+2023-07-01 00:01:19,947 DEBUG telegram.bot []
+2023-07-01 00:01:19,947 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:01:19,947 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:01:30,113 DEBUG telegram.bot No new updates found.
+2023-07-01 00:01:30,113 DEBUG telegram.bot []
+2023-07-01 00:01:30,114 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:01:30,114 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:01:40,258 DEBUG telegram.bot No new updates found.
+2023-07-01 00:01:40,259 DEBUG telegram.bot []
+2023-07-01 00:01:40,259 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:01:40,259 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:01:50,399 DEBUG telegram.bot No new updates found.
+2023-07-01 00:01:50,400 DEBUG telegram.bot []
+2023-07-01 00:01:50,400 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:01:50,401 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:02:00,542 DEBUG telegram.bot No new updates found.
+2023-07-01 00:02:00,542 DEBUG telegram.bot []
+2023-07-01 00:02:00,543 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:02:00,543 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:02:10,689 DEBUG telegram.bot No new updates found.
+2023-07-01 00:02:10,689 DEBUG telegram.bot []
+2023-07-01 00:02:10,689 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:02:10,689 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:02:20,844 DEBUG telegram.bot No new updates found.
+2023-07-01 00:02:20,844 DEBUG telegram.bot []
+2023-07-01 00:02:20,844 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:02:20,844 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:02:27,930 DEBUG telegram.ext.dispatcher Setting singleton dispatcher as <telegram.ext.dispatcher.Dispatcher object at 0x00000299DC985980>
+2023-07-01 00:02:27,932 INFO apscheduler.scheduler Scheduler started
+2023-07-01 00:02:27,934 DEBUG telegram.bot Entering: get_me
+2023-07-01 00:02:27,935 DEBUG apscheduler.scheduler Looking for jobs to run
+2023-07-01 00:02:27,936 DEBUG apscheduler.scheduler No jobs; waiting until a job is added
+2023-07-01 00:02:29,351 DEBUG telegram.bot {'username': 'ypitebot', 'first_name': 'ypite', 'can_join_groups': True, 'is_bot': True, 'can_read_all_group_messages': False, 'id': 6143246892, 'supports_inline_queries': True}
+2023-07-01 00:02:29,351 DEBUG telegram.bot Exiting: get_me
+2023-07-01 00:02:29,353 DEBUG telegram.ext.updater Bot:6143246892:dispatcher - started
+2023-07-01 00:02:29,355 DEBUG telegram.ext.updater Bot:6143246892:updater - started
+2023-07-01 00:02:29,355 DEBUG telegram.ext.updater Updater thread started (polling)
+2023-07-01 00:02:29,355 DEBUG telegram.ext.updater Waiting for Dispatcher and polling to start
+2023-07-01 00:02:29,355 DEBUG telegram.ext.updater Start network loop retry bootstrap del webhook
+2023-07-01 00:02:29,355 DEBUG telegram.ext.updater Deleting webhook
+2023-07-01 00:02:29,356 DEBUG telegram.bot Entering: delete_webhook
+2023-07-01 00:02:29,358 DEBUG telegram.ext.dispatcher Dispatcher started
+2023-07-01 00:02:29,487 DEBUG telegram.bot True
+2023-07-01 00:02:29,487 DEBUG telegram.bot Exiting: delete_webhook
+2023-07-01 00:02:29,487 DEBUG telegram.ext.updater Bootstrap done
+2023-07-01 00:02:29,488 DEBUG telegram.ext.updater Start network loop retry getting Updates
+2023-07-01 00:02:29,488 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:02:33,005 DEBUG telegram.bot Getting updates: [458808825]
+2023-07-01 00:02:33,006 DEBUG telegram.bot [<telegram.update.Update object at 0x00000299DCA35160>]
+2023-07-01 00:02:33,006 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:02:33,006 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:02:33,006 DEBUG telegram.ext.dispatcher Processing Update: {'update_id': 458808825, 'message': {'entities': [], 'message_id': 1465, 'chat': {'username': 'Gifkaol', 'first_name': 'hijk', 'id': 6058104589, 'type': 'private'}, 'caption_entities': [], 'new_chat_photo': [], 'delete_chat_photo': False, 'new_chat_members': [], 'photo': [], 'group_chat_created': False, 'date': 1688140953, 'channel_chat_created': False, 'text': 'Старт', 'supergroup_chat_created': False, 'from': {'username': 'Gifkaol', 'first_name': 'hijk', 'is_bot': False, 'language_code': 'ru', 'id': 6058104589}}}
+2023-07-01 00:02:33,008 DEBUG telegram.bot Entering: send_message
+2023-07-01 00:02:33,552 DEBUG telegram.bot {'entities': [{'offset': 64, 'length': 9, 'type': 'mention'}], 'message_id': 1466, 'chat': {'username': 'Gifkaol', 'first_name': 'hijk', 'id': 6058104589, 'type': 'private'}, 'caption_entities': [], 'new_chat_photo': [], 'delete_chat_photo': False, 'new_chat_members': [], 'photo': [], 'group_chat_created': False, 'date': 1688140953, 'channel_chat_created': False, 'text': 'You are not member beta-test!! If you want to test this bot --> @r_ypiter', 'supergroup_chat_created': False, 'from': {'username': 'ypitebot', 'first_name': 'ypite', 'is_bot': True, 'id': 6143246892}}
+2023-07-01 00:02:33,553 DEBUG telegram.bot Exiting: send_message
+2023-07-01 00:02:43,132 DEBUG telegram.bot No new updates found.
+2023-07-01 00:02:43,132 DEBUG telegram.bot []
+2023-07-01 00:02:43,132 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:02:43,132 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:02:53,257 DEBUG telegram.bot No new updates found.
+2023-07-01 00:02:53,258 DEBUG telegram.bot []
+2023-07-01 00:02:53,259 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:02:53,259 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:03:03,381 DEBUG telegram.bot No new updates found.
+2023-07-01 00:03:03,381 DEBUG telegram.bot []
+2023-07-01 00:03:03,381 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:03:03,381 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:03:13,508 DEBUG telegram.bot No new updates found.
+2023-07-01 00:03:13,508 DEBUG telegram.bot []
+2023-07-01 00:03:13,509 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:03:13,510 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:03:23,637 DEBUG telegram.bot No new updates found.
+2023-07-01 00:03:23,638 DEBUG telegram.bot []
+2023-07-01 00:03:23,639 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:03:23,639 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:03:33,763 DEBUG telegram.bot No new updates found.
+2023-07-01 00:03:33,763 DEBUG telegram.bot []
+2023-07-01 00:03:33,763 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:03:33,763 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:03:43,883 DEBUG telegram.bot No new updates found.
+2023-07-01 00:03:43,883 DEBUG telegram.bot []
+2023-07-01 00:03:43,884 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:03:43,884 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:03:54,005 DEBUG telegram.bot No new updates found.
+2023-07-01 00:03:54,006 DEBUG telegram.bot []
+2023-07-01 00:03:54,006 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:03:54,006 DEBUG telegram.bot Entering: get_updates

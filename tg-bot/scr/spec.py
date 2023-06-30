@@ -48,13 +48,19 @@ def checkban(update, context):
         if str(update.callback_query.message.chat['id']) in banlist:
             update.callback_query.message.reply_text("You are banned in this place")
             return True
-        elif str(update.callback_query.message.chat['id']) in beta_list:
+        elif str(update.callback_query.message.chat['id']) not in beta_list:
+            update.callback_query.message.reply_text("You are not member beta-test!! If you want to test this bot --> @r_ypiter")
+            return True
+        else:
             return False
     except AttributeError:
         if str(update.message.chat['id']) in banlist:
             update.message.reply_text("You are banned in this place")
             return True
-        elif str(update.message.chat['id']) in beta_list:
+        elif str(update.message.chat['id']) not in beta_list:
+            update.message.reply_text("You are not member beta-test!! If you want to test this bot --> @r_ypiter")
+            return True
+        else:
             return False
 
 def unban(update, context):
