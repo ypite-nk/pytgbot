@@ -6,6 +6,7 @@ import keyboardbot as kb
 
 from echo import echo
 from openf import openf
+from spec import checkban
 
 from telegram import InlineKeyboardMarkup, InlineKeyboardButton, ParseMode
 
@@ -18,10 +19,14 @@ likestat = False
 dislikestat = False
 
 def fun_handler(update, context):
+    if checkban(update, context):
+        return 0
     update.message.reply_text(openf("descriptext", "fun"),
                               reply_markup=InlineKeyboardMarkup(kb.key))
 
 def game2_handler(update, context):
+    if checkban(update, context):
+        return 0
     global active_mem, LikeCount, DisLikeCount, mem_m, edit_message_id
     mem_n = []
     LikeCount, DisLikeCount = 0, 0
@@ -42,6 +47,8 @@ def game2_handler(update, context):
     mem_m[0] = active_mem.data()[0]
 
 def vid_handler(update, context):
+    if checkban(update, context):
+        return 0
     global video_mem
     with open("links/vid.txt", "r", encoding="utf-8") as file:
         file = file.readlines()
@@ -56,6 +63,8 @@ def vid_handler(update, context):
     video_mem[0] = active_video
 
 def joke_handler(update, context):
+    if checkban(update, context):
+        return 0
     global joke_mem
     with open("data/joke.txt", "r", encoding="utf-8") as file:
         file = file.readlines()
@@ -70,6 +79,8 @@ def joke_handler(update, context):
     joke_mem[0] = joke
 
 def citaty_handler(update, context):
+    if checkban(update, context):
+        return 0
     global citaty_mem
     with open("data/citaty.txt", "r", encoding="utf-8") as file:
         file = file.readlines()
@@ -90,6 +101,8 @@ def change(update, context):
     context.bot.delete_message(chat_id, message_id)
 
 def echo_button(update, context):
+    if checkban(update, context):
+        return 0
     global marks_namelist
     global old_message_id, likestat, dislikestat
     sticker_links = {'fifticent' : open("links/fifticent.txt").readlines(0), 'lilpeep' : open("links/lilpeep.txt").readlines(0),

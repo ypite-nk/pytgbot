@@ -1,10 +1,13 @@
 ﻿# -*- coding: utf-8 -*-
 import telegram
-from telegram.ext import CommandHandler, MessageHandler, Filters, Updater, CallbackQueryHandler, InlineQueryHandler
+from telegram.ext import CommandHandler, MessageHandler, Filters, Updater, CallbackQueryHandler, InlineQueryHandler, PrefixHandler
 
 import functions as func
 
+import spec
+
 from case import echo_button, fun_handler
+
 from inline import inline_query
 
 import logging
@@ -17,6 +20,10 @@ import logg
 token = "6143246892:AAEQGuhkqKZ-6Hsn7cvvbUMwOW0rNOHHGSE"
 bot = telegram.Bot(token=token)
 updater = Updater(token=token, use_context=True)
+
+updater.dispatcher.add_handler(CallbackQueryHandler(echo_button))
+
+updater.dispatcher.add_handler(InlineQueryHandler(inline_query))
 
 updater.dispatcher.add_handler(CommandHandler('start', func.start_handler))
 updater.dispatcher.add_handler(CommandHandler('info', func.info_handler))
@@ -31,13 +38,16 @@ updater.dispatcher.add_handler(CommandHandler('support', func.support_handler))
 updater.dispatcher.add_handler(CommandHandler('menu', func.back_handler))
 updater.dispatcher.add_handler(CommandHandler("back", func.back_handler))
 
-updater.dispatcher.add_handler(CommandHandler(logg.password[0], logg.clear))
-
-updater.dispatcher.add_handler(CallbackQueryHandler(echo_button))
-
-updater.dispatcher.add_handler(InlineQueryHandler(inline_query))
+updater.dispatcher.add_handler(PrefixHandler('!', 'рецензия', func.prefix_marks))
 
 updater.dispatcher.add_handler(MessageHandler(Filters.text & (~Filters.command), func.echo_handler))
+
+updater.dispatcher.add_handler(PrefixHandler('/', 'ban', spec.ban))
+updater.dispatcher.add_handler(PrefixHandler('/', 'unban', spec.unban))
+
+updater.dispatcher.add_handler(CommandHandler('banlist', spec.banlist))
+
+updater.dispatcher.add_handler(CommandHandler(logg.password[0], logg.clear))
 
 while True:
     try:
