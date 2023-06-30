@@ -21163,3 +21163,979 @@ AttributeError: 'NoneType' object has no attribute 'text'
 2023-07-01 00:03:54,006 DEBUG telegram.bot []
 2023-07-01 00:03:54,006 DEBUG telegram.bot Exiting: get_updates
 2023-07-01 00:03:54,006 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:04:04,127 DEBUG telegram.bot No new updates found.
+2023-07-01 00:04:04,127 DEBUG telegram.bot []
+2023-07-01 00:04:04,127 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:04:04,127 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:04:14,249 DEBUG telegram.bot No new updates found.
+2023-07-01 00:04:14,249 DEBUG telegram.bot []
+2023-07-01 00:04:14,249 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:04:14,249 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:04:24,380 DEBUG telegram.bot No new updates found.
+2023-07-01 00:04:24,381 DEBUG telegram.bot []
+2023-07-01 00:04:24,381 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:04:24,382 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:04:34,508 DEBUG telegram.bot No new updates found.
+2023-07-01 00:04:34,508 DEBUG telegram.bot []
+2023-07-01 00:04:34,508 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:04:34,508 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:04:44,629 DEBUG telegram.bot No new updates found.
+2023-07-01 00:04:44,629 DEBUG telegram.bot []
+2023-07-01 00:04:44,629 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:04:44,629 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:04:54,751 DEBUG telegram.bot No new updates found.
+2023-07-01 00:04:54,752 DEBUG telegram.bot []
+2023-07-01 00:04:54,752 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:04:54,753 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:05:04,874 DEBUG telegram.bot No new updates found.
+2023-07-01 00:05:04,874 DEBUG telegram.bot []
+2023-07-01 00:05:04,874 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:05:04,874 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:05:14,999 DEBUG telegram.bot No new updates found.
+2023-07-01 00:05:14,999 DEBUG telegram.bot []
+2023-07-01 00:05:14,999 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:05:14,999 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:05:25,120 DEBUG telegram.bot No new updates found.
+2023-07-01 00:05:25,120 DEBUG telegram.bot []
+2023-07-01 00:05:25,121 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:05:25,121 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:05:35,244 DEBUG telegram.bot No new updates found.
+2023-07-01 00:05:35,245 DEBUG telegram.bot []
+2023-07-01 00:05:35,245 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:05:35,246 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:05:45,379 DEBUG telegram.bot No new updates found.
+2023-07-01 00:05:45,379 DEBUG telegram.bot []
+2023-07-01 00:05:45,379 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:05:45,379 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:05:55,500 DEBUG telegram.bot No new updates found.
+2023-07-01 00:05:55,500 DEBUG telegram.bot []
+2023-07-01 00:05:55,500 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:05:55,500 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:06:05,622 DEBUG telegram.bot No new updates found.
+2023-07-01 00:06:05,623 DEBUG telegram.bot []
+2023-07-01 00:06:05,623 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:06:05,624 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:06:27,521 DEBUG telegram.ext.dispatcher Setting singleton dispatcher as <telegram.ext.dispatcher.Dispatcher object at 0x000002C0926C5980>
+2023-07-01 00:06:27,524 INFO apscheduler.scheduler Scheduler started
+2023-07-01 00:06:27,525 DEBUG telegram.bot Entering: get_me
+2023-07-01 00:06:27,526 DEBUG apscheduler.scheduler Looking for jobs to run
+2023-07-01 00:06:27,528 DEBUG apscheduler.scheduler No jobs; waiting until a job is added
+2023-07-01 00:06:27,944 DEBUG telegram.bot {'can_read_all_group_messages': False, 'id': 6143246892, 'supports_inline_queries': True, 'can_join_groups': True, 'username': 'ypitebot', 'first_name': 'ypite', 'is_bot': True}
+2023-07-01 00:06:27,945 DEBUG telegram.bot Exiting: get_me
+2023-07-01 00:06:27,946 DEBUG telegram.ext.updater Bot:6143246892:dispatcher - started
+2023-07-01 00:06:27,948 DEBUG telegram.ext.updater Waiting for Dispatcher and polling to start
+2023-07-01 00:06:27,948 DEBUG telegram.ext.updater Bot:6143246892:updater - started
+2023-07-01 00:06:27,948 DEBUG telegram.ext.updater Updater thread started (polling)
+2023-07-01 00:06:27,949 DEBUG telegram.ext.updater Start network loop retry bootstrap del webhook
+2023-07-01 00:06:27,949 DEBUG telegram.ext.updater Deleting webhook
+2023-07-01 00:06:27,949 DEBUG telegram.bot Entering: delete_webhook
+2023-07-01 00:06:27,951 DEBUG telegram.ext.dispatcher Dispatcher started
+2023-07-01 00:06:28,078 DEBUG telegram.bot True
+2023-07-01 00:06:28,078 DEBUG telegram.bot Exiting: delete_webhook
+2023-07-01 00:06:28,078 DEBUG telegram.ext.updater Bootstrap done
+2023-07-01 00:06:28,078 DEBUG telegram.ext.updater Start network loop retry getting Updates
+2023-07-01 00:06:28,078 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:06:38,214 DEBUG telegram.bot No new updates found.
+2023-07-01 00:06:38,215 DEBUG telegram.bot []
+2023-07-01 00:06:38,215 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:06:38,216 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:06:48,343 DEBUG telegram.bot No new updates found.
+2023-07-01 00:06:48,344 DEBUG telegram.bot []
+2023-07-01 00:06:48,344 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:06:48,344 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:06:58,474 DEBUG telegram.bot No new updates found.
+2023-07-01 00:06:58,474 DEBUG telegram.bot []
+2023-07-01 00:06:58,475 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:06:58,475 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:07:08,607 DEBUG telegram.bot No new updates found.
+2023-07-01 00:07:08,607 DEBUG telegram.bot []
+2023-07-01 00:07:08,607 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:07:08,607 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:07:18,753 DEBUG telegram.bot No new updates found.
+2023-07-01 00:07:18,753 DEBUG telegram.bot []
+2023-07-01 00:07:18,754 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:07:18,754 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:07:28,883 DEBUG telegram.bot No new updates found.
+2023-07-01 00:07:28,884 DEBUG telegram.bot []
+2023-07-01 00:07:28,884 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:07:28,885 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:07:39,015 DEBUG telegram.bot No new updates found.
+2023-07-01 00:07:39,016 DEBUG telegram.bot []
+2023-07-01 00:07:39,016 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:07:39,017 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:07:49,166 DEBUG telegram.bot No new updates found.
+2023-07-01 00:07:49,166 DEBUG telegram.bot []
+2023-07-01 00:07:49,166 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:07:49,166 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:07:59,290 DEBUG telegram.bot No new updates found.
+2023-07-01 00:07:59,291 DEBUG telegram.bot []
+2023-07-01 00:07:59,291 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:07:59,291 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:08:09,416 DEBUG telegram.bot No new updates found.
+2023-07-01 00:08:09,416 DEBUG telegram.bot []
+2023-07-01 00:08:09,416 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:08:09,417 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:08:19,545 DEBUG telegram.bot No new updates found.
+2023-07-01 00:08:19,545 DEBUG telegram.bot []
+2023-07-01 00:08:19,546 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:08:19,546 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:08:29,674 DEBUG telegram.bot No new updates found.
+2023-07-01 00:08:29,674 DEBUG telegram.bot []
+2023-07-01 00:08:29,675 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:08:29,675 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:08:39,804 DEBUG telegram.bot No new updates found.
+2023-07-01 00:08:39,804 DEBUG telegram.bot []
+2023-07-01 00:08:39,804 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:08:39,804 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:08:49,935 DEBUG telegram.bot No new updates found.
+2023-07-01 00:08:49,935 DEBUG telegram.bot []
+2023-07-01 00:08:49,935 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:08:49,935 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:09:00,062 DEBUG telegram.bot No new updates found.
+2023-07-01 00:09:00,062 DEBUG telegram.bot []
+2023-07-01 00:09:00,062 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:09:00,062 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:09:10,188 DEBUG telegram.bot No new updates found.
+2023-07-01 00:09:10,188 DEBUG telegram.bot []
+2023-07-01 00:09:10,188 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:09:10,188 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:09:20,332 DEBUG telegram.bot No new updates found.
+2023-07-01 00:09:20,333 DEBUG telegram.bot []
+2023-07-01 00:09:20,333 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:09:20,334 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:09:30,465 DEBUG telegram.bot No new updates found.
+2023-07-01 00:09:30,466 DEBUG telegram.bot []
+2023-07-01 00:09:30,466 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:09:30,467 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:09:40,595 DEBUG telegram.bot No new updates found.
+2023-07-01 00:09:40,595 DEBUG telegram.bot []
+2023-07-01 00:09:40,596 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:09:40,596 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:09:50,737 DEBUG telegram.bot No new updates found.
+2023-07-01 00:09:50,738 DEBUG telegram.bot []
+2023-07-01 00:09:50,739 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:09:50,739 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:10:00,868 DEBUG telegram.bot No new updates found.
+2023-07-01 00:10:00,868 DEBUG telegram.bot []
+2023-07-01 00:10:00,868 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:10:00,868 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:10:11,000 DEBUG telegram.bot No new updates found.
+2023-07-01 00:10:11,000 DEBUG telegram.bot []
+2023-07-01 00:10:11,001 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:10:11,001 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:10:21,128 DEBUG telegram.bot No new updates found.
+2023-07-01 00:10:21,128 DEBUG telegram.bot []
+2023-07-01 00:10:21,128 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:10:21,128 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:10:31,255 DEBUG telegram.bot No new updates found.
+2023-07-01 00:10:31,360 DEBUG telegram.bot []
+2023-07-01 00:10:31,360 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:10:31,361 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:10:41,508 DEBUG telegram.bot No new updates found.
+2023-07-01 00:10:41,508 DEBUG telegram.bot []
+2023-07-01 00:10:41,508 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:10:41,508 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:10:51,641 DEBUG telegram.bot No new updates found.
+2023-07-01 00:10:51,641 DEBUG telegram.bot []
+2023-07-01 00:10:51,642 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:10:51,642 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:11:01,768 DEBUG telegram.bot No new updates found.
+2023-07-01 00:11:01,768 DEBUG telegram.bot []
+2023-07-01 00:11:01,768 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:11:01,768 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:11:11,894 DEBUG telegram.bot No new updates found.
+2023-07-01 00:11:11,894 DEBUG telegram.bot []
+2023-07-01 00:11:11,894 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:11:11,894 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:11:22,023 DEBUG telegram.bot No new updates found.
+2023-07-01 00:11:22,023 DEBUG telegram.bot []
+2023-07-01 00:11:22,023 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:11:22,023 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:11:32,151 DEBUG telegram.bot No new updates found.
+2023-07-01 00:11:32,151 DEBUG telegram.bot []
+2023-07-01 00:11:32,151 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:11:32,151 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:11:42,277 DEBUG telegram.bot No new updates found.
+2023-07-01 00:11:42,277 DEBUG telegram.bot []
+2023-07-01 00:11:42,277 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:11:42,277 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:11:52,402 DEBUG telegram.bot No new updates found.
+2023-07-01 00:11:52,402 DEBUG telegram.bot []
+2023-07-01 00:11:52,402 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:11:52,402 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:12:02,532 DEBUG telegram.bot No new updates found.
+2023-07-01 00:12:02,532 DEBUG telegram.bot []
+2023-07-01 00:12:02,532 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:12:02,532 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:12:12,658 DEBUG telegram.bot No new updates found.
+2023-07-01 00:12:12,658 DEBUG telegram.bot []
+2023-07-01 00:12:12,658 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:12:12,658 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:12:22,791 DEBUG telegram.bot No new updates found.
+2023-07-01 00:12:22,791 DEBUG telegram.bot []
+2023-07-01 00:12:22,791 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:12:22,792 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:12:32,950 DEBUG telegram.bot No new updates found.
+2023-07-01 00:12:32,950 DEBUG telegram.bot []
+2023-07-01 00:12:32,950 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:12:32,950 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:12:43,075 DEBUG telegram.bot No new updates found.
+2023-07-01 00:12:43,075 DEBUG telegram.bot []
+2023-07-01 00:12:43,075 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:12:43,075 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:12:53,224 DEBUG telegram.bot No new updates found.
+2023-07-01 00:12:53,224 DEBUG telegram.bot []
+2023-07-01 00:12:53,224 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:12:53,224 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:13:03,357 DEBUG telegram.bot No new updates found.
+2023-07-01 00:13:03,357 DEBUG telegram.bot []
+2023-07-01 00:13:03,357 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:13:03,357 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:13:13,491 DEBUG telegram.bot No new updates found.
+2023-07-01 00:13:13,492 DEBUG telegram.bot []
+2023-07-01 00:13:13,492 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:13:13,493 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:13:23,623 DEBUG telegram.bot No new updates found.
+2023-07-01 00:13:23,624 DEBUG telegram.bot []
+2023-07-01 00:13:23,624 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:13:23,624 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:13:33,758 DEBUG telegram.bot No new updates found.
+2023-07-01 00:13:33,759 DEBUG telegram.bot []
+2023-07-01 00:13:33,759 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:13:33,759 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:13:43,885 DEBUG telegram.bot No new updates found.
+2023-07-01 00:13:43,885 DEBUG telegram.bot []
+2023-07-01 00:13:43,885 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:13:43,886 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:13:54,011 DEBUG telegram.bot No new updates found.
+2023-07-01 00:13:54,012 DEBUG telegram.bot []
+2023-07-01 00:13:54,012 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:13:54,012 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:14:04,142 DEBUG telegram.bot No new updates found.
+2023-07-01 00:14:04,143 DEBUG telegram.bot []
+2023-07-01 00:14:04,143 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:14:04,143 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:14:14,268 DEBUG telegram.bot No new updates found.
+2023-07-01 00:14:14,268 DEBUG telegram.bot []
+2023-07-01 00:14:14,268 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:14:14,268 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:14:24,396 DEBUG telegram.bot No new updates found.
+2023-07-01 00:14:24,396 DEBUG telegram.bot []
+2023-07-01 00:14:24,396 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:14:24,396 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:14:34,524 DEBUG telegram.bot No new updates found.
+2023-07-01 00:14:34,524 DEBUG telegram.bot []
+2023-07-01 00:14:34,524 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:14:34,524 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:14:44,652 DEBUG telegram.bot No new updates found.
+2023-07-01 00:14:44,652 DEBUG telegram.bot []
+2023-07-01 00:14:44,652 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:14:44,652 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:14:54,781 DEBUG telegram.bot No new updates found.
+2023-07-01 00:14:54,781 DEBUG telegram.bot []
+2023-07-01 00:14:54,781 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:14:54,781 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:15:04,915 DEBUG telegram.bot No new updates found.
+2023-07-01 00:15:04,915 DEBUG telegram.bot []
+2023-07-01 00:15:04,915 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:15:04,916 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:15:15,054 DEBUG telegram.bot No new updates found.
+2023-07-01 00:15:15,054 DEBUG telegram.bot []
+2023-07-01 00:15:15,055 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:15:15,055 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:15:25,181 DEBUG telegram.bot No new updates found.
+2023-07-01 00:15:25,181 DEBUG telegram.bot []
+2023-07-01 00:15:25,181 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:15:25,181 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:15:35,309 DEBUG telegram.bot No new updates found.
+2023-07-01 00:15:35,310 DEBUG telegram.bot []
+2023-07-01 00:15:35,310 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:15:35,310 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:15:45,457 DEBUG telegram.bot No new updates found.
+2023-07-01 00:15:45,457 DEBUG telegram.bot []
+2023-07-01 00:15:45,457 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:15:45,458 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:15:55,586 DEBUG telegram.bot No new updates found.
+2023-07-01 00:15:55,587 DEBUG telegram.bot []
+2023-07-01 00:15:55,587 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:15:55,588 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:16:05,715 DEBUG telegram.bot No new updates found.
+2023-07-01 00:16:05,715 DEBUG telegram.bot []
+2023-07-01 00:16:05,715 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:16:05,716 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:16:15,841 DEBUG telegram.bot No new updates found.
+2023-07-01 00:16:15,841 DEBUG telegram.bot []
+2023-07-01 00:16:15,841 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:16:15,841 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:16:25,967 DEBUG telegram.bot No new updates found.
+2023-07-01 00:16:25,967 DEBUG telegram.bot []
+2023-07-01 00:16:25,967 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:16:25,967 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:16:36,099 DEBUG telegram.bot No new updates found.
+2023-07-01 00:16:36,099 DEBUG telegram.bot []
+2023-07-01 00:16:36,099 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:16:36,100 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:16:46,225 DEBUG telegram.bot No new updates found.
+2023-07-01 00:16:46,227 DEBUG telegram.bot []
+2023-07-01 00:16:46,227 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:16:46,228 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:16:56,356 DEBUG telegram.bot No new updates found.
+2023-07-01 00:16:56,356 DEBUG telegram.bot []
+2023-07-01 00:16:56,356 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:16:56,356 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:17:06,484 DEBUG telegram.bot No new updates found.
+2023-07-01 00:17:06,485 DEBUG telegram.bot []
+2023-07-01 00:17:06,485 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:17:06,485 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:17:16,614 DEBUG telegram.bot No new updates found.
+2023-07-01 00:17:16,614 DEBUG telegram.bot []
+2023-07-01 00:17:16,614 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:17:16,615 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:17:26,745 DEBUG telegram.bot No new updates found.
+2023-07-01 00:17:26,745 DEBUG telegram.bot []
+2023-07-01 00:17:26,746 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:17:26,746 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:17:36,872 DEBUG telegram.bot No new updates found.
+2023-07-01 00:17:36,872 DEBUG telegram.bot []
+2023-07-01 00:17:36,872 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:17:36,872 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:17:47,005 DEBUG telegram.bot No new updates found.
+2023-07-01 00:17:47,005 DEBUG telegram.bot []
+2023-07-01 00:17:47,005 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:17:47,005 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:17:57,132 DEBUG telegram.bot No new updates found.
+2023-07-01 00:17:57,132 DEBUG telegram.bot []
+2023-07-01 00:17:57,132 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:17:57,133 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:18:07,258 DEBUG telegram.bot No new updates found.
+2023-07-01 00:18:07,258 DEBUG telegram.bot []
+2023-07-01 00:18:07,258 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:18:07,258 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:18:17,405 DEBUG telegram.bot No new updates found.
+2023-07-01 00:18:17,406 DEBUG telegram.bot []
+2023-07-01 00:18:17,406 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:18:17,406 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:18:27,537 DEBUG telegram.bot No new updates found.
+2023-07-01 00:18:27,538 DEBUG telegram.bot []
+2023-07-01 00:18:27,538 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:18:27,539 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:18:37,667 DEBUG telegram.bot No new updates found.
+2023-07-01 00:18:37,668 DEBUG telegram.bot []
+2023-07-01 00:18:37,668 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:18:37,669 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:18:47,796 DEBUG telegram.bot No new updates found.
+2023-07-01 00:18:47,796 DEBUG telegram.bot []
+2023-07-01 00:18:47,796 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:18:47,796 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:18:57,924 DEBUG telegram.bot No new updates found.
+2023-07-01 00:18:57,925 DEBUG telegram.bot []
+2023-07-01 00:18:57,925 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:18:57,925 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:19:08,114 DEBUG telegram.bot No new updates found.
+2023-07-01 00:19:08,114 DEBUG telegram.bot []
+2023-07-01 00:19:08,114 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:19:08,114 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:19:18,247 DEBUG telegram.bot No new updates found.
+2023-07-01 00:19:18,247 DEBUG telegram.bot []
+2023-07-01 00:19:18,248 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:19:18,248 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:19:28,424 DEBUG telegram.bot No new updates found.
+2023-07-01 00:19:28,424 DEBUG telegram.bot []
+2023-07-01 00:19:28,424 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:19:28,424 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:19:38,549 DEBUG telegram.bot No new updates found.
+2023-07-01 00:19:38,549 DEBUG telegram.bot []
+2023-07-01 00:19:38,549 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:19:38,549 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:19:48,685 DEBUG telegram.bot No new updates found.
+2023-07-01 00:19:48,686 DEBUG telegram.bot []
+2023-07-01 00:19:48,686 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:19:48,687 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:19:58,814 DEBUG telegram.bot No new updates found.
+2023-07-01 00:19:58,814 DEBUG telegram.bot []
+2023-07-01 00:19:58,814 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:19:58,814 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:20:08,943 DEBUG telegram.bot No new updates found.
+2023-07-01 00:20:08,943 DEBUG telegram.bot []
+2023-07-01 00:20:08,944 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:20:08,944 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:20:19,072 DEBUG telegram.bot No new updates found.
+2023-07-01 00:20:19,073 DEBUG telegram.bot []
+2023-07-01 00:20:19,073 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:20:19,074 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:20:29,200 DEBUG telegram.bot No new updates found.
+2023-07-01 00:20:29,200 DEBUG telegram.bot []
+2023-07-01 00:20:29,200 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:20:29,200 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:20:39,339 DEBUG telegram.bot No new updates found.
+2023-07-01 00:20:39,340 DEBUG telegram.bot []
+2023-07-01 00:20:39,340 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:20:39,341 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:20:49,469 DEBUG telegram.bot No new updates found.
+2023-07-01 00:20:49,469 DEBUG telegram.bot []
+2023-07-01 00:20:49,470 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:20:49,470 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:20:59,601 DEBUG telegram.bot No new updates found.
+2023-07-01 00:20:59,601 DEBUG telegram.bot []
+2023-07-01 00:20:59,601 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:20:59,601 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:21:09,727 DEBUG telegram.bot No new updates found.
+2023-07-01 00:21:09,728 DEBUG telegram.bot []
+2023-07-01 00:21:09,728 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:21:09,729 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:21:19,859 DEBUG telegram.bot No new updates found.
+2023-07-01 00:21:19,860 DEBUG telegram.bot []
+2023-07-01 00:21:19,860 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:21:19,861 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:21:29,991 DEBUG telegram.bot No new updates found.
+2023-07-01 00:21:29,992 DEBUG telegram.bot []
+2023-07-01 00:21:29,992 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:21:29,992 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:21:40,126 DEBUG telegram.bot No new updates found.
+2023-07-01 00:21:40,127 DEBUG telegram.bot []
+2023-07-01 00:21:40,127 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:21:40,128 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:21:50,254 DEBUG telegram.bot No new updates found.
+2023-07-01 00:21:50,254 DEBUG telegram.bot []
+2023-07-01 00:21:50,254 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:21:50,255 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:22:00,391 DEBUG telegram.bot No new updates found.
+2023-07-01 00:22:00,391 DEBUG telegram.bot []
+2023-07-01 00:22:00,392 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:22:00,392 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:22:10,524 DEBUG telegram.bot No new updates found.
+2023-07-01 00:22:10,524 DEBUG telegram.bot []
+2023-07-01 00:22:10,524 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:22:10,524 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:22:20,666 DEBUG telegram.bot No new updates found.
+2023-07-01 00:22:20,666 DEBUG telegram.bot []
+2023-07-01 00:22:20,666 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:22:20,666 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:22:30,796 DEBUG telegram.bot No new updates found.
+2023-07-01 00:22:30,796 DEBUG telegram.bot []
+2023-07-01 00:22:30,796 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:22:30,797 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:22:40,928 DEBUG telegram.bot No new updates found.
+2023-07-01 00:22:40,928 DEBUG telegram.bot []
+2023-07-01 00:22:40,928 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:22:40,928 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:22:51,055 DEBUG telegram.bot No new updates found.
+2023-07-01 00:22:51,055 DEBUG telegram.bot []
+2023-07-01 00:22:51,056 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:22:51,056 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:23:01,182 DEBUG telegram.bot No new updates found.
+2023-07-01 00:23:01,183 DEBUG telegram.bot []
+2023-07-01 00:23:01,183 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:23:01,183 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:23:11,613 DEBUG telegram.bot No new updates found.
+2023-07-01 00:23:11,614 DEBUG telegram.bot []
+2023-07-01 00:23:11,614 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:23:11,614 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:23:21,748 DEBUG telegram.bot No new updates found.
+2023-07-01 00:23:21,748 DEBUG telegram.bot []
+2023-07-01 00:23:21,748 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:23:21,748 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:23:31,883 DEBUG telegram.bot No new updates found.
+2023-07-01 00:23:31,883 DEBUG telegram.bot []
+2023-07-01 00:23:31,883 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:23:31,883 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:23:42,028 DEBUG telegram.bot No new updates found.
+2023-07-01 00:23:42,028 DEBUG telegram.bot []
+2023-07-01 00:23:42,028 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:23:42,028 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:23:52,163 DEBUG telegram.bot No new updates found.
+2023-07-01 00:23:52,163 DEBUG telegram.bot []
+2023-07-01 00:23:52,163 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:23:52,163 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:24:02,298 DEBUG telegram.bot No new updates found.
+2023-07-01 00:24:02,298 DEBUG telegram.bot []
+2023-07-01 00:24:02,298 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:24:02,298 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:24:12,448 DEBUG telegram.bot No new updates found.
+2023-07-01 00:24:12,448 DEBUG telegram.bot []
+2023-07-01 00:24:12,449 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:24:12,449 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:24:22,587 DEBUG telegram.bot No new updates found.
+2023-07-01 00:24:22,587 DEBUG telegram.bot []
+2023-07-01 00:24:22,588 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:24:22,588 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:24:32,725 DEBUG telegram.bot No new updates found.
+2023-07-01 00:24:32,726 DEBUG telegram.bot []
+2023-07-01 00:24:32,726 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:24:32,727 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:24:42,862 DEBUG telegram.bot No new updates found.
+2023-07-01 00:24:42,862 DEBUG telegram.bot []
+2023-07-01 00:24:42,862 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:24:42,862 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:24:52,999 DEBUG telegram.bot No new updates found.
+2023-07-01 00:24:53,000 DEBUG telegram.bot []
+2023-07-01 00:24:53,000 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:24:53,001 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:25:03,137 DEBUG telegram.bot No new updates found.
+2023-07-01 00:25:03,138 DEBUG telegram.bot []
+2023-07-01 00:25:03,138 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:25:03,139 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:25:13,280 DEBUG telegram.bot No new updates found.
+2023-07-01 00:25:13,280 DEBUG telegram.bot []
+2023-07-01 00:25:13,280 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:25:13,280 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:25:23,800 DEBUG telegram.bot No new updates found.
+2023-07-01 00:25:23,801 DEBUG telegram.bot []
+2023-07-01 00:25:23,801 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:25:23,802 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:25:33,941 DEBUG telegram.bot No new updates found.
+2023-07-01 00:25:33,941 DEBUG telegram.bot []
+2023-07-01 00:25:33,942 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:25:33,942 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:25:44,098 DEBUG telegram.bot No new updates found.
+2023-07-01 00:25:44,098 DEBUG telegram.bot []
+2023-07-01 00:25:44,099 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:25:44,099 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:25:54,255 DEBUG telegram.bot No new updates found.
+2023-07-01 00:25:54,255 DEBUG telegram.bot []
+2023-07-01 00:25:54,255 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:25:54,256 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:26:04,395 DEBUG telegram.bot No new updates found.
+2023-07-01 00:26:04,395 DEBUG telegram.bot []
+2023-07-01 00:26:04,395 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:26:04,395 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:26:14,532 DEBUG telegram.bot No new updates found.
+2023-07-01 00:26:14,533 DEBUG telegram.bot []
+2023-07-01 00:26:14,533 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:26:14,534 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:26:24,680 DEBUG telegram.bot No new updates found.
+2023-07-01 00:26:24,680 DEBUG telegram.bot []
+2023-07-01 00:26:24,680 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:26:24,680 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:26:34,816 DEBUG telegram.bot No new updates found.
+2023-07-01 00:26:34,816 DEBUG telegram.bot []
+2023-07-01 00:26:34,816 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:26:34,816 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:26:44,951 DEBUG telegram.bot No new updates found.
+2023-07-01 00:26:44,951 DEBUG telegram.bot []
+2023-07-01 00:26:44,951 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:26:44,951 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:26:55,085 DEBUG telegram.bot No new updates found.
+2023-07-01 00:26:55,085 DEBUG telegram.bot []
+2023-07-01 00:26:55,085 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:26:55,085 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:27:05,220 DEBUG telegram.bot No new updates found.
+2023-07-01 00:27:05,221 DEBUG telegram.bot []
+2023-07-01 00:27:05,221 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:27:05,222 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:27:15,359 DEBUG telegram.bot No new updates found.
+2023-07-01 00:27:15,359 DEBUG telegram.bot []
+2023-07-01 00:27:15,359 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:27:15,361 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:27:25,496 DEBUG telegram.bot No new updates found.
+2023-07-01 00:27:25,497 DEBUG telegram.bot []
+2023-07-01 00:27:25,497 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:27:25,498 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:27:35,635 DEBUG telegram.bot No new updates found.
+2023-07-01 00:27:35,635 DEBUG telegram.bot []
+2023-07-01 00:27:35,636 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:27:35,636 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:27:45,772 DEBUG telegram.bot No new updates found.
+2023-07-01 00:27:45,772 DEBUG telegram.bot []
+2023-07-01 00:27:45,772 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:27:45,772 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:27:55,907 DEBUG telegram.bot No new updates found.
+2023-07-01 00:27:55,907 DEBUG telegram.bot []
+2023-07-01 00:27:55,907 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:27:55,907 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:28:06,044 DEBUG telegram.bot No new updates found.
+2023-07-01 00:28:06,045 DEBUG telegram.bot []
+2023-07-01 00:28:06,045 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:28:06,046 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:28:16,180 DEBUG telegram.bot No new updates found.
+2023-07-01 00:28:16,180 DEBUG telegram.bot []
+2023-07-01 00:28:16,181 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:28:16,181 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:28:26,320 DEBUG telegram.bot No new updates found.
+2023-07-01 00:28:26,320 DEBUG telegram.bot []
+2023-07-01 00:28:26,321 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:28:26,321 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:28:36,459 DEBUG telegram.bot No new updates found.
+2023-07-01 00:28:36,460 DEBUG telegram.bot []
+2023-07-01 00:28:36,460 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:28:36,461 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:28:46,598 DEBUG telegram.bot No new updates found.
+2023-07-01 00:28:46,599 DEBUG telegram.bot []
+2023-07-01 00:28:46,599 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:28:46,600 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:28:56,737 DEBUG telegram.bot No new updates found.
+2023-07-01 00:28:56,738 DEBUG telegram.bot []
+2023-07-01 00:28:56,738 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:28:56,739 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:29:06,875 DEBUG telegram.bot No new updates found.
+2023-07-01 00:29:06,875 DEBUG telegram.bot []
+2023-07-01 00:29:06,875 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:29:06,875 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:29:17,012 DEBUG telegram.bot No new updates found.
+2023-07-01 00:29:17,012 DEBUG telegram.bot []
+2023-07-01 00:29:17,013 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:29:17,013 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:29:27,148 DEBUG telegram.bot No new updates found.
+2023-07-01 00:29:27,148 DEBUG telegram.bot []
+2023-07-01 00:29:27,149 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:29:27,149 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:29:37,285 DEBUG telegram.bot No new updates found.
+2023-07-01 00:29:37,286 DEBUG telegram.bot []
+2023-07-01 00:29:37,286 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:29:37,287 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:29:47,422 DEBUG telegram.bot No new updates found.
+2023-07-01 00:29:47,422 DEBUG telegram.bot []
+2023-07-01 00:29:47,422 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:29:47,422 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:29:57,557 DEBUG telegram.bot No new updates found.
+2023-07-01 00:29:57,558 DEBUG telegram.bot []
+2023-07-01 00:29:57,558 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:29:57,559 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:30:07,706 DEBUG telegram.bot No new updates found.
+2023-07-01 00:30:07,706 DEBUG telegram.bot []
+2023-07-01 00:30:07,706 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:30:07,707 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:30:17,844 DEBUG telegram.bot No new updates found.
+2023-07-01 00:30:17,845 DEBUG telegram.bot []
+2023-07-01 00:30:17,845 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:30:17,846 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:30:27,983 DEBUG telegram.bot No new updates found.
+2023-07-01 00:30:27,983 DEBUG telegram.bot []
+2023-07-01 00:30:27,983 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:30:27,983 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:30:38,138 DEBUG telegram.bot No new updates found.
+2023-07-01 00:30:38,138 DEBUG telegram.bot []
+2023-07-01 00:30:38,138 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:30:38,138 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:30:48,272 DEBUG telegram.bot No new updates found.
+2023-07-01 00:30:48,272 DEBUG telegram.bot []
+2023-07-01 00:30:48,272 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:30:48,272 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:30:58,414 DEBUG telegram.bot No new updates found.
+2023-07-01 00:30:58,415 DEBUG telegram.bot []
+2023-07-01 00:30:58,415 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:30:58,415 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:31:08,549 DEBUG telegram.bot No new updates found.
+2023-07-01 00:31:08,549 DEBUG telegram.bot []
+2023-07-01 00:31:08,549 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:31:08,549 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:31:18,686 DEBUG telegram.bot No new updates found.
+2023-07-01 00:31:18,686 DEBUG telegram.bot []
+2023-07-01 00:31:18,686 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:31:18,686 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:31:28,823 DEBUG telegram.bot No new updates found.
+2023-07-01 00:31:28,823 DEBUG telegram.bot []
+2023-07-01 00:31:28,824 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:31:28,824 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:31:38,960 DEBUG telegram.bot No new updates found.
+2023-07-01 00:31:38,960 DEBUG telegram.bot []
+2023-07-01 00:31:38,960 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:31:38,960 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:31:49,094 DEBUG telegram.bot No new updates found.
+2023-07-01 00:31:49,094 DEBUG telegram.bot []
+2023-07-01 00:31:49,094 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:31:49,095 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:31:59,230 DEBUG telegram.bot No new updates found.
+2023-07-01 00:31:59,230 DEBUG telegram.bot []
+2023-07-01 00:31:59,230 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:31:59,230 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:32:09,364 DEBUG telegram.bot No new updates found.
+2023-07-01 00:32:09,364 DEBUG telegram.bot []
+2023-07-01 00:32:09,364 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:32:09,364 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:32:19,499 DEBUG telegram.bot No new updates found.
+2023-07-01 00:32:19,499 DEBUG telegram.bot []
+2023-07-01 00:32:19,499 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:32:19,500 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:32:29,633 DEBUG telegram.bot No new updates found.
+2023-07-01 00:32:29,634 DEBUG telegram.bot []
+2023-07-01 00:32:29,634 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:32:29,634 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:32:39,769 DEBUG telegram.bot No new updates found.
+2023-07-01 00:32:39,769 DEBUG telegram.bot []
+2023-07-01 00:32:39,769 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:32:39,770 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:32:49,906 DEBUG telegram.bot No new updates found.
+2023-07-01 00:32:49,906 DEBUG telegram.bot []
+2023-07-01 00:32:49,906 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:32:49,906 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:33:00,041 DEBUG telegram.bot No new updates found.
+2023-07-01 00:33:00,041 DEBUG telegram.bot []
+2023-07-01 00:33:00,041 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:33:00,041 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:33:10,180 DEBUG telegram.bot No new updates found.
+2023-07-01 00:33:10,180 DEBUG telegram.bot []
+2023-07-01 00:33:10,180 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:33:10,180 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:33:20,315 DEBUG telegram.bot No new updates found.
+2023-07-01 00:33:20,315 DEBUG telegram.bot []
+2023-07-01 00:33:20,315 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:33:20,315 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:33:30,453 DEBUG telegram.bot No new updates found.
+2023-07-01 00:33:30,453 DEBUG telegram.bot []
+2023-07-01 00:33:30,454 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:33:30,454 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:33:40,590 DEBUG telegram.bot No new updates found.
+2023-07-01 00:33:40,590 DEBUG telegram.bot []
+2023-07-01 00:33:40,590 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:33:40,590 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:33:50,725 DEBUG telegram.bot No new updates found.
+2023-07-01 00:33:50,726 DEBUG telegram.bot []
+2023-07-01 00:33:50,726 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:33:50,726 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:34:00,865 DEBUG telegram.bot No new updates found.
+2023-07-01 00:34:00,865 DEBUG telegram.bot []
+2023-07-01 00:34:00,865 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:34:00,865 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:34:11,010 DEBUG telegram.bot No new updates found.
+2023-07-01 00:34:11,010 DEBUG telegram.bot []
+2023-07-01 00:34:11,010 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:34:11,010 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:34:21,159 DEBUG telegram.bot No new updates found.
+2023-07-01 00:34:21,159 DEBUG telegram.bot []
+2023-07-01 00:34:21,159 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:34:21,160 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:34:31,297 DEBUG telegram.bot No new updates found.
+2023-07-01 00:34:31,298 DEBUG telegram.bot []
+2023-07-01 00:34:31,298 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:34:31,299 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:34:41,435 DEBUG telegram.bot No new updates found.
+2023-07-01 00:34:41,435 DEBUG telegram.bot []
+2023-07-01 00:34:41,435 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:34:41,435 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:34:51,635 DEBUG telegram.bot No new updates found.
+2023-07-01 00:34:51,635 DEBUG telegram.bot []
+2023-07-01 00:34:51,635 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:34:51,635 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:35:01,770 DEBUG telegram.bot No new updates found.
+2023-07-01 00:35:01,770 DEBUG telegram.bot []
+2023-07-01 00:35:01,771 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:35:01,771 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:35:11,907 DEBUG telegram.bot No new updates found.
+2023-07-01 00:35:11,908 DEBUG telegram.bot []
+2023-07-01 00:35:11,908 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:35:11,909 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:35:22,047 DEBUG telegram.bot No new updates found.
+2023-07-01 00:35:22,047 DEBUG telegram.bot []
+2023-07-01 00:35:22,047 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:35:22,048 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:35:32,182 DEBUG telegram.bot No new updates found.
+2023-07-01 00:35:32,182 DEBUG telegram.bot []
+2023-07-01 00:35:32,182 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:35:32,182 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:35:42,319 DEBUG telegram.bot No new updates found.
+2023-07-01 00:35:42,319 DEBUG telegram.bot []
+2023-07-01 00:35:42,320 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:35:42,320 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:35:52,457 DEBUG telegram.bot No new updates found.
+2023-07-01 00:35:52,457 DEBUG telegram.bot []
+2023-07-01 00:35:52,457 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:35:52,457 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:36:02,591 DEBUG telegram.bot No new updates found.
+2023-07-01 00:36:02,591 DEBUG telegram.bot []
+2023-07-01 00:36:02,591 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:36:02,591 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:36:12,728 DEBUG telegram.bot No new updates found.
+2023-07-01 00:36:12,728 DEBUG telegram.bot []
+2023-07-01 00:36:12,728 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:36:12,728 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:36:22,862 DEBUG telegram.bot No new updates found.
+2023-07-01 00:36:22,862 DEBUG telegram.bot []
+2023-07-01 00:36:22,862 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:36:22,862 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:36:32,999 DEBUG telegram.bot No new updates found.
+2023-07-01 00:36:32,999 DEBUG telegram.bot []
+2023-07-01 00:36:32,999 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:36:32,999 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:36:43,137 DEBUG telegram.bot No new updates found.
+2023-07-01 00:36:43,138 DEBUG telegram.bot []
+2023-07-01 00:36:43,138 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:36:43,138 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:36:53,273 DEBUG telegram.bot No new updates found.
+2023-07-01 00:36:53,273 DEBUG telegram.bot []
+2023-07-01 00:36:53,273 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:36:53,274 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:37:01,631 DEBUG telegram.bot Getting updates: [458808826]
+2023-07-01 00:37:01,634 DEBUG telegram.bot [<telegram.update.Update object at 0x000002C0927754A0>]
+2023-07-01 00:37:01,634 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:37:01,634 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:37:01,635 DEBUG telegram.ext.dispatcher Processing Update: {'update_id': 458808826, 'message': {'caption_entities': [], 'channel_chat_created': False, 'new_chat_members': [], 'new_chat_photo': [], 'text': '/start', 'supergroup_chat_created': False, 'photo': [], 'message_id': 1467, 'chat': {'id': 1086638338, 'type': 'private', 'username': 'r_ypiter', 'first_name': 'ypiter'}, 'delete_chat_photo': False, 'entities': [{'length': 6, 'offset': 0, 'type': 'bot_command'}], 'group_chat_created': False, 'date': 1688143022, 'from': {'id': 1086638338, 'language_code': 'en', 'username': 'r_ypiter', 'first_name': 'ypiter', 'is_bot': False}}}
+2023-07-01 00:37:01,637 DEBUG telegram.bot Entering: send_message
+2023-07-01 00:37:02,098 DEBUG telegram.bot {'reply_markup': {'inline_keyboard': [[{'callback_data': 'faq', 'text': 'FAQ'}, {'callback_data': 'info', 'text': 'Инфо'}, {'callback_data': 'commands', 'text': 'Команды'}], [{'callback_data': 'helper', 'text': 'Обратная связь'}]]}, 'caption_entities': [], 'channel_chat_created': False, 'new_chat_members': [], 'new_chat_photo': [], 'text': 'Приветсвую тебя!\nЯ "ypite", текстовый помощник и по совместительству хранитель истории Фомина Никиты. Я могу рассказать вам о моем создателе, о его жизни и какой он человек. Также я храню рецензии, которые на него написали его знакомые.\nСнизу представлено меню.\n\nFAQ - Информация обо мне и Никите.\nИнфо - Статистическая информация обо мне.\nКоманды - Список доступных команд.\nОбратная связь - Используте при наличии не решенных вопросов.\n\nВНИМАНИЕ!\nРазработчик бота не несет ответсвенность за его содержание!!\nПродолжив работу с ботом, вы подтверждаете, что не будете иметь претензий ни к создателю бота, ни к боту, ни к его содержанию и готовы нести ответсвенность за любой материал, отправленный боту.', 'supergroup_chat_created': False, 'photo': [], 'message_id': 1468, 'chat': {'id': 1086638338, 'type': 'private', 'username': 'r_ypiter', 'first_name': 'ypiter'}, 'delete_chat_photo': False, 'entities': [], 'group_chat_created': False, 'date': 1688143022, 'from': {'id': 6143246892, 'username': 'ypitebot', 'first_name': 'ypite', 'is_bot': True}}
+2023-07-01 00:37:02,098 DEBUG telegram.bot Exiting: send_message
+2023-07-01 00:37:11,770 DEBUG telegram.bot No new updates found.
+2023-07-01 00:37:11,771 DEBUG telegram.bot []
+2023-07-01 00:37:11,771 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:37:11,771 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:37:21,904 DEBUG telegram.bot No new updates found.
+2023-07-01 00:37:21,904 DEBUG telegram.bot []
+2023-07-01 00:37:21,904 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:37:21,904 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:37:32,039 DEBUG telegram.bot No new updates found.
+2023-07-01 00:37:32,039 DEBUG telegram.bot []
+2023-07-01 00:37:32,039 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:37:32,039 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:37:42,173 DEBUG telegram.bot No new updates found.
+2023-07-01 00:37:42,173 DEBUG telegram.bot []
+2023-07-01 00:37:42,173 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:37:42,173 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:37:52,308 DEBUG telegram.bot No new updates found.
+2023-07-01 00:37:52,309 DEBUG telegram.bot []
+2023-07-01 00:37:52,309 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:37:52,309 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:38:02,451 DEBUG telegram.bot No new updates found.
+2023-07-01 00:38:02,451 DEBUG telegram.bot []
+2023-07-01 00:38:02,451 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:38:02,452 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:38:12,586 DEBUG telegram.bot No new updates found.
+2023-07-01 00:38:12,587 DEBUG telegram.bot []
+2023-07-01 00:38:12,587 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:38:12,587 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:38:22,724 DEBUG telegram.bot No new updates found.
+2023-07-01 00:38:22,724 DEBUG telegram.bot []
+2023-07-01 00:38:22,724 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:38:22,724 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:38:32,861 DEBUG telegram.bot No new updates found.
+2023-07-01 00:38:32,861 DEBUG telegram.bot []
+2023-07-01 00:38:32,861 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:38:32,861 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:38:43,001 DEBUG telegram.bot No new updates found.
+2023-07-01 00:38:43,001 DEBUG telegram.bot []
+2023-07-01 00:38:43,002 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:38:43,002 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:38:53,138 DEBUG telegram.bot No new updates found.
+2023-07-01 00:38:53,138 DEBUG telegram.bot []
+2023-07-01 00:38:53,138 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:38:53,139 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:39:03,278 DEBUG telegram.bot No new updates found.
+2023-07-01 00:39:03,278 DEBUG telegram.bot []
+2023-07-01 00:39:03,279 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:39:03,279 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:39:13,413 DEBUG telegram.bot No new updates found.
+2023-07-01 00:39:13,413 DEBUG telegram.bot []
+2023-07-01 00:39:13,413 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:39:13,413 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:39:23,562 DEBUG telegram.bot No new updates found.
+2023-07-01 00:39:23,562 DEBUG telegram.bot []
+2023-07-01 00:39:23,562 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:39:23,562 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:39:33,698 DEBUG telegram.bot No new updates found.
+2023-07-01 00:39:33,699 DEBUG telegram.bot []
+2023-07-01 00:39:33,699 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:39:33,700 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:39:43,836 DEBUG telegram.bot No new updates found.
+2023-07-01 00:39:43,836 DEBUG telegram.bot []
+2023-07-01 00:39:43,836 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:39:43,836 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:39:53,971 DEBUG telegram.bot No new updates found.
+2023-07-01 00:39:53,972 DEBUG telegram.bot []
+2023-07-01 00:39:53,972 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:39:53,972 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:40:04,392 DEBUG telegram.bot No new updates found.
+2023-07-01 00:40:04,392 DEBUG telegram.bot []
+2023-07-01 00:40:04,392 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:40:04,392 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:40:14,524 DEBUG telegram.bot No new updates found.
+2023-07-01 00:40:14,524 DEBUG telegram.bot []
+2023-07-01 00:40:14,525 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:40:14,525 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:40:24,663 DEBUG telegram.bot No new updates found.
+2023-07-01 00:40:24,663 DEBUG telegram.bot []
+2023-07-01 00:40:24,663 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:40:24,663 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:40:34,796 DEBUG telegram.bot No new updates found.
+2023-07-01 00:40:34,796 DEBUG telegram.bot []
+2023-07-01 00:40:34,796 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:40:34,796 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:40:44,928 DEBUG telegram.bot No new updates found.
+2023-07-01 00:40:44,928 DEBUG telegram.bot []
+2023-07-01 00:40:44,929 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:40:44,929 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:40:55,079 DEBUG telegram.bot No new updates found.
+2023-07-01 00:40:55,079 DEBUG telegram.bot []
+2023-07-01 00:40:55,079 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:40:55,079 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:41:05,212 DEBUG telegram.bot No new updates found.
+2023-07-01 00:41:05,212 DEBUG telegram.bot []
+2023-07-01 00:41:05,212 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:41:05,212 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:41:15,345 DEBUG telegram.bot No new updates found.
+2023-07-01 00:41:15,345 DEBUG telegram.bot []
+2023-07-01 00:41:15,345 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:41:15,345 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:41:25,478 DEBUG telegram.bot No new updates found.
+2023-07-01 00:41:25,478 DEBUG telegram.bot []
+2023-07-01 00:41:25,478 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:41:25,478 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:41:35,613 DEBUG telegram.bot No new updates found.
+2023-07-01 00:41:35,614 DEBUG telegram.bot []
+2023-07-01 00:41:35,614 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:41:35,615 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:41:45,750 DEBUG telegram.bot No new updates found.
+2023-07-01 00:41:45,751 DEBUG telegram.bot []
+2023-07-01 00:41:45,751 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:41:45,752 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:41:55,888 DEBUG telegram.bot No new updates found.
+2023-07-01 00:41:55,889 DEBUG telegram.bot []
+2023-07-01 00:41:55,889 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:41:55,890 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:42:06,023 DEBUG telegram.bot No new updates found.
+2023-07-01 00:42:06,023 DEBUG telegram.bot []
+2023-07-01 00:42:06,024 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:42:06,024 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:42:16,156 DEBUG telegram.bot No new updates found.
+2023-07-01 00:42:16,156 DEBUG telegram.bot []
+2023-07-01 00:42:16,156 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:42:16,156 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:42:26,290 DEBUG telegram.bot No new updates found.
+2023-07-01 00:42:26,290 DEBUG telegram.bot []
+2023-07-01 00:42:26,290 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:42:26,291 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:42:36,425 DEBUG telegram.bot No new updates found.
+2023-07-01 00:42:36,425 DEBUG telegram.bot []
+2023-07-01 00:42:36,426 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:42:36,426 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:42:46,561 DEBUG telegram.bot No new updates found.
+2023-07-01 00:42:46,561 DEBUG telegram.bot []
+2023-07-01 00:42:46,561 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:42:46,561 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:42:56,693 DEBUG telegram.bot No new updates found.
+2023-07-01 00:42:56,693 DEBUG telegram.bot []
+2023-07-01 00:42:56,694 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:42:56,694 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:46:45,228 DEBUG telegram.ext.dispatcher Setting singleton dispatcher as <telegram.ext.dispatcher.Dispatcher object at 0x000002738E6FC600>
+2023-07-01 00:46:45,230 INFO apscheduler.scheduler Scheduler started
+2023-07-01 00:46:45,232 DEBUG telegram.bot Entering: get_me
+2023-07-01 00:46:45,233 DEBUG apscheduler.scheduler Looking for jobs to run
+2023-07-01 00:46:45,234 DEBUG apscheduler.scheduler No jobs; waiting until a job is added
+2023-07-01 00:46:45,649 DEBUG telegram.bot {'first_name': 'ypite', 'can_read_all_group_messages': False, 'can_join_groups': True, 'is_bot': True, 'supports_inline_queries': True, 'username': 'ypitebot', 'id': 6143246892}
+2023-07-01 00:46:45,649 DEBUG telegram.bot Exiting: get_me
+2023-07-01 00:46:45,651 DEBUG telegram.ext.updater Bot:6143246892:dispatcher - started
+2023-07-01 00:46:45,652 DEBUG telegram.ext.updater Waiting for Dispatcher and polling to start
+2023-07-01 00:46:45,652 DEBUG telegram.ext.updater Bot:6143246892:updater - started
+2023-07-01 00:46:45,653 DEBUG telegram.ext.updater Updater thread started (polling)
+2023-07-01 00:46:45,653 DEBUG telegram.ext.updater Start network loop retry bootstrap del webhook
+2023-07-01 00:46:45,653 DEBUG telegram.ext.updater Deleting webhook
+2023-07-01 00:46:45,653 DEBUG telegram.bot Entering: delete_webhook
+2023-07-01 00:46:45,656 DEBUG telegram.ext.dispatcher Dispatcher started
+2023-07-01 00:46:45,787 DEBUG telegram.bot True
+2023-07-01 00:46:45,787 DEBUG telegram.bot Exiting: delete_webhook
+2023-07-01 00:46:45,787 DEBUG telegram.ext.updater Bootstrap done
+2023-07-01 00:46:45,787 DEBUG telegram.ext.updater Start network loop retry getting Updates
+2023-07-01 00:46:45,787 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:46:52,190 DEBUG telegram.bot Getting updates: [458808827]
+2023-07-01 00:46:52,191 DEBUG telegram.bot [<telegram.update.Update object at 0x000002738E7AD640>]
+2023-07-01 00:46:52,191 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:46:52,191 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:46:52,193 DEBUG telegram.ext.dispatcher Processing Update: {'update_id': 458808827, 'message': {'channel_chat_created': False, 'date': 1688143612, 'entities': [{'type': 'bot_command', 'length': 5, 'offset': 0}], 'message_id': 1469, 'text': '/back', 'group_chat_created': False, 'caption_entities': [], 'new_chat_photo': [], 'chat': {'first_name': 'ypiter', 'type': 'private', 'id': 1086638338, 'username': 'r_ypiter'}, 'delete_chat_photo': False, 'photo': [], 'supergroup_chat_created': False, 'new_chat_members': [], 'from': {'first_name': 'ypiter', 'is_bot': False, 'language_code': 'en', 'username': 'r_ypiter', 'id': 1086638338}}}
+2023-07-01 00:46:52,194 DEBUG telegram.bot Entering: send_message
+2023-07-01 00:46:52,772 DEBUG telegram.bot {'channel_chat_created': False, 'date': 1688143613, 'reply_markup': {'inline_keyboard': [[{'text': 'FAQ', 'callback_data': 'faq'}, {'text': 'Инфо', 'callback_data': 'info'}, {'text': 'Команды', 'callback_data': 'commands'}], [{'text': 'Обратная связь', 'callback_data': 'helper'}]]}, 'entities': [], 'message_id': 1470, 'text': 'Меню:', 'group_chat_created': False, 'caption_entities': [], 'new_chat_photo': [], 'chat': {'first_name': 'ypiter', 'type': 'private', 'id': 1086638338, 'username': 'r_ypiter'}, 'delete_chat_photo': False, 'photo': [], 'supergroup_chat_created': False, 'new_chat_members': [], 'from': {'first_name': 'ypite', 'is_bot': True, 'username': 'ypitebot', 'id': 6143246892}}
+2023-07-01 00:46:52,773 DEBUG telegram.bot Exiting: send_message
+2023-07-01 00:46:56,783 DEBUG telegram.bot Getting updates: [458808828]
+2023-07-01 00:46:56,783 DEBUG telegram.bot [<telegram.update.Update object at 0x000002738E7AD7E0>]
+2023-07-01 00:46:56,784 DEBUG telegram.bot Exiting: get_updates
+2023-07-01 00:46:56,784 DEBUG telegram.bot Entering: get_updates
+2023-07-01 00:46:56,784 DEBUG telegram.ext.dispatcher Processing Update: {'update_id': 458808828, 'message': {'channel_chat_created': False, 'date': 1688143617, 'entities': [{'type': 'bot_command', 'length': 5, 'offset': 0}], 'message_id': 1471, 'text': '/menu', 'group_chat_created': False, 'caption_entities': [], 'new_chat_photo': [], 'chat': {'first_name': 'ypiter', 'type': 'private', 'id': 1086638338, 'username': 'r_ypiter'}, 'delete_chat_photo': False, 'photo': [], 'supergroup_chat_created': False, 'new_chat_members': [], 'from': {'first_name': 'ypiter', 'is_bot': False, 'language_code': 'en', 'username': 'r_ypiter', 'id': 1086638338}}}
+2023-07-01 00:46:56,785 DEBUG telegram.bot Entering: send_message
+2023-07-01 00:46:56,955 DEBUG telegram.bot {'channel_chat_created': False, 'date': 1688143617, 'reply_markup': {'inline_keyboard': [[{'text': 'FAQ', 'callback_data': 'faq'}, {'text': 'Инфо', 'callback_data': 'info'}, {'text': 'Команды', 'callback_data': 'commands'}], [{'text': 'Обратная связь', 'callback_data': 'helper'}]]}, 'entities': [], 'message_id': 1472, 'text': 'Меню:', 'group_chat_created': False, 'caption_entities': [], 'new_chat_photo': [], 'chat': {'first_name': 'ypiter', 'type': 'private', 'id': 1086638338, 'username': 'r_ypiter'}, 'delete_chat_photo': False, 'photo': [], 'supergroup_chat_created': False, 'new_chat_members': [], 'from': {'first_name': 'ypite', 'is_bot': True, 'username': 'ypitebot', 'id': 6143246892}}
+2023-07-01 00:46:56,956 DEBUG telegram.bot Exiting: send_message

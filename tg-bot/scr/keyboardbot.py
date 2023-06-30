@@ -74,14 +74,11 @@ class GenresKeyboard():
         
         self.keyboard = [[InlineKeyboardButton(text=self.name_link[0], url=self.name_link[1]), InlineKeyboardButton(text=self.name_link[2], url=self.name_link[3]),
                           InlineKeyboardButton(text=self.name_link[4], url=self.name_link[5]), InlineKeyboardButton(text=self.name_link[6], url=self.name_link[7]),
-                          InlineKeyboardButton(text=self.name_link[8], url=self.name_link[9])
-                          ],
+                          InlineKeyboardButton(text=self.name_link[8], url=self.name_link[9])],
                          [InlineKeyboardButton(text=self.name_link[10], url=self.name_link[11]), InlineKeyboardButton(text=self.name_link[12], url=self.name_link[13]),
                           InlineKeyboardButton(text=self.name_link[14], url=self.name_link[15]), InlineKeyboardButton(text=self.name_link[16], url=self.name_link[17]),
-                          InlineKeyboardButton(text=self.name_link[18], url=self.name_link[19])
-                          ],
-                          [InlineKeyboardButton("...назад", callback_data="backbook1"), menudel]
-                         ]
+                          InlineKeyboardButton(text=self.name_link[18], url=self.name_link[19])],
+                         [InlineKeyboardButton("...назад", callback_data="backbook1"), menudel]]
 
 file = open("learn/name.txt", "r", encoding="utf-8").readlines(0)
 pathlist = ["learn/book/"]
@@ -100,8 +97,7 @@ genreskb = {'action' : GenresKeyboard(pathlist[0], pathlist[1]).keyboard, 'adv' 
             'religion' : GenresKeyboard(pathlist[0], pathlist[21]).keyboard, 'romans' : GenresKeyboard(pathlist[0], pathlist[22]).keyboard,
             'rus' : GenresKeyboard(pathlist[0], pathlist[23]).keyboard, 'scary' : GenresKeyboard(pathlist[0], pathlist[24]).keyboard,
             'science' : GenresKeyboard(pathlist[0], pathlist[25]).keyboard, 'stories' : GenresKeyboard(pathlist[0], pathlist[26]).keyboard,
-            'tale' : GenresKeyboard(pathlist[0], pathlist[27]).keyboard
-            }
+            'tale' : GenresKeyboard(pathlist[0], pathlist[27]).keyboard}
 
 it = [[InlineKeyboardButton("Программирование", callback_data="coding")], [InlineKeyboardButton("Веб-разработка", callback_data="web")],
       [InlineKeyboardButton("Сис. Администрирование", callback_data="admin"), InlineKeyboardButton("Базы данных", callback_data="sql")],
@@ -164,7 +160,6 @@ def mem(LikeCount, DisLikeCount):
         InlineKeyboardButton("👍  " + str(LikeCount), callback_data="like-" + str(LikeCount)),
         InlineKeyboardButton("👎  " + str(DisLikeCount), callback_data="dislike-" + str(DisLikeCount))],
        [InlineKeyboardButton("Назад", callback_data="/fun"), menudel]]
-
     return mem
 
 vid = [[InlineKeyboardButton("Видео", callback_data="videomem")],

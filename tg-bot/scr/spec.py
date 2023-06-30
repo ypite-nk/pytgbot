@@ -1,6 +1,4 @@
-
 admin_id = [1086638338]
-
 def banlist(update, context):
     if update.message.chat['id'] in admin_id:
         banlists = []
@@ -39,7 +37,7 @@ def ban(update, context):
 
 def checkban(update, context):
     banlist = []
-    beta_list = ['894130439', '1086638338', '1336513455', '', '']
+    beta_list = ['', '1086638338', '', '', '']
     with open("info/banlist.txt", "r", encoding="utf-8") as file:
         file = file.readlines() 
         for i in file:
