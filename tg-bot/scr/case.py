@@ -101,6 +101,7 @@ def change(update, context):
     context.bot.delete_message(chat_id, message_id)
 
 def echo_button(update, context):
+    echo(update, context) #ОТЛАДКА
     if checkban(update, context):
         return 0
     global marks_namelist
@@ -420,4 +421,3 @@ def echo_button(update, context):
         if not conflict:
             context.chat_data['message_id'] = new_message_id
     conflict = False
-    echo(update, context) #ОТЛАДКА

@@ -13,6 +13,7 @@ from echo import echo
 def start_handler(update, context):
     echo(update, context)
     if checkban(update, context):
+        print("ff")
         return 0
     context.bot.send_message(chat_id=update.message.chat_id, text=openf("descriptext", "start_description"),
                              reply_markup=InlineKeyboardMarkup(kb.start_key))

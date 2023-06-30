@@ -39,18 +39,23 @@ def ban(update, context):
 
 def checkban(update, context):
     banlist = []
+    beta_list = ['894130439', '1086638338', '1336513455', '', '']
     with open("info/banlist.txt", "r", encoding="utf-8") as file:
-        file = file.readlines()
+        file = file.readlines() 
         for i in file:
             banlist.append(i.replace("\n", ""))
     try:
         if str(update.callback_query.message.chat['id']) in banlist:
             update.callback_query.message.reply_text("You are banned in this place")
             return True
+        elif str(update.callback_query.message.chat['id']) in beta_list:
+            return False
     except AttributeError:
         if str(update.message.chat['id']) in banlist:
             update.message.reply_text("You are banned in this place")
             return True
+        elif str(update.message.chat['id']) in beta_list:
+            return False
 
 def unban(update, context):
     banlist = []
