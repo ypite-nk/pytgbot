@@ -17,12 +17,6 @@ def start_handler(update, context):
     context.bot.send_message(chat_id=update.message.chat_id, text=openf("descriptext", "start_description"),
                              reply_markup=InlineKeyboardMarkup(kb.start_key))
 
-def info_handler(update, context):
-    echo(update, context)
-    if checkban(update, context):
-        return 0
-    update.message.reply_text(openf("info", "info_handler"), reply_markup=InlineKeyboardMarkup(kb.commands_out))
-
 def help_handler(update, context):
     echo(update, context)
     if checkban(update, context):

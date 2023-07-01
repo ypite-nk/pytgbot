@@ -13,7 +13,7 @@ from telegram import InlineKeyboardMarkup, InlineKeyboardButton, ParseMode
 mem_m = ['', '', '', '', '']
 video_mem = ['', '', '', '', '']
 joke_mem = ['', '', '', '', '']
-citaty_mem = ['', '', '', '', '']
+thought_mem = ['', '', '', '', '']
 old_message_id = 0
 likestat = False
 dislikestat = False
@@ -71,28 +71,28 @@ def joke_handler(update, context):
     joke = random.choice(file).replace("\n", "")
     while joke in joke_mem:
         joke = random.choice(file).replace("\n", "")
-    update.callback_query.message.reply_text(joke, reply_markup=InlineKeyboardMarkup(kb.jokes))
+    update.callback_query.message.reply_text(joke, reply_markup=InlineKeyboardMarkup(kb.jokes), parse_mode=ParseMode.MARKDOWN_V2)
     joke_mem[4] = joke_mem[3]
     joke_mem[3] = joke_mem[2]
     joke_mem[2] = joke_mem[1]
     joke_mem[1] = joke_mem[0]
     joke_mem[0] = joke
 
-def citaty_handler(update, context):
+def thought_handler(update, context):
     if checkban(update, context):
         return 0
-    global citaty_mem
-    with open("data/citaty.txt", "r", encoding="utf-8") as file:
+    global thought_mem
+    with open("data/thought.txt", "r", encoding="utf-8") as file:
         file = file.readlines()
-    citaty = random.choice(file).replace("\n", "")
-    while citaty in citaty_mem:
-        citaty = random.choice(file).replace("\n", "")
-    update.callback_query.message.reply_text(citaty, reply_markup=InlineKeyboardMarkup(kb.citaty))
-    citaty_mem[4] = citaty_mem[3]
-    citaty_mem[3] = citaty_mem[2]
-    citaty_mem[2] = citaty_mem[1]
-    citaty_mem[1] = citaty_mem[0]
-    citaty_mem[0] = citaty
+    thought = random.choice(file).replace("\n", "")
+    while thought in thought_mem:
+        thought = random.choice(file).replace("\n", "")
+    update.callback_query.message.reply_text(thought, reply_markup=InlineKeyboardMarkup(kb.thought), parse_mode=ParseMode.MARKDOWN_V2)
+    thought_mem[4] = thought_mem[3]
+    thought_mem[3] = thought_mem[2]
+    thought_mem[2] = thought_mem[1]
+    thought_mem[1] = thought_mem[0]
+    thought_mem[0] = thought
 
 def change(update, context):
     global message_id
@@ -166,8 +166,8 @@ def echo_button(update, context):
             case "jokes":
                 joke_handler(update, context)
 
-            case "citaty":
-                citaty_handler(update, context)
+            case "thought":
+                thought_handler(update, context)
 
             case _:
                 conflict = False

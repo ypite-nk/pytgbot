@@ -21,7 +21,6 @@ updater.dispatcher.add_handler(CallbackQueryHandler(echo_button))
 updater.dispatcher.add_handler(InlineQueryHandler(inline_query))
 
 updater.dispatcher.add_handler(CommandHandler('start', func.start_handler))
-updater.dispatcher.add_handler(CommandHandler('info', func.info_handler))
 updater.dispatcher.add_handler(CommandHandler('help', func.help_handler))
 updater.dispatcher.add_handler(CommandHandler('FAQ', func.faq_handler))
 updater.dispatcher.add_handler(CommandHandler('fun', fun_handler))

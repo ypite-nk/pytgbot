@@ -41,7 +41,7 @@ def set_mark(list):
 commands_out = [[InlineKeyboardButton("Команды", callback_data="commands"), menudel]]
 
 learns = [[InlineKeyboardButton("Образование", callback_data="learning"), InlineKeyboardButton("Книги", callback_data="books")],
-             [menudel]]
+             [InlineKeyboardButton("Команды", callback_data="commands"), menudel]]
 
 learn = [[InlineKeyboardButton("IT", callback_data="it"), InlineKeyboardButton("3D", callback_data="3d")],
          [InlineKeyboardButton("...назад", callback_data="learn"), menudel]]
@@ -147,7 +147,7 @@ support = [[InlineKeyboardButton(text="Поддержать", url="https://www.d
 
 key = [[InlineKeyboardButton("rap", callback_data="rap"), InlineKeyboardButton("Фото мем", callback_data="photomem"),
         InlineKeyboardButton("Видео мем", callback_data="videomem"), InlineKeyboardButton("Анекдоты", callback_data="jokes"),
-        InlineKeyboardButton("Цитаты", callback_data="citaty")],
+        InlineKeyboardButton("Мысль", callback_data="thought")],
        [InlineKeyboardButton("Команды", callback_data="commands"), menudel]]
 
 link = [[InlineKeyboardButton(text="Канал ТГ", url="https://t.me/ypite"), InlineKeyboardButton(text="Группа Вк", url="https://vk.com/cloud_ypiter"), InlineKeyboardButton(text="GitHub", url="https://github.com/ypite-nk")],
@@ -168,5 +168,5 @@ vid = [[InlineKeyboardButton("Видео", callback_data="videomem")],
 jokes = [[InlineKeyboardButton("Анекдот", callback_data="jokes")],
          [InlineKeyboardButton("Назад", callback_data="/fun"), menudel]]
 
-citaty = [[InlineKeyboardButton("Цитата", callback_data="citaty")],
+thought = [[InlineKeyboardButton("Мысль", callback_data="thought")],
           [InlineKeyboardButton("Назад", callback_data="/fun"), menudel]]
