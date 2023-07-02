@@ -5,8 +5,7 @@ import used_class
 import keyboardbot as kb
 
 from echo import echo
-from openf import openf
-from spec import checkban
+from spec import checkban, openf
 
 from telegram import InlineKeyboardMarkup, InlineKeyboardButton, ParseMode
 

@@ -12,9 +12,11 @@ bot = telegram.Bot(token=token)
 updater = Updater(token=token, use_context=True)
 
 import spec
+import prefix
+import functions as func
+
 from case import echo_button, fun_handler
 from inline import inline_query
-import functions as func
 
 updater.dispatcher.add_handler(CallbackQueryHandler(echo_button))
 
@@ -32,7 +34,8 @@ updater.dispatcher.add_handler(CommandHandler('support', func.support_handler))
 updater.dispatcher.add_handler(CommandHandler('menu', func.back_handler))
 updater.dispatcher.add_handler(CommandHandler("back", func.back_handler))
 
-updater.dispatcher.add_handler(PrefixHandler('!', 'рецензия', func.prefix_marks))
+updater.dispatcher.add_handler(PrefixHandler('!', 'рецензия', prefix.prefix_marks))
+updater.dispatcher.add_handler(PrefixHandler('!', 'погода', prefix.prefix_weather))
 
 updater.dispatcher.add_handler(MessageHandler(Filters.text & (~Filters.command), func.echo_handler))
 
