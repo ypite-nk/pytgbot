@@ -93,12 +93,12 @@ def prefix_marks(update, context):
         file = file.readlines()
         for i in file:
             marks_id_memory.append(i.replace("\n", ""))
-    if update.message.chat['username'] in marks_id_memory:
+    if str(update.message.chat['id']) in marks_id_memory:
         update.message.reply_text("Вы уже отправляли рецензию!")
     else:
         if "\n" in update.message.text and len(update.message.text.split("\n")) == 5:
             with open("info/ypiter/marks/memory.txt", "w", encoding="utf-8") as file:
-                marks_id_memory.append(update.message.chat['username'])
+                marks_id_memory.append(str(update.message.chat['id']))
                 for i in range(len(marks_id_memory)):
                     if i != len(marks_id_memory):
                         file.write(marks_id_memory[i] + "\n")
@@ -107,6 +107,7 @@ def prefix_marks(update, context):
             marksget = update.message.text.split("\n")
             context.bot.send_message(chat_id=-1001955905639, text="Type: " + marksget[0] + "\n" + 
                                                                         "Link: " + marksget[1] + "\n" + 
+                                                                        "ID: " + str(update.message.chat['id']) + "\n" +
                                                                         "Text: " + marksget[2] + "\n" + 
                                                                         "A: " + marksget[3] + "\n" + 
                                                                         "P: " + marksget[4] + "\n")
