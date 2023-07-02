@@ -8,7 +8,7 @@ def banlist(update, context):
                 banlists.append(i.replace("\n", ""))
         update.message.reply_text(str(banlists))
     else:
-        update.message.reply_text("You don't have a key for this command")
+        update.message.reply_text("You are not admin")
 
 def ban(update, context):
     banlist = []
@@ -33,7 +33,7 @@ def ban(update, context):
         else:
             update.message.reply_text("User: " + str(user_id) + " was banned. Admin: " + str(admin))
     else:
-        update.message.reply_text("You don't have a key for this command")
+        update.message.reply_text("You are not admin")
 
 def checkban(update, context):
     banlist = []
@@ -84,4 +84,4 @@ def unban(update, context):
         else:
             update.message.reply_text("User: " + str(user_id) + " wasn't banned. Admin: " + str(admin))
     else:
-        update.message.reply_text("You don't have a key for this command")
+        update.message.reply_text("You are not admin")

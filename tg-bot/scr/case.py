@@ -242,6 +242,9 @@ def echo_button(update, context):
             case "helper":
                 new_message_id = update.callback_query.message.reply_text(openf("descriptext", "helper"),
                                                                           reply_markup=InlineKeyboardMarkup(kb.backdel)).message_id
+            case "projects":
+                new_message_id = update.callback_query.message.reply_text(openf("info", "projectsDEL"),
+                                                                          reply_markup=InlineKeyboardMarkup(kb.projects)).message_id
 #   LEARN
             case "learn":
                 new_message_id = update.callback_query.message.reply_text(openf("learn", "description"), reply_markup=InlineKeyboardMarkup(kb.learns)).message_id
