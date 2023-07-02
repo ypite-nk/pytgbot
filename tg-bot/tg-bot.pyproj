@@ -27,7 +27,7 @@
     <Compile Include="scr\inline.py" />
     <Compile Include="scr\keyboardbot.py" />
     <Compile Include="scr\logg.py" />
-    <Compile Include="scr\openf.py" />
+    <Compile Include="scr\prefix.py" />
     <Compile Include="scr\spec.py" />
     <Compile Include="scr\used_class.py" />
     <Compile Include="scr\tg_bot.py" />
