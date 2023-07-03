@@ -1,29 +1,31 @@
 ﻿# -*- coding: utf-8 -*-
 from telegram import InlineQueryResultPhoto, InlineQueryResultArticle, InputTextMessageContent
-from googletrans import Translator as TR
-TR = TR()
 
 from uuid import uuid4
 from prefix import prefix_weather
+from spec import checkban
 
 linkslist = []
 result = []
 
 def inline_query(update, context):
     global linkslist, result
-    query = update.inline_query.query
 
-    if not query:
+    if not update.inline_query.query:
         return
 
-    if "-" in query and "w" not in query:
-        command, value = query.split("-")
+    if checkban(update, context):
+        result = [InlineQueryResultArticle(id=str(uuid4()), title="You can't use this bot", input_message_content=InputTextMessageContent("Error - ban or not mbt"))]
+        update.inline_query.answer(result)
+        return
+
+    if "-" in update.inline_query.query and "w" not in update.inline_query.query:
+        command, value = update.inline_query.query.split("-")
         try:
             for i in open("links/mem_links.txt", "r", encoding="utf-8").readlines(0):
                 if i not in linkslist:
                     linkslist.append(i)
             int(value)
-            #print(linkslist[value])
             if command == "memp":
                 try:
                     result = [InlineQueryResultPhoto(id=str(uuid4()), photo_url=linkslist[int(value)].replace("\n", ""), thumb_url=linkslist[int(value)].replace("\n", ""))]
@@ -34,8 +36,8 @@ def inline_query(update, context):
         except ValueError:
             return
 
-    if "w" in query.lower() and " " in query:
-        value1, value2 = query.lower().split(" ")
+    if "w" in update.inline_query.query.lower() and " " in update.inline_query.query:
+        value1, value2 = update.inline_query.query.lower().split(" ")
         if value2 == 'w':
             if value1 is None:
                 return
@@ -43,19 +45,17 @@ def inline_query(update, context):
                 result = prefix_weather(None, None, value1)
                 if result is not None:
                     list_val = []
-                    value1 = TR.translate(value1, dest="ru").text
                     for i in value1:
                         list_val.append(i)
                     list_val[0] = list_val[0].upper()
-                    print(list_val[0].upper())
                     value1 = ""
                     for i in list_val:
                         value1 += i
-                    print(list_val)
                     result = [InlineQueryResultArticle(id=str(uuid4()), title=value1 + " погода",
                                                    input_message_content=InputTextMessageContent("Город: " + value1 + 
-                                                                         "\nПогода: " + str(result[0]) +
-                                                                         "\nТемпература: " + str(result[1])))]
+                                                                         "\nТемпература: " + str(result[0]) +
+                                                                         "\nНебо: " + str(result[1]) +
+                                                                         "\nВетер: " + str(result[2]) + "м/с"))]
                     update.inline_query.answer(result)
                 else:
                     return

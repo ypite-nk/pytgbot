@@ -38,22 +38,38 @@ def prefix_marks(update, context):
             update.message.reply_text(openf("info/ypiter/marks", "markserror"), reply_markup=InlineKeyboardMarkup(backdel))
 
 from pyowm import OWM
-owm = OWM('e8d3ccc3b3a95bec547a312f27610381')
+from pyowm.utils.config import get_default_config
+config_dict = get_default_config()
+config_dict['language'] = 'ru'
+owm = OWM('e8d3ccc3b3a95bec547a312f27610381', config_dict)
 mng = owm.weather_manager()
 l_weather = mng.weather_at_place
 
 def prefix_weather(update, context, city = None):
     echo(update, context)
-    '''if checkban(update, context):
-        return'''
-    if update is None: # INLINE QUERY
+    if checkban(update, context):
+        return
+    if update is None:
         try:
             w = l_weather(city).weather
-            w_temp = w.temperature('celsius')['temp']
-            w_cloud = w.detailed_status
-            return [w_cloud, w_temp]
+            return [w.temperature('celsius')['temp'], w.detailed_status, w.wind()['speed']]
         except:
             return None
-    else: # NOT INLINE
-        prefix, city = update.message.text.split(" ")
-        w = l_weather(city).weather
+    else:
+        try:
+            prefix, city = update.message.text.split(" ")
+        except:
+            try:
+                prefix, city1, city2 = update.message.text.split(" ")
+                city = city1 + " " + city2
+            except:
+                prefix, city1, city2, city3 = update.message.text.split(" ")
+                city = city1 + " " + city2 + " " + city3
+        try:
+            w = l_weather(city).weather
+            result = [w.temperature('celsius')['temp'], w.detailed_status, w.wind()['speed']]
+            update.message.reply_text("Город: " + city + "\nТемпература: " + str(result[0]) + "\nНебо: " + str(result[1]) + "\nВетер: " + str(result[2]) + "м/с",
+                                      reply_markup=InlineKeyboardMarkup(backdel))
+        except:
+            update.message.reply_text("Такого города не существует! Возможно, вы ошиблись в написании или у OpenWeatherMap нету таких данных.",
+                                      reply_markup=InlineKeyboardMarkup(backdel))

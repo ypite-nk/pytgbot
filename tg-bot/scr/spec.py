@@ -44,7 +44,7 @@ def ban(update, context):
 
 def checkban(update, context):
     banlist = []
-    beta_list = ['1661744004', '1086638338', '', '', '']
+    beta_list = ['1086638338', '1661744004', '', '', '']
     with open("info/banlist.txt", "r", encoding="utf-8") as file:
         file = file.readlines()
         for i in file:
@@ -52,24 +52,37 @@ def checkban(update, context):
     try:
         if str(update.callback_query.message.chat['id']) in banlist:
             update.callback_query.message.reply_text("You are banned in this place")
+            context.bot.send_message(chat_id=-1001955905639, text="User: " + str(update.callback_query.message.chat['username']) + " trying to use bot... (banned)")
             return True
         elif str(update.callback_query.message.chat['id']) not in beta_list:
             update.callback_query.message.reply_text("You are not member beta-test!! If you want to test this bot --> @r_ypiter")
+            context.bot.send_message(chat_id=-1001955905639, text="User: " + str(update.callback_query.message.chat['username']) + " trying to use bot... (not member beta-test)")
             return True
         else:
             return False
     except AttributeError:
-        if str(update.message.chat['id']) in banlist:
-            update.message.reply_text("You are banned in this place")
-            return True
-        elif str(update.message.chat['id']) not in beta_list:
-            update.message.reply_text("You are not member beta-test!! If you want to test this bot --> @r_ypiter")
-            return True
-        else:
-            return False
+        try:
+            if str(update.message.chat['id']) in banlist:
+                update.message.reply_text("You are banned in this place")
+                context.bot.send_message(chat_id=-1001955905639, text="User: " + str(update.message.chat['username']) + " trying to use bot... (banned)")
+                return True
+            elif str(update.message.chat['id']) not in beta_list:
+                update.message.reply_text("You are not member beta-test!! If you want to test this bot --> @r_ypiter")
+                context.bot.send_message(chat_id=-1001955905639, text="User: " + str(update.message.chat['username']) + " trying to use bot... (not member beta-test)")
+                return True
+            else:
+                return False
 
-    except TypeError:
-        pass
+        except:
+            if update != None:
+                if str(update.inline_query.from_user['id']) in banlist:
+                    return True
+                elif str(update.inline_query.from_user['id']) not in beta_list:
+                    return True
+                else:
+                    return False
+            else:
+                return False
 
 def unban(update, context):
     banlist = []
