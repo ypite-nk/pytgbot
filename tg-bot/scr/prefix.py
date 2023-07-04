@@ -68,7 +68,7 @@ def prefix_weather(update, context, city = None):
         try:
             w = l_weather(city).weather
             result = [w.temperature('celsius')['temp'], w.detailed_status, w.wind()['speed']]
-            update.message.reply_text("Город: " + city + "\nТемпература: " + str(result[0]) + "\nНебо: " + str(result[1]) + "\nВетер: " + str(result[2]) + "м/с",
+            update.message.reply_text("Город: " + city + "\nТемпература: " + str(result[0]) + "\nНебо: " + str(result[1]) + "\nВетер: " + str(result[2]) + " м/с",
                                       reply_markup=InlineKeyboardMarkup(backdel))
         except:
             update.message.reply_text("Такого города не существует! Возможно, вы ошиблись в написании или у OpenWeatherMap нету таких данных.",

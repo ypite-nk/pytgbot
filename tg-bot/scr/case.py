@@ -48,6 +48,8 @@ def game2_handler(update, context):
 def vid_handler(update, context):
     if checkban(update, context):
         return 0
+    else:
+        update.callback_query.message.reply_text("None", reply_markup=InlineKeyboardMarkup(kb.backdel))                                        #DELETE
     global video_mem
     with open("links/vid.txt", "r", encoding="utf-8") as file:
         file = file.readlines()
@@ -64,6 +66,8 @@ def vid_handler(update, context):
 def joke_handler(update, context):
     if checkban(update, context):
         return 0
+    else:
+        update.callback_query.message.reply_text("None", reply_markup=InlineKeyboardMarkup(kb.backdel))                                        #DELETE
     global joke_mem
     with open("data/joke.txt", "r", encoding="utf-8") as file:
         file = file.readlines()
@@ -80,6 +84,8 @@ def joke_handler(update, context):
 def thought_handler(update, context):
     if checkban(update, context):
         return 0
+    else:
+        update.callback_query.message.reply_text("None", reply_markup=InlineKeyboardMarkup(kb.backdel))                                        #DELETE
     global thought_mem
     with open("data/thought.txt", "r", encoding="utf-8") as file:
         file = file.readlines()
@@ -191,6 +197,8 @@ def echo_button(update, context):
                                             reply_markup=InlineKeyboardMarkup(kb.ypiterFAQ)).message_id
 #   О YPITER
             case "all":
+                 new_message_id = update.callback_query.message.reply_text("None", reply_markup=InlineKeyboardMarkup(kb.backdel)).message_id                   #DELETE
+                 return
                  new_message_id = reply_text(openf("info/ypiter", "YpiAll"),
                                              reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Назад", callback_data="ypiinfo"), kb.menudel]]),
                                              parse_mode=ParseMode.HTML).message_id
@@ -198,9 +206,13 @@ def echo_button(update, context):
                 new_message_id = reply_text(openf("info/ypiter", "YpiAllMore"),
                                             reply_markup=InlineKeyboardMarkup(kb.ypimore))
             case "14":
+                 new_message_id = update.callback_query.message.reply_text("None", reply_markup=InlineKeyboardMarkup(kb.backdel)).message_id                   #DELETE
+                 return
                  new_message_id = reply_text(openf("info/ypiter", "Ypi14"),
                                              reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Назад", callback_data="ypiinfo"), kb.menudel]])).message_id
             case "15":
+                 new_message_id = update.callback_query.message.reply_text("None", reply_markup=InlineKeyboardMarkup(kb.backdel)).message_id                   #DELETE
+                 return
                  new_message_id = reply_text(openf("info/ypiter", "Ypi15"),
                                              reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Назад", callback_data="ypiinfo"), kb.menudel]])).message_id
 #   РЕЦЕНЗИИ
@@ -251,7 +263,9 @@ def echo_button(update, context):
                 new_message_id = reply_text(openf("descriptext", "helper"),
                                             reply_markup=InlineKeyboardMarkup(kb.backdel)).message_id
             case "projects":
-                new_message_id = reply_text(openf("info", "projectsDEL"),
+                new_message_id = update.callback_query.message.reply_text("None", reply_markup=InlineKeyboardMarkup(kb.backdel)).message_id                   #DELETE
+                return
+                new_message_id = reply_text(openf("info", "projects"),
                                             reply_markup=InlineKeyboardMarkup(kb.projects)).message_id
 #   LEARN
             case "learn":

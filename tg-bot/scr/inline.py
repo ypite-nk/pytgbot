@@ -55,7 +55,7 @@ def inline_query(update, context):
                                                    input_message_content=InputTextMessageContent("Город: " + value1 + 
                                                                          "\nТемпература: " + str(result[0]) +
                                                                          "\nНебо: " + str(result[1]) +
-                                                                         "\nВетер: " + str(result[2]) + "м/с"))]
+                                                                         "\nВетер: " + str(result[2]) + " м/с"))]
                     update.inline_query.answer(result)
                 else:
                     return
