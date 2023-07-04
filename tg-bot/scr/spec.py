@@ -44,7 +44,8 @@ def ban(update, context):
 
 def checkban(update, context):
     banlist = []
-    beta_list = ['1086638338', '1661744004', '', '', '']
+    #beta_list = ['1086638338', '1661744004', '1913240001', '', '']
+    beta_list = ['1086638338', '', '', '', '']
     with open("info/banlist.txt", "r", encoding="utf-8") as file:
         file = file.readlines()
         for i in file:
