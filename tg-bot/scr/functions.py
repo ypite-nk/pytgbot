@@ -1,11 +1,12 @@
 ﻿# -*- coding: utf-8 -*-
-import used_class
 import keyboardbot as kb
 
 from telegram import InlineKeyboardMarkup, ParseMode
 
 from spec import checkban, openf
 from echo import echo
+
+from login import authorize
 
 def start_handler(update, context):
     echo(update, context)
