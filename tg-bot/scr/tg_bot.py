@@ -41,8 +41,8 @@ updater.dispatcher.add_handler(MessageHandler(Filters.text & (~Filters.command),
 
 updater.dispatcher.add_handler(PrefixHandler('/', 'ban', spec.ban))
 updater.dispatcher.add_handler(PrefixHandler('/', 'unban', spec.unban))
-
-updater.dispatcher.add_handler(CommandHandler('banlist', spec.banlist))
+updater.dispatcher.add_handler(PrefixHandler('/', 'betaadd', spec.add_beta))
+updater.dispatcher.add_handler(PrefixHandler('/', 'betadel', spec.del_beta))
 
 import logg
 
