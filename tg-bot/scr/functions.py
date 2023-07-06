@@ -33,7 +33,8 @@ def pack_handler(update, context):
     if checkban(update, context):
         return 0
     else:
-        update.message.reply_text("None", reply_markup=InlineKeyboardMarkup(kb.backdel))                                        #DELETE
+        update.message.reply_text("None", reply_markup=InlineKeyboardMarkup(kb.backdel))                                      #DELETE
+        return
     update.message.reply_text(openf("info", "pack"), reply_markup=InlineKeyboardMarkup(kb.commands_out), parse_mode=ParseMode.HTML)
 
 def link_handler(update, context):
@@ -54,15 +55,18 @@ def support_handler(update, context):
     if checkban(update, context):
         return 0
     else:
-        update.message.reply_text("None", reply_markup=InlineKeyboardMarkup(kb.backdel))                                        #DELETE
-    update.message.reply_text(openf("info", "support"), reply_markup=InlineKeyboardMarkup(kb.support))
+        update.message.reply_text("None", reply_markup=InlineKeyboardMarkup(kb.backdel))                                      #DELETE
+        return
+    update.message.reply_photo('https://raw.githubusercontent.com/ypite-nk/Sticker/main/paytinkoff.webp', parse_mode=ParseMode.HTML)
+    update.message.reply_text(openf("info", "support"), reply_markup=InlineKeyboardMarkup(kb.support), parse_mode=ParseMode.HTML)
 
 def echo_handler(update, context):
     echo(update, context)
     if checkban(update, context):
         return 0
     else:
-        update.message.reply_text("None", reply_markup=InlineKeyboardMarkup(kb.backdel))                                        #DELETE
+        update.message.reply_text("None", reply_markup=InlineKeyboardMarkup(kb.backdel))                                      #DELETE
+        return
     with open("info/hi.txt", "r", encoding="utf-8") as file:
         file = file.readlines(0)
     hi = True

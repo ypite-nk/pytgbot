@@ -49,7 +49,8 @@ def vid_handler(update, context):
     if checkban(update, context):
         return 0
     else:
-        update.callback_query.message.reply_text("None", reply_markup=InlineKeyboardMarkup(kb.backdel))                                        #DELETE
+        update.callback_query.message.reply_text("None", reply_markup=InlineKeyboardMarkup(kb.backdel))                                      #DELETE
+        return
     global video_mem
     with open("links/vid.txt", "r", encoding="utf-8") as file:
         file = file.readlines()
@@ -67,13 +68,15 @@ def joke_handler(update, context):
     if checkban(update, context):
         return 0
     else:
-        update.callback_query.message.reply_text("None", reply_markup=InlineKeyboardMarkup(kb.backdel))                                        #DELETE
+        update.callback_query.message.reply_text("None", reply_markup=InlineKeyboardMarkup(kb.backdel))                                      #DELETE
+        return
     global joke_mem
     with open("data/joke.txt", "r", encoding="utf-8") as file:
         file = file.readlines()
     joke = random.choice(file).replace("\n", "")
     while joke in joke_mem:
         joke = random.choice(file).replace("\n", "")
+    print(joke)
     update.callback_query.message.reply_text(joke, reply_markup=InlineKeyboardMarkup(kb.jokes), parse_mode=ParseMode.MARKDOWN_V2)
     joke_mem[4] = joke_mem[3]
     joke_mem[3] = joke_mem[2]
@@ -85,7 +88,8 @@ def thought_handler(update, context):
     if checkban(update, context):
         return 0
     else:
-        update.callback_query.message.reply_text("None", reply_markup=InlineKeyboardMarkup(kb.backdel))                                        #DELETE
+        update.callback_query.message.reply_text("None", reply_markup=InlineKeyboardMarkup(kb.backdel))                                      #DELETE
+        return
     global thought_mem
     with open("data/thought.txt", "r", encoding="utf-8") as file:
         file = file.readlines()
@@ -545,3 +549,9 @@ def echo_button(update, context):
         if not conflict:
             context.chat_data['message_id'] = new_message_id
     conflict = False
+
+def echo_call(update, context):
+    try:
+        echo_button(update, context)
+    except:
+        update.callback_query.message.reply_text("Error", reply_markup=InlineKeyboardMarkup(kb.backdel))

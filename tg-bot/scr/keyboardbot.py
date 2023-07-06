@@ -153,7 +153,7 @@ key = [[InlineKeyboardButton("rap", callback_data="rap"), InlineKeyboardButton("
 
 link = [[InlineKeyboardButton(text="Канал ТГ", url="https://t.me/ypite"), InlineKeyboardButton(text="Группа Вк", url="https://vk.com/cloud_ypiter"), InlineKeyboardButton(text="GitHub", url="https://github.com/ypite-nk")],
         [InlineKeyboardButton(text="Вконтакте", url="https://vk.com/ypite"), InlineKeyboardButton(text="Телеграмм", url="https://t.me/r_ypiter")],
-        [InlineKeyboardButton(text="Youtube", url="https://www.youtube.com/channel/UCQunVaPHyI2MvS0rU56_MhA"), InlineKeyboardButton(text="TikTok", url="https://vm.tiktok.com/ZT81sSebh/")],
+        [InlineKeyboardButton(text="Youtube", url="https://www.youtube.com/channel/UCQunVaPHyI2MvS0rU56_MhA"), InlineKeyboardButton(text="TikTok", url="https://vm.tiktok.com/ZT81sSebh/"), InlineKeyboardButton(text="Boosty", url="https://boosty.to/ypite")],
         [InlineKeyboardButton("Команды", callback_data="commands"), menudel]]
 
 def mem(LikeCount, DisLikeCount):
@@ -174,3 +174,5 @@ thought = [[InlineKeyboardButton("Мысль", callback_data="thought")],
 
 projects = [[InlineKeyboardButton("Список проектов", callback_data="projects"), InlineKeyboardButton("Дополнительно...", callback_data="projects")],
             [menudel]]
+
+ypimore = [[menudel]]

@@ -15,10 +15,10 @@ import spec
 import prefix
 import functions as func
 
-from case import echo_button, fun_handler
+from case import echo_call, fun_handler
 from inline import inline_query
 
-updater.dispatcher.add_handler(CallbackQueryHandler(echo_button))
+updater.dispatcher.add_handler(CallbackQueryHandler(echo_call))
 
 updater.dispatcher.add_handler(InlineQueryHandler(inline_query))
 
