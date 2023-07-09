@@ -48,9 +48,7 @@ def game2_handler(update, context):
 def vid_handler(update, context):
     if checkban(update, context):
         return 0
-    else:
-        update.callback_query.message.reply_text("None", reply_markup=InlineKeyboardMarkup(kb.backdel))                                      #DELETE
-        return
+
     global video_mem
     with open("links/vid.txt", "r", encoding="utf-8") as file:
         file = file.readlines()
@@ -67,9 +65,7 @@ def vid_handler(update, context):
 def joke_handler(update, context):
     if checkban(update, context):
         return 0
-    else:
-        update.callback_query.message.reply_text("None", reply_markup=InlineKeyboardMarkup(kb.backdel))                                      #DELETE
-        return
+
     global joke_mem
     with open("data/joke.txt", "r", encoding="utf-8") as file:
         file = file.readlines()
@@ -87,9 +83,7 @@ def joke_handler(update, context):
 def thought_handler(update, context):
     if checkban(update, context):
         return 0
-    else:
-        update.callback_query.message.reply_text("None", reply_markup=InlineKeyboardMarkup(kb.backdel))                                      #DELETE
-        return
+
     global thought_mem
     with open("data/thought.txt", "r", encoding="utf-8") as file:
         file = file.readlines()
@@ -201,8 +195,6 @@ def echo_button(update, context):
                                             reply_markup=InlineKeyboardMarkup(kb.ypiterFAQ)).message_id
 #   О YPITER
             case "all":
-                 new_message_id = update.callback_query.message.reply_text("None", reply_markup=InlineKeyboardMarkup(kb.backdel)).message_id                   #DELETE
-                 return
                  new_message_id = reply_text(openf("info/ypiter", "YpiAll"),
                                              reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Назад", callback_data="ypiinfo"), kb.menudel]]),
                                              parse_mode=ParseMode.HTML).message_id
@@ -210,13 +202,9 @@ def echo_button(update, context):
                 new_message_id = reply_text(openf("info/ypiter", "YpiAllMore"),
                                             reply_markup=InlineKeyboardMarkup(kb.ypimore))
             case "14":
-                 new_message_id = update.callback_query.message.reply_text("None", reply_markup=InlineKeyboardMarkup(kb.backdel)).message_id                   #DELETE
-                 return
                  new_message_id = reply_text(openf("info/ypiter", "Ypi14"),
                                              reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Назад", callback_data="ypiinfo"), kb.menudel]])).message_id
             case "15":
-                 new_message_id = update.callback_query.message.reply_text("None", reply_markup=InlineKeyboardMarkup(kb.backdel)).message_id                   #DELETE
-                 return
                  new_message_id = reply_text(openf("info/ypiter", "Ypi15"),
                                              reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Назад", callback_data="ypiinfo"), kb.menudel]])).message_id
 #   РЕЦЕНЗИИ
@@ -267,8 +255,6 @@ def echo_button(update, context):
                 new_message_id = reply_text(openf("descriptext", "helper"),
                                             reply_markup=InlineKeyboardMarkup(kb.backdel)).message_id
             case "projects":
-                new_message_id = update.callback_query.message.reply_text("None", reply_markup=InlineKeyboardMarkup(kb.backdel)).message_id                   #DELETE
-                return
                 new_message_id = reply_text(openf("info", "projects"),
                                             reply_markup=InlineKeyboardMarkup(kb.projects)).message_id
 #   LEARN
@@ -301,190 +287,136 @@ def echo_button(update, context):
                                             reply_markup=InlineKeyboardMarkup(kb.booklist2)).message_id
 
             case "classic":
-                new_message_id = update.callback_query.message.reply_text("None", reply_markup=InlineKeyboardMarkup(kb.backdel)).message_id                   #DELETE
-                return
                 new_message_id = reply_text(openf("learn/genres", "classic"),
                                             reply_markup=InlineKeyboardMarkup(kb.genreskb["classic"]),
                                             parse_mode=ParseMode.HTML).message_id
 
             case "foreign":
-                new_message_id = update.callback_query.message.reply_text("None", reply_markup=InlineKeyboardMarkup(kb.backdel)).message_id                   #DELETE
-                return
                 new_message_id = reply_text(openf("learn/genres", "foreign"),
                                             reply_markup=InlineKeyboardMarkup(kb.genreskb["foreign"]),
                                             parse_mode=ParseMode.HTML).message_id
 
             case "rus":
-                new_message_id = update.callback_query.message.reply_text("None", reply_markup=InlineKeyboardMarkup(kb.backdel)).message_id                   #DELETE
-                return
                 new_message_id = reply_text(openf("learn/genres", "rus"),
                                             reply_markup=InlineKeyboardMarkup(kb.genreskb["rus"]),
                                             parse_mode=ParseMode.HTML).message_id
 
             case "detective":
-                new_message_id = update.callback_query.message.reply_text("None", reply_markup=InlineKeyboardMarkup(kb.backdel)).message_id                   #DELETE
-                return
                 new_message_id = reply_text(openf("learn/genres", "detective"),
                                             reply_markup=InlineKeyboardMarkup(kb.genreskb["detective"]),
                                             parse_mode=ParseMode.HTML).message_id
 
             case "fantasy":
-                new_message_id = update.callback_query.message.reply_text("None", reply_markup=InlineKeyboardMarkup(kb.backdel)).message_id                   #DELETE
-                return
                 new_message_id = reply_text(openf("learn/genres", "fantasy"),
                                             reply_markup=InlineKeyboardMarkup(kb.genreskb["fantasy"]),
                                             parse_mode=ParseMode.HTML).message_id
 
             case "fantastik":
-                new_message_id = update.callback_query.message.reply_text("None", reply_markup=InlineKeyboardMarkup(kb.backdel)).message_id                   #DELETE
-                return
                 new_message_id = reply_text(openf("learn/genres", "fantastik"),
                                             reply_markup=InlineKeyboardMarkup(kb.genreskb["fantastik"]),
                                             parse_mode=ParseMode.HTML).message_id
 
             case "prose":
-                new_message_id = update.callback_query.message.reply_text("None", reply_markup=InlineKeyboardMarkup(kb.backdel)).message_id                   #DELETE
-                return
                 new_message_id = reply_text(openf("learn/genres", "prose"),
                                             reply_markup=InlineKeyboardMarkup(kb.genreskb["prose"]),
                                             parse_mode=ParseMode.HTML).message_id
 
             case "scary":
-                new_message_id = update.callback_query.message.reply_text("None", reply_markup=InlineKeyboardMarkup(kb.backdel)).message_id                   #DELETE
-                return
                 new_message_id = reply_text(openf("learn/genres", "scary"),
                                             reply_markup=InlineKeyboardMarkup(kb.genreskb["scary"]),
                                             parse_mode=ParseMode.HTML).message_id
 
             case "adv":
-                new_message_id = update.callback_query.message.reply_text("None", reply_markup=InlineKeyboardMarkup(kb.backdel)).message_id                   #DELETE
-                return
                 new_message_id = reply_text(openf("learn/genres", "adv"),
                                             reply_markup=InlineKeyboardMarkup(kb.genreskb["adv"]),
                                             parse_mode=ParseMode.HTML).message_id
 
             case "action":
-                new_message_id = update.callback_query.message.reply_text("None", reply_markup=InlineKeyboardMarkup(kb.backdel)).message_id                   #DELETE
-                return
                 new_message_id = reply_text(openf("learn/genres", "action"),
                                             reply_markup=InlineKeyboardMarkup(kb.genreskb["action"]),
                                             parse_mode=ParseMode.HTML).message_id
 
             case "stories":
-                new_message_id = update.callback_query.message.reply_text("None", reply_markup=InlineKeyboardMarkup(kb.backdel)).message_id                   #DELETE
-                return
                 new_message_id = reply_text(openf("learn/genres", "stories"),
                                             reply_markup=InlineKeyboardMarkup(kb.genreskb["stories"]),
                                             parse_mode=ParseMode.HTML).message_id
 
             case "poem":
-                new_message_id = update.callback_query.message.reply_text("None", reply_markup=InlineKeyboardMarkup(kb.backdel)).message_id                   #DELETE
-                return
                 new_message_id = reply_text(openf("learn/genres", "poem"),
                                             reply_markup=InlineKeyboardMarkup(kb.genreskb["poem"]),
                                             parse_mode=ParseMode.HTML).message_id
 
             case "scince":
-                new_message_id = update.callback_query.message.reply_text("None", reply_markup=InlineKeyboardMarkup(kb.backdel)).message_id                   #DELETE
-                return
                 new_message_id = reply_text(openf("learn/genres", "scince"),
                                             reply_markup=InlineKeyboardMarkup(kb.genreskb["scince"]),
                                             parse_mode=ParseMode.HTML).message_id
 
             case "psycho":
-                new_message_id = update.callback_query.message.reply_text("None", reply_markup=InlineKeyboardMarkup(kb.backdel)).message_id                   #DELETE
-                return
                 new_message_id = reply_text(openf("learn/genres", "psycho"),
                                             reply_markup=InlineKeyboardMarkup(kb.genreskb["psycho"]),
                                             parse_mode=ParseMode.HTML).message_id
 
             case "comics":
-                new_message_id = update.callback_query.message.reply_text("None", reply_markup=InlineKeyboardMarkup(kb.backdel)).message_id                   #DELETE
-                return
                 new_message_id = reply_text(openf("learn/genres", "comics"),
                                             reply_markup=InlineKeyboardMarkup(kb.genreskb["comics"]),
                                             parse_mode=ParseMode.HTML).message_id
 
             case "manga":
-                new_message_id = update.callback_query.message.reply_text("None", reply_markup=InlineKeyboardMarkup(kb.backdel)).message_id                   #DELETE
-                return
                 new_message_id = reply_text(openf("learn/genres", "manga"),
                                             reply_markup=InlineKeyboardMarkup(kb.genreskb["manga"]),
                                             parse_mode=ParseMode.HTML).message_id
 
             case "esotericism":
-                new_message_id = update.callback_query.message.reply_text("None", reply_markup=InlineKeyboardMarkup(kb.backdel)).message_id                   #DELETE
-                return
                 new_message_id = reply_text(openf("learn/genres", "esotericism"),
                                             reply_markup=InlineKeyboardMarkup(kb.genreskb["esotericism"]),
                                             parse_mode=ParseMode.HTML).message_id
 
             case "culture":
-                new_message_id = update.callback_query.message.reply_text("None", reply_markup=InlineKeyboardMarkup(kb.backdel)).message_id                   #DELETE
-                return
                 new_message_id = reply_text(openf("learn/genres", "culture"),
                                             reply_markup=InlineKeyboardMarkup(kb.genreskb["culture"]),
                                             parse_mode=ParseMode.HTML).message_id
 
             case "romans":
-                new_message_id = update.callback_query.message.reply_text("None", reply_markup=InlineKeyboardMarkup(kb.backdel)).message_id                   #DELETE
-                return
                 new_message_id = reply_text(openf("learn/genres", "romans"),
                                             reply_markup=InlineKeyboardMarkup(kb.genreskb["romans"]),
                                             parse_mode=ParseMode.HTML).message_id
 
             case "books":
-                new_message_id = update.callback_query.message.reply_text("None", reply_markup=InlineKeyboardMarkup(kb.backdel)).message_id                   #DELETE
-                return
                 new_message_id = reply_text(openf("learn/genres", "books"),
                                             reply_markup=InlineKeyboardMarkup(kb.genreskb["books"]),
                                             parse_mode=ParseMode.HTML).message_id
 
             case "bookfaq":
-                new_message_id = update.callback_query.message.reply_text("None", reply_markup=InlineKeyboardMarkup(kb.backdel)).message_id                   #DELETE
-                return
                 new_message_id = reply_text(openf("learn/genres", "bookfaq"),
                                             reply_markup=InlineKeyboardMarkup(kb.genreskb["bookfaq"]),
                                             parse_mode=ParseMode.HTML).message_id
 
             case "religion":
-                new_message_id = update.callback_query.message.reply_text("None", reply_markup=InlineKeyboardMarkup(kb.backdel)).message_id                   #DELETE
-                return
                 new_message_id = reply_text(openf("learn/genres", "religion"),
                                             reply_markup=InlineKeyboardMarkup(kb.genreskb["religion"]),
                                             parse_mode=ParseMode.HTML).message_id
 
             case "funny":
-                new_message_id = update.callback_query.message.reply_text("None", reply_markup=InlineKeyboardMarkup(kb.backdel)).message_id                   #DELETE
-                return
                 new_message_id = reply_text(openf("learn/genres", "funny"),
                                             reply_markup=InlineKeyboardMarkup(kb.genreskb["funny"]),
                                             parse_mode=ParseMode.HTML).message_id
 
             case "tale":
-                new_message_id = update.callback_query.message.reply_text("None", reply_markup=InlineKeyboardMarkup(kb.backdel)).message_id                   #DELETE
-                return
                 new_message_id = reply_text(openf("learn/genres", "tale"),
                                             reply_markup=InlineKeyboardMarkup(kb.genreskb["tale"]),
                                             parse_mode=ParseMode.HTML).message_id
 
             case "kids":
-                new_message_id = update.callback_query.message.reply_text("None", reply_markup=InlineKeyboardMarkup(kb.backdel)).message_id                   #DELETE
-                return
                 new_message_id = reply_text(openf("learn/genres", "kids"),
                                             reply_markup=InlineKeyboardMarkup(kb.genreskb["kids"]),
                                             parse_mode=ParseMode.HTML).message_id
 
             case "buisness":
-                new_message_id = update.callback_query.message.reply_text("None", reply_markup=InlineKeyboardMarkup(kb.backdel)).message_id                   #DELETE
-                return
                 new_message_id = reply_text(openf("learn/genres", "buisness"),
                                             reply_markup=InlineKeyboardMarkup(kb.genreskb["buisness"]),
                                             parse_mode=ParseMode.HTML).message_id
 
             case "home":
-                new_message_id = update.callback_query.message.reply_text("None", reply_markup=InlineKeyboardMarkup(kb.backdel)).message_id                   #DELETE
-                return
                 new_message_id = reply_text(openf("learn/genres", "home"),
                                             reply_markup=InlineKeyboardMarkup(kb.genreskb["home"]),
                                             parse_mode=ParseMode.HTML).message_id
