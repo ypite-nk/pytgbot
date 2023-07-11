@@ -6,6 +6,8 @@ from keyboardbot import backdel
 from echo import echo
 from spec import checkban, openf
 
+import login
+
 def prefix_marks(update, context):
     echo(update, context)
     if checkban(update, context):
@@ -18,24 +20,11 @@ def prefix_marks(update, context):
     if str(update.message.chat['id']) in marks_id_memory:
         update.message.reply_text("Вы уже отправляли рецензию!")
     else:
-        if "\n" in update.message.text and len(update.message.text.split("\n")) == 5:
-            with open("info/ypiter/marks/memory.txt", "w", encoding="utf-8") as file:
-                marks_id_memory.append(str(update.message.chat['id']))
-                for i in range(len(marks_id_memory)):
-                    if i != len(marks_id_memory):
-                        file.write(marks_id_memory[i] + "\n")
-                    else:
-                        file.write(marks_id_memory[i])
-            marksget = update.message.text.split("\n")
-            context.bot.send_message(chat_id=-1001955905639, text="Type: " + marksget[0] + "\n" + 
-                                                                        "Link: " + marksget[1] + "\n" + 
-                                                                        "ID: " + str(update.message.chat['id']) + "\n" +
-                                                                        "Text: " + marksget[2] + "\n" + 
-                                                                        "A: " + marksget[3] + "\n" + 
-                                                                        "P: " + marksget[4] + "\n")
-            update.message.reply_text(openf("info/ypiter/marks", "markssucces"), reply_markup=InlineKeyboardMarkup(backdel))
-        else:
-            update.message.reply_text(openf("info/ypiter/marks", "markserror"), reply_markup=InlineKeyboardMarkup(backdel))
+        user = login.authorize(update.message.chat['id'])
+        user['marks_collect'] = 1
+        login.update(update.message.chat['id'], user)
+
+        update.message.reply_text(openf("descriptext", "marks1"))
 
 from pyowm import OWM
 from pyowm.utils.config import get_default_config

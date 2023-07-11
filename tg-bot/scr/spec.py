@@ -1,11 +1,82 @@
+﻿# -*- coding: utf-8 -*-
 import login
 admin_id = [1086638338]
 
-def openf(path, name):
+def openf(path, name, method: int = 0):
+    if method:
+        with open(path + "/" + name + ".txt", "r", encoding="utf-8") as f:
+            return "\n".join(f.readlines(0))
     if path != "":
-        return "".join(open(path + "/" + name + ".txt", "r", encoding="utf-8").readlines(0))
+        with open(path + "/" + name + ".txt", "r", encoding="utf-8") as f:
+            return "".join(f.readlines(0))
     else:
-        return "".join(open(name + ".txt", "r", encoding="utf-8").readlines(0))
+        with open(name + ".txt", "r", encoding="utf-8") as f:
+            return "".join(f.readlines(0))
+
+def write_marks(update, context):
+    stat = login.authorize(update.message.chat['id'])
+    if stat['marks_collect'] == 0:
+        return False
+    uid = str(update.message.chat['id'])
+    marks_id_memory = []
+
+    with open("info/ypiter/marks/memory.txt", "r", encoding="utf-8") as file:
+        file = file.readlines()
+        for i in file:
+            marks_id_memory.append(i.replace("\n", ""))
+    if uid in marks_id_memory:
+        update.message.reply_text("Вы уже отправляли рецензию!")
+        return True
+    if stat['marks_collect'] > 0 and stat['marks_collect'] < 5:
+        user_text = openf("base", uid + "marks")
+
+        if stat['marks_collect'] == 1:
+            with open("base/" + uid + "marks.txt", "w+", encoding="utf-8") as f:
+                f.write(user_text + update.message.text + "\n")
+                update.message.reply_text(openf("descriptext", "marks2"))
+
+        elif stat['marks_collect'] == 2:
+            with open("base/" + uid + "marks.txt", "w+", encoding="utf-8") as f:
+                f.write(user_text + update.message.text + "\n")
+            update.message.reply_text(openf("descriptext", "marks3"))
+
+        elif stat['marks_collect'] == 3:
+            if update.message.text.lower() == "да":
+                update.message.reply_text(openf("descriptext", "marks4_5"))
+                stat['marks_collect'] = stat['marks_collect'] + 1
+            elif update.message.text.lower() == "нет":
+                update.message.reply_text(openf("descriptext", "marks4"))
+
+        if stat['marks_collect'] == 4:
+            update.message.reply_text(openf("descriptext", "marks_complete") + "\n" +
+                openf("base", uid + "marks") + "\nХотите изменить?(Да/нет)")
+        stat['marks_collect'] = stat['marks_collect'] + 1
+        login.update(update.message.chat['id'], stat)
+        return True
+
+    if stat['marks_collect'] == 5:
+        if update.message.text.lower() == "да":
+            stat['marks_collect'] = 1
+            login.update(uid, stat)
+            write_marks(update, context)
+            return True
+        elif update.message.text.lower() == "нет":
+            stat['marks_collect'] = 0
+            login.update(uid, stat)
+            with open("info/ypiter/marks/memory.txt", "w", encoding="utf-8") as file:
+                marks_id_memory.append(str(update.message.chat['id']))
+                for i in range(len(marks_id_memory)):
+                    if i != len(marks_id_memory):
+                        file.write(marks_id_memory[i] + "\n")
+                    else:
+                        file.write(marks_id_memory[i])
+            with open("base/"+ uid +"marks.txt", "w", encoding="utf-8") as file:
+                file.write(" ")
+            update.message.reply_text(openf("info/ypiter/marks", "markssucces"))
+            return False
+
+    return False
+
 
 def ban(update, context):
     command, user_id = update.message.text.split(" ")

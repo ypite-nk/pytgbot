@@ -8,6 +8,7 @@ logging.basicConfig(filename="tmp/info.log", level=logging.DEBUG,
 logger = logging.getLogger(__name__)
 
 token = "6143246892:AAEQGuhkqKZ-6Hsn7cvvbUMwOW0rNOHHGSE"
+#token = "5658241360:AAFMBbtWmi-TrvNV2OnrylSEs8ijqVySoRw"
 bot = telegram.Bot(token=token)
 updater = Updater(token=token, use_context=True)
 
@@ -15,10 +16,10 @@ import spec
 import prefix
 import functions as func
 
-from case import echo_call, fun_handler
+from case import echo_button, fun_handler
 from inline import inline_query
 
-updater.dispatcher.add_handler(CallbackQueryHandler(echo_call))
+updater.dispatcher.add_handler(CallbackQueryHandler(echo_button))
 
 updater.dispatcher.add_handler(InlineQueryHandler(inline_query))
 

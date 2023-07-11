@@ -3,7 +3,7 @@ import keyboardbot as kb
 
 from telegram import InlineKeyboardMarkup, ParseMode
 
-from spec import checkban, openf
+from spec import checkban, openf, write_marks
 from echo import echo
 
 def start_handler(update, context):
@@ -56,6 +56,10 @@ def echo_handler(update, context):
     echo(update, context)
     if checkban(update, context):
         return 0
+    
+    if write_marks(update, context):
+        return
+
     with open("info/hi.txt", "r", encoding="utf-8") as file:
         file = file.readlines(0)
     hi = True

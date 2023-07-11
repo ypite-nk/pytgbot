@@ -108,6 +108,7 @@ def echo_button(update, context):
     if checkban(update, context):
         return 0
     global marks_namelist
+    global conflict
     global old_message_id, likestat, dislikestat
 
     reply_text = update.callback_query.message.reply_text
@@ -155,8 +156,9 @@ def echo_button(update, context):
         if action == "A" or action == "П":
             reply_text(openf("info/ypiter/marks", "MARKS-" + value + "-" + action),
                                                      reply_markup=InlineKeyboardMarkup(kb.set_mark(marks_namelist)))
-
+        
     else:
+        conflict = False
         match update.callback_query['data']:
             case "/back":
                 reply_text(openf('descriptext', 'Menu'), reply_markup=InlineKeyboardMarkup(kb.start_key))
