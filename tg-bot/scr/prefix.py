@@ -3,15 +3,13 @@
 from telegram import InlineKeyboardMarkup
 
 from keyboardbot import backdel
-from echo import echo
 from spec import checkban, openf
 
 import login
 
 def prefix_marks(update, context):
-    echo(update, context)
     if checkban(update, context):
-        return 0
+        return
     marks_id_memory = []
     with open("info/ypiter/marks/memory.txt", "r", encoding="utf-8") as file:
         file = file.readlines()
@@ -35,7 +33,6 @@ mng = owm.weather_manager()
 l_weather = mng.weather_at_place
 
 def prefix_weather(update, context, city = None):
-    echo(update, context)
     if checkban(update, context):
         return
     if update is None:
@@ -62,3 +59,62 @@ def prefix_weather(update, context, city = None):
         except:
             update.message.reply_text("Такого города не существует! Возможно, вы ошиблись в написании или у OpenWeatherMap нету таких данных.",
                                       reply_markup=InlineKeyboardMarkup(backdel))
+
+def city_create(update, context):
+    if checkban(update, context):
+        return
+    
+    uid = str(update.message.chat['id'])
+    user = login.authorize(uid)
+    
+    if not user['city']:
+        update.message.reply_text("Город успешно создан!")
+        user['city'] = 1
+        login.update(uid, user)
+    else:
+        update.message.reply_text("У вас уже есть город!")
+        return
+    
+    prefix, *name = update.message.text.split(' ')
+    city_name = ""
+    
+    for i in name:
+        city_name += i
+    first_part = "name:" + city_name
+    second_part = "\nbudget:10000\npeople:1\nkids:0\ntenager:0\nadults:1\nancient:0\ncreated:12.07.23\nroad:100\nlearning:100\nmedecine:100\nsafety:100\ninflation:4\nhapiest:100\nwater:100\nenergy_have:0\nenergy_need:0"
+    all_part = first_part + second_part
+    login.city_create(uid, all_part)
+
+def mycity(update, context):
+    if checkban(update, context):
+        return
+
+    uid = str(update.message.chat['id'])
+    user_city = login.city(uid)
+    if user_city is None:
+        update.message.reply_text("Вы еще не создали город! Для создания введите !city имягорода")
+    city_key = []
+    city_value = []
+    info_city = ""
+    for i in user_city.keys():
+        city_key.append(i)
+    for i in user_city.values():
+        city_value.append(i)
+    for i in range(len(city_key)):
+        info_city += city_key[i] + " : " + city_value[i] + "\n"
+    update.message.reply_text("Ваш город: " + user_city['name'] + "\n" + info_city + "\nДля изменения имени города введите:\n!mycity changename новоеимя")
+
+def mycity_changename(update, context):
+    if checkban(update, context):
+        return
+    #try:
+    uid = str(update.message.chat['id'])
+    user_city = login.city(uid)
+    prefix, new_name = update.message.text.split(" ")
+        
+    update.message.reply_text("Имя города успешно изменено!\n" + user_city['name'] + " --> " + new_name)
+        
+    user_city['name'] = new_name
+    login.city_change(uid, user_city)
+    '''except:
+        update.message.reply_text("Произошла неизвестная ошибка, попробуйте заного")'''

@@ -1,5 +1,8 @@
 ﻿# -*- coding: utf-8 -*-
 import login
+
+from echo import echo
+
 admin_id = [1086638338]
 
 def openf(path, name, method: int = 0):
@@ -135,6 +138,7 @@ def del_beta(update, context):
         update.message.reply_text("You are not admin")
 
 def checkban(update, context):
+    echo(update, context)
     callback = False
     inline = False
     try:
@@ -181,4 +185,3 @@ def checkban(update, context):
             return True
         else:
             return False
-        

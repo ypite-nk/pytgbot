@@ -1,10 +1,9 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 import random
 import used_class
 
 import keyboardbot as kb
 
-from echo import echo
 from spec import checkban, openf
 
 from telegram import InlineKeyboardMarkup, InlineKeyboardButton, ParseMode
@@ -19,13 +18,13 @@ dislikestat = False
 
 def fun_handler(update, context):
     if checkban(update, context):
-        return 0
+        return
     update.message.reply_text(openf("descriptext", "fun"),
                               reply_markup=InlineKeyboardMarkup(kb.key))
 
 def game2_handler(update, context):
     if checkban(update, context):
-        return 0
+        return
     global active_mem, LikeCount, DisLikeCount, mem_m, edit_message_id
     mem_n = []
     LikeCount, DisLikeCount = 0, 0
@@ -47,7 +46,7 @@ def game2_handler(update, context):
 
 def vid_handler(update, context):
     if checkban(update, context):
-        return 0
+        return
 
     global video_mem
     with open("links/vid.txt", "r", encoding="utf-8") as file:
@@ -64,7 +63,7 @@ def vid_handler(update, context):
 
 def joke_handler(update, context):
     if checkban(update, context):
-        return 0
+        return
 
     global joke_mem
     with open("data/joke.txt", "r", encoding="utf-8") as file:
@@ -82,7 +81,7 @@ def joke_handler(update, context):
 
 def thought_handler(update, context):
     if checkban(update, context):
-        return 0
+        return
 
     global thought_mem
     with open("data/thought.txt", "r", encoding="utf-8") as file:
@@ -104,11 +103,9 @@ def change(update, context):
     context.bot.delete_message(chat_id, message_id)
 
 def echo_button(update, context):
-    echo(update, context) #ОТЛАДКА
     if checkban(update, context):
-        return 0
+        return
     global marks_namelist
-    global conflict
     global old_message_id, likestat, dislikestat
 
     reply_text = update.callback_query.message.reply_text
@@ -156,9 +153,8 @@ def echo_button(update, context):
         if action == "A" or action == "П":
             reply_text(openf("info/ypiter/marks", "MARKS-" + value + "-" + action),
                                                      reply_markup=InlineKeyboardMarkup(kb.set_mark(marks_namelist)))
-        
+
     else:
-        conflict = False
         match update.callback_query['data']:
             case "/back":
                 reply_text(openf('descriptext', 'Menu'), reply_markup=InlineKeyboardMarkup(kb.start_key))
@@ -185,6 +181,7 @@ def echo_button(update, context):
             change(update, context)
     
         match update.callback_query['data']:
+# BACK TO MENU
             case "/backdel":
                 new_message_id = reply_text(openf('descriptext', 'Menu'), 
                                             reply_markup=InlineKeyboardMarkup(kb.start_key)).message_id
@@ -462,7 +459,6 @@ def echo_button(update, context):
             case "django":
                 new_message_id = reply_text(openf("learn/descriptext", "django"),
                                             reply_markup=InlineKeyboardMarkup(kb.django)).message_id
-
 #       S_ADMIN
             case "s_admin":
                 new_message_id = reply_text(openf("learn/descriptext", "sys"),
