@@ -1,1 +1,1 @@
-{"ban":0,"bt":0,"wordly":0,"admin":0,"marks_collect":0,"city":0}
+{"ban":0,"bt":0,"wordly":0,"admin":0,"marks_collect":0}
