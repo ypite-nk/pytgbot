@@ -1,0 +1,11 @@
+name:Москва
+country:Россия
+subject:Иркутская обл.
+create_data:21.08.23
+size:490 кв.км.
+people:79000
+mayor:Игоревна Анна Щекина
+optional:Опционально
+sign:Нету
+gymn:Нету
+history:Нету
