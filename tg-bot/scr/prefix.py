@@ -83,38 +83,73 @@ def city_create(update, context):
     first_part = "name:" + city_name
     second_part = "\nbudget:10000\npeople:1\nkids:0\ntenager:0\nadults:1\nancient:0\ncreated:12.07.23\nroad:100\nlearning:100\nmedecine:100\nsafety:100\ninflation:4\nhapiest:100\nwater:100\nenergy_have:0\nenergy_need:0"
     all_part = first_part + second_part
-    login.city_create(uid, all_part)
+    status = "nameCH:0\nsignCH:0\ngymnCH:0\nhistoryCH:0"
+    login.city_create(uid, all_part, status)
 
 def mycity(update, context):
     if checkban(update, context):
         return
 
     uid = str(update.message.chat['id'])
-    user_city = login.city(uid)
+    user_city = login.city_info(uid)
     if user_city is None:
         update.message.reply_text("Вы еще не создали город! Для создания введите !city имягорода")
+        return
     city_key = []
     city_value = []
     info_city = ""
+    city_tr = {"name": "Имя",
+               "country": "Страна",
+               "subject": "Область",
+               "create_data": "Дата создания",
+               "size": "Площадь",
+               "people": "Количество людей",
+               "mayor": "Мэр",
+               "optional": "\nОпционально",
+               "sign": "Герб",
+               "gymn": "Гимн",
+               "history": "История"}
     for i in user_city.keys():
         city_key.append(i)
     for i in user_city.values():
         city_value.append(i)
     for i in range(len(city_key)):
-        info_city += city_key[i] + " : " + city_value[i] + "\n"
-    update.message.reply_text("Ваш город: " + user_city['name'] + "\n" + info_city + "\nДля изменения имени города введите:\n!mycity changename новоеимя")
+        info_city += city_tr[city_key[i]] + " : " + city_value[i] + "\n"
+    update.message.reply_text("Ваш город: " + "\n\n" + info_city + "\nДля изменения имени города введите:\n!mycity changename новоеимя")
 
-def mycity_changename(update, context):
+def change(update, context):
     if checkban(update, context):
         return
-    #try:
-    uid = str(update.message.chat['id'])
-    user_city = login.city(uid)
-    prefix, new_name = update.message.text.split(" ")
-        
-    update.message.reply_text("Имя города успешно изменено!\n" + user_city['name'] + " --> " + new_name)
-        
-    user_city['name'] = new_name
-    login.city_change(uid, user_city)
-    '''except:
-        update.message.reply_text("Произошла неизвестная ошибка, попробуйте заного")'''
+    try:
+        uid = str(update.message.chat['id'])
+        prefix, *message = update.message.text.split(" ")
+
+        match message[0].lower():
+            case "профиль":
+                user = login.authorize(uid)
+                match message[1].lower():
+                    case "имя":
+                        pass
+            case "город":
+                user_city_status = login.authorize_city(uid)
+                if user_city_status is None:
+                    update.message.reply_text("Вы еще не создали город! Для создания введите !city имягорода")
+                    return
+                match message[1].lower():
+                    case "имя": # name
+                        user_city_status['name'] = 1
+                        login.city_status_change(uid, user_city_status)
+                    case "герб": # sign
+                        user_city_status['sign'] = 1
+                        login.city_status_change(uid, user_city_status)
+                    case "гимн": # gymn
+                        user_city_status['gymn'] = 1
+                        login.city_status_change(uid, user_city_status)
+                    case "история": # history
+                        user_city_status['history'] = 1
+                        login.city_status_change(uid, user_city_status)
+
+            case _:
+                update.message.reply_text("Команда '/change' или '/изменить' должна содержать в себе аттрибуты: '/change профиль||город имя||(имя|герб|гимн|история)'")
+    except:
+        update.message.reply_text("Произошла неизвестная ошибка, попробуйте заного")

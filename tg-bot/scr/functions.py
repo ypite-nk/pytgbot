@@ -3,7 +3,7 @@ import keyboardbot as kb
 
 from telegram import InlineKeyboardMarkup, ParseMode
 
-from spec import checkban, openf, write_marks
+from spec import checkban, openf, Echo_Checker
 
 def start_handler(update, context):
     if checkban(update, context):
@@ -47,21 +47,19 @@ def support_handler(update, context):
 def echo_handler(update, context):
     if checkban(update, context):
         return
-    
-    if write_marks(update, context):
+    Checker = Echo_Checker(update, context)
+    if Checker.echo_check():
         return
 
     with open("info/hi.txt", "r", encoding="utf-8") as file:
         file = file.readlines(0)
     hi = True
     for i in file:
-        if i.replace("\n", "").lower() in update.message.text.lower():
+        if i.replace("\n", "").lower() in update.message.text.lower() and hi == True:
             update.message.reply_text(openf("info", "echohi"), reply_markup=InlineKeyboardMarkup(kb.backdel))
             hi = False
     if hi == True:
         update.message.reply_text(openf("info", "echo"), reply_markup=InlineKeyboardMarkup(kb.backdel))
-
-    hi = True
 
 def back_handler(update, context):
     if checkban(update, context):

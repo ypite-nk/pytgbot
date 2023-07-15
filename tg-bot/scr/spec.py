@@ -1,4 +1,5 @@
 ﻿# -*- coding: utf-8 -*-
+from urllib import request
 import login
 
 from echo import echo
@@ -16,70 +17,186 @@ def openf(path, name, method: int = 0):
         with open(name + ".txt", "r", encoding="utf-8") as f:
             return "".join(f.readlines(0))
 
-def write_marks(update, context):
-    stat = login.authorize(update.message.chat['id'])
-    if stat['marks_collect'] == 0:
-        return False
-    uid = str(update.message.chat['id'])
-    marks_id_memory = []
+class Echo_Checker():
+    '''
+    Класс для проверки различных статусов записи.
 
-    with open("info/ypiter/marks/memory.txt", "r", encoding="utf-8") as file:
-        file = file.readlines()
-        for i in file:
-            marks_id_memory.append(i.replace("\n", ""))
-    if uid in marks_id_memory:
-        update.message.reply_text("Вы уже отправляли рецензию!")
-        return True
-    if stat['marks_collect'] > 0 and stat['marks_collect'] < 5:
-        user_text = openf("base", uid + "marks")
+    Пример: Если активна запись рецензии - выполниться код. И так далее...
+    '''
+    def __init__(self, update, context):
+        self.update = update
+        self.context = context
 
-        if stat['marks_collect'] == 1:
-            with open("base/" + uid + "marks.txt", "w+", encoding="utf-8") as f:
-                f.write(user_text + update.message.text + "\n")
-                update.message.reply_text(openf("descriptext", "marks2"))
+        self.uid = str(self.update.message.chat['id'])
 
-        elif stat['marks_collect'] == 2:
-            with open("base/" + uid + "marks.txt", "w+", encoding="utf-8") as f:
-                f.write(user_text + update.message.text + "\n")
-            update.message.reply_text(openf("descriptext", "marks3"))
+        self.status = { 'name':'0',
+                        'sign':'0',
+                        'gymn':'0',
+                        'history':'0' }
 
-        elif stat['marks_collect'] == 3:
-            if update.message.text.lower() == "да":
-                update.message.reply_text(openf("descriptext", "marks4_5"))
-                stat['marks_collect'] = stat['marks_collect'] + 1
-            elif update.message.text.lower() == "нет":
-                update.message.reply_text(openf("descriptext", "marks4"))
+    def write_marks(self):
+        stat = login.authorize(self.update.message.chat['id'])
+        if stat['marks_collect'] == 0:
+            return False
+        marks_id_memory = []
 
-        if stat['marks_collect'] == 4:
-            update.message.reply_text(openf("descriptext", "marks_complete") + "\n" +
-                openf("base", uid + "marks") + "\nХотите изменить?(Да/нет)")
-        stat['marks_collect'] = stat['marks_collect'] + 1
-        login.update(update.message.chat['id'], stat)
-        return True
-
-    if stat['marks_collect'] == 5:
-        if update.message.text.lower() == "да":
-            stat['marks_collect'] = 1
-            login.update(uid, stat)
-            write_marks(update, context)
+        with open("info/ypiter/marks/memory.txt", "r", encoding="utf-8") as file:
+            file = file.readlines()
+            for i in file:
+                marks_id_memory.append(i.replace("\n", ""))
+        if self.uid in marks_id_memory:
+            self.update.message.reply_text("Вы уже отправляли рецензию!")
             return True
-        elif update.message.text.lower() == "нет":
-            stat['marks_collect'] = 0
-            login.update(uid, stat)
-            with open("info/ypiter/marks/memory.txt", "w", encoding="utf-8") as file:
-                marks_id_memory.append(str(update.message.chat['id']))
-                for i in range(len(marks_id_memory)):
-                    if i != len(marks_id_memory):
-                        file.write(marks_id_memory[i] + "\n")
-                    else:
-                        file.write(marks_id_memory[i])
-            with open("base/"+ uid +"marks.txt", "w", encoding="utf-8") as file:
-                file.write(" ")
-            update.message.reply_text(openf("info/ypiter/marks", "markssucces"))
+        if stat['marks_collect'] > 0 and stat['marks_collect'] < 5:
+            user_text = openf("base", self.uid + "marks")
+
+            if stat['marks_collect'] == 1:
+                with open("base/" + self.uid + "marks.txt", "w+", encoding="utf-8") as f:
+                    f.write(user_text + self.update.message.text + "\n")
+                    self.update.message.reply_text(openf("descriptext", "marks2"))
+
+            elif stat['marks_collect'] == 2:
+                with open("base/" + self.uid + "marks.txt", "w+", encoding="utf-8") as f:
+                    f.write(user_text + self.update.message.text + "\n")
+                self.update.message.reply_text(openf("descriptext", "marks3"))
+
+            elif stat['marks_collect'] == 3:
+                if self.update.message.text.lower() == "да":
+                    self.update.message.reply_text(openf("descriptext", "marks4_5"))
+                    stat['marks_collect'] = stat['marks_collect'] + 1
+                elif self.update.message.text.lower() == "нет":
+                    self.update.message.reply_text(openf("descriptext", "marks4"))
+
+            if stat['marks_collect'] == 4:
+                self.update.message.reply_text(openf("descriptext", "marks_complete") + "\n" +
+                    openf("base", self.uid + "marks") + "\nХотите изменить?(Да/нет)")
+            stat['marks_collect'] = stat['marks_collect'] + 1
+            login.update(self.update.message.chat['id'], stat)
+            return True
+
+        if stat['marks_collect'] == 5:
+            if self.update.message.text.lower() == "да":
+                stat['marks_collect'] = 1
+                login.update(self.uid, stat)
+                self.write_marks
+                return True
+            elif self.update.message.text.lower() == "нет":
+                stat['marks_collect'] = 0
+                login.update(self.uid, stat)
+                with open("info/ypiter/marks/memory.txt", "w", encoding="utf-8") as file:
+                    marks_id_memory.append(str(self.update.message.chat['id']))
+                    for i in range(len(marks_id_memory)):
+                        if i != len(marks_id_memory):
+                            file.write(marks_id_memory[i] + "\n")
+                        else:
+                            file.write(marks_id_memory[i])
+                with open("base/"+ self.uid +"marks.txt", "w", encoding="utf-8") as file:
+                    file.write(" ")
+                self.update.message.reply_text(openf("info/ypiter/marks", "markssucces"))
+                return False
+
+        return False
+
+    def write_name(self):
+        return False
+
+    def clear_city_status(self):
+        login.city_status_change(self.uid, self.status)
+
+    def write_city_name(self):
+        user_city_status = login.authorize_city(self.uid)
+        if user_city_status is None:
+            return False
+        if user_city_status['name']:
+            self.update.message.reply_text("Имя города успешно изменено!\n" + user_city['name'] + " --> " + self.update.message.text)
+
+            user_city = login.city_info(self.uid)
+            user_city['name'] == self.update.message.text
+            login.city_change(self.uid, user_city)
+            self.clear_city_status()
+            return True
+        else:
             return False
 
-    return False
+    def write_city_sign(self):
+        user_city_status = login.authorize_city(self.uid)
 
+        if user_city_status is None:
+            return False
+
+        if user_city_status['sign']:
+            self.update.message.reply_text("Герб города успешно изменен!")
+            '''
+            file = self.context.bot.get_file(self.update.message.photo[-1].file_id)
+            response = request.urlopen(file.file_path)
+            path = "D:/proj/pytgbotGH/tg-bot/photo.jpg"
+            with open(path, 'wb') as new_file:
+                new_file.write(response.content)
+            '''
+            #width, height = file.width, file.height
+            #print(file)
+            '''if width <= 400 and height <= 400:
+                self.context.bot.get_file(file.file_id).download_to_drive(custom_path="photo/")
+                self.clear_city_status()
+                return True
+            else:
+                return False'''
+            return True
+        else:
+            return False
+
+    def write_city_gymn(self):
+        user_city_status = login.authorize_city(self.uid)
+        if user_city_status is None:
+            return False
+        if user_city_status['gymn']:
+            self.update.message.reply_text("Гимн города умпешно изменен!")
+
+            user_city = login.city_info(self.uid)
+            user_city['gymn'] == self.update.message.text
+            login.city_change(self.uid, user_city)
+            self.clear_city_status()
+            return True
+        else:
+            return False
+
+    def write_city_history(self):
+        user_city_status = login.authorize_city(self.uid)
+        if user_city_status is None:
+            return False
+        if user_city_status['history']:
+            self.update.message.reply_text("История города успешно изменена!")
+
+            user_city = login.city_info(self.uid)
+            user_city['history'] == self.update.message.text
+            login.city_change(self.uid, user_city)
+            self.clear_city_status()
+            return True
+        else:
+            return False
+
+    def echo_check(self):
+
+        ''' Check-write-status function '''
+
+        if self.write_marks():
+            return True
+        if self.write_name():
+            return True
+        if self.write_city_name():
+            return True
+        if self.write_city_sign():
+            return True
+        if self.write_city_gymn():
+            return True
+        if self.write_city_history():
+            return True
+        
+        self.clear_city_status()
+        if self.update.message.text is None:
+            return True
+        else:
+            return False
 
 def ban(update, context):
     command, user_id = update.message.text.split(" ")

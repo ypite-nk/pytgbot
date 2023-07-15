@@ -33,19 +33,20 @@ updater.dispatcher.add_handler(CommandHandler('support', func.support_handler))
 updater.dispatcher.add_handler(CommandHandler('menu', func.back_handler))
 updater.dispatcher.add_handler(CommandHandler("back", func.back_handler))
 
-updater.dispatcher.add_handler(PrefixHandler('!', 'рецензия', prefix.prefix_marks))
-updater.dispatcher.add_handler(PrefixHandler('!', 'погода', prefix.prefix_weather))
+updater.dispatcher.add_handler(PrefixHandler('/', 'рецензия', prefix.prefix_marks))
+updater.dispatcher.add_handler(PrefixHandler('/', 'погода', prefix.prefix_weather))
 # prefix for game
 # create game
 updater.dispatcher.add_handler(PrefixHandler('/', 'город', prefix.city_create))
 # control game
-updater.dispatcher.add_handler(PrefixHandler('!', 'город', prefix.mycity))
-updater.dispatcher.add_handler(PrefixHandler('!', 'mycity', prefix.mycity))
+updater.dispatcher.add_handler(PrefixHandler('/', 'мойгород', prefix.mycity))
+updater.dispatcher.add_handler(PrefixHandler('/', 'mycity', prefix.mycity))
 
-updater.dispatcher.add_handler(PrefixHandler('!', 'changename', prefix.mycity_changename))
-updater.dispatcher.add_handler(PrefixHandler('!', 'имя', prefix.mycity_changename))
+updater.dispatcher.add_handler(PrefixHandler('/', 'change', prefix.change))
+updater.dispatcher.add_handler(PrefixHandler('/', 'изменить', prefix.change))
 
 updater.dispatcher.add_handler(MessageHandler(Filters.text & (~Filters.command), func.echo_handler))
+updater.dispatcher.add_handler(MessageHandler(Filters.photo, func.echo_handler))
 
 updater.dispatcher.add_handler(InlineQueryHandler(inline_query))
 # ADMIN COMMAND
