@@ -4,6 +4,7 @@ from telegram import InlineKeyboardMarkup
 
 from keyboardbot import backdel
 from spec import checkban, openf
+from spec import Echo_Checker
 
 import login
 
@@ -123,7 +124,6 @@ def change(update, context):
     try:
         uid = str(update.message.chat['id'])
         prefix, *message = update.message.text.split(" ")
-
         match message[0].lower():
             case "профиль":
                 user = login.authorize(uid)
@@ -136,20 +136,22 @@ def change(update, context):
                     update.message.reply_text("Вы еще не создали город! Для создания введите !city имягорода")
                     return
                 match message[1].lower():
-                    case "имя": # name
+                    case "имя":
                         user_city_status['name'] = 1
                         login.city_status_change(uid, user_city_status)
-                    case "герб": # sign
+                    case "герб":
                         user_city_status['sign'] = 1
                         login.city_status_change(uid, user_city_status)
-                    case "гимн": # gymn
+                    case "гимн":
                         user_city_status['gymn'] = 1
                         login.city_status_change(uid, user_city_status)
-                    case "история": # history
+                    case "история":
                         user_city_status['history'] = 1
                         login.city_status_change(uid, user_city_status)
-
             case _:
-                update.message.reply_text("Команда '/change' или '/изменить' должна содержать в себе аттрибуты: '/change профиль||город имя||(имя|герб|гимн|история)'")
+                update.message.reply_text("Команда '/change' или '/изменить' должна содержать в себе аттрибуты: '/change (профиль|город) (имя|герб|гимн|история) (значение)'")
+        if len(message) == 3:
+            checker = Echo_Checker(update, context)
+            checker.echo_check()                    
     except:
         update.message.reply_text("Произошла неизвестная ошибка, попробуйте заного")

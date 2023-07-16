@@ -1,5 +1,5 @@
 ﻿# -*- coding: utf-8 -*-
-from urllib import request
+import urllib.request
 import login
 
 from echo import echo
@@ -27,6 +27,11 @@ class Echo_Checker():
         self.update = update
         self.context = context
 
+        self.prefix, *self.text = self.update.message.text.split(" ")
+
+        if len(self.text) == 3:
+            self.update.message.text = self.text[2]
+
         self.uid = str(self.update.message.chat['id'])
 
         self.status = { 'name':'0',
@@ -36,7 +41,7 @@ class Echo_Checker():
 
     def write_marks(self):
         stat = login.authorize(self.update.message.chat['id'])
-        if stat['marks_collect'] == 0:
+        if stat['marks_collect'] == 0 or self.update.message.text is not None:
             return False
         marks_id_memory = []
 
@@ -107,11 +112,12 @@ class Echo_Checker():
         user_city_status = login.authorize_city(self.uid)
         if user_city_status is None:
             return False
-        if user_city_status['name']:
+        if user_city_status['name'] and self.update.message.text is not None:
+            user_city = login.city_info(self.uid)
+
             self.update.message.reply_text("Имя города успешно изменено!\n" + user_city['name'] + " --> " + self.update.message.text)
 
-            user_city = login.city_info(self.uid)
-            user_city['name'] == self.update.message.text
+            user_city['name'] = self.update.message.text
             login.city_change(self.uid, user_city)
             self.clear_city_status()
             return True
@@ -124,24 +130,24 @@ class Echo_Checker():
         if user_city_status is None:
             return False
 
-        if user_city_status['sign']:
-            self.update.message.reply_text("Герб города успешно изменен!")
-            '''
-            file = self.context.bot.get_file(self.update.message.photo[-1].file_id)
-            response = request.urlopen(file.file_path)
-            path = "D:/proj/pytgbotGH/tg-bot/photo.jpg"
-            with open(path, 'wb') as new_file:
-                new_file.write(response.content)
-            '''
-            #width, height = file.width, file.height
-            #print(file)
-            '''if width <= 400 and height <= 400:
-                self.context.bot.get_file(file.file_id).download_to_drive(custom_path="photo/")
+        if user_city_status['sign'] == 1 and self.update.message.text is None:
+            
+            file = self.context.bot.get_file(self.update.message.photo[-1])
+            file_size = self.update.message.photo[-1]
+            
+            if file_size.width <= 400 and file_size.height <= 400:
+                self.update.message.reply_text("Герб города успешно изменен!")
+                response = urllib.request.urlopen(file.file_path)
+                path = "D:/proj/pytgbotGH/tg-bot/base/cities/photo/" + self.uid + ".jpg"
+
+                with open(path, 'wb') as new_file:
+                    new_file.write(response.read())
                 self.clear_city_status()
+
                 return True
             else:
-                return False'''
-            return True
+                self.update.message.reply_text("Размеры файла превышают максимальные! (400x400)")
+                return False
         else:
             return False
 
@@ -149,11 +155,11 @@ class Echo_Checker():
         user_city_status = login.authorize_city(self.uid)
         if user_city_status is None:
             return False
-        if user_city_status['gymn']:
+        if user_city_status['gymn'] and self.update.message.text is not None:
             self.update.message.reply_text("Гимн города умпешно изменен!")
 
             user_city = login.city_info(self.uid)
-            user_city['gymn'] == self.update.message.text
+            user_city['gymn'] = self.update.message.text
             login.city_change(self.uid, user_city)
             self.clear_city_status()
             return True
@@ -164,11 +170,11 @@ class Echo_Checker():
         user_city_status = login.authorize_city(self.uid)
         if user_city_status is None:
             return False
-        if user_city_status['history']:
+        if user_city_status['history'] and self.update.message.text is not None:
             self.update.message.reply_text("История города успешно изменена!")
 
             user_city = login.city_info(self.uid)
-            user_city['history'] == self.update.message.text
+            user_city['history'] = self.update.message.text
             login.city_change(self.uid, user_city)
             self.clear_city_status()
             return True
@@ -192,7 +198,6 @@ class Echo_Checker():
         if self.write_city_history():
             return True
         
-        self.clear_city_status()
         if self.update.message.text is None:
             return True
         else:
