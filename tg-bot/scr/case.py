@@ -6,6 +6,8 @@ import keyboardbot as kb
 
 from spec import checkban, openf
 
+from prefix import mycity
+
 from telegram import InlineKeyboardMarkup, InlineKeyboardButton, ParseMode
 
 mem_m = ['', '', '', '', '']
@@ -199,7 +201,7 @@ def echo_button(update, context):
                                              parse_mode=ParseMode.HTML).message_id
             case "ypimore":
                 new_message_id = reply_text(openf("info/ypiter", "YpiAllMore"),
-                                            reply_markup=InlineKeyboardMarkup(kb.ypimore))
+                                            reply_markup=InlineKeyboardMarkup(kb.backdel))
             case "14":
                  new_message_id = reply_text(openf("info/ypiter", "Ypi14"),
                                              reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Назад", callback_data="ypiinfo"), kb.menudel]])).message_id
@@ -256,6 +258,9 @@ def echo_button(update, context):
             case "projects":
                 new_message_id = reply_text(openf("info", "projects"),
                                             reply_markup=InlineKeyboardMarkup(kb.projects)).message_id
+            case "mycity":
+                new_message_id = mycity(update, context)
+
 #   LEARN
             case "learn":
                 new_message_id = reply_text(openf("learn", "description"),
@@ -475,6 +480,96 @@ def echo_button(update, context):
             case "3d":
                 new_message_id = reply_text(openf("learn/descriptext", "3d"),
                                             reply_markup=InlineKeyboardMarkup(kb.modeling)).message_id
+#   CITY_GAME
+#       CREATE
+            case "create":
+                new_message_id = reply_text(openf("city/descrip", "create"),
+                                            reply_markup=InlineKeyboardMarkup(kb.city_createtypes)).message_id
+#       CREATE-HOUSE
+            case "house":
+                new_message_id = reply_text(openf("city/descrip", "create_house"),
+                                            reply_markup=InlineKeyboardMarkup(kb.city_create_house)).message_id
+            case "house1":
+                new_message_id = reply_text(openf("city/descrip/create", "create_house_1"),
+                                            reply_markup=InlineKeyboardMarkup(kb.backdel)).message_id
+                # NEED NEW FUNC IN SPEC.PY TO CREATE AND SAVE CREATING OBJECT
+            case "house2":
+                new_message_id = reply_text(openf("city/descrip/create", "create_house_2"),
+                                            reply_markup=InlineKeyboardMarkup(kb.backdel)).message_id
+                # NEED NEW FUNC IN SPEC.PY TO CREATE AND SAVE CREATING OBJECT
+            case "house3":
+                new_message_id = reply_text(openf("city/descrip/create", "create_house_3"),
+                                            reply_markup=InlineKeyboardMarkup(kb.backdel)).message_id
+                # NEED NEW FUNC IN SPEC.PY TO CREATE AND SAVE CREATING OBJECT
+#       CREATE-COMMERCICAL
+            case "commercical":
+                new_message_id = reply_text(openf("city/descrip", "create_commercical"),
+                                            reply_markup=InlineKeyboardMarkup(kb.city_create_commercical)).message_id
+            case "comm1":
+                new_message_id = reply_text(openf("city/descrip/create", "create_comm_1"),
+                                            reply_markup=InlineKeyboardMarkup(kb.backdel)).message_id
+                # NEED NEW FUNC IN SPEC.PY TO CREATE AND SAVE CREATING OBJECT
+            case "comm2":
+                new_message_id = reply_text(openf("city/descrip/create", "create_comm_2"),
+                                            reply_markup=InlineKeyboardMarkup(kb.backdel)).message_id
+                # NEED NEW FUNC IN SPEC.PY TO CREATE AND SAVE CREATING OBJECT
+            case "comm3":
+                new_message_id = reply_text(openf("city/descrip/create", "create_comm_3"),
+                                            reply_markup=InlineKeyboardMarkup(kb.backdel)).message_id
+                # NEED NEW FUNC IN SPEC.PY TO CREATE AND SAVE CREATING OBJECT
+#       CREATE-INDUSTRY
+            case "industry":
+                new_message_id = reply_text(openf("city/descrip", "create_industry"),
+                                            reply_markup=InlineKeyboardMarkup(kb.city_create_industry)).message_id
+            case "ind1":
+                new_message_id = reply_text(openf("city/descrip/create", "create_ind_1"),
+                                            reply_markup=InlineKeyboardMarkup(kb.city_create_ind1)).message_id
+            case "1indenergy":
+                new_message_id = reply_text(openf("city/descrip/create", "create_ind_en_1"),
+                                            reply_markup=InlineKeyboardMarkup(kb.backdel)).message_id
+                # NEED NEW FUNC IN SPEC.PY TO CREATE AND SAVE CREATING OBJECT
+            case "2indenergy":
+                new_message_id = reply_text(openf("city/descrip/create", "create_ind_en_2"),
+                                            reply_markup=InlineKeyboardMarkup(kb.backdel)).message_id
+                # NEED NEW FUNC IN SPEC.PY TO CREATE AND SAVE CREATING OBJECT
+            case "3indenergy":
+                new_message_id = reply_text(openf("city/descrip/create", "create_ind_en_3"),
+                                            reply_markup=InlineKeyboardMarkup(kb.backdel)).message_id
+                # NEED NEW FUNC IN SPEC.PY TO CREATE AND SAVE CREATING OBJECT
+            case "ind2":
+                new_message_id = reply_text(openf("city/descrip/create", "create_ind_2"),
+                                            reply_markup=InlineKeyboardMarkup(kb.city_create_ind2)).message_id
+            case "1indwater":
+                new_message_id = reply_text(openf("city/descrip/create", "create_ind_wat_1"),
+                                            reply_markup=InlineKeyboardMarkup(kb.backdel)).message_id
+                # NEED NEW FUNC IN SPEC.PY TO CREATE AND SAVE CREATING OBJECT
+            case "2indwater":
+                new_message_id = reply_text(openf("city/descrip/create", "create_ind_wat_2"),
+                                            reply_markup=InlineKeyboardMarkup(kb.backdel)).message_id
+                # NEED NEW FUNC IN SPEC.PY TO CREATE AND SAVE CREATING OBJECT
+            case "3indwater":
+                new_message_id = reply_text(openf("city/descrip/create", "create_ind_wat_3"),
+                                            reply_markup=InlineKeyboardMarkup(kb.backdel)).message_id
+                # NEED NEW FUNC IN SPEC.PY TO CREATE AND SAVE CREATING OBJECT
+            case "ind3":
+                new_message_id = reply_text(openf("city/descrip/create", "create_ind_3"),
+                                            reply_markup=InlineKeyboardMarkup(kb.city_create_ind3)).message_id
+            case "1indmat":
+                new_message_id = reply_text(openf("city/descrip/create", "create_ind_mat_1"),
+                                            reply_markup=InlineKeyboardMarkup(kb.backdel)).message_id
+                # NEED NEW FUNC IN SPEC.PY TO CREATE AND SAVE CREATING OBJECT
+            case "2indmat":
+                new_message_id = reply_text(openf("city/descrip/create", "create_ind_mat_2"),
+                                            reply_markup=InlineKeyboardMarkup(kb.backdel)).message_id
+                # NEED NEW FUNC IN SPEC.PY TO CREATE AND SAVE CREATING OBJECT
+            case "3indmat":
+                new_message_id = reply_text(openf("city/descrip/create", "create_ind_mat_3"),
+                                            reply_markup=InlineKeyboardMarkup(kb.backdel)).message_id
+                # NEED NEW FUNC IN SPEC.PY TO CREATE AND SAVE CREATING OBJECT
+#       DESTROYED
+            case "destroyed":
+                new_message_id = reply_text(openf(""),
+                                            repl_markup=InlineKeyboardMarkup(kb.city_xxx)).message_id
 
         if not conflict:
             context.chat_data['message_id'] = new_message_id

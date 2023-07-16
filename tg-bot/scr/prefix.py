@@ -2,11 +2,11 @@
 
 from telegram import InlineKeyboardMarkup
 
-from keyboardbot import backdel
 from spec import checkban, openf
-from spec import Echo_Checker
 
 import login
+
+import keyboardbot as kb
 
 def prefix_marks(update, context):
     if checkban(update, context):
@@ -56,10 +56,10 @@ def prefix_weather(update, context, city = None):
             w = l_weather(city).weather
             result = [w.temperature('celsius')['temp'], w.detailed_status, w.wind()['speed']]
             update.message.reply_text("Город: " + city + "\nТемпература: " + str(result[0]) + "\nНебо: " + str(result[1]) + "\nВетер: " + str(result[2]) + " м/с",
-                                      reply_markup=InlineKeyboardMarkup(backdel))
+                                      reply_markup=InlineKeyboardMarkup(kb.backdel))
         except:
             update.message.reply_text("Такого города не существует! Возможно, вы ошиблись в написании или у OpenWeatherMap нету таких данных.",
-                                      reply_markup=InlineKeyboardMarkup(backdel))
+                                      reply_markup=InlineKeyboardMarkup(kb.backdel))
 
 def city_create(update, context):
     if checkban(update, context):
@@ -85,39 +85,85 @@ def city_create(update, context):
     second_part = "\nbudget:10000\npeople:1\nkids:0\ntenager:0\nadults:1\nancient:0\ncreated:12.07.23\nroad:100\nlearning:100\nmedecine:100\nsafety:100\ninflation:4\nhapiest:100\nwater:100\nenergy_have:0\nenergy_need:0"
     all_part = first_part + second_part
     status = "nameCH:0\nsignCH:0\ngymnCH:0\nhistoryCH:0"
-    login.city_create(uid, all_part, status)
+    data = "money_have:0\nenergy_have:0\nwater_have:0\nmoney_need:0\nenergy_need:0\nwater_need:0"
+    login.city_create(uid, all_part, status, data)
 
 def mycity(update, context):
     if checkban(update, context):
         return
+    try:
+        uid = str(update.message.chat['id'])
+    except:
+        uid = str(update.callback_query.message.chat['id'])
+    user_city_info = login.city_info(uid)
+    user_city_data = login.city_data(uid)
 
-    uid = str(update.message.chat['id'])
-    user_city = login.city_info(uid)
-    if user_city is None:
-        update.message.reply_text("Вы еще не создали город! Для создания введите !city имягорода")
-        return
-    city_key = []
-    city_value = []
-    info_city = ""
-    city_tr = {"name": "Имя",
-               "country": "Страна",
-               "subject": "Область",
-               "create_data": "Дата создания",
-               "size": "Площадь",
-               "people": "Количество людей",
-               "mayor": "Мэр",
-               "optional": "\nОпционально",
-               "sign": "Герб",
-               "gymn": "Гимн",
-               "history": "История"}
-    for i in user_city.keys():
-        city_key.append(i)
-    for i in user_city.values():
-        city_value.append(i)
-    for i in range(len(city_key)):
-        info_city += city_tr[city_key[i]] + " : " + city_value[i] + "\n"
-    update.message.reply_text("Ваш город: " + "\n\n" + info_city + "\nДля изменения имени города введите:\n!mycity changename новоеимя")
+    if user_city_info is None:
+        try:
+            update.message.reply_text("Вы еще не создали город! Для создания введите !city имягорода")
+            return
+        except:
+            new_message_id = update.callback_query.message.reply_text("Вы еще не создали город! Для создания введите /город имягорода").message_id
+            return new_message_id
 
+    city_info = ""
+    city_info_key = []
+    city_info_value = []
+    city_info_tr = {
+                    "name": "Имя",
+                    "country": "Страна",
+                    "subject": "Область",
+                    "create_data": "Дата создания",
+                    "size": "Площадь",
+                    "people": "Количество людей",
+                    "mayor": "Мэр",
+                    "---optional---": "\n---Опциональные---",
+                    "sign": "Герб",
+                    "gymn": "Гимн",
+                    "history": "История"
+               }
+
+    city_data = ""
+    city_data_key = []
+    city_data_value = []
+    city_data_tr = {
+                    "money_have":"Бюджет",
+                    "energy_have":"Электроэнергия",
+                    "water_have":"Водоснабжение",
+
+                    "money_need":"Расход бюджета",
+                    "energy_need":"Расход электроэнергии",
+                    "water_need":"Расход водоснабжения"
+                    }
+    for key in user_city_info.keys():
+        city_info_key.append(key)
+    for value in user_city_info.values():
+        city_info_value.append(value)
+    for key in range(len(city_info_key)):
+        city_info += city_info_tr[city_info_key[key]] + " : " + city_info_value[key] + "\n"
+
+    for key in user_city_data.keys():
+        city_data_key.append(key)
+    for value in user_city_data.values():
+        city_data_value.append(value)
+    for key in range(len(city_data_key)):
+        city_data += city_data_tr[city_data_key[key]] + " : " + city_data_value[key] + "\n"
+
+    try:
+        update.message.reply_text("===Ваш город===" + "\n" + city_info +
+                              "\nДля изменения опциональных данных города введите:\n" + 
+                              "/изменить город 'имя/герб/гимн/история' 'ваш текст'" + "\n" +
+                              "\n===Управление===\n"+
+                              city_data, reply_markup=InlineKeyboardMarkup(kb.city_admin))
+    except:
+        new_message_id = update.callback_query.message.reply_text("===Ваш город===" + "\n" + city_info +
+                              "\nДля изменения опциональных данных города введите:\n" + 
+                              "/изменить город 'имя/герб/гимн/история' 'ваш текст'" + "\n" +
+                              "\n===Управление===\n"+
+                              city_data, reply_markup=InlineKeyboardMarkup(kb.city_admin)).message_id
+        return new_message_id
+
+from spec import Echo_Checker
 def change(update, context):
     if checkban(update, context):
         return

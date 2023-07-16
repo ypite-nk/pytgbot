@@ -17,7 +17,7 @@ rap = [[InlineKeyboardButton("50 Cent", callback_data="50 Cent"), InlineKeyboard
        [InlineKeyboardButton("<<<", callback_data="/fun"), menudel]]
 
 start_key = [[InlineKeyboardButton("FAQ", callback_data="faq"), InlineKeyboardButton("Инфо", callback_data="info"), InlineKeyboardButton("Команды", callback_data="commands")],
-             [InlineKeyboardButton("Проекты", callback_data="projects")],
+             [InlineKeyboardButton("Проекты", callback_data="projects"), InlineKeyboardButton("Мой город", callback_data="mycity")],
              [InlineKeyboardButton("Обратная связь", callback_data="helper")]]
 
 def set_mark(list):
@@ -176,3 +176,56 @@ projects = [[InlineKeyboardButton("Список проектов", callback_data
             [menudel]]
 
 ypimore = [[menudel]]
+
+city_admin = [
+              [InlineKeyboardButton("Постройка", callback_data="create"), InlineKeyboardButton("Разрушение", callback_data="destroyed")],
+              [menudel]
+             ]
+
+city_createtypes = [
+                    [InlineKeyboardButton("Жилье", callback_data="house"), InlineKeyboardButton("Коммерция", callback_data="commercical")],
+                    [InlineKeyboardButton("Промышленность", callback_data="industry")],
+                    [menudel]
+                   ]
+
+city_create_house = [
+                     [InlineKeyboardButton("Малый район", callback_data="house1")],
+                     [InlineKeyboardButton("Средний район", callback_data="house2")],
+                     [InlineKeyboardButton("Большой район", callback_data="house3")],
+                     [menudel]
+                    ]
+
+city_create_commercical = [
+                     [InlineKeyboardButton("Малый район", callback_data="comm1")],
+                     [InlineKeyboardButton("Средний район", callback_data="comm2")],
+                     [InlineKeyboardButton("Большой район", callback_data="comm3")],
+                     [menudel]
+                    ]
+
+city_create_industry = [
+                     [InlineKeyboardButton("Электроэнергия", callback_data="ind1")],
+                     [InlineKeyboardButton("Водоснабжение", callback_data="ind2")],
+                     [InlineKeyboardButton("Товаропроизводство", callback_data="ind3")],
+                     [menudel]
+                    ]
+
+city_create_ind1 = [
+                     [InlineKeyboardButton("Малая станция", callback_data="1indenergy")],
+                     [InlineKeyboardButton("Средняя станция", callback_data="2indenergy")],
+                     [InlineKeyboardButton("Большая станция", callback_data="3indenergy")],
+                     [menudel]
+                    ]
+
+city_create_ind2 = [
+                     [InlineKeyboardButton("Малая станция", callback_data="1indwater")],
+                     [InlineKeyboardButton("Средняя станция", callback_data="2indwater")],
+                     [InlineKeyboardButton("Большая станция", callback_data="3indwater")],
+                     [menudel]
+                    ]
+
+city_create_ind3 = [
+                     [InlineKeyboardButton("Малый район", callback_data="1indmat")],
+                     [InlineKeyboardButton("Средний район", callback_data="2indmat")],
+                     [InlineKeyboardButton("Большой район", callback_data="3indmat")],
+                     [menudel]
+                    ]

@@ -70,11 +70,13 @@ def update(user_id: str, data: dict = None):
 	with open('base/' + user_id + '.txt', 'w', encoding="utf-8") as f:
 		f.write(json.dumps(data).replace(" ", ""))
 
-def city_create(user_id: str, data: str, status: str):
+def city_create(user_id: str, info: str, status: str, data: str):
 	if not path.exists('base/cities/' + user_id + "city.txt"):
 		with open('base/' + user_id + "city.txt", "w", encoding="utf-8") as f:
-			f.write(data)
+			f.write(info)
 		with open('base/' + user_id + "city_status.txt", "w", encoding="utf-8") as f:
+			f.write(status)
+		with open('base/' + user_id + "city_data.txt", "w", encoding="utf-8") as f:
 			f.write(data)
 
 def authorize_city(user_id: str):
@@ -101,6 +103,18 @@ def city_info(user_id: str):
 				user_city[key] = value.replace("\n", "")
 		return user_city
 
+def city_data(user_id: str):
+	if not path.exists('base/cities/' + user_id + 'city_data.txt'):
+		return None
+	else:
+		city_data = {}
+		with open('base/cities/' + user_id + 'city_data.txt', 'r', encoding='utf-8') as f:
+			f = f.readlines(0)
+			for i in f:
+				key, value = i.split(":")
+				city_data[key] = value.replace("\n", "")
+		return city_data
+
 def city_change(user_id: str, city: dict):
 	info = replaced(str(city))
 	with open('base/cities/' + user_id + "city.txt", "w", encoding="utf-8") as f:
@@ -109,4 +123,9 @@ def city_change(user_id: str, city: dict):
 def city_status_change(user_id: str, status: dict):
 	info = replaced(str(status))
 	with open('base/cities/' + user_id + "city_status.txt", "w", encoding="utf-8") as f:
+		f.write(info)
+
+def city_data_change(user_id: str, data: dict):
+	info = replaced(str(data))
+	with open('base/cities/' + user_id + "city_data.txt", "w", encoding="utf-8") as f:
 		f.write(info)

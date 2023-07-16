@@ -144,6 +144,10 @@ class Echo_Checker():
                     new_file.write(response.read())
                 self.clear_city_status()
 
+                user_city = login.city_info(self.uid)
+                user_city['sign'] = "Есть"
+                login.city_change(self.uid, user_city)
+
                 return True
             else:
                 self.update.message.reply_text("Размеры файла превышают максимальные! (400x400)")
