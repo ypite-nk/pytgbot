@@ -1,6 +1,7 @@
-money_have:0
+money_have:10000000
 energy_have:0
 water_have:0
+money:0
 money_need:0
 energy_need:0
 water_need:0
