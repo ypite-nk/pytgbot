@@ -48,7 +48,16 @@ def replaced(info):
 
 	return return_info
 
-def authorize(user_id: str):
+def json_reworking(info: list, uid: str = '0'):
+	users = []
+
+	for i in info:
+		users.append(i.replace("\n", ""))
+	if uid not in users:
+		users.append(uid)
+	return users
+
+def authorize(user_id: str, chat_id: str):
 	user_id = str(user_id)
 	if not path.exists('base/' + user_id + '.txt'):
 		with open('base/' + user_id + '.txt', 'w', encoding="utf-8") as f:
@@ -60,6 +69,15 @@ def authorize(user_id: str):
 	with open('base/' + user_id + '.txt', 'r', encoding="utf-8") as f:
 		user = convert(f)
 
+	with open('base/users.txt', 'r', encoding="utf-8") as f:
+		users = f.readlines(0)
+
+	users = json_reworking(users, chat_id)
+	users = '\n'.join(users)
+
+	with open('base/users.txt', 'w', encoding="utf-8") as f:
+		f.write(users)
+
 	return user
 
 def update(user_id: str, data: dict = None):
@@ -70,13 +88,21 @@ def update(user_id: str, data: dict = None):
 	with open('base/' + user_id + '.txt', 'w', encoding="utf-8") as f:
 		f.write(json.dumps(data).replace(" ", ""))
 
+def users_info():
+	with open('base/users.txt', 'r', encoding="utf-8") as f:
+		users = f.readlines(0)
+
+	users = json_reworking(users)
+
+	return users
+
 def city_create(user_id: str, info: str, status: str, data: str):
 	if not path.exists('base/cities/' + user_id + "city.txt"):
-		with open('base/' + user_id + "city.txt", "w", encoding="utf-8") as f:
+		with open('base/cities/' + user_id + "city.txt", "w", encoding="utf-8") as f:
 			f.write(info)
-		with open('base/' + user_id + "city_status.txt", "w", encoding="utf-8") as f:
+		with open('base/cities/' + user_id + "city_status.txt", "w", encoding="utf-8") as f:
 			f.write(status)
-		with open('base/' + user_id + "city_data.txt", "w", encoding="utf-8") as f:
+		with open('base/cities/' + user_id + "city_data.txt", "w", encoding="utf-8") as f:
 			f.write(data)
 
 def authorize_city(user_id: str):

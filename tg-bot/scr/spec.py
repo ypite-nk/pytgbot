@@ -207,6 +207,304 @@ class Echo_Checker():
         else:
             return False
 
+class Create():
+    def __init__(self, update, context):
+        self.update = update
+        self.context = context
+
+        self.uid = str(self.update.callback_query.message.chat['id'])
+
+    def house1(self):
+        user_city = login.city_info(self.uid)
+        user_city_data = login.city_data(self.uid)
+
+        money_cost = 500000
+        money_expenses = 67200
+        export_people = 4000
+
+        if user_city_data['money_have'] > money_cost and (user_city_data['money'] - user_city_data['money_need']) > money_expenses:
+            user_city_data['money_have'] -= money_cost
+            user_city_data['money_need'] += money_expenses
+            user_city['people'] += export_people
+
+            login.city_data_change(self.uid, user_city_data)
+            login.city_change(self.uid, user_city)
+
+            self.update.callback_query.message.reply_text(openf("city/descrip/create", "create_house_1"),
+                                                            reply_markup=InlineKeyboardMarkup(kb.backdel))
+
+        else:
+            self.update.callback_query.message.reply_text("Средства города не способны содерждать этот район... Пополните бюджет или увеличьте доход")
+
+    def house2(self):
+        user_city = login.city_info(self.uid)
+        user_city_data = login.city_data(self.uid)
+
+        money_cost = 1500000
+        money_expenses = 151200
+        export_people = 9000
+
+        if user_city_data['money_have'] > money_cost and (user_city_data['money'] - user_city_data['money_need']) > money_expenses:
+            user_city_data['money_have'] -= money_cost
+            user_city_data['money_need'] += money_expenses
+            user_city['people'] += export_people
+
+            login.city_data_change(self.uid, user_city_data)
+            login.city_change(self.uid, user_city)
+
+            self.update.callback_query.message.reply_text(openf("city/descrip/create", "create_house_2"),
+                                                            reply_markup=InlineKeyboardMarkup(kb.backdel))
+
+        else:
+            self.update.callback_query.message.reply_text("Средства города не способны содерждать этот район... Пополните бюджет или увеличьте доход")
+
+    def house3(self):
+        user_city = login.city_info(self.uid)
+        user_city_data = login.city_data(self.uid)
+
+        money_cost = 3500000
+        money_expenses = 336000
+        export_people = 20000
+
+        if user_city_data['money_have'] > money_cost and (user_city_data['money'] - user_city_data['money_need']) > money_expenses:
+            user_city_data['money_have'] -= money_cost
+            user_city_data['money_need'] += money_expenses
+            user_city['people'] += export_people
+
+            login.city_data_change(self.uid, user_city_data)
+            login.city_change(self.uid, user_city)
+
+            self.update.callback_query.message.reply_text(openf("city/descrip/create", "create_house_3"),
+                                                            reply_markup=InlineKeyboardMarkup(kb.backdel))
+
+        else:
+            self.update.callback_query.message.reply_text("Средства города не способны содерждать этот район... Пополните бюджет или увеличьте доход")
+
+    def comm1(self):
+        user_city_data = login.city_data(self.uid)
+
+        money_cost = 140000
+        export_money = 18000
+
+        if user_city_data['money_have'] > money_cost:
+            user_city_data['money_have'] -= money_cost
+            user_city_data['money'] += export_money
+
+            login.city_data_change(self.uid, user_city_data)
+
+            self.update.callback_query.message.reply_text(openf("city/descrip/create", "create_comm_1"),
+                                                            reply_markup=InlineKeyboardMarkup(kb.backdel))
+        else:
+            self.update.callback_query.message.reply_text("Средства города не способны содерждать этот район... Пополните бюджет или увеличьте доход")
+
+    def comm2(self):
+        user_city_data = login.city_data(self.uid)
+
+        money_cost = 780000
+        export_money = 58000
+
+        if user_city_data['money_have'] > money_cost:
+            user_city_data['money_have'] -= money_cost
+            user_city_data['money'] += export_money
+
+            login.city_data_change(self.uid, user_city_data)
+
+            self.update.callback_query.message.reply_text(openf("city/descrip/create", "create_comm_2"),
+                                                            reply_markup=InlineKeyboardMarkup(kb.backdel))
+        else:
+            self.update.callback_query.message.reply_text("Средства города не способны содерждать этот район... Пополните бюджет или увеличьте доход")
+
+    def comm3(self):
+        user_city_data = login.city_data(self.uid)
+
+        money_cost = 2300000
+        export_money = 152000
+
+        if user_city_data['money_have'] > money_cost:
+            user_city_data['money_have'] -= money_cost
+            user_city_data['money'] += export_money
+
+            login.city_data_change(self.uid, user_city_data)
+
+            self.update.callback_query.message.reply_text(openf("city/descrip/create", "create_comm_3"),
+                                                            reply_markup=InlineKeyboardMarkup(kb.backdel))
+        else:
+            self.update.callback_query.message.reply_text("Средства города не способны содерждать этот район... Пополните бюджет или увеличьте доход")
+
+    def ind1_1(self):
+        user_city_data = login.city_data(self.uid)
+
+        money_cost = 20000
+        money_expenses = 4230
+
+        export_energy = 850
+
+        if user_city_data['money_have'] > money_cost and (user_city_data['money'] - user_city_data['money_need']) > money_expenses:
+            user_city_data['money_have'] -= money_cost
+            user_city_data['money_need'] += money_expenses
+            user_city_data['energy_have'] += export_energy
+
+            login.city_data_change(self.uid, user_city_data)
+
+            self.update.callback_query.message.reply_text(openf("city/descrip/create", "create_ind_en_1"),
+                                                            reply_markup=InlineKeyboardMarkup(kb.backdel))
+        else:
+            self.update.callback_query.message.reply_text("Средства города не способны содерждать этот объект... Пополните бюджет или увеличьте доход")
+
+    def ind1_2(self):
+        user_city_data = login.city_data(self.uid)
+
+        money_cost = 100000
+        money_expenses = 9100
+
+        export_energy = 1850
+
+        if user_city_data['money_have'] > money_cost and (user_city_data['money'] - user_city_data['money_need']) > money_expenses:
+            user_city_data['money_have'] -= money_cost
+            user_city_data['money_need'] += money_expenses
+            user_city_data['energy_have'] += export_energy
+
+            login.city_data_change(self.uid, user_city_data)
+
+            self.update.callback_query.message.reply_text(openf("city/descrip/create", "create_ind_en_2"),
+                                                            reply_markup=InlineKeyboardMarkup(kb.backdel))
+        else:
+            self.update.callback_query.message.reply_text("Средства города не способны содерждать этот объект... Пополните бюджет или увеличьте доход")
+
+    def ind1_3(self):
+        user_city_data = login.city_data(self.uid)
+
+        money_cost = 500000
+        money_expenses = 19000
+
+        export_energy = 5000
+
+        if user_city_data['money_have'] > money_cost and (user_city_data['money'] - user_city_data['money_need']) > money_expenses:
+            user_city_data['money_have'] -= money_cost
+            user_city_data['money_need'] += money_expenses
+            user_city_data['energy_have'] += export_energy
+
+            login.city_data_change(self.uid, user_city_data)
+
+            self.update.callback_query.message.reply_text(openf("city/descrip/create", "create_ind_en_3"),
+                                                            reply_markup=InlineKeyboardMarkup(kb.backdel))
+        else:
+            self.update.callback_query.message.reply_text("Средства города не способны содерждать этот объект... Пополните бюджет или увеличьте доход")
+
+    def ind2_1(self):
+        user_city_data = login.city_data(self.uid)
+
+        money_cost = 20000
+        money_expenses = 2800
+
+        export_water = 1480
+
+        if user_city_data['money_have'] > money_cost and (user_city_data['money'] - user_city_data['money_need']) > money_expenses:
+            user_city_data['money_have'] -= money_cost
+            user_city_data['money_need'] += money_expenses
+            user_city_data['water_have'] += export_water
+
+            login.city_data_change(self.uid, user_city_data)
+
+            self.update.callback_query.message.reply_text(openf("city/descrip/create", "create_ind_wat_1"),
+                                                            reply_markup=InlineKeyboardMarkup(kb.backdel))
+        else:
+            self.update.callback_query.message.reply_text("Средства города не способны содерждать этот объект... Пополните бюджет или увеличьте доход")
+
+    def ind2_2(self):
+        user_city_data = login.city_data(self.uid)
+
+        money_cost = 100000
+        money_expenses = 5400
+
+        export_water = 3200
+
+        if user_city_data['money_have'] > money_cost and (user_city_data['money'] - user_city_data['money_need']) > money_expenses:
+            user_city_data['money_have'] -= money_cost
+            user_city_data['money_need'] += money_expenses
+            user_city_data['water_have'] += export_water
+
+            login.city_data_change(self.uid, user_city_data)
+
+            self.update.callback_query.message.reply_text(openf("city/descrip/create", "create_ind_wat_2"),
+                                                            reply_markup=InlineKeyboardMarkup(kb.backdel))
+        else:
+            self.update.callback_query.message.reply_text("Средства города не способны содерждать этот объект... Пополните бюджет или увеличьте доход")
+
+    def ind2_3(self):
+        user_city_data = login.city_data(self.uid)
+
+        money_cost = 500000
+        money_expenses = 16000
+
+        export_water = 7100
+
+        if user_city_data['money_have'] > money_cost and (user_city_data['money'] - user_city_data['money_need']) > money_expenses:
+            user_city_data['money_have'] -= money_cost
+            user_city_data['money_need'] += money_expenses
+            user_city_data['water_have'] += export_water
+
+            login.city_data_change(self.uid, user_city_data)
+
+            self.update.callback_query.message.reply_text(openf("city/descrip/create", "create_ind_wat_3"),
+                                                            reply_markup=InlineKeyboardMarkup(kb.backdel))
+        else:
+            self.update.callback_query.message.reply_text("Средства города не способны содерждать этот объект... Пополните бюджет или увеличьте доход")
+
+    def ind3_1(self):
+        user_city_data = login.city_data(self.uid)
+
+        money_cost = 160000
+
+        export_money = 8400
+
+        if user_city_data['money_have'] > money_cost:
+            user_city_data['money_have'] -= money_cost
+            user_city_data['money'] += export_money
+
+            login.city_data_change(self.uid, user_city_data)
+
+            self.update.callback_query.message.reply_text(openf("city/descrip/create", "create_ind_mat_1"),
+                                                            reply_markup=InlineKeyboardMarkup(kb.backdel))
+        else:
+            self.update.callback_query.message.reply_text("Средства города не способны содерждать этот район... Пополните бюджет или увеличьте доход")
+
+    def ind3_2(self):
+        user_city_data = login.city_data(self.uid)
+
+        money_cost = 1700000
+
+        export_money = 30100
+
+        if user_city_data['money_have'] > money_cost:
+            user_city_data['money_have'] -= money_cost
+            user_city_data['money'] += export_money
+
+            login.city_data_change(self.uid, user_city_data)
+
+            self.update.callback_query.message.reply_text(openf("city/descrip/create", "create_ind_mat_2"),
+                                                            reply_markup=InlineKeyboardMarkup(kb.backdel))
+        else:
+            self.update.callback_query.message.reply_text("Средства города не способны содерждать этот район... Пополните бюджет или увеличьте доход")
+
+    def ind3_3(self):
+        user_city_data = login.city_data(self.uid)
+
+        money_cost = 6350000
+
+        export_money = 185800
+
+        if user_city_data['money_have'] > money_cost:
+            user_city_data['money_have'] -= money_cost
+            user_city_data['money'] += export_money
+
+            login.city_data_change(self.uid, user_city_data)
+
+            self.update.callback_query.message.reply_text(openf("city/descrip/create", "create_ind_mat_3"),
+                                                            reply_markup=InlineKeyboardMarkup(kb.backdel))
+        else:
+            self.update.callback_query.message.reply_text("Средства города не способны содерждать этот район... Пополните бюджет или увеличьте доход")
+
 def ban(update, context):
     command, user_id = update.message.text.split(" ")
     user = login.authorize(str(user_id))
@@ -268,13 +566,13 @@ def checkban(update, context):
     callback = False
     inline = False
     try:
-        user = login.authorize(str(update.callback_query.message.chat['id']))
+        user = login.authorize(str(update.callback_query.message.chat['id']), str(update.callback_query.message.chat_id))
         callback = True
     except:
         try:
-            user = login.authorize(str(update.message.chat['id']))
+            user = login.authorize(str(update.message.chat['id']), str(update.message.chat_id))
         except:
-            user = login.authorize(str(update.inline_query.from_user['id']))
+            user = login.authorize(str(update.inline_query.from_user['id']), update.inline_query.message.chat_id)
             inline = True
 
     if not callback and not inline:

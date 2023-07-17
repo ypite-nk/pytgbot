@@ -178,8 +178,7 @@ projects = [[InlineKeyboardButton("Список проектов", callback_data
 ypimore = [[menudel]]
 
 city_admin = [
-              [InlineKeyboardButton("Постройка", callback_data="create"), InlineKeyboardButton("Разрушение", callback_data="destroyed")],
-              [menudel]
+              [menudel], [InlineKeyboardButton("Постройка", callback_data="create")]
              ]
 
 city_createtypes = [

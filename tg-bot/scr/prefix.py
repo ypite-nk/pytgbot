@@ -82,10 +82,11 @@ def city_create(update, context):
     for i in name:
         city_name += i
     first_part = "name:" + city_name
-    second_part = "\nbudget:10000\npeople:1\nkids:0\ntenager:0\nadults:1\nancient:0\ncreated:12.07.23\nroad:100\nlearning:100\nmedecine:100\nsafety:100\ninflation:4\nhapiest:100\nwater:100\nenergy_have:0\nenergy_need:0"
+    #second_part = "\nbudget:10000\npeople:1\nkids:0\ntenager:0\nadults:1\nancient:0\ncreated:12.07.23\nroad:100\nlearning:100\nmedecine:100\nsafety:100\ninflation:4\nhapiest:100\nwater:100\nenergy_have:0\nenergy_need:0"
+    second_part = "\ncountry:Россия\nsubject:Иркутская область\ncreate_data:2023\nsize:0\npeople:0\nmayor:Нет\n---optional---:---Опциональные---\nsign:Нет\ngymn:Нет\nhistory:Нет\n"
     all_part = first_part + second_part
-    status = "nameCH:0\nsignCH:0\ngymnCH:0\nhistoryCH:0"
-    data = "money_have:0\nenergy_have:0\nwater_have:0\nmoney_need:0\nenergy_need:0\nwater_need:0"
+    status = "name:0\nsign:0\ngymn:0\nhistory:0"
+    data = "money_have:1000000\nenergy_have:0\nwater_have:0\nmoney:0\nmoney_need:0\nenergy_need:0\nwater_need:0"
     login.city_create(uid, all_part, status, data)
 
 def mycity(update, context):
@@ -100,7 +101,7 @@ def mycity(update, context):
 
     if user_city_info is None:
         try:
-            update.message.reply_text("Вы еще не создали город! Для создания введите !city имягорода")
+            update.message.reply_text("Вы еще не создали город! Для создания введите /город имягорода")
             return
         except:
             new_message_id = update.callback_query.message.reply_text("Вы еще не создали город! Для создания введите /город имягорода").message_id
@@ -130,7 +131,7 @@ def mycity(update, context):
                     "money_have":"Бюджет",
                     "energy_have":"Электроэнергия",
                     "water_have":"Водоснабжение",
-
+                    "money":"Доход",
                     "money_need":"Расход бюджета",
                     "energy_need":"Расход электроэнергии",
                     "water_need":"Расход водоснабжения"
@@ -201,3 +202,14 @@ def change(update, context):
             checker.echo_check()                    
     except:
         update.message.reply_text("Произошла неизвестная ошибка, попробуйте заного")
+
+
+
+def update(update, context):
+    users_uid = login.users_info()
+    for i in users_uid:
+        user = login.city_data(i)
+        user['money_have'] += user['money']
+        login.city_data_change(i, user)
+        context.bot.send_message(chat_id=i, text="💰payday💰\n\nТвой город заработал - " + str(user['money']) +
+                                     "\nБюджет: " + str(user['money_have']))
