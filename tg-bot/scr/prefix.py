@@ -209,7 +209,8 @@ def update(update, context):
     users_uid = login.users_info()
     for i in users_uid:
         user = login.city_data(i)
-        user['money_have'] += user['money']
-        login.city_data_change(i, user)
-        context.bot.send_message(chat_id=i, text="💰payday💰\n\nТвой город заработал - " + str(user['money']) +
+        if user is not None:
+            user['money_have'] += user['money']
+            login.city_data_change(i, user)
+            context.bot.send_message(chat_id=i, text="💰payday💰\n\nТвой город заработал - " + str(user['money']) +
                                      "\nБюджет: " + str(user['money_have']))

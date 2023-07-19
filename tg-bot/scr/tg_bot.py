@@ -18,44 +18,40 @@ import functions as func
 
 from case import echo_call, fun_handler
 from inline import inline_query
-# base check-callback-query
-updater.dispatcher.add_handler(CallbackQueryHandler(echo_call))
-# command's
-updater.dispatcher.add_handler(CommandHandler('start', func.start_handler))
-updater.dispatcher.add_handler(CommandHandler('help', func.help_handler))
-updater.dispatcher.add_handler(CommandHandler('FAQ', func.faq_handler))
-updater.dispatcher.add_handler(CommandHandler('fun', fun_handler))
-updater.dispatcher.add_handler(CommandHandler('pack', func.pack_handler))
-updater.dispatcher.add_handler(CommandHandler('links', func.link_handler))
-updater.dispatcher.add_handler(CommandHandler('learning', func.learn_handler))
-updater.dispatcher.add_handler(CommandHandler('support', func.support_handler))
-# any command-line
-updater.dispatcher.add_handler(CommandHandler('menu', func.back_handler))
-updater.dispatcher.add_handler(CommandHandler("back", func.back_handler))
-# any-func
-updater.dispatcher.add_handler(PrefixHandler('/', 'рецензия', prefix.prefix_marks))
-updater.dispatcher.add_handler(PrefixHandler('/', 'погода', prefix.prefix_weather))
-# prefix for game
-# create game
-updater.dispatcher.add_handler(PrefixHandler('/', 'город', prefix.city_create))
-# info game
-updater.dispatcher.add_handler(PrefixHandler('/', 'мойгород', prefix.mycity))
-updater.dispatcher.add_handler(PrefixHandler('/', 'mycity', prefix.mycity))
-# control game
-updater.dispatcher.add_handler(PrefixHandler('/', 'change', prefix.change))
-updater.dispatcher.add_handler(PrefixHandler('/', 'изменить', prefix.change))
-# update time-game
-updater.dispatcher.add_handler(PrefixHandler('/', 'update', prefix.update))
-# filters for spam
-updater.dispatcher.add_handler(MessageHandler(Filters.text & (~Filters.command), func.echo_handler))
-updater.dispatcher.add_handler(MessageHandler(Filters.photo, func.echo_handler))
-# inline-mode
-updater.dispatcher.add_handler(InlineQueryHandler(inline_query))
-# ADMIN COMMAND
-updater.dispatcher.add_handler(PrefixHandler('/', 'ban', spec.ban))
-updater.dispatcher.add_handler(PrefixHandler('/', 'unban', spec.unban))
-updater.dispatcher.add_handler(PrefixHandler('/', 'betaadd', spec.add_beta))
-updater.dispatcher.add_handler(PrefixHandler('/', 'betadel', spec.del_beta))
+
+updater.dispatcher.add_handler(CallbackQueryHandler(echo_call))# base check-callback-query
+
+updater.dispatcher.add_handler(CommandHandler('start', func.start_handler))#     command
+updater.dispatcher.add_handler(CommandHandler('help', func.help_handler))#       command
+updater.dispatcher.add_handler(CommandHandler('FAQ', func.faq_handler))#         command
+updater.dispatcher.add_handler(CommandHandler('fun', fun_handler))#              command
+updater.dispatcher.add_handler(CommandHandler('pack', func.pack_handler))#       command
+updater.dispatcher.add_handler(CommandHandler('links', func.link_handler))#      command
+updater.dispatcher.add_handler(CommandHandler('learning', func.learn_handler))#  command
+updater.dispatcher.add_handler(CommandHandler('support', func.support_handler))# command
+
+updater.dispatcher.add_handler(CommandHandler('menu', func.back_handler))#       any command-line
+updater.dispatcher.add_handler(CommandHandler("back", func.back_handler))#       any command-line
+
+updater.dispatcher.add_handler(PrefixHandler('/', 'рецензия', prefix.prefix_marks))# any-func
+updater.dispatcher.add_handler(PrefixHandler('/', 'погода', prefix.prefix_weather))# any-func
+
+updater.dispatcher.add_handler(PrefixHandler('/', 'город', prefix.city_create))# create game
+updater.dispatcher.add_handler(PrefixHandler('/', 'мойгород', prefix.mycity))#   info game
+updater.dispatcher.add_handler(PrefixHandler('/', 'mycity', prefix.mycity))#     info game
+updater.dispatcher.add_handler(PrefixHandler('/', 'change', prefix.change))#     control game
+updater.dispatcher.add_handler(PrefixHandler('/', 'изменить', prefix.change))#   control game
+updater.dispatcher.add_handler(PrefixHandler('/', 'update', prefix.update))#     update time-game
+
+updater.dispatcher.add_handler(MessageHandler(Filters.text & (~Filters.command), func.echo_handler))# filters for spam
+updater.dispatcher.add_handler(MessageHandler(Filters.photo, func.echo_handler))#                     filters for spam
+
+updater.dispatcher.add_handler(InlineQueryHandler(inline_query))# inline-mode
+
+updater.dispatcher.add_handler(PrefixHandler('/', 'ban', spec.ban))#          ADMIN COMMAND
+updater.dispatcher.add_handler(PrefixHandler('/', 'unban', spec.unban))#      ADMIN COMMAND
+updater.dispatcher.add_handler(PrefixHandler('/', 'betaadd', spec.add_beta))# ADMIN COMMAND
+updater.dispatcher.add_handler(PrefixHandler('/', 'betadel', spec.del_beta))# ADMIN COMMAND
 
 import logg
 
