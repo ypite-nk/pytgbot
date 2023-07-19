@@ -1,4 +1,0 @@
-name:0
-sign:0
-gymn:0
-history:0
