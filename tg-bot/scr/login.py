@@ -57,7 +57,7 @@ def json_reworking(info: list, uid: str = '0'):
 		users.append(uid)
 	return users
 
-def authorize(user_id: str, chat_id: str):
+def authorize(user_id: str):
 	user_id = str(user_id)
 	if not path.exists('base/' + user_id + '.txt'):
 		with open('base/' + user_id + '.txt', 'w', encoding="utf-8") as f:
@@ -72,7 +72,7 @@ def authorize(user_id: str, chat_id: str):
 	with open('base/users.txt', 'r', encoding="utf-8") as f:
 		users = f.readlines(0)
 
-	users = json_reworking(users, chat_id)
+	users = json_reworking(users, user_id)
 	users = '\n'.join(users)
 
 	with open('base/users.txt', 'w', encoding="utf-8") as f:
@@ -138,7 +138,7 @@ def city_data(user_id: str):
 			f = f.readlines(0)
 			for i in f:
 				key, value = i.split(":")
-				city_data[key] = value.replace("\n", "")
+				city_data[key] = int(value.replace("\n", ""))
 		return city_data
 
 def city_change(user_id: str, city: dict):

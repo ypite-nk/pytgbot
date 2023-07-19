@@ -262,6 +262,8 @@ def echo_button(update, context):
                                             reply_markup=InlineKeyboardMarkup(kb.projects)).message_id
             case "mycity":
                 new_message_id = mycity(update, context)
+            case "cityBack":
+                new_message_id = mycity(update, context)
 
 #   LEARN
             case "learn":
@@ -492,32 +494,26 @@ def echo_button(update, context):
                 new_message_id = reply_text(openf("city/descrip", "create_house"),
                                             reply_markup=InlineKeyboardMarkup(kb.city_create_house)).message_id
             case "house1":
-                new_message_id = reply_text(openf("city/descrip/create", "create"),
-                                            reply_markup=InlineKeyboardMarkup(kb.backdel)).message_id
+                new_message_id = reply_text(openf("city/descrip/create", "create")).message_id
                 Create(update, context).house1()
             case "house2":
-                new_message_id = reply_text(openf("city/descrip/create", "create"),
-                                            reply_markup=InlineKeyboardMarkup(kb.backdel)).message_id
+                new_message_id = reply_text(openf("city/descrip/create", "create")).message_id
                 Create(update, context).house2()
             case "house3":
-                new_message_id = reply_text(openf("city/descrip/create", "create"),
-                                            reply_markup=InlineKeyboardMarkup(kb.backdel)).message_id
+                new_message_id = reply_text(openf("city/descrip/create", "create")).message_id
                 Create(update, context).house3()
 #       CREATE-COMMERCICAL
             case "commercical":
                 new_message_id = reply_text(openf("city/descrip", "create_commercical"),
                                             reply_markup=InlineKeyboardMarkup(kb.city_create_commercical)).message_id
             case "comm1":
-                new_message_id = reply_text(openf("city/descrip/create", "create"),
-                                            reply_markup=InlineKeyboardMarkup(kb.backdel)).message_id
+                new_message_id = reply_text(openf("city/descrip/create", "create")).message_id
                 Create(update, context).comm1()
             case "comm2":
-                new_message_id = reply_text(openf("city/descrip/create", "create"),
-                                            reply_markup=InlineKeyboardMarkup(kb.backdel)).message_id
+                new_message_id = reply_text(openf("city/descrip/create", "create")).message_id
                 Create(update, context).comm2()
             case "comm3":
-                new_message_id = reply_text(openf("city/descrip/create", "create"),
-                                            reply_markup=InlineKeyboardMarkup(kb.backdel)).message_id
+                new_message_id = reply_text(openf("city/descrip/create", "create")).message_id
                 Create(update, context).comm3()
 #       CREATE-INDUSTRY
             case "industry":
@@ -527,46 +523,37 @@ def echo_button(update, context):
                 new_message_id = reply_text(openf("city/descrip/create", "create_ind_1"),
                                             reply_markup=InlineKeyboardMarkup(kb.city_create_ind1)).message_id
             case "1indenergy":
-                new_message_id = reply_text(openf("city/descrip/create", "create"),
-                                            reply_markup=InlineKeyboardMarkup(kb.backdel)).message_id
+                new_message_id = reply_text(openf("city/descrip/create", "create")).message_id
                 Create(update, context).ind1_1()
             case "2indenergy":
-                new_message_id = reply_text(openf("city/descrip/create", "create"),
-                                            reply_markup=InlineKeyboardMarkup(kb.backdel)).message_id
+                new_message_id = reply_text(openf("city/descrip/create", "create")).message_id
                 Create(update, context).ind1_2()
             case "3indenergy":
-                new_message_id = reply_text(openf("city/descrip/create", "create"),
-                                            reply_markup=InlineKeyboardMarkup(kb.backdel)).message_id
+                new_message_id = reply_text(openf("city/descrip/create", "create")).message_id
                 Create(update, context).ind1_3()
             case "ind2":
                 new_message_id = reply_text(openf("city/descrip/create", "create_ind_2"),
                                             reply_markup=InlineKeyboardMarkup(kb.city_create_ind2)).message_id
             case "1indwater":
-                new_message_id = reply_text(openf("city/descrip/create", "create"),
-                                            reply_markup=InlineKeyboardMarkup(kb.backdel)).message_id
+                new_message_id = reply_text(openf("city/descrip/create", "create")).message_id
                 Create(update, context).ind2_1()
             case "2indwater":
-                new_message_id = reply_text(openf("city/descrip/create", "create"),
-                                            reply_markup=InlineKeyboardMarkup(kb.backdel)).message_id
+                new_message_id = reply_text(openf("city/descrip/create", "create")).message_id
                 Create(update, context).ind2_2()
             case "3indwater":
-                new_message_id = reply_text(openf("city/descrip/create", "create"),
-                                            reply_markup=InlineKeyboardMarkup(kb.backdel)).message_id
+                new_message_id = reply_text(openf("city/descrip/create", "create")).message_id
                 Create(update, context).ind2_3()
             case "ind3":
                 new_message_id = reply_text(openf("city/descrip/create", "create_ind_3"),
                                             reply_markup=InlineKeyboardMarkup(kb.city_create_ind3)).message_id
             case "1indmat":
-                new_message_id = reply_text(openf("city/descrip/create", "create"),
-                                            reply_markup=InlineKeyboardMarkup(kb.backdel)).message_id
+                new_message_id = reply_text(openf("city/descrip/create", "create")).message_id
                 Create(update, context).ind3_1()
             case "2indmat":
-                new_message_id = reply_text(openf("city/descrip/create", "create"),
-                                            reply_markup=InlineKeyboardMarkup(kb.backdel)).message_id
+                new_message_id = reply_text(openf("city/descrip/create", "create")).message_id
                 Create(update, context).ind3_2()
             case "3indmat":
-                new_message_id = reply_text(openf("city/descrip/create", "create"),
-                                            reply_markup=InlineKeyboardMarkup(kb.backdel)).message_id
+                new_message_id = reply_text(openf("city/descrip/create", "create")).message_id
                 Create(update, context).ind3_3()
 
         if not conflict:

@@ -16,12 +16,12 @@ def prefix_marks(update, context):
         file = file.readlines()
         for i in file:
             marks_id_memory.append(i.replace("\n", ""))
-    if str(update.message.chat['id']) in marks_id_memory:
+    if str(update.message.chat_id) in marks_id_memory:
         update.message.reply_text("Вы уже отправляли рецензию!")
     else:
-        user = login.authorize(update.message.chat['id'])
+        user = login.authorize(update.message.chat_id)
         user['marks_collect'] = 1
-        login.update(update.message.chat['id'], user)
+        login.update(update.message.chat_id, user)
 
         update.message.reply_text(openf("descriptext", "marks1"))
 
@@ -65,15 +65,17 @@ def city_create(update, context):
     if checkban(update, context):
         return
     
-    uid = str(update.message.chat['id'])
+    uid = str(update.message.chat_id)
     user = login.authorize(uid)
     
     if not user['city']:
-        update.message.reply_text("Город успешно создан!")
+        update.message.reply_text("Город успешно создан!",
+                                  reply_markup=InlineKeyboardMarkup(kb.backcity))
         user['city'] = 1
         login.update(uid, user)
     else:
-        update.message.reply_text("У вас уже есть город!")
+        update.message.reply_text("У вас уже есть город!",
+                                  reply_markup=InlineKeyboardMarkup(kb.backcity))
         return
     
     prefix, *name = update.message.text.split(' ')
@@ -82,20 +84,19 @@ def city_create(update, context):
     for i in name:
         city_name += i
     first_part = "name:" + city_name
-    #second_part = "\nbudget:10000\npeople:1\nkids:0\ntenager:0\nadults:1\nancient:0\ncreated:12.07.23\nroad:100\nlearning:100\nmedecine:100\nsafety:100\ninflation:4\nhapiest:100\nwater:100\nenergy_have:0\nenergy_need:0"
-    second_part = "\ncountry:Россия\nsubject:Иркутская область\ncreate_data:2023\nsize:0\npeople:0\nmayor:Нет\n---optional---:---Опциональные---\nsign:Нет\ngymn:Нет\nhistory:Нет\n"
+    second_part = "\ncountry:Россия\nsubject:Иркутская область\ncreate_data:2023\nsize:10\npeople:4000\n---optional---:---Опциональные---\nmayor:Нет\nsign:Нет\ngymn:Нет\nhistory:Нет\n"
     all_part = first_part + second_part
-    status = "name:0\nsign:0\ngymn:0\nhistory:0"
-    data = "money_have:1000000\nenergy_have:0\nwater_have:0\nmoney:0\nmoney_need:0\nenergy_need:0\nwater_need:0"
+    status = "name:0\nsign:0\ngymn:0\nhistory:0\nmayor:0"
+    data = "money_have:1000000\nenergy_have:0\nwater_have:0\nmoney:150000\nmoney_need:113200\nenergy_need:0\nwater_need:0"
     login.city_create(uid, all_part, status, data)
 
 def mycity(update, context):
     if checkban(update, context):
         return
     try:
-        uid = str(update.message.chat['id'])
+        uid = str(update.message.chat_id)
     except:
-        uid = str(update.callback_query.message.chat['id'])
+        uid = str(update.callback_query.message.chat_id)
     user_city_info = login.city_info(uid)
     user_city_data = login.city_data(uid)
 
@@ -141,14 +142,14 @@ def mycity(update, context):
     for value in user_city_info.values():
         city_info_value.append(value)
     for key in range(len(city_info_key)):
-        city_info += city_info_tr[city_info_key[key]] + " : " + city_info_value[key] + "\n"
+        city_info += str(city_info_tr[city_info_key[key]]) + " : " + str(city_info_value[key]) + "\n"
 
     for key in user_city_data.keys():
         city_data_key.append(key)
     for value in user_city_data.values():
         city_data_value.append(value)
     for key in range(len(city_data_key)):
-        city_data += city_data_tr[city_data_key[key]] + " : " + city_data_value[key] + "\n"
+        city_data += str(city_data_tr[city_data_key[key]]) + " : " + str(city_data_value[key]) + "\n"
 
     try:
         update.message.reply_text("===Ваш город===" + "\n" + city_info +
@@ -169,7 +170,7 @@ def change(update, context):
     if checkban(update, context):
         return
     try:
-        uid = str(update.message.chat['id'])
+        uid = str(update.message.chat_id)
         prefix, *message = update.message.text.split(" ")
         match message[0].lower():
             case "профиль":
@@ -180,7 +181,7 @@ def change(update, context):
             case "город":
                 user_city_status = login.authorize_city(uid)
                 if user_city_status is None:
-                    update.message.reply_text("Вы еще не создали город! Для создания введите !city имягорода")
+                    update.message.reply_text("Вы еще не создали город! Для создания введите /город имягорода")
                     return
                 match message[1].lower():
                     case "имя":
@@ -195,13 +196,28 @@ def change(update, context):
                     case "история":
                         user_city_status['history'] = 1
                         login.city_status_change(uid, user_city_status)
+                    case "мэр":
+                        user_city_status['mayor'] = 1
+                        login.city_status_change(uid, user_city_status)
+                    case _:
+                        update.message.reply_text("Команда '/change' или '/изменить' должна содержать в себе аттрибуты: '/change (профиль|город) (имя|герб|гимн|история) (значение)'")
             case _:
                 update.message.reply_text("Команда '/change' или '/изменить' должна содержать в себе аттрибуты: '/change (профиль|город) (имя|герб|гимн|история) (значение)'")
-        if len(message) == 3:
+        if len(message) > 2:
+            check_list = ['профиль', 'имя', 'город', 'имя', 'герб', 'гимн', 'история', 'мэр']
+            text = ""
+            for i in message:
+                if i not in check_list or message[1].lower() == "история" or message[1].lower() == "гимн":
+                    if i == message[-1]:
+                        text += i
+                    else:
+                        i += " "
+                        text += i
             checker = Echo_Checker(update, context)
-            checker.echo_check()                    
+            checker.echo_check(text)                    
     except:
-        update.message.reply_text("Произошла неизвестная ошибка, попробуйте заного")
+        update.message.reply_text("Произошла неизвестная ошибка, попробуйте заного",
+                                  reply_markup=InlineKeyboardMarkup(kb.backdel))
 
 
 
@@ -210,7 +226,8 @@ def update(update, context):
     for i in users_uid:
         user = login.city_data(i)
         if user is not None:
-            user['money_have'] += user['money']
+            money = (user['money'] - user['money_need'])
+            user['money_have'] += money
             login.city_data_change(i, user)
-            context.bot.send_message(chat_id=i, text="💰payday💰\n\nТвой город заработал - " + str(user['money']) +
+            context.bot.send_message(chat_id=i, text="💰payday💰\n\nТвой город заработал - " + str(money) +
                                      "\nБюджет: " + str(user['money_have']))

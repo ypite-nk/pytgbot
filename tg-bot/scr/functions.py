@@ -48,7 +48,7 @@ def echo_handler(update, context):
     if checkban(update, context):
         return
     Checker = Echo_Checker(update, context)
-    if Checker.echo_check():
+    if Checker.echo_check(update.message.text):
         return
 
     with open("info/hi.txt", "r", encoding="utf-8") as file:
