@@ -2,6 +2,8 @@
 import urllib.request
 import login
 
+import random
+
 from echo import echo
 
 admin_id = [1086638338]
@@ -672,6 +674,57 @@ class Create():
         else:
             self.update.callback_query.message.reply_text("Средства города не способны содерждать этот район... Пополните бюджет или увеличьте доход", 
                                                           reply_markup=InlineKeyboardMarkup(kb.backcity))
+
+class Tasks():
+    def __init__(self, update, context):
+        self.update = update
+        self.context = context
+
+        self.uid = self.update.message.chat_id # self.update.callback_query.message.chat_id
+
+        self.house = [
+                      'house',
+                      'fire',
+                      'terakt',
+                      'happst'
+                     ]
+        
+        self.commercical = [
+                            'comm',
+                            'downC',
+                            'uppC'
+                           ]
+        
+        self.industrial = [
+                           'ind',
+                           'downI',
+                           'uppI'
+                          ]
+
+        self.weather = [
+                        'weather'
+                        'ураган',
+                        'потоп',
+                        'землятрясение'
+                       ]
+
+        self.type = [self.house, self.commercical, self.industrial, self.weather]
+
+    def generateRandomTask(self):
+        self.type = random.choices(self.type, weights=[20, 20, 20, 40])
+        
+        if self.type[0] == 'house':
+            self.type = [self.type[1], self.type[2], self.type[3]]
+            self.task = random.choices(self.type, weights=[30, 10, 60])
+        elif self.type[0] == 'comm':
+            self.type = [self.type[1], self.type[2]]
+            self.task = random.choices(self.type, weights=[50, 50])
+        elif self.type[0] == 'ind':
+            self.type = [self.type[1], self.type[2]]
+            self.task = random.choices(self.type, weights=[50, 50])
+        else:
+            self.type = [self.type[1], self.type[2], self.type[3]]
+            self.task = random.choices(self.type, weights=[20, 40, 40])
 
 def ban(update, context):
     command, user_id = update.message.text.split(" ")
