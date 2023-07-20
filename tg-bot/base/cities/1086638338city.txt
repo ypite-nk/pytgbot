@@ -1,0 +1,11 @@
+name:Жумайсынбек
+country:Россия
+subject:Иркутская область
+create_data:2023
+size:10
+people:4000
+---optional---:---Опциональные---
+mayor:Нет
+sign:Нет
+gymn:Нет
+history:Нет
