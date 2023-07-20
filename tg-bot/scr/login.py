@@ -7,7 +7,8 @@ user_base_dict = {'ban': 0,
              'bt': 0,
              'wordly': 0,
 			 'admin': 0,
-			 'marks_collect': 0
+			 'marks_collect': 0,
+			 'city': 0
             }
 user = {}
 def convert(f):

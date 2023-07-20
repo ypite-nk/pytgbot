@@ -1,13 +1,4 @@
 ﻿# -*- coding: utf-8 -*-
-import urllib.request
-import login
-
-import random
-
-from echo import echo
-
-admin_id = [1086638338]
-
 def openf(path, name, method: int = 0):
     if method:
         with open(path + "/" + name + ".txt", "r", encoding="utf-8") as f:
@@ -19,11 +10,17 @@ def openf(path, name, method: int = 0):
         with open(name + ".txt", "r", encoding="utf-8") as f:
             return "".join(f.readlines(0))
 
+def convert_int(data: dict):
+    for i in data.keys():
+        data[i] = int(data[i])
+    return data
+
+import urllib.request
+import login
+
 class Echo_Checker():
     '''
     Класс для проверки различных статусов записи.
-
-    Пример: Если активна запись рецензии - выполниться код. И так далее...
     '''
     def __init__(self, update, context):
         self.update = update
@@ -240,7 +237,9 @@ class Echo_Checker():
             return False
 
 from telegram import InlineKeyboardMarkup
+
 import keyboardbot as kb
+import random
 
 class Create():
     def __init__(self, update, context):
@@ -249,14 +248,9 @@ class Create():
 
         self.uid = str(self.update.callback_query.message.chat_id)
 
-    def convert_int(self, data: dict):
-        for i in data.keys():
-            data[i] = int(data[i])
-        return data
-
     def house1(self):
         user_city = login.city_info(self.uid)
-        user_city_data = self.convert_int(login.city_data(self.uid))
+        user_city_data = convert_int(login.city_data(self.uid))
 
         money_cost = 500000
         money_expenses = 67200
@@ -296,7 +290,7 @@ class Create():
 
     def house2(self):
         user_city = login.city_info(self.uid)
-        user_city_data = self.convert_int(login.city_data(self.uid))
+        user_city_data = convert_int(login.city_data(self.uid))
 
         money_cost = 1500000
         money_expenses = 151200
@@ -336,7 +330,7 @@ class Create():
 
     def house3(self):
         user_city = login.city_info(self.uid)
-        user_city_data = self.convert_int(login.city_data(self.uid))
+        user_city_data = convert_int(login.city_data(self.uid))
 
         money_cost = 3500000
         money_expenses = 336000
@@ -375,7 +369,7 @@ class Create():
                                                           reply_markup=InlineKeyboardMarkup(kb.backcity))
 
     def comm1(self):
-        user_city_data = self.convert_int(login.city_data(self.uid))
+        user_city_data = convert_int(login.city_data(self.uid))
 
         money_cost = 140000
         export_money = 18000
@@ -393,7 +387,7 @@ class Create():
                                                           reply_markup=InlineKeyboardMarkup(kb.backcity))
 
     def comm2(self):
-        user_city_data = self.convert_int(login.city_data(self.uid))
+        user_city_data = convert_int(login.city_data(self.uid))
 
         money_cost = 780000
         export_money = 58000
@@ -411,7 +405,7 @@ class Create():
                                                           reply_markup=InlineKeyboardMarkup(kb.backcity))
 
     def comm3(self):
-        user_city_data = self.convert_int(login.city_data(self.uid))
+        user_city_data = convert_int(login.city_data(self.uid))
 
         money_cost = 2300000
         export_money = 152000
@@ -429,7 +423,7 @@ class Create():
                                                           reply_markup=InlineKeyboardMarkup(kb.backcity))
 
     def ind1_1(self):
-        user_city_data = self.convert_int(login.city_data(self.uid))
+        user_city_data = convert_int(login.city_data(self.uid))
 
         money_cost = 20000
         money_expenses = 4230
@@ -450,7 +444,7 @@ class Create():
                                                           reply_markup=InlineKeyboardMarkup(kb.backcity))
 
     def ind1_2(self):
-        user_city_data = self.convert_int(login.city_data(self.uid))
+        user_city_data = convert_int(login.city_data(self.uid))
 
         money_cost = 100000
         money_expenses = 9100
@@ -471,7 +465,7 @@ class Create():
                                                           reply_markup=InlineKeyboardMarkup(kb.backcity))
 
     def ind1_3(self):
-        user_city_data = self.convert_int(login.city_data(self.uid))
+        user_city_data = convert_int(login.city_data(self.uid))
 
         money_cost = 500000
         money_expenses = 19000
@@ -492,7 +486,7 @@ class Create():
                                                           reply_markup=InlineKeyboardMarkup(kb.backcity))
 
     def ind2_1(self):
-        user_city_data = self.convert_int(login.city_data(self.uid))
+        user_city_data = convert_int(login.city_data(self.uid))
 
         money_cost = 20000
         money_expenses = 2800
@@ -521,7 +515,7 @@ class Create():
                                                           reply_markup=InlineKeyboardMarkup(kb.backcity))
 
     def ind2_2(self):
-        user_city_data = self.convert_int(login.city_data(self.uid))
+        user_city_data = convert_int(login.city_data(self.uid))
 
         money_cost = 100000
         money_expenses = 5400
@@ -549,7 +543,7 @@ class Create():
                                                           reply_markup=InlineKeyboardMarkup(kb.backcity))
 
     def ind2_3(self):
-        user_city_data = self.convert_int(login.city_data(self.uid))
+        user_city_data = convert_int(login.city_data(self.uid))
 
         money_cost = 500000
         money_expenses = 16000
@@ -577,7 +571,7 @@ class Create():
                                                           reply_markup=InlineKeyboardMarkup(kb.backcity))
 
     def ind3_1(self):
-        user_city_data = self.convert_int(login.city_data(self.uid))
+        user_city_data = convert_int(login.city_data(self.uid))
 
         money_cost = 160000
         energy_expenses = 5
@@ -610,7 +604,7 @@ class Create():
                                                           reply_markup=InlineKeyboardMarkup(kb.backcity))
 
     def ind3_2(self):
-        user_city_data = self.convert_int(login.city_data(self.uid))
+        user_city_data = convert_int(login.city_data(self.uid))
 
         money_cost = 1700000
         energy_expenses = 13 
@@ -643,7 +637,7 @@ class Create():
                                                           reply_markup=InlineKeyboardMarkup(kb.backcity))
 
     def ind3_3(self):
-        user_city_data = self.convert_int(login.city_data(self.uid))
+        user_city_data = convert_int(login.city_data(self.uid))
 
         money_cost = 6350000
         energy_expenses = 25
@@ -676,111 +670,169 @@ class Create():
                                                           reply_markup=InlineKeyboardMarkup(kb.backcity))
 
 class Tasks():
-    def __init__(self, update, context):
-        self.update = update
-        self.context = context
+    def __init__(self, uid: str):
 
-        self.uid = self.update.message.chat_id # self.update.callback_query.message.chat_id
+        self.uid = str(uid)
 
         self.house = [
                       'house',
                       'fire',
-                      'terakt',
-                      'happst'
+                      'terrorism',
+                      'holiday'
                      ]
-        
-        self.commercical = [
-                            'comm',
-                            'downC',
-                            'uppC'
-                           ]
-        
-        self.industrial = [
-                           'ind',
-                           'downI',
-                           'uppI'
-                          ]
 
         self.weather = [
-                        'weather'
-                        'ураган',
-                        'потоп',
-                        'землятрясение'
+                        'weather',
+                        'hurricane',
+                        'flood',
+                        'earthshake'
                        ]
 
-        self.type = [self.house, self.commercical, self.industrial, self.weather]
+        self.type = [self.house, self.weather]
 
     def generateRandomTask(self):
-        self.type = random.choices(self.type, weights=[20, 20, 20, 40])
-        
+        '''
+        Генератор рандомных городских (негативных) событий
+
+        Переназначение self.type и назначение self.task
+        '''
+        self.type = random.choices(self.type, weights=[30, 70])[0]
         if self.type[0] == 'house':
             self.type = [self.type[1], self.type[2], self.type[3]]
-            self.task = random.choices(self.type, weights=[30, 10, 60])
-        elif self.type[0] == 'comm':
-            self.type = [self.type[1], self.type[2]]
-            self.task = random.choices(self.type, weights=[50, 50])
-        elif self.type[0] == 'ind':
-            self.type = [self.type[1], self.type[2]]
-            self.task = random.choices(self.type, weights=[50, 50])
-        else:
+            self.task = random.choices(self.type, weights=[30, 10, 60])[0]
+        elif self.type[0] == 'weather':
             self.type = [self.type[1], self.type[2], self.type[3]]
-            self.task = random.choices(self.type, weights=[20, 40, 40])
+            self.task = random.choices(self.type, weights=[20, 40, 40])[0]
 
-def ban(update, context):
-    command, user_id = update.message.text.split(" ")
-    user = login.authorize(str(user_id))
-    active_user = login.authorize(str(update.message.chat_id))
-    
-    if active_user['admin']:
-        active_user = update.message.chat_id
-        user['ban'] = 1
-        login.update(user_id, user)
-        update.message.reply_text("User: " + str(user_id) + " banned. Admin: " + str(active_user))
-        context.bot.send_message(chat_id=-1001955905639, text="User: " + str(user_id) + " banned. Admin: " + str(active_user))
-    else:
-        update.message.reply_text("You are not admin")
+        self.type = [self.house, self.weather]
 
-def unban(update, context):
-    command, user_id = update.message.text.split(" ")
-    user = login.authorize(str(user_id))
-    active_user = login.authorize(str(update.message.chat_id))
+    def taskUpdate(self):
+        self.generateRandomTask()
 
-    if active_user['admin']:
-        active_user = update.message.chat_id
-        user['ban'] = 0
-        login.update(user_id, user)
-        update.message.reply_text("User: " + str(user_id) + " unbanned. Admin: " + str(active_user))
-        context.bot.send_message(chat_id=-1001955905639, text="User: " + str(user_id) + " unbanned. Admin: " + str(active_user))
-    else:
-        update.message.reply_text("You are not admin")
+        self.text = "Error"
 
-def add_beta(update, context):
-    command, user_id = update.message.text.split(" ")
-    user = login.authorize(str(user_id))
-    active_user = login.authorize(str(update.message.chat_id))
+        user_city = login.city_info(self.uid)
+        user_city_data = convert_int(login.city_data(self.uid))
 
-    if active_user['admin']:
-        active_user = update.message.chat_id
-        user['bt'] = 1
-        login.update(user_id, user)
-        update.message.reply_text("User: " + str(user_id) + " added to beta-test. Admin: " + str(active_user))
-        context.bot.send_message(chat_id=-1001955905639, text="User: " + str(user_id) + " added to beta-test. Admin: " + str(active_user))
-    else:
-        update.message.reply_text("You are not admin")
+        # specific convert (can't use for or another method's)
+        user_city['people'] = int(user_city['people'])
 
-def del_beta(update, context):
-    command, user_id = update.message.text.split(" ")
-    user = login.authorize(str(user_id))
-    active_user = login.authorize(str(update.message.chat_id))
+        match self.task:
 
-    if active_user['admin']:
-        active_user = update.message.chat_id
-        user['bt'] = 0
-        login.update(user_id, user)
-        update.message.reply_text("User: " + str(user_id) + " delete from beta-test. Admin: " + str(active_user))
-        context.bot.send_message(chat_id=-1001955905639, text="User: " + str(user_id) + " added to beta-test. Admin: " + str(active_user))
-    else:
-        update.message.reply_text("You are not admin")
+            case "fire":
+                self.text = openf("city/descrip", "fire")
+
+                user_city_data['money_have'] -= 140000
+
+            case "terrorism":
+                self.text = openf("city/descrip", "terrorism")
+
+                user_city['people'] -= 4000
+                user_city_data['money_have'] -= 70000
+
+            case "holiday":
+                self.text = openf("city/descrip", "holiday")
+
+            case "hurricane":
+                self.text = openf("city/descrip", "hurricane")
+
+                user_city['people'] -= 200
+                user_city_data['money_have'] -= 80000
+
+            case "flood":
+                self.text = openf("city/descrip", "flood")
+
+                user_city_data['money_have'] -= 30000
+
+            case "earthshake":
+                self.text = openf("city/descrip", "earthshake")
+
+                user_city_data['money_have'] -= 100000
+
+        login.city_data_change(self.uid, user_city_data)
+        login.city_change(self.uid, user_city)
+
+class Admins():
+    def __init__(self, update, context):
+        self.update = update
+        self.context = context
+
+        self.command, self.uid = self.update.message.text.split(" ")
+        self.uid = str(self.uid)
+
+        self.user = login.authorize(str(self.uid))
+        self.active_user = login.authorize(str(update.message.chat_id))
+
+    def ban(self):
+        if self.active_user['admin']:
+            
+            self.active_user = self.update.message.chat_id
+            self.user['ban'] = 1
+
+            login.update(self.uid, self.user)
+
+            self.update.message.reply_text("User: " + self.uid + " banned. Admin: " + str(self.active_user))
+            self.context.bot.send_message(chat_id=-1001955905639,
+                                          text="User: " + self.uid + " banned. Admin: " + str(self.active_user))
+        else:
+            self.update.message.reply_text("You are not admin")
+
+    def unban(self):
+        if self.active_user['admin']:
+            
+            self.active_user = self.update.message.chat_id
+            self.user['ban'] = 0
+
+            login.update(self.uid, self.user)
+
+            self.update.message.reply_text("User: " + self.uid + " unbanned. Admin: " + str(self.active_user))
+            self.context.bot.send_message(chat_id=-1001955905639,
+                                          text="User: " + self.uid + " unbanned. Admin: " + str(self.active_user))
+        else:
+            self.update.message.reply_text("You are not admin")
+
+    def addbeta(self):
+        if self.active_user['admin']:
+
+            self.active_user = self.update.message.chat_id
+            self.user['bt'] = 1
+
+            login.update(self.uid, self.user)
+
+            self.update.message.reply_text("User: " + self.uid + " added to beta-test. Admin: " + str(self.active_user))
+            self.context.bot.send_message(chat_id=-1001955905639,
+                                          text="User: " + self.uid + " added to beta-test. Admin: " + str(self.active_user))
+        else:
+            self.update.message.reply_text("You are not admin")
+
+    def delbeta(self):
+        if self.active_user['admin']:
+
+            self.active_user = self.update.message.chat_id
+            self.user['bt'] = 0
+
+            login.update(self.uid, self.user)
+
+            self.update.message.reply_text("User: " + self.uid + " delete from beta-test. Admin: " + str(self.active_user))
+            self.context.bot.send_message(chat_id=-1001955905639,
+                                          text="User: " + self.uid + " delete from beta-test. Admin: " + str(self.active_user))
+        else:
+            self.update.message.reply_text("You are not admin")
+
+def admin(update, context):
+    admin = Admins(update, context)
+    text = update.message.text
+
+    if '/ban' in text:
+        admin.ban
+    elif '/unban' in text:
+        admin.unban
+    elif '/addbeta' in text:
+        admin.addbeta
+    elif '/delbeta' in text:
+        admin.delbeta
+
+from echo import echo
 
 def checkban(update, context):
     echo(update, context)

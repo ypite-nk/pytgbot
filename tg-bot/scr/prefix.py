@@ -29,16 +29,14 @@ from pyowm import OWM
 from pyowm.utils.config import get_default_config
 config_dict = get_default_config()
 config_dict['language'] = 'ru'
-owm = OWM('e8d3ccc3b3a95bec547a312f27610381', config_dict)
-mng = owm.weather_manager()
-l_weather = mng.weather_at_place
+owm = OWM('e8d3ccc3b3a95bec547a312f27610381', config_dict).weather_manager().weather_at_place
 
 def prefix_weather(update, context, city = None):
     if checkban(update, context):
         return
     if update is None:
         try:
-            w = l_weather(city).weather
+            w = owm(city).weather
             return [w.temperature('celsius')['temp'], w.detailed_status, w.wind()['speed']]
         except:
             return None
@@ -53,7 +51,7 @@ def prefix_weather(update, context, city = None):
                 prefix, city1, city2, city3 = update.message.text.split(" ")
                 city = city1 + " " + city2 + " " + city3
         try:
-            w = l_weather(city).weather
+            w = owm(city).weather
             result = [w.temperature('celsius')['temp'], w.detailed_status, w.wind()['speed']]
             update.message.reply_text("Город: " + city + "\nТемпература: " + str(result[0]) + "\nНебо: " + str(result[1]) + "\nВетер: " + str(result[2]) + " м/с",
                                       reply_markup=InlineKeyboardMarkup(kb.backdel))
@@ -166,6 +164,7 @@ def mycity(update, context):
         return new_message_id
 
 from spec import Echo_Checker
+
 def change(update, context):
     if checkban(update, context):
         return
@@ -219,8 +218,6 @@ def change(update, context):
         update.message.reply_text("Произошла неизвестная ошибка, попробуйте заного",
                                   reply_markup=InlineKeyboardMarkup(kb.backdel))
 
-
-
 def update(update, context):
     users_uid = login.users_info()
     for i in users_uid:
@@ -231,3 +228,17 @@ def update(update, context):
             login.city_data_change(i, user)
             context.bot.send_message(chat_id=i, text="💰payday💰\n\nТвой город заработал - " + str(money) +
                                      "\nБюджет: " + str(user['money_have']))
+
+from spec import Tasks
+
+def update_event(update, context):
+    users_uid = login.users_info()
+    for i in users_uid:
+        user = login.city_data(i)
+        if user is not None:
+            task = Tasks(i)
+            task.taskUpdate()
+            
+            context.bot.send_message(chat_id=i,
+                                     text=task.text,
+                                     reply_markup=InlineKeyboardMarkup(kb.backcity))
