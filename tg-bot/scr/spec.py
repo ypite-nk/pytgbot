@@ -258,22 +258,36 @@ class Create():
 
         money_cost = 500000
         money_expenses = 67200
+        energy_expenses = 400
+        water_expenses = 1200
+
         export_people = 4000
 
         # specific convert (can't use for or another method's)
         user_city['people'] = int(user_city['people'])
 
         if user_city_data['money_have'] > money_cost and (user_city_data['money'] - user_city_data['money_need']) > money_expenses:
-            user_city_data['money_have'] -= money_cost
-            user_city_data['money_need'] += money_expenses
-            user_city['people'] += export_people
+            if (user_city_data['energy_have'] - user_city_data['energy_need']) > energy_expenses:
+                if (user_city_data['water_have'] - user_city_data['water_need']) > water_expenses:
+                    
+                    user_city_data['money_have'] -= money_cost
+                    user_city_data['money_need'] += money_expenses
+                    user_city_data['energy_need'] += energy_expenses
+                    user_city_data['water_need'] += water_expenses
 
-            login.city_data_change(self.uid, user_city_data)
-            login.city_change(self.uid, user_city)
+                    user_city['people'] += export_people
 
-            self.update.callback_query.message.reply_text(openf("city/descrip/create", "create_house_1"),
-                                                            reply_markup=InlineKeyboardMarkup(kb.backcity))
+                    login.city_data_change(self.uid, user_city_data)
+                    login.city_change(self.uid, user_city)
 
+                    self.update.callback_query.message.reply_text(openf("city/descrip/create", "create_house_1"),
+                                                                  reply_markup=InlineKeyboardMarkup(kb.backcity))
+                else:
+                    self.update.callback_query.message.reply_text("Для постройки этого района нехватает водоснабжения! Постройте новые станции водоснабжения", 
+                                                          reply_markup=InlineKeyboardMarkup(kb.backcity))
+            else:
+                self.update.callback_query.message.reply_text("Для постройки этого района нехватает электроэнергии! Постройте новые электростанции", 
+                                                          reply_markup=InlineKeyboardMarkup(kb.backcity))
         else:
             self.update.callback_query.message.reply_text("Средства города не способны содерждать этот район... Пополните бюджет или увеличьте доход", 
                                                           reply_markup=InlineKeyboardMarkup(kb.backcity))
@@ -284,22 +298,36 @@ class Create():
 
         money_cost = 1500000
         money_expenses = 151200
+        energy_expenses = 900
+        water_expenses = 2700
+
         export_people = 9000
 
         # specific convert (can't use for or another method's)
         user_city['people'] = int(user_city['people'])
 
         if user_city_data['money_have'] > money_cost and (user_city_data['money'] - user_city_data['money_need']) > money_expenses:
-            user_city_data['money_have'] -= money_cost
-            user_city_data['money_need'] += money_expenses
-            user_city['people'] += export_people
+            if (user_city_data['energy_have'] - user_city_data['energy_need']) > energy_expenses:
+                if (user_city_data['water_have'] - user_city_data['water_need']) > water_expenses:
+                    
+                    user_city_data['money_have'] -= money_cost
+                    user_city_data['money_need'] += money_expenses
+                    user_city_data['energy_need'] += energy_expenses
+                    user_city_data['water_need'] += water_expenses
 
-            login.city_data_change(self.uid, user_city_data)
-            login.city_change(self.uid, user_city)
+                    user_city['people'] += export_people
 
-            self.update.callback_query.message.reply_text(openf("city/descrip/create", "create_house_2"),
-                                                            reply_markup=InlineKeyboardMarkup(kb.backcity))
+                    login.city_data_change(self.uid, user_city_data)
+                    login.city_change(self.uid, user_city)
 
+                    self.update.callback_query.message.reply_text(openf("city/descrip/create", "create_house_2"),
+                                                                  reply_markup=InlineKeyboardMarkup(kb.backcity))
+                else:
+                    self.update.callback_query.message.reply_text("Для постройки этого района нехватает водоснабжения! Постройте новые станции водоснабжения", 
+                                                          reply_markup=InlineKeyboardMarkup(kb.backcity))
+            else:
+                self.update.callback_query.message.reply_text("Для постройки этого района нехватает электроэнергии! Постройте новые электростанции", 
+                                                          reply_markup=InlineKeyboardMarkup(kb.backcity))
         else:
             self.update.callback_query.message.reply_text("Средства города не способны содерждать этот район... Пополните бюджет или увеличьте доход", 
                                                           reply_markup=InlineKeyboardMarkup(kb.backcity))
@@ -310,22 +338,36 @@ class Create():
 
         money_cost = 3500000
         money_expenses = 336000
+        energy_expenses = 2000
+        water_expenses = 6000
+
         export_people = 20000
 
         # specific convert (can't use for or another method's)
         user_city['people'] = int(user_city['people'])
 
         if user_city_data['money_have'] > money_cost and (user_city_data['money'] - user_city_data['money_need']) > money_expenses:
-            user_city_data['money_have'] -= money_cost
-            user_city_data['money_need'] += money_expenses
-            user_city['people'] += export_people
+            if (user_city_data['energy_have'] - user_city_data['energy_need']) > energy_expenses:
+                if (user_city_data['water_have'] - user_city_data['water_need']) > water_expenses:
+                    
+                    user_city_data['money_have'] -= money_cost
+                    user_city_data['money_need'] += money_expenses
+                    user_city_data['energy_need'] += energy_expenses
+                    user_city_data['water_need'] += water_expenses
 
-            login.city_data_change(self.uid, user_city_data)
-            login.city_change(self.uid, user_city)
+                    user_city['people'] += export_people
 
-            self.update.callback_query.message.reply_text(openf("city/descrip/create", "create_house_3"),
-                                                            reply_markup=InlineKeyboardMarkup(kb.backcity))
+                    login.city_data_change(self.uid, user_city_data)
+                    login.city_change(self.uid, user_city)
 
+                    self.update.callback_query.message.reply_text(openf("city/descrip/create", "create_house_3"),
+                                                                  reply_markup=InlineKeyboardMarkup(kb.backcity))
+                else:
+                    self.update.callback_query.message.reply_text("Для постройки этого района нехватает водоснабжения! Постройте новые станции водоснабжения", 
+                                                          reply_markup=InlineKeyboardMarkup(kb.backcity))
+            else:
+                self.update.callback_query.message.reply_text("Для постройки этого района нехватает электроэнергии! Постройте новые электростанции", 
+                                                          reply_markup=InlineKeyboardMarkup(kb.backcity))
         else:
             self.update.callback_query.message.reply_text("Средства города не способны содерждать этот район... Пополните бюджет или увеличьте доход", 
                                                           reply_markup=InlineKeyboardMarkup(kb.backcity))
@@ -452,18 +494,26 @@ class Create():
 
         money_cost = 20000
         money_expenses = 2800
+        energy_expenses = 2
 
         export_water = 1480
 
         if user_city_data['money_have'] > money_cost and (user_city_data['money'] - user_city_data['money_need']) > money_expenses:
-            user_city_data['money_have'] -= money_cost
-            user_city_data['money_need'] += money_expenses
-            user_city_data['water_have'] += export_water
+            if (user_city_data['energy_have'] -user_city_data['energy_need']) > energy_expenses:
+                
+                user_city_data['money_have'] -= money_cost
+                user_city_data['money_need'] += money_expenses
+                user_city_data['energy_need'] += energy_expenses
 
-            login.city_data_change(self.uid, user_city_data)
+                user_city_data['water_have'] += export_water
 
-            self.update.callback_query.message.reply_text(openf("city/descrip/create", "create_ind_wat_1"),
+                login.city_data_change(self.uid, user_city_data)
+
+                self.update.callback_query.message.reply_text(openf("city/descrip/create", "create_ind_wat_1"),
                                                             reply_markup=InlineKeyboardMarkup(kb.backcity))
+            else:
+                self.update.callback_query.message.reply_text("Для постройки этого объекта нехватает электроэнергии! Постройте новые электростанции",
+                                                              reply_markup=InlineKeyboardMarkup(kb.backcity))
         else:
             self.update.callback_query.message.reply_text("Средства города не способны содерждать этот объект... Пополните бюджет или увеличьте доход", 
                                                           reply_markup=InlineKeyboardMarkup(kb.backcity))
@@ -473,18 +523,25 @@ class Create():
 
         money_cost = 100000
         money_expenses = 5400
+        energy_expenses = 4
 
         export_water = 3200
 
         if user_city_data['money_have'] > money_cost and (user_city_data['money'] - user_city_data['money_need']) > money_expenses:
-            user_city_data['money_have'] -= money_cost
-            user_city_data['money_need'] += money_expenses
-            user_city_data['water_have'] += export_water
+            if (user_city_data['energy_have'] -user_city_data['energy_need']) > energy_expenses:
+                user_city_data['money_have'] -= money_cost
+                user_city_data['money_need'] += money_expenses
+                user_city_data['energy_need'] += energy_expenses
 
-            login.city_data_change(self.uid, user_city_data)
+                user_city_data['water_have'] += export_water
 
-            self.update.callback_query.message.reply_text(openf("city/descrip/create", "create_ind_wat_2"),
+                login.city_data_change(self.uid, user_city_data)
+
+                self.update.callback_query.message.reply_text(openf("city/descrip/create", "create_ind_wat_2"),
                                                             reply_markup=InlineKeyboardMarkup(kb.backcity))
+            else:
+                self.update.callback_query.message.reply_text("Для постройки этого объекта нехватает электроэнергии! Постройте новые электростанции",
+                                                              reply_markup=InlineKeyboardMarkup(kb.backcity))
         else:
             self.update.callback_query.message.reply_text("Средства города не способны содерждать этот объект... Пополните бюджет или увеличьте доход", 
                                                           reply_markup=InlineKeyboardMarkup(kb.backcity))
@@ -494,18 +551,25 @@ class Create():
 
         money_cost = 500000
         money_expenses = 16000
+        energy_expenses = 8
 
         export_water = 7100
 
         if user_city_data['money_have'] > money_cost and (user_city_data['money'] - user_city_data['money_need']) > money_expenses:
-            user_city_data['money_have'] -= money_cost
-            user_city_data['money_need'] += money_expenses
-            user_city_data['water_have'] += export_water
+            if (user_city_data['energy_have'] -user_city_data['energy_need']) > energy_expenses:
+                user_city_data['money_have'] -= money_cost
+                user_city_data['money_need'] += money_expenses
+                user_city_data['energy_need'] += energy_expenses
 
-            login.city_data_change(self.uid, user_city_data)
+                user_city_data['water_have'] += export_water
 
-            self.update.callback_query.message.reply_text(openf("city/descrip/create", "create_ind_wat_3"),
+                login.city_data_change(self.uid, user_city_data)
+
+                self.update.callback_query.message.reply_text(openf("city/descrip/create", "create_ind_wat_3"),
                                                             reply_markup=InlineKeyboardMarkup(kb.backcity))
+            else:
+                self.update.callback_query.message.reply_text("Для постройки этого объекта нехватает электроэнергии! Постройте новые электростанции",
+                                                              reply_markup=InlineKeyboardMarkup(kb.backcity))
         else:
             self.update.callback_query.message.reply_text("Средства города не способны содерждать этот объект... Пополните бюджет или увеличьте доход", 
                                                           reply_markup=InlineKeyboardMarkup(kb.backcity))
@@ -514,17 +578,31 @@ class Create():
         user_city_data = self.convert_int(login.city_data(self.uid))
 
         money_cost = 160000
+        energy_expenses = 5
+        water_expenses = 100
 
         export_money = 8400
 
         if user_city_data['money_have'] > money_cost:
-            user_city_data['money_have'] -= money_cost
-            user_city_data['money'] += export_money
+            if (user_city_data['energy_have'] - user_city_data['energy_need']) > energy_expenses:
+                if (user_city_data['water_have'] - user_city_data['water_need']) > water_expenses:
+                    
+                    user_city_data['money_have'] -= money_cost
+                    user_city_data['energy_need'] += energy_expenses
+                    user_city_data['water_need'] += water_expenses
 
-            login.city_data_change(self.uid, user_city_data)
+                    user_city_data['money'] += export_money
 
-            self.update.callback_query.message.reply_text(openf("city/descrip/create", "create_ind_mat_1"),
-                                                            reply_markup=InlineKeyboardMarkup(kb.backcity))
+                    login.city_data_change(self.uid, user_city_data)
+
+                    self.update.callback_query.message.reply_text(openf("city/descrip/create", "create_ind_mat_1"),
+                                                                  reply_markup=InlineKeyboardMarkup(kb.backcity))
+                else:
+                    self.update.callback_query.message.reply_text("Для постройки этого района нехватает водоснабжения! Постройте новые станции водоснабжения",
+                                                                  reply_markup=InlineKeyboardMarkup(kb.backcity))
+            else:
+                self.update.callback_query.message.reply_text("Для постройки этого района нехватает электроэнергии! Постройте новые электростанции",
+                                                              reply_markup=InlineKeyboardMarkup(kb.backcity))
         else:
             self.update.callback_query.message.reply_text("Средства города не способны содерждать этот район... Пополните бюджет или увеличьте доход", 
                                                           reply_markup=InlineKeyboardMarkup(kb.backcity))
@@ -533,17 +611,31 @@ class Create():
         user_city_data = self.convert_int(login.city_data(self.uid))
 
         money_cost = 1700000
+        energy_expenses = 13 
+        water_expenses = 400
 
         export_money = 30100
 
         if user_city_data['money_have'] > money_cost:
-            user_city_data['money_have'] -= money_cost
-            user_city_data['money'] += export_money
+            if (user_city_data['energy_have'] - user_city_data['energy_need']) > energy_expenses:
+                if (user_city_data['water_have'] - user_city_data['water_need']) > water_expenses:
+                    
+                    user_city_data['money_have'] -= money_cost
+                    user_city_data['energy_need'] += energy_expenses
+                    user_city_data['water_need'] += water_expenses
 
-            login.city_data_change(self.uid, user_city_data)
+                    user_city_data['money'] += export_money
 
-            self.update.callback_query.message.reply_text(openf("city/descrip/create", "create_ind_mat_2"),
-                                                            reply_markup=InlineKeyboardMarkup(kb.backcity))
+                    login.city_data_change(self.uid, user_city_data)
+
+                    self.update.callback_query.message.reply_text(openf("city/descrip/create", "create_ind_mat_2"),
+                                                                  reply_markup=InlineKeyboardMarkup(kb.backcity))
+                else:
+                    self.update.callback_query.message.reply_text("Для постройки этого района нехватает водоснабжения! Постройте новые станции водоснабжения",
+                                                                  reply_markup=InlineKeyboardMarkup(kb.backcity))
+            else:
+                self.update.callback_query.message.reply_text("Для постройки этого района нехватает электроэнергии! Постройте новые электростанции",
+                                                              reply_markup=InlineKeyboardMarkup(kb.backcity))
         else:
             self.update.callback_query.message.reply_text("Средства города не способны содерждать этот район... Пополните бюджет или увеличьте доход", 
                                                           reply_markup=InlineKeyboardMarkup(kb.backcity))
@@ -552,17 +644,31 @@ class Create():
         user_city_data = self.convert_int(login.city_data(self.uid))
 
         money_cost = 6350000
+        energy_expenses = 25
+        water_expenses = 700
 
         export_money = 185800
 
         if user_city_data['money_have'] > money_cost:
-            user_city_data['money_have'] -= money_cost
-            user_city_data['money'] += export_money
+            if (user_city_data['energy_have'] - user_city_data['energy_need']) > energy_expenses:
+                if (user_city_data['water_have'] - user_city_data['water_need']) > water_expenses:
+                    
+                    user_city_data['money_have'] -= money_cost
+                    user_city_data['energy_need'] += energy_expenses
+                    user_city_data['water_need'] += water_expenses
 
-            login.city_data_change(self.uid, user_city_data)
+                    user_city_data['money'] += export_money
 
-            self.update.callback_query.message.reply_text(openf("city/descrip/create", "create_ind_mat_3"),
-                                                            reply_markup=InlineKeyboardMarkup(kb.backcity))
+                    login.city_data_change(self.uid, user_city_data)
+
+                    self.update.callback_query.message.reply_text(openf("city/descrip/create", "create_ind_mat_3"),
+                                                                  reply_markup=InlineKeyboardMarkup(kb.backcity))
+                else:
+                    self.update.callback_query.message.reply_text("Для постройки этого района нехватает водоснабжения! Постройте новые станции водоснабжения",
+                                                                  reply_markup=InlineKeyboardMarkup(kb.backcity))
+            else:
+                self.update.callback_query.message.reply_text("Для постройки этого района нехватает электроэнергии! Постройте новые электростанции",
+                                                              reply_markup=InlineKeyboardMarkup(kb.backcity))
         else:
             self.update.callback_query.message.reply_text("Средства города не способны содерждать этот район... Пополните бюджет или увеличьте доход", 
                                                           reply_markup=InlineKeyboardMarkup(kb.backcity))

@@ -87,7 +87,7 @@ def city_create(update, context):
     second_part = "\ncountry:Россия\nsubject:Иркутская область\ncreate_data:2023\nsize:10\npeople:4000\n---optional---:---Опциональные---\nmayor:Нет\nsign:Нет\ngymn:Нет\nhistory:Нет\n"
     all_part = first_part + second_part
     status = "name:0\nsign:0\ngymn:0\nhistory:0\nmayor:0"
-    data = "money_have:1000000\nenergy_have:0\nwater_have:0\nmoney:150000\nmoney_need:113200\nenergy_need:0\nwater_need:0"
+    data = "money_have:1000000\nenergy_have:0\nwater_have:0\nmoney:100000\nmoney_need:0\nenergy_need:0\nwater_need:0"
     login.city_create(uid, all_part, status, data)
 
 def mycity(update, context):
