@@ -1,7 +1,7 @@
-money_have:1000000
-energy_have:0
-water_have:0
-money:100000
-money_need:0
-energy_need:0
+money_have:50000
+energy_have:850
+water_have:1480
+money:158000
+money_need:7030
+energy_need:2
 water_need:0
