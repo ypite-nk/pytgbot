@@ -7,10 +7,8 @@ logging.basicConfig(filename="tmp/info.log", level=logging.DEBUG,
                     format='%(asctime)s %(levelname)s %(name)s %(message)s')
 logger = logging.getLogger(__name__)
 
-token = "6143246892:AAEQGuhkqKZ-6Hsn7cvvbUMwOW0rNOHHGSE"
-#token = "5658241360:AAFMBbtWmi-TrvNV2OnrylSEs8ijqVySoRw" Save token
-bot = telegram.Bot(token=token)
-updater = Updater(token=token, use_context=True)
+bot = telegram.Bot(token="6143246892:AAEQGuhkqKZ-6Hsn7cvvbUMwOW0rNOHHGSE")
+updater = Updater(token="6143246892:AAEQGuhkqKZ-6Hsn7cvvbUMwOW0rNOHHGSE", use_context=True)
 ud = updater.dispatcher
 # UPDATER NOT UD ; UD - updater.dispatcher FROM add_handler!!!
 from case import echo_call, fun_handler

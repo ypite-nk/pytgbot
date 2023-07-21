@@ -49,6 +49,8 @@ def echo_handler(update, context):
         return
     Checker = Echo_Checker(update, context)
     if Checker.echo_check(update.message.text):
+        update.message.reply_text(Checker.message,
+                                  reply_markup=Checker.reply_markup)
         return
 
     with open("info/hi.txt", "r", encoding="utf-8") as file:

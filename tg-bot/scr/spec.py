@@ -17,6 +17,9 @@ def convert_int(data: dict):
 
 import urllib.request
 import login
+import keyboardbot as kb
+
+from telegram import InlineKeyboardMarkup
 
 class Echo_Checker():
     '''
@@ -33,12 +36,18 @@ class Echo_Checker():
 
         self.uid = str(self.update.message.chat_id)
 
+        self.menu = InlineKeyboardMarkup(kb.backdel)
+        self.city = InlineKeyboardMarkup(kb.backcity)
+
         self.status = { 'name':'0',
                         'sign':'0',
                         'gymn':'0',
                         'history':'0',
                         'mayor':'0'
                       }
+
+        self.message = "Error"
+        self.reply_markup = self.menu
 
     def write_marks(self):
         stat = login.authorize(self.uid)
@@ -51,7 +60,7 @@ class Echo_Checker():
             for i in file:
                 marks_id_memory.append(i.replace("\n", ""))
         if self.uid in marks_id_memory:
-            self.update.message.reply_text("Вы уже отправляли рецензию!")
+            self.message = "Вы уже отправляли рецензию!"
             return True
         if stat['marks_collect'] > 0 and stat['marks_collect'] < 5:
             user_text = openf("base", self.uid + "marks")
@@ -59,22 +68,22 @@ class Echo_Checker():
             if stat['marks_collect'] == 1:
                 with open("base/" + self.uid + "marks.txt", "w+", encoding="utf-8") as f:
                     f.write(user_text + self.update.message.text + "\n")
-                    self.update.message.reply_text(openf("descriptext", "marks2"))
+                self.message = openf("descriptext", "marks2")
 
             elif stat['marks_collect'] == 2:
                 with open("base/" + self.uid + "marks.txt", "w+", encoding="utf-8") as f:
                     f.write(user_text + self.update.message.text + "\n")
-                self.update.message.reply_text(openf("descriptext", "marks3"))
+                self.message = openf("descriptext", "marks3")
 
             elif stat['marks_collect'] == 3:
                 if self.update.message.text.lower() == "да":
-                    self.update.message.reply_text(openf("descriptext", "marks4_5"))
+                    self.message = openf("descriptext", "marks4_5")
                     stat['marks_collect'] = stat['marks_collect'] + 1
                 elif self.update.message.text.lower() == "нет":
-                    self.update.message.reply_text(openf("descriptext", "marks4"))
+                    self.message = openf("descriptext", "marks4")
 
             if stat['marks_collect'] == 4:
-                self.update.message.reply_text(openf("descriptext", "marks_complete") + "\n" +
+                self.message = str(openf("descriptext", "marks_complete") + "\n" +
                     openf("base", self.uid + "marks") + "\nХотите изменить?(Да/нет)")
             stat['marks_collect'] = stat['marks_collect'] + 1
             login.update(self.update.message.chat_id, stat)
@@ -98,7 +107,7 @@ class Echo_Checker():
                             file.write(marks_id_memory[i])
                 with open("base/"+ self.uid +"marks.txt", "w", encoding="utf-8") as file:
                     file.write(" ")
-                self.update.message.reply_text(openf("info/ypiter/marks", "markssucces"))
+                self.message = openf("info/ypiter/marks", "markssucces")
                 return False
 
         return False
@@ -116,11 +125,12 @@ class Echo_Checker():
         if user_city_status['name'] and text is not None:
             user_city = login.city_info(self.uid)
 
-            self.update.message.reply_text("Имя города успешно изменено!\n" + user_city['name'] + " --> " + self.update.message.text,
-                                           reply_markup=InlineKeyboardMarkup(kb.backcity))
+            self.message = "Имя города успешно изменено!\n" + user_city['name'] + " --> " + self.update.message.text
+            self.reply_markup = self.city
 
             user_city['name'] = text
             login.city_change(self.uid, user_city)
+
             self.clear_city_status()
 
             return True
@@ -139,14 +149,16 @@ class Echo_Checker():
             file_size = self.update.message.photo[-1]
             
             if file_size.width <= 400 and file_size.height <= 400:
-                self.update.message.reply_text("Герб города успешно изменен!",
-                                               reply_markup=InlineKeyboardMarkup(kb.backcity))
+
+                self.message = "Герб города успешно изменен!"
+                self.reply_markup = self.city
 
                 response = urllib.request.urlopen(file.file_path)
                 path = "D:/proj/pytgbotGH/tg-bot/base/cities/photo/" + self.uid + "city.jpg"
 
                 with open(path, 'wb') as new_file:
                     new_file.write(response.read())
+
                 self.clear_city_status()
 
                 user_city = login.city_info(self.uid)
@@ -155,7 +167,7 @@ class Echo_Checker():
 
                 return True
             else:
-                self.update.message.reply_text("Размеры файла превышают максимальные! (400x400)")
+                self.message = "Размеры файла превышают максимальные! (400x400)"
                 return False
         else:
             return False
@@ -165,12 +177,14 @@ class Echo_Checker():
         if user_city_status is None:
             return False
         if user_city_status['gymn'] and text is not None:
-            self.update.message.reply_text("Гимн города умпешно изменен!",
-                                           reply_markup=InlineKeyboardMarkup(kb.backcity))
+
+            self.message = "Гимн города умпешно изменен!"
+            self.reply_markup = self.city
 
             user_city = login.city_info(self.uid)
             user_city['gymn'] = text
             login.city_change(self.uid, user_city)
+
             self.clear_city_status()
 
             return True
@@ -182,12 +196,14 @@ class Echo_Checker():
         if user_city_status is None:
             return False
         if user_city_status['history'] and text is not None:
-            self.update.message.reply_text("История города успешно изменена!",
-                                           reply_markup=InlineKeyboardMarkup(kb.backcity))
+
+            self.message = "История города успешно изменена!"
+            self.reply_markup = self.city
 
             user_city = login.city_info(self.uid)
             user_city['history'] = text
             login.city_change(self.uid, user_city)
+
             self.clear_city_status()
 
             return True
@@ -199,12 +215,14 @@ class Echo_Checker():
         if user_city_status is None:
             return False
         if user_city_status['mayor'] and text is not None:
-            self.update.message.reply_text("Мэр города успешно изменен!",
-                                           reply_markup=InlineKeyboardMarkup(kb.backcity))
+
+            self.message = "Мэр города успешно изменен!"
+            self.reply_markup = self.city
 
             user_city = login.city_info(self.uid)
             user_city['mayor'] = text
             login.city_change(self.uid, user_city)
+
             self.clear_city_status()
 
             return True
@@ -236,9 +254,6 @@ class Echo_Checker():
         else:
             return False
 
-from telegram import InlineKeyboardMarkup
-
-import keyboardbot as kb
 import random
 
 class Create():
