@@ -229,14 +229,14 @@ def update(update, context):
             context.bot.send_message(chat_id=i, text="💰payday💰\n\nТвой город заработал - " + str(money) +
                                      "\nБюджет: " + str(user['money_have']))
 
-from spec import Tasks
+from spec import RandomTasks
 
 def update_event(update, context):
     users_uid = login.users_info()
     for i in users_uid:
         user = login.city_data(i)
         if user is not None:
-            task = Tasks(i)
+            task = RandomTasks(i)
             task.taskUpdate()
             
             context.bot.send_message(chat_id=i,

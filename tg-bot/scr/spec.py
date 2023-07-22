@@ -684,7 +684,7 @@ class Create():
             self.update.callback_query.message.reply_text("Средства города не способны содерждать этот район... Пополните бюджет или увеличьте доход", 
                                                           reply_markup=InlineKeyboardMarkup(kb.backcity))
 
-class Tasks():
+class RandomTasks():
     def __init__(self, uid: str):
 
         self.uid = str(uid)
