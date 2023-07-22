@@ -154,7 +154,7 @@ def echo_button(update, context):
                 old_message_id = ""
                 dislikestat = False
 
-        if action == "A" or action == "П":
+        if action == "А" or action == "П":
             reply_text(openf("info/ypiter/marks", "MARKS-" + value + "-" + action),
                                                      reply_markup=InlineKeyboardMarkup(kb.set_mark(marks_namelist)))
 
@@ -204,12 +204,6 @@ def echo_button(update, context):
             case "ypimore":
                 new_message_id = reply_text(openf("info/ypiter", "YpiAllMore"),
                                             reply_markup=InlineKeyboardMarkup(kb.backdel))
-            case "14":
-                 new_message_id = reply_text(openf("info/ypiter", "Ypi14"),
-                                             reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Назад", callback_data="ypiinfo"), kb.menudel]])).message_id
-            case "15":
-                 new_message_id = reply_text(openf("info/ypiter", "Ypi15"),
-                                             reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Назад", callback_data="ypiinfo"), kb.menudel]])).message_id
 #   РЕЦЕНЗИИ
             case "marks":
                 with open("info/ypiter/marks/markslist.txt", "r", encoding="utf-8") as file:

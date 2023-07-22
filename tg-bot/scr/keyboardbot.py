@@ -5,7 +5,6 @@ menudel = InlineKeyboardButton("Меню", callback_data="/backdel")
 backdel = [[menudel]]
 
 ypiterFAQ = [[InlineKeyboardButton("Общее", callback_data='all'), InlineKeyboardButton("Рецензии", callback_data='marks'), InlineKeyboardButton("Больше..", callback_data="ypimore")],
-             [InlineKeyboardButton("14 лет", callback_data='14'), InlineKeyboardButton("15 лет", callback_data='15')],
              [InlineKeyboardButton("<<<", callback_data="faq"), menudel]]
 
 FAQ = [[InlineKeyboardButton("О боте", callback_data="botinfo"), InlineKeyboardButton("О ypiter", callback_data="ypiinfo")],
