@@ -1,15 +1,15 @@
 Детектив
 
-Нажав на клавиатуре номер книги, вы сможете скачать ее PDF файл
+Нажав на название книги, вы сможете скачать ее .epub файл
 
 10 лучших книг в жанре Детектив:
-1) <a href=''>{name}</a>
-2) <a href=''>{name}</a>
-3) <a href=''>{name}</a>
-4) <a href=''>{name}</a>
-5) <a href=''>{name}</a>
-6) <a href=''>{name}</a>
-7) <a href=''>{name}</a>
-8) <a href=''>{name}</a>
-9) <a href=''>{name}</a>
-10) <a href=''>{name}</a>
+1) <a href='https://disk.yandex.ru/d/I7E4zjn7LrdvRQ'>Безмолвный пациент - Алекс Михаэлидес</a>
+2) <a href='https://disk.yandex.ru/d/_J37jyJvNC3CLw'>Гончие Лилит - Кристина Старк</a>
+3) <a href='https://disk.yandex.ru/d/MqPPRHDH_vvy1w'>Пассажир - Жан-Кристоф Гранже</a>
+4) <a href='https://disk.yandex.ru/i/7_VVta8intv6RA'>След смерти - Блейк Пирс</a>
+5) <a href='https://disk.yandex.ru/d/ovbOB76-sVQ4eg'>Правда о деле Гарри Квеберта - Жоэль Диккер</a>
+6) <a href='https://disk.yandex.ru/d/kKe7coS5FtlI8Q'>Происхождение - Дэн Браун</a>
+7) <a href='https://disk.yandex.ru/d/0g50Ck6vudgwWw'>Книга Балтиморов - Жоэль Диккер</a>
+8) <a href='https://disk.yandex.ru/d/nQeGyC7_vbO5Qg'>Зов кукушки - Роберт Гэлбрейт</a>
+9) <a href='https://disk.yandex.ru/d/bNRzSYCdjX3UGg'>Дневник моего исчезновения - Камилла Гребе</a>
+10) <a href='https://disk.yandex.ru/d/GEsBilt1gPN4qQ'>Исчезнувшая - Гиллиан Флинн</a>

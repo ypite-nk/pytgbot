@@ -1,15 +1,15 @@
 Приключения
 
-Нажав на клавиатуре номер книги, вы сможете скачать ее PDF файл
+Нажав на название книги, вы сможете скачать ее .epub файл
 
 10 лучших книг в жанре Приключения:
-1) <a href=''>{name}</a>
-2) <a href=''>{name}</a>
-3) <a href=''>{name}</a>
-4) <a href=''>{name}</a>
-5) <a href=''>{name}</a>
-6) <a href=''>{name}</a>
-7) <a href=''>{name}</a>
-8) <a href=''>{name}</a>
-9) <a href=''>{name}</a>
-10) <a href=''>{name}</a>
+1) <a href='https://disk.yandex.ru/i/xxumRTFHTAHsSg'>Морской волк - Джек Лондон</a>
+2) <a href='https://disk.yandex.ru/d/rZJpFxSguR8mJQ'>Сердца трех - Джек Лондон</a>
+3) <a href='https://disk.yandex.ru/i/9V9cTXQnGeTZQw'>Любовь к жизни - Джек Лондно</a>
+4) <a href='https://disk.yandex.ru/i/HsHARA5ybc1EVA'>Последний из могикан - Джеймс Фенимор Купер</a>
+5) <a href='https://disk.yandex.ru/d/x6C7B4-bX7UyGg'>Рождение феникса - Нина Опалько</a>
+6) <a href='https://disk.yandex.ru/d/HnLy37QHJF1a4w'>Воровка для правителя - Дарья Мариенко</a>
+7) <a href='https://disk.yandex.ru/i/MhBl5NvtXxjJJQ'>Шестая жена - Ная Геярова</a>
+8) <a href='https://disk.yandex.ru/i/OlZSe2_QaBgmNA'>Тайны Нью-Йорка - Вильям Кобб</a>
+9) <a href='https://disk.yandex.ru/i/DEVXx_DNzUOPPw'>Никому тебя не отдам - Тайета Сан</a>
+10) <a href='https://disk.yandex.ru/i/UVERUJ2ly3ky5A'>Сокровища Перу - Софи Верисгофер</a>

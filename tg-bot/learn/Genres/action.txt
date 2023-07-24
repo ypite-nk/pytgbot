@@ -1,9 +1,9 @@
 Боевики
 
-Нажав на клавиатуре номер книги, вы сможете скачать ее PDF файл
+Нажав на название книги, вы сможете скачать ее .epub файл
 
 10 лучших книг в жанре Боевики:
-1) <a href='https://libking.ru/books/sf-/sf-action/26468-2-uilyam-keyt-bitva.html#book'><i>Битва</i></a>
+1) <a href=''><i>Битва</i></a>
 2) <a href=''>{name}</a>
 3) <a href=''>{name}</a>
 4) <a href=''>{name}</a>
