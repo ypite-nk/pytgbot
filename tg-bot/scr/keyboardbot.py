@@ -51,53 +51,19 @@ booklist = [[InlineKeyboardButton("<<<", callback_data="backbook1"), menudel]]
 booklist1 = [[InlineKeyboardButton("Классика", callback_data="classic"), InlineKeyboardButton("Зарубежные", callback_data="foreign"), InlineKeyboardButton("Русская", callback_data="rus")],
         [InlineKeyboardButton("Детективы", callback_data="detective"), InlineKeyboardButton("Фэнтези", callback_data="fantasy"), InlineKeyboardButton("Фантастика", callback_data="fantastik")],
         [InlineKeyboardButton("Проза", callback_data="prose"), InlineKeyboardButton("Ужасы", callback_data="scary"), InlineKeyboardButton("Приключения", callback_data="adv")],
-        [InlineKeyboardButton("<<<", callback_data="learn"), InlineKeyboardButton("Далее...", callback_data="booklist2")]]
+        [InlineKeyboardButton("<<<", callback_data="learn"), InlineKeyboardButton(">>>", callback_data="booklist2")]]
 
 booklist2 = [[InlineKeyboardButton("Боевики", callback_data="action"), InlineKeyboardButton("Повести", callback_data="stories"), InlineKeyboardButton("Поэзия", callback_data="poem")],
         [InlineKeyboardButton("Научпоп", callback_data="science"), InlineKeyboardButton("Психология", callback_data="psycho"), InlineKeyboardButton("Комиксы", callback_data="comics")],
         [InlineKeyboardButton("Манга", callback_data="manga"), InlineKeyboardButton("Эзотерика", callback_data="esotericism"), InlineKeyboardButton("Культура", callback_data="culture")],
-        [InlineKeyboardButton("<<<", callback_data="backbook1"), InlineKeyboardButton("Далее...", callback_data="booklist3")]]
+        [InlineKeyboardButton("<<<", callback_data="backbook1"), InlineKeyboardButton(">>>", callback_data="booklist3")]]
 
 booklist3 = [[InlineKeyboardButton("Романы", callback_data="romans"), InlineKeyboardButton("Словари", callback_data="books"), InlineKeyboardButton("Справочники", callback_data="bookfaq")],
         [InlineKeyboardButton("Религия", callback_data="religion"), InlineKeyboardButton("Юмор", callback_data="funny"), InlineKeyboardButton("Рассказы", callback_data="tale")],
         [InlineKeyboardButton("Для детей", callback_data="kids"), InlineKeyboardButton("Бизнес", callback_data="buisness"), InlineKeyboardButton("Дом", callback_data="home")],
         [InlineKeyboardButton("<<<", callback_data="backbook2"), menudel]]
 
-class GenresKeyboard():
-    def __init__(self, path, filename):
-        self.file = open(path + filename + ".txt", "r", encoding="utf-8").readlines(0)
-        self.name_link = []
-        for id_link in self.file:
-            self.id, self.link = id_link.split("-")
-            self.name_link.append(str(self.id.replace("\n", "")))
-            self.name_link.append(str(self.link.replace("\n", "")))
-        
-        self.keyboard = [[InlineKeyboardButton(text=self.name_link[0], url=self.name_link[1]), InlineKeyboardButton(text=self.name_link[2], url=self.name_link[3]),
-                          InlineKeyboardButton(text=self.name_link[4], url=self.name_link[5]), InlineKeyboardButton(text=self.name_link[6], url=self.name_link[7]),
-                          InlineKeyboardButton(text=self.name_link[8], url=self.name_link[9])],
-                         [InlineKeyboardButton(text=self.name_link[10], url=self.name_link[11]), InlineKeyboardButton(text=self.name_link[12], url=self.name_link[13]),
-                          InlineKeyboardButton(text=self.name_link[14], url=self.name_link[15]), InlineKeyboardButton(text=self.name_link[16], url=self.name_link[17]),
-                          InlineKeyboardButton(text=self.name_link[18], url=self.name_link[19])],
-                         [InlineKeyboardButton("<<<", callback_data="backbook1"), menudel]]
-
-file = open("learn/name.txt", "r", encoding="utf-8").readlines(0)
-pathlist = ["learn/book/"]
-for name in file:
-    pathlist.append(str(name.replace("\n", "")))
-genreskb = {'action' : GenresKeyboard(pathlist[0], pathlist[1]).keyboard, 'adv' : GenresKeyboard(pathlist[0], pathlist[2]).keyboard,
-            'bookfaq' : GenresKeyboard(pathlist[0], pathlist[3]).keyboard, 'books' : GenresKeyboard(pathlist[0], pathlist[4]).keyboard,
-            'buisness' : GenresKeyboard(pathlist[0], pathlist[5]).keyboard, 'classic' : GenresKeyboard(pathlist[0], pathlist[6]).keyboard,
-            'comics' : GenresKeyboard(pathlist[0], pathlist[7]).keyboard, 'culture' : GenresKeyboard(pathlist[0], pathlist[8]).keyboard,
-            'detective' : GenresKeyboard(pathlist[0], pathlist[9]).keyboard, 'esotericism' : GenresKeyboard(pathlist[0], pathlist[10]).keyboard,
-            'fantastik' : GenresKeyboard(pathlist[0], pathlist[11]).keyboard, 'fantasy' : GenresKeyboard(pathlist[0], pathlist[12]).keyboard,
-            'foreign' : GenresKeyboard(pathlist[0], pathlist[13]).keyboard, 'funny' : GenresKeyboard(pathlist[0], pathlist[14]).keyboard,
-            'home' : GenresKeyboard(pathlist[0], pathlist[15]).keyboard, 'kids' : GenresKeyboard(pathlist[0], pathlist[16]).keyboard,
-            'manga' : GenresKeyboard(pathlist[0], pathlist[17]).keyboard, 'poem' : GenresKeyboard(pathlist[0], pathlist[18]).keyboard,
-            'prose' : GenresKeyboard(pathlist[0], pathlist[19]).keyboard, 'psycho' : GenresKeyboard(pathlist[0], pathlist[20]).keyboard,
-            'religion' : GenresKeyboard(pathlist[0], pathlist[21]).keyboard, 'romans' : GenresKeyboard(pathlist[0], pathlist[22]).keyboard,
-            'rus' : GenresKeyboard(pathlist[0], pathlist[23]).keyboard, 'scary' : GenresKeyboard(pathlist[0], pathlist[24]).keyboard,
-            'science' : GenresKeyboard(pathlist[0], pathlist[25]).keyboard, 'stories' : GenresKeyboard(pathlist[0], pathlist[26]).keyboard,
-            'tale' : GenresKeyboard(pathlist[0], pathlist[27]).keyboard}
+genreskb = [[InlineKeyboardButton("<<<", callback_data="backbook1"), menudel]]
 
 it = [[InlineKeyboardButton("Программирование", callback_data="coding")], [InlineKeyboardButton("Веб-разработка", callback_data="web")],
       [InlineKeyboardButton("Сис. Администрирование", callback_data="admin"), InlineKeyboardButton("Базы данных", callback_data="sql")],

@@ -290,137 +290,111 @@ def echo_button(update, context):
 
             case "classic":
                 new_message_id = reply_text(openf("learn/genres", "classic"),
-                                            reply_markup=InlineKeyboardMarkup(kb.genreskb["classic"]),
+                                            reply_markup=InlineKeyboardMarkup(kb.genreskb),
                                             parse_mode=ParseMode.HTML).message_id
-
             case "foreign":
                 new_message_id = reply_text(openf("learn/genres", "foreign"),
-                                            reply_markup=InlineKeyboardMarkup(kb.genreskb["foreign"]),
+                                            reply_markup=InlineKeyboardMarkup(kb.genreskb),
                                             parse_mode=ParseMode.HTML).message_id
-
             case "rus":
                 new_message_id = reply_text(openf("learn/genres", "rus"),
-                                            reply_markup=InlineKeyboardMarkup(kb.genreskb["rus"]),
+                                            reply_markup=InlineKeyboardMarkup(kb.genreskb),
                                             parse_mode=ParseMode.HTML).message_id
-
             case "detective":
                 new_message_id = reply_text(openf("learn/genres", "detective"),
-                                            reply_markup=InlineKeyboardMarkup(kb.genreskb["detective"]),
+                                            reply_markup=InlineKeyboardMarkup(kb.genreskb),
                                             parse_mode=ParseMode.HTML).message_id
-
             case "fantasy":
                 new_message_id = reply_text(openf("learn/genres", "fantasy"),
-                                            reply_markup=InlineKeyboardMarkup(kb.genreskb["fantasy"]),
+                                            reply_markup=InlineKeyboardMarkup(kb.genreskb),
                                             parse_mode=ParseMode.HTML).message_id
-
             case "fantastik":
                 new_message_id = reply_text(openf("learn/genres", "fantastik"),
-                                            reply_markup=InlineKeyboardMarkup(kb.genreskb["fantastik"]),
+                                            reply_markup=InlineKeyboardMarkup(kb.genreskb),
                                             parse_mode=ParseMode.HTML).message_id
-
             case "prose":
                 new_message_id = reply_text(openf("learn/genres", "prose"),
-                                            reply_markup=InlineKeyboardMarkup(kb.genreskb["prose"]),
+                                            reply_markup=InlineKeyboardMarkup(kb.genreskb),
                                             parse_mode=ParseMode.HTML).message_id
-
             case "scary":
                 new_message_id = reply_text(openf("learn/genres", "scary"),
-                                            reply_markup=InlineKeyboardMarkup(kb.genreskb["scary"]),
+                                            reply_markup=InlineKeyboardMarkup(kb.genreskb),
                                             parse_mode=ParseMode.HTML).message_id
-
             case "adv":
                 new_message_id = reply_text(openf("learn/genres", "adv"),
-                                            reply_markup=InlineKeyboardMarkup(kb.genreskb["adv"]),
+                                            reply_markup=InlineKeyboardMarkup(kb.genreskb),
                                             parse_mode=ParseMode.HTML).message_id
-
             case "action":
                 new_message_id = reply_text(openf("learn/genres", "action"),
-                                            reply_markup=InlineKeyboardMarkup(kb.genreskb["action"]),
+                                            reply_markup=InlineKeyboardMarkup(kb.genreskb),
                                             parse_mode=ParseMode.HTML).message_id
-
             case "stories":
                 new_message_id = reply_text(openf("learn/genres", "stories"),
-                                            reply_markup=InlineKeyboardMarkup(kb.genreskb["stories"]),
+                                            reply_markup=InlineKeyboardMarkup(kb.genreskb),
                                             parse_mode=ParseMode.HTML).message_id
-
             case "poem":
                 new_message_id = reply_text(openf("learn/genres", "poem"),
-                                            reply_markup=InlineKeyboardMarkup(kb.genreskb["poem"]),
+                                            reply_markup=InlineKeyboardMarkup(kb.genreskb),
                                             parse_mode=ParseMode.HTML).message_id
-
             case "scince":
                 new_message_id = reply_text(openf("learn/genres", "scince"),
-                                            reply_markup=InlineKeyboardMarkup(kb.genreskb["scince"]),
+                                            reply_markup=InlineKeyboardMarkup(kb.genreskb),
                                             parse_mode=ParseMode.HTML).message_id
-
             case "psycho":
                 new_message_id = reply_text(openf("learn/genres", "psycho"),
-                                            reply_markup=InlineKeyboardMarkup(kb.genreskb["psycho"]),
+                                            reply_markup=InlineKeyboardMarkup(kb.genreskb),
                                             parse_mode=ParseMode.HTML).message_id
-
             case "comics":
                 new_message_id = reply_text(openf("learn/genres", "comics"),
-                                            reply_markup=InlineKeyboardMarkup(kb.genreskb["comics"]),
+                                            reply_markup=InlineKeyboardMarkup(kb.genreskb),
                                             parse_mode=ParseMode.HTML).message_id
-
             case "manga":
                 new_message_id = reply_text(openf("learn/genres", "manga"),
-                                            reply_markup=InlineKeyboardMarkup(kb.genreskb["manga"]),
+                                            reply_markup=InlineKeyboardMarkup(kb.genreskb),
                                             parse_mode=ParseMode.HTML).message_id
-
             case "esotericism":
                 new_message_id = reply_text(openf("learn/genres", "esotericism"),
-                                            reply_markup=InlineKeyboardMarkup(kb.genreskb["esotericism"]),
+                                            reply_markup=InlineKeyboardMarkup(kb.genreskb),
                                             parse_mode=ParseMode.HTML).message_id
-
             case "culture":
                 new_message_id = reply_text(openf("learn/genres", "culture"),
-                                            reply_markup=InlineKeyboardMarkup(kb.genreskb["culture"]),
+                                            reply_markup=InlineKeyboardMarkup(kb.genreskb),
                                             parse_mode=ParseMode.HTML).message_id
-
             case "romans":
                 new_message_id = reply_text(openf("learn/genres", "romans"),
-                                            reply_markup=InlineKeyboardMarkup(kb.genreskb["romans"]),
+                                            reply_markup=InlineKeyboardMarkup(kb.genreskb),
                                             parse_mode=ParseMode.HTML).message_id
-
             case "books":
                 new_message_id = reply_text(openf("learn/genres", "books"),
-                                            reply_markup=InlineKeyboardMarkup(kb.genreskb["books"]),
+                                            reply_markup=InlineKeyboardMarkup(kb.genreskb),
                                             parse_mode=ParseMode.HTML).message_id
-
             case "bookfaq":
                 new_message_id = reply_text(openf("learn/genres", "bookfaq"),
-                                            reply_markup=InlineKeyboardMarkup(kb.genreskb["bookfaq"]),
+                                            reply_markup=InlineKeyboardMarkup(kb.genreskb),
                                             parse_mode=ParseMode.HTML).message_id
-
             case "religion":
                 new_message_id = reply_text(openf("learn/genres", "religion"),
-                                            reply_markup=InlineKeyboardMarkup(kb.genreskb["religion"]),
+                                            reply_markup=InlineKeyboardMarkup(kb.genreskb),
                                             parse_mode=ParseMode.HTML).message_id
-
             case "funny":
                 new_message_id = reply_text(openf("learn/genres", "funny"),
-                                            reply_markup=InlineKeyboardMarkup(kb.genreskb["funny"]),
+                                            reply_markup=InlineKeyboardMarkup(kb.genreskb),
                                             parse_mode=ParseMode.HTML).message_id
-
             case "tale":
                 new_message_id = reply_text(openf("learn/genres", "tale"),
-                                            reply_markup=InlineKeyboardMarkup(kb.genreskb["tale"]),
+                                            reply_markup=InlineKeyboardMarkup(kb.genreskb),
                                             parse_mode=ParseMode.HTML).message_id
-
             case "kids":
                 new_message_id = reply_text(openf("learn/genres", "kids"),
-                                            reply_markup=InlineKeyboardMarkup(kb.genreskb["kids"]),
+                                            reply_markup=InlineKeyboardMarkup(kb.genreskb),
                                             parse_mode=ParseMode.HTML).message_id
-
             case "buisness":
                 new_message_id = reply_text(openf("learn/genres", "buisness"),
-                                            reply_markup=InlineKeyboardMarkup(kb.genreskb["buisness"]),
+                                            reply_markup=InlineKeyboardMarkup(kb.genreskb),
                                             parse_mode=ParseMode.HTML).message_id
-
             case "home":
                 new_message_id = reply_text(openf("learn/genres", "home"),
-                                            reply_markup=InlineKeyboardMarkup(kb.genreskb["home"]),
+                                            reply_markup=InlineKeyboardMarkup(kb.genreskb),
                                             parse_mode=ParseMode.HTML).message_id
 #   IT-LEARN
             case "it":
