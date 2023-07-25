@@ -58,9 +58,8 @@ booklist2 = [[InlineKeyboardButton("Боевики", callback_data="action"), In
         [InlineKeyboardButton("Манга", callback_data="manga"), InlineKeyboardButton("Эзотерика", callback_data="esotericism"), InlineKeyboardButton("Культура", callback_data="culture")],
         [InlineKeyboardButton("<<<", callback_data="backbook1"), InlineKeyboardButton(">>>", callback_data="booklist3")]]
 
-booklist3 = [[InlineKeyboardButton("Романы", callback_data="romans"), InlineKeyboardButton("Словари", callback_data="books"), InlineKeyboardButton("Справочники", callback_data="bookfaq")],
-        [InlineKeyboardButton("Религия", callback_data="religion"), InlineKeyboardButton("Юмор", callback_data="funny"), InlineKeyboardButton("Рассказы", callback_data="tale")],
-        [InlineKeyboardButton("Для детей", callback_data="kids"), InlineKeyboardButton("Бизнес", callback_data="buisness"), InlineKeyboardButton("Дом", callback_data="home")],
+booklist3 = [[InlineKeyboardButton("Романы", callback_data="romans"), InlineKeyboardButton("Справочники", callback_data="bookfaq"), InlineKeyboardButton("Дом", callback_data="home")],
+        [InlineKeyboardButton("Религия", callback_data="religion"), InlineKeyboardButton("Юмор", callback_data="funny"), InlineKeyboardButton("Бизнес", callback_data="buisness")],
         [InlineKeyboardButton("<<<", callback_data="backbook2"), menudel]]
 
 genreskb = [[InlineKeyboardButton("<<<", callback_data="backbook1"), menudel]]
