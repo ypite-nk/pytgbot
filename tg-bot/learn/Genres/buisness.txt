@@ -3,13 +3,13 @@
 Нажав на название книги, вы сможете скачать ее .epub файл
 
 10 лучших книг в жанре Бизнес:
-1) <a href=''>{name}</a>
-2) <a href=''>{name}</a>
-3) <a href=''>{name}</a>
-4) <a href=''>{name}</a>
-5) <a href=''>{name}</a>
-6) <a href=''>{name}</a>
-7) <a href=''>{name}</a>
-8) <a href=''>{name}</a>
-9) <a href=''>{name}</a>
-10) <a href=''>{name}</a>
+1) <a href='https://disk.yandex.ru/d/cEOfGUKgK8e4QQ'>Оргсхема: Как разработать структуру компании - Александр Высоцкий</a>
+2) <a href='https://disk.yandex.ru/d/jgW8C00zTdJ54w'>Финансовое планирование. Искусство создавать доход - Александр Высоцкий</a>
+3) <a href='https://disk.yandex.ru/i/GsevQ-AlXidysQ'>Закон стартапа - Роман Янковский</a>
+4) <a href='https://disk.yandex.ru/d/Stw7PGR9H9nmdQ'>Клиенты на всю жизнь - Карл Сьюэлл</a>
+5) <a href='https://disk.yandex.ru/d/lCZ-keciw4-AQw'>Основы маркетинга - Филип Котлер</a>
+6) <a href='https://disk.yandex.ru/d/Lz5gZBU9id_d6g'>Бизнес без МВА - Олег Тиньков</a>
+7) <a href='https://disk.yandex.ru/d/icmQaAFx8gi3bg'>Склад: логистика, управление, анализ - Владислав Волгин</a>
+8) <a href='https://disk.yandex.ru/d/NlrZH-kXSeQtZA'>Шахерезада продаж - Павел Платонов</a>
+9) <a href='https://disk.yandex.ru/d/1mI7a_vDtOSvGA'>48 законов власти - Роберт Грин</a>
+10) <a href='https://disk.yandex.ru/d/86hGeZVuernY7g'>Риторика - Аристотель</a>

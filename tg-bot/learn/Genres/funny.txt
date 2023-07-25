@@ -3,13 +3,13 @@
 Нажав на название книги, вы сможете скачать ее .epub файл
 
 10 лучших книг в жанре Юмор:
-1) <a href=''>{name}</a>
-2) <a href=''>{name}</a>
-3) <a href=''>{name}</a>
-4) <a href=''>{name}</a>
-5) <a href=''>{name}</a>
-6) <a href=''>{name}</a>
-7) <a href=''>{name}</a>
-8) <a href=''>{name}</a>
-9) <a href=''>{name}</a>
-10) <a href=''>{name}</a>
+1) <a href='https://disk.yandex.ru/d/yVMUpt7IBbObjA'>Двенадцать стульев - Илья Ильиф</a>
+2) <a href='https://disk.yandex.ru/i/6r6np360cREeMw'>Золотой теленок - Илья Ильиф</a>
+3) <a href='https://disk.yandex.ru/d/kKnf2UEku6Xh_g'>Вождь краснокожих - О. Генри</a>
+4) <a href='https://disk.yandex.ru/d/7RtWIOCczemshg'>Возмутитель спокойствия - Леонид Соловьев</a>
+5) <a href='https://disk.yandex.ru/d/hWn38PcaV_WT1Q'>Принцесса выходит в свет - Михаил Коссой</a>
+6) <a href='https://disk.yandex.ru/d/E6gdLrlgPaQEng'>Воспитание Игорёшика - Ольга Назарова</a>
+7) <a href='https://disk.yandex.ru/d/po9r_w41KqL4Qg'>Лаврушка - Тата Кит</a>
+8) <a href='https://disk.yandex.ru/d/jn1QWdqXhIusLA'>Укрощение рыжего чудовища - Дарья Волкова</a>
+9) <a href='https://disk.yandex.ru/i/gMyQgMvLWaTsLQ'>Синдром <i>КУ-КУ</i> - Вячеслав Низеньков</a>
+10) <a href='https://disk.yandex.ru/d/7_n8D0DZQOiFDQ'>Ящик пандоры - Назар Валеев</a>

@@ -1,15 +1,15 @@
 Комиксы
 
-Нажав на название книги, вы сможете скачать ее .epub файл
+Нажав на название комикса, откроется сайт для прочтения
 
 10 лучших книг в жанре Комиксы:
-1) <a href=''>{name}</a>
-2) <a href=''>{name}</a>
-3) <a href=''>{name}</a>
-4) <a href=''>{name}</a>
-5) <a href=''>{name}</a>
-6) <a href=''>{name}</a>
-7) <a href=''>{name}</a>
-8) <a href=''>{name}</a>
-9) <a href=''>{name}</a>
-10) <a href=''>{name}</a>
+1) <a href='https://com-x.life/562-watchmen-read.html#main'>Хранители</a>
+2) <a href='https://com-x.life/3164-batman-the-killing-joke-betmen-ubiystvennaya-shutka-1988-read.html#main'>Бэтмен: Убийственная шутка</a>
+3) <a href='https://com-x.life/2226-skazaniya-read.html#main'>Сказки</a>
+4) <a href='https://com-x.life/8110-the-walking-dead-deluxe-hodyachie-mertvecy-delyuks.html#main'>Ходячие мертвецы</a>
+5) <a href='https://com-x.life/201-skott-pilgrim-2004-read.html#main'>Скотт Пилигрим</a>
+6) <a href='https://com-x.life/2221-pesochnyy-chelovek-read.html#main'>Песочный человек</a>
+7) <a href='https://com-x.life/1733-transmetropolitan-read.html#main'>Трансметрополитен</a>
+8) <a href='https://com-x.life/529-y-last-man-read.html#main'>Y: Последний мужчина</a>
+9) <a href='https://com-x.life/5269-umbrella-academy-apocalypse-suite-read.html#main'>Академия Амбрелла: Сюита Апокалипсиса</a>
+10) <a href='https://com-x.life/2208-gorod-grehov-read.html#main'>Город Грехов</a>

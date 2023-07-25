@@ -1,15 +1,15 @@
 Манга
 
-Нажав на название книги, вы сможете скачать ее .epub файл
+Нажав на название манги, вас перенаправят на mangalib (Некоторые манги требуют авторизации из-за 18+ метки)
 
 10 лучших книг в жанре Манга:
-1) <a href=''>{name}</a>
-2) <a href=''>{name}</a>
-3) <a href=''>{name}</a>
-4) <a href=''>{name}</a>
-5) <a href=''>{name}</a>
-6) <a href=''>{name}</a>
-7) <a href=''>{name}</a>
-8) <a href=''>{name}</a>
-9) <a href=''>{name}</a>
-10) <a href=''>{name}</a>
+1) <a href='https://mangalib.me/vinland-saga-colored-version?section=info'>Сага о Винланде</a> (Нужна авторизация)
+2) <a href='https://mangalib.me/guran-buru?section=info'>Необъятный океан</a>
+3) <a href='https://mangalib.me/bungou-stray-dogs?section=info'>Великий из Бродячих Псов</a>
+4) <a href='https://mangalib.me/vagabond?section=info'>Бродяга</a> (Нужна авторизация)
+5) <a href='https://mangalib.me/8kaijuu?section=info'>Кайдзю</a>
+6) <a href='https://mangalib.me/tomodachi-game?section=info'>Игра друзей</a> (Нужна авторизация)
+7) <a href='https://mangalib.me/berserk?section=info'>Берсерк</a> (Нужна авторизация)
+8) <a href='https://mangalib.me/sulajeonseol-doglyong?section=info'>Легенда о Суре: Ядовитый дракон</a> (Нужна авторизация)
+9) <a href='https://mangalib.me/onepunchman?section=info'>Ванпанчмен</a>
+10) <a href='https://mangalib.me/shingeki-no-kyojin?section=info'>Атака Титанов</a> (Нужна авторизация)
