@@ -15,13 +15,6 @@ from case import echo_call, fun_handler
 ud.add_handler(CallbackQueryHandler(echo_call))#                 base check-callback-query
 import functions as func
 ud.add_handler(CommandHandler('start', func.start_handler))#     command
-ud.add_handler(CommandHandler('help', func.help_handler))#       command
-ud.add_handler(CommandHandler('FAQ', func.faq_handler))#         command
-ud.add_handler(CommandHandler('fun', fun_handler))#              command
-ud.add_handler(CommandHandler('pack', func.pack_handler))#       command
-ud.add_handler(CommandHandler('links', func.link_handler))#      command
-ud.add_handler(CommandHandler('learning', func.learn_handler))#  command
-ud.add_handler(CommandHandler('support', func.support_handler))# command
 ud.add_handler(CommandHandler('menu', func.back_handler))#       any command-line
 ud.add_handler(CommandHandler("back", func.back_handler))#       any command-line
 import prefix

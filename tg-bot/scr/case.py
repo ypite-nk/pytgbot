@@ -23,24 +23,23 @@ dislikestat = False
 def fun_handler(update, context):
     if checkban(update, context):
         return
-    update.message.reply_text(openf("descriptext", "fun"),
-                              reply_markup=InlineKeyboardMarkup(kb.key))
+    update.callback_query.message.reply_text(openf("menu/more/fun", "fun"),
+                                             reply_markup=InlineKeyboardMarkup(kb.key))
 
-def game2_handler(update, context):
+def photo_handler(update, context):
     if checkban(update, context):
         return
     global active_mem, LikeCount, DisLikeCount, mem_m, edit_message_id
     mem_n = []
     LikeCount, DisLikeCount = 0, 0
     active_mem = 0
-    for i in range(len(open("links/mem_links.txt", "r", encoding="utf-8").readlines(0))):
+    for i in range(len(open("menu/more/fun/photo/links.txt", "r", encoding="utf-8").readlines(0))):
         mem_n.append(used_class.Mem(i))
     active_mem = random.choice(mem_n)
     while active_mem.data()[0] in mem_m:
         active_mem = random.choice(mem_n)
     LikeCount = active_mem.data()[2]
     DisLikeCount = active_mem.data()[3]
-    print(active_mem.data()[0])
     edit_message_id = update.callback_query.message.reply_photo(active_mem.data()[0], reply_markup=InlineKeyboardMarkup(kb.mem(LikeCount, DisLikeCount))).message_id
     mem_m[4] = mem_m[3]
     mem_m[3] = mem_m[2]
@@ -51,9 +50,8 @@ def game2_handler(update, context):
 def vid_handler(update, context):
     if checkban(update, context):
         return
-
     global video_mem
-    with open("links/vid.txt", "r", encoding="utf-8") as file:
+    with open("menu/more/fun/vid/vid.txt", "r", encoding="utf-8") as file:
         file = file.readlines()
     active_video = random.choice(file).replace("\n", "")
     while active_video in video_mem:
@@ -68,9 +66,8 @@ def vid_handler(update, context):
 def joke_handler(update, context):
     if checkban(update, context):
         return
-
     global joke_mem
-    with open("data/joke.txt", "r", encoding="utf-8") as file:
+    with open("menu/more/fun/joke/joke.txt", "r", encoding="utf-8") as file:
         file = file.readlines()
     joke = random.choice(file).replace("\n", "")
     while joke in joke_mem:
@@ -86,9 +83,8 @@ def joke_handler(update, context):
 def thought_handler(update, context):
     if checkban(update, context):
         return
-
     global thought_mem
-    with open("data/thought.txt", "r", encoding="utf-8") as file:
+    with open("menu/more/fun/thought/thought.txt", "r", encoding="utf-8") as file:
         file = file.readlines()
     thought = random.choice(file).replace("\n", "")
     while thought in thought_mem:
@@ -115,9 +111,9 @@ def echo_button(update, context):
     reply_text = update.callback_query.message.reply_text
     reply_sticker = update.callback_query.message.reply_sticker
 
-    sticker_links = {'fifticent' : open("links/fifticent.txt").readlines(0), 'lilpeep' : open("links/lilpeep.txt").readlines(0),
-                    'gecs' : open("links/100gecs.txt").readlines(0), 'egorcreed' : open("links/egorcreed.txt").readlines(0),
-                    'dog' : open("links/dog.txt").readlines(0)
+    sticker_links = {'fifticent' : open("menu/more/fun/rap/fifticent.txt").readlines(0), 'lilpeep' : open("menu/more/fun/rap/lilpeep.txt").readlines(0),
+                    'gecs' : open("menu/more/fun/rap/100gecs.txt").readlines(0), 'egorcreed' : open("menu/more/fun/rap/egorcreed.txt").readlines(0),
+                    'dog' : open("menu/more/fun/rap/dog.txt").readlines(0)
                     }
     conflict = True
     if "-" in update.callback_query['data']:
@@ -155,19 +151,16 @@ def echo_button(update, context):
                 dislikestat = False
 
         if action == "А" or action == "П":
-            reply_text(openf("info/ypiter/marks", "MARKS-" + value + "-" + action),
+            reply_text(openf("menu/faq/ypiter/marks/marks", "MARKS-" + value + "-" + action),
                                                      reply_markup=InlineKeyboardMarkup(kb.set_mark(marks_namelist)))
 
     else:
         match update.callback_query['data']:
-            case "/back":
-                reply_text(openf('descriptext', 'Menu'), reply_markup=InlineKeyboardMarkup(kb.start_key))
-
-            case "/fun":
-                fun_handler(update.callback_query, context)
+            case "fun":
+                fun_handler(update, context)
 
             case "photomem":
-                game2_handler(update, context)
+                photo_handler(update, context)
 
             case "videomem":
                 vid_handler(update, context)
@@ -186,42 +179,42 @@ def echo_button(update, context):
     
         match update.callback_query['data']:
 # BACK TO MENU
-            case "/backdel":
-                new_message_id = reply_text(openf('descriptext', 'Menu'), 
+            case "/back":
+                new_message_id = reply_text(openf('menu', 'menu'), 
                                             reply_markup=InlineKeyboardMarkup(kb.start_key)).message_id
 #   FAQ
             case "botinfo":
-                new_message_id = reply_text(openf("info", "Bot"),
-                                            reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Назад", callback_data="faq"), kb.menudel]])).message_id
+                new_message_id = reply_text(openf("menu/faq", "bot"),
+                                            reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("<<<", callback_data="faq"), kb.backmenu]])).message_id
             case "ypiinfo":
-                new_message_id = reply_text(openf("info/ypiter", "Ypiter"),
+                new_message_id = reply_text(openf("menu/faq/ypiter", "faq"),
                                             reply_markup=InlineKeyboardMarkup(kb.ypiterFAQ)).message_id
 #   О YPITER
             case "all":
-                 new_message_id = reply_text(openf("info/ypiter", "YpiAll"),
-                                             reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Назад", callback_data="ypiinfo"), kb.menudel]]),
+                 new_message_id = reply_text(openf("menu/faq/ypiter", "all"),
+                                             reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("<<<", callback_data="ypiinfo"), kb.backmenu]]),
                                              parse_mode=ParseMode.HTML).message_id
             case "ypimore":
-                new_message_id = reply_text(openf("info/ypiter", "YpiAllMore"),
-                                            reply_markup=InlineKeyboardMarkup(kb.backdel))
+                new_message_id = reply_text(openf("menu/faq/ypiter", "more"),
+                                            reply_markup=InlineKeyboardMarkup(kb.back))
 #   РЕЦЕНЗИИ
             case "marks":
-                with open("info/ypiter/marks/markslist.txt", "r", encoding="utf-8") as file:
+                with open("menu/faq/ypiter/marks/markslist.txt", "r", encoding="utf-8") as file:
                     marks = file.readlines()
                     marks_namelist = []
                     for i in range(int(marks[0].split(";")[0])+1):
                         if "-" in marks[0].split(";")[i]:
                             marks_namelist.append(marks[0].split(";")[i])
                 
-                new_message_id = reply_text(openf("info/ypiter/marks", "marks"),
+                new_message_id = reply_text(openf("menu/faq/ypiter/marks", "marks"),
                                             reply_markup=InlineKeyboardMarkup(kb.set_mark(marks_namelist))).message_id
 
             case "getmark":
-                new_message_id = reply_text(openf("info/ypiter/marks", "marksget"),
+                new_message_id = reply_text(openf("menu/faq/ypiter/marks", "marksget"),
                                             reply_markup=InlineKeyboardMarkup(kb.ypiterFAQ)).message_id
 #   GAME:RAP
             case "rap":
-                new_message_id = reply_text(openf('descriptext', "Game_Description1"),
+                new_message_id = reply_text(openf('menu/more/fun/rap', "Game_Description1"),
                                             reply_markup=InlineKeyboardMarkup(kb.rap)).message_id
             case "50 Cent":
                 new_message_id = reply_sticker(sticker_links['fifticent'][0],
@@ -240,25 +233,39 @@ def echo_button(update, context):
                                                 reply_markup=InlineKeyboardMarkup(kb.rap)).message_id
 #   MENU
             case "faq":
-                new_message_id = reply_text(openf("descriptext", "faq"),
+                new_message_id = reply_text(openf("menu/faq", "faq"),
                                             reply_markup=InlineKeyboardMarkup(kb.FAQ)).message_id
             case "info":
-                new_message_id = reply_text(openf('', "version"),
-                                            reply_markup=InlineKeyboardMarkup(kb.backdel)).message_id
+                new_message_id = reply_text(openf('menu', "info"),
+                                            reply_markup=InlineKeyboardMarkup(kb.back)).message_id
             case "commands":
-                new_message_id = reply_text(openf('links', 'links'),
-                                            reply_markup=InlineKeyboardMarkup(kb.backdel)).message_id
+                new_message_id = reply_text(openf('menu', 'commands'),
+                                            reply_markup=InlineKeyboardMarkup(kb.back)).message_id
             case "helper":
-                new_message_id = reply_text(openf("descriptext", "helper"),
-                                            reply_markup=InlineKeyboardMarkup(kb.backdel)).message_id
+                new_message_id = reply_text(openf("menu", "callback"),
+                                            reply_markup=InlineKeyboardMarkup(kb.back)).message_id
             case "projects":
-                new_message_id = reply_text(openf("info", "projects"),
+                new_message_id = reply_text(openf("menu", "projects"),
                                             reply_markup=InlineKeyboardMarkup(kb.projects)).message_id
             case "mycity":
                 new_message_id = mycity(update, context)
             case "cityBack":
                 new_message_id = mycity(update, context)
-
+#   MORE
+            case "more":
+                new_message_id = reply_text(openf("menu/more", "more"),
+                                            reply_markup=InlineKeyboardMarkup(kb.more)).message_id
+            case "social":
+                new_message_id = reply_text(openf("menu/more", "social"),
+                                            reply_markup=InlineKeyboardMarkup(kb.link)).message_id
+            case "packs":
+                new_message_id = reply_text(openf("menu/more", "pack"),
+                                            reply_markup=InlineKeyboardMarkup(kb.commands_out),
+                                            parse_mode=ParseMode.HTML).message_id
+            case "donate":
+                new_message_id = reply_text(openf("menu/more", "donate"),
+                                            reply_markup=InlineKeyboardMarkup(kb.support),
+                                            parse_mode=ParseMode.HTML).message_id
 #   LEARN
             case "learn":
                 new_message_id = reply_text(openf("learn", "description"),
@@ -455,73 +462,73 @@ def echo_button(update, context):
 #   CITY_GAME
 #       CREATE
             case "create":
-                new_message_id = reply_text(openf("city/descrip", "create"),
+                new_message_id = reply_text(openf("data/city/descrip", "create"),
                                             reply_markup=InlineKeyboardMarkup(kb.city_createtypes)).message_id
 #       CREATE-HOUSE
             case "house":
-                new_message_id = reply_text(openf("city/descrip", "create_house"),
+                new_message_id = reply_text(openf("data/city/descrip", "create_house"),
                                             reply_markup=InlineKeyboardMarkup(kb.city_create_house)).message_id
             case "house1":
-                new_message_id = reply_text(openf("city/descrip/create", "create")).message_id
+                new_message_id = reply_text(openf("data/city/descrip/create", "create")).message_id
                 Create(update, context).house1()
             case "house2":
-                new_message_id = reply_text(openf("city/descrip/create", "create")).message_id
+                new_message_id = reply_text(openf("data/city/descrip/create", "create")).message_id
                 Create(update, context).house2()
             case "house3":
-                new_message_id = reply_text(openf("city/descrip/create", "create")).message_id
+                new_message_id = reply_text(openf("data/city/descrip/create", "create")).message_id
                 Create(update, context).house3()
 #       CREATE-COMMERCICAL
             case "commercical":
-                new_message_id = reply_text(openf("city/descrip", "create_commercical"),
+                new_message_id = reply_text(openf("data/city/descrip", "create_commercical"),
                                             reply_markup=InlineKeyboardMarkup(kb.city_create_commercical)).message_id
             case "comm1":
-                new_message_id = reply_text(openf("city/descrip/create", "create")).message_id
+                new_message_id = reply_text(openf("data/city/descrip/create", "create")).message_id
                 Create(update, context).comm1()
             case "comm2":
-                new_message_id = reply_text(openf("city/descrip/create", "create")).message_id
+                new_message_id = reply_text(openf("data/city/descrip/create", "create")).message_id
                 Create(update, context).comm2()
             case "comm3":
-                new_message_id = reply_text(openf("city/descrip/create", "create")).message_id
+                new_message_id = reply_text(openf("data/city/descrip/create", "create")).message_id
                 Create(update, context).comm3()
 #       CREATE-INDUSTRY
             case "industry":
-                new_message_id = reply_text(openf("city/descrip", "create_industry"),
+                new_message_id = reply_text(openf("data/city/descrip", "create_industry"),
                                             reply_markup=InlineKeyboardMarkup(kb.city_create_industry)).message_id
             case "ind1":
-                new_message_id = reply_text(openf("city/descrip/create", "create_ind_1"),
+                new_message_id = reply_text(openf("data/city/descrip/create", "create_ind_1"),
                                             reply_markup=InlineKeyboardMarkup(kb.city_create_ind1)).message_id
             case "1indenergy":
-                new_message_id = reply_text(openf("city/descrip/create", "create")).message_id
+                new_message_id = reply_text(openf("data/city/descrip/create", "create")).message_id
                 Create(update, context).ind1_1()
             case "2indenergy":
-                new_message_id = reply_text(openf("city/descrip/create", "create")).message_id
+                new_message_id = reply_text(openf("data/city/descrip/create", "create")).message_id
                 Create(update, context).ind1_2()
             case "3indenergy":
-                new_message_id = reply_text(openf("city/descrip/create", "create")).message_id
+                new_message_id = reply_text(openf("data/city/descrip/create", "create")).message_id
                 Create(update, context).ind1_3()
             case "ind2":
-                new_message_id = reply_text(openf("city/descrip/create", "create_ind_2"),
+                new_message_id = reply_text(openf("data/city/descrip/create", "create_ind_2"),
                                             reply_markup=InlineKeyboardMarkup(kb.city_create_ind2)).message_id
             case "1indwater":
-                new_message_id = reply_text(openf("city/descrip/create", "create")).message_id
+                new_message_id = reply_text(openf("data/city/descrip/create", "create")).message_id
                 Create(update, context).ind2_1()
             case "2indwater":
-                new_message_id = reply_text(openf("city/descrip/create", "create")).message_id
+                new_message_id = reply_text(openf("data/city/descrip/create", "create")).message_id
                 Create(update, context).ind2_2()
             case "3indwater":
-                new_message_id = reply_text(openf("city/descrip/create", "create")).message_id
+                new_message_id = reply_text(openf("data/city/descrip/create", "create")).message_id
                 Create(update, context).ind2_3()
             case "ind3":
-                new_message_id = reply_text(openf("city/descrip/create", "create_ind_3"),
+                new_message_id = reply_text(openf("data/city/descrip/create", "create_ind_3"),
                                             reply_markup=InlineKeyboardMarkup(kb.city_create_ind3)).message_id
             case "1indmat":
-                new_message_id = reply_text(openf("city/descrip/create", "create")).message_id
+                new_message_id = reply_text(openf("data/city/descrip/create", "create")).message_id
                 Create(update, context).ind3_1()
             case "2indmat":
-                new_message_id = reply_text(openf("city/descrip/create", "create")).message_id
+                new_message_id = reply_text(openf("data/city/descrip/create", "create")).message_id
                 Create(update, context).ind3_2()
             case "3indmat":
-                new_message_id = reply_text(openf("city/descrip/create", "create")).message_id
+                new_message_id = reply_text(openf("data/city/descrip/create", "create")).message_id
                 Create(update, context).ind3_3()
 
         if not conflict:
@@ -532,4 +539,4 @@ def echo_call(update, context):
     try:
         echo_button(update, context)
     except:
-        update.callback_query.message.reply_text("Error", reply_markup=InlineKeyboardMarkup(kb.backdel))
+        update.callback_query.message.reply_text("Error", reply_markup=InlineKeyboardMarkup(kb.back))

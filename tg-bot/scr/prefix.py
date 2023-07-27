@@ -54,10 +54,10 @@ def prefix_weather(update, context, city = None):
             w = owm(city).weather
             result = [w.temperature('celsius')['temp'], w.detailed_status, w.wind()['speed']]
             update.message.reply_text("Город: " + city + "\nТемпература: " + str(result[0]) + "\nНебо: " + str(result[1]) + "\nВетер: " + str(result[2]) + " м/с",
-                                      reply_markup=InlineKeyboardMarkup(kb.backdel))
+                                      reply_markup=InlineKeyboardMarkup(kb.back))
         except:
             update.message.reply_text("Такого города не существует! Возможно, вы ошиблись в написании или у OpenWeatherMap нету таких данных.",
-                                      reply_markup=InlineKeyboardMarkup(kb.backdel))
+                                      reply_markup=InlineKeyboardMarkup(kb.back))
 
 def city_create(update, context):
     if checkban(update, context):
@@ -216,7 +216,7 @@ def change(update, context):
             checker.echo_check(text)                    
     except:
         update.message.reply_text("Произошла неизвестная ошибка, попробуйте заного",
-                                  reply_markup=InlineKeyboardMarkup(kb.backdel))
+                                  reply_markup=InlineKeyboardMarkup(kb.back))
 
 def update(update, context):
     users_uid = login.users_info()

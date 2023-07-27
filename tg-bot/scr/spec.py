@@ -36,7 +36,7 @@ class Echo_Checker():
 
         self.uid = str(self.update.message.chat_id)
 
-        self.menu = InlineKeyboardMarkup(kb.backdel)
+        self.menu = InlineKeyboardMarkup(kb.back)
         self.city = InlineKeyboardMarkup(kb.backcity)
 
         self.status = { 'name':'0',
@@ -55,7 +55,7 @@ class Echo_Checker():
             return False
         marks_id_memory = []
 
-        with open("info/ypiter/marks/memory.txt", "r", encoding="utf-8") as file:
+        with open("menu/faq/ypiter/marks/memory.txt", "r", encoding="utf-8") as file:
             file = file.readlines()
             for i in file:
                 marks_id_memory.append(i.replace("\n", ""))
@@ -68,22 +68,22 @@ class Echo_Checker():
             if stat['marks_collect'] == 1:
                 with open("base/" + self.uid + "marks.txt", "w+", encoding="utf-8") as f:
                     f.write(user_text + self.update.message.text + "\n")
-                self.message = openf("descriptext", "marks2")
+                self.message = openf("menu/faq/ypiter/marks", "marks2")
 
             elif stat['marks_collect'] == 2:
                 with open("base/" + self.uid + "marks.txt", "w+", encoding="utf-8") as f:
                     f.write(user_text + self.update.message.text + "\n")
-                self.message = openf("descriptext", "marks3")
+                self.message = openf("menu/faq/ypiter/marks", "marks3")
 
             elif stat['marks_collect'] == 3:
                 if self.update.message.text.lower() == "да":
-                    self.message = openf("descriptext", "marks4_5")
+                    self.message = openf("menu/faq/ypiter/marks", "marks4_5")
                     stat['marks_collect'] = stat['marks_collect'] + 1
                 elif self.update.message.text.lower() == "нет":
-                    self.message = openf("descriptext", "marks4")
+                    self.message = openf("menu/faq/ypiter/marks", "marks4")
 
             if stat['marks_collect'] == 4:
-                self.message = str(openf("descriptext", "marks_complete") + "\n" +
+                self.message = str(openf("menu/faq/ypiter/marks", "marks_complete") + "\n" +
                     openf("base", self.uid + "marks") + "\nХотите изменить?(Да/нет)")
             stat['marks_collect'] = stat['marks_collect'] + 1
             login.update(self.update.message.chat_id, stat)
@@ -98,7 +98,7 @@ class Echo_Checker():
             elif self.update.message.text.lower() == "нет":
                 stat['marks_collect'] = 0
                 login.update(self.uid, stat)
-                with open("info/ypiter/marks/memory.txt", "w", encoding="utf-8") as file:
+                with open("menu/faq/ypiter/marks/memory.txt", "w", encoding="utf-8") as file:
                     marks_id_memory.append(str(self.update.message.chat_id))
                     for i in range(len(marks_id_memory)):
                         if i != len(marks_id_memory):
@@ -107,7 +107,7 @@ class Echo_Checker():
                             file.write(marks_id_memory[i])
                 with open("base/"+ self.uid +"marks.txt", "w", encoding="utf-8") as file:
                     file.write(" ")
-                self.message = openf("info/ypiter/marks", "markssucces")
+                self.message = openf("menu/faq/ypiter/marks", "markssucces")
                 return False
 
         return False
@@ -154,7 +154,7 @@ class Echo_Checker():
                 self.reply_markup = self.city
 
                 response = urllib.request.urlopen(file.file_path)
-                path = "D:/proj/pytgbotGH/tg-bot/base/cities/photo/" + self.uid + "city.jpg"
+                path = "base/cities/photo/" + self.uid + "city.jpg"
 
                 with open(path, 'wb') as new_file:
                     new_file.write(response.read())
@@ -291,7 +291,7 @@ class Create():
                     login.city_data_change(self.uid, user_city_data)
                     login.city_change(self.uid, user_city)
 
-                    self.update.callback_query.message.reply_text(openf("city/descrip/create", "create_house_1"),
+                    self.update.callback_query.message.reply_text(openf("data/city/descrip/create", "create_house_1"),
                                                                   reply_markup=InlineKeyboardMarkup(kb.backcity))
                 else:
                     self.update.callback_query.message.reply_text("Для постройки этого района нехватает водоснабжения! Постройте новые станции водоснабжения", 
@@ -331,7 +331,7 @@ class Create():
                     login.city_data_change(self.uid, user_city_data)
                     login.city_change(self.uid, user_city)
 
-                    self.update.callback_query.message.reply_text(openf("city/descrip/create", "create_house_2"),
+                    self.update.callback_query.message.reply_text(openf("data/city/descrip/create", "create_house_2"),
                                                                   reply_markup=InlineKeyboardMarkup(kb.backcity))
                 else:
                     self.update.callback_query.message.reply_text("Для постройки этого района нехватает водоснабжения! Постройте новые станции водоснабжения", 
@@ -371,7 +371,7 @@ class Create():
                     login.city_data_change(self.uid, user_city_data)
                     login.city_change(self.uid, user_city)
 
-                    self.update.callback_query.message.reply_text(openf("city/descrip/create", "create_house_3"),
+                    self.update.callback_query.message.reply_text(openf("data/city/descrip/create", "create_house_3"),
                                                                   reply_markup=InlineKeyboardMarkup(kb.backcity))
                 else:
                     self.update.callback_query.message.reply_text("Для постройки этого района нехватает водоснабжения! Постройте новые станции водоснабжения", 
@@ -395,7 +395,7 @@ class Create():
 
             login.city_data_change(self.uid, user_city_data)
 
-            self.update.callback_query.message.reply_text(openf("city/descrip/create", "create_comm_1"),
+            self.update.callback_query.message.reply_text(openf("data/city/descrip/create", "create_comm_1"),
                                                             reply_markup=InlineKeyboardMarkup(kb.backcity))
         else:
             self.update.callback_query.message.reply_text("Средства города не способны содерждать этот район... Пополните бюджет или увеличьте доход", 
@@ -413,7 +413,7 @@ class Create():
 
             login.city_data_change(self.uid, user_city_data)
 
-            self.update.callback_query.message.reply_text(openf("city/descrip/create", "create_comm_2"),
+            self.update.callback_query.message.reply_text(openf("data/city/descrip/create", "create_comm_2"),
                                                             reply_markup=InlineKeyboardMarkup(kb.backcity))
         else:
             self.update.callback_query.message.reply_text("Средства города не способны содерждать этот район... Пополните бюджет или увеличьте доход", 
@@ -431,7 +431,7 @@ class Create():
 
             login.city_data_change(self.uid, user_city_data)
 
-            self.update.callback_query.message.reply_text(openf("city/descrip/create", "create_comm_3"),
+            self.update.callback_query.message.reply_text(openf("data/city/descrip/create", "create_comm_3"),
                                                             reply_markup=InlineKeyboardMarkup(kb.backcity))
         else:
             self.update.callback_query.message.reply_text("Средства города не способны содерждать этот район... Пополните бюджет или увеличьте доход", 
@@ -452,7 +452,7 @@ class Create():
 
             login.city_data_change(self.uid, user_city_data)
 
-            self.update.callback_query.message.reply_text(openf("city/descrip/create", "create_ind_en_1"),
+            self.update.callback_query.message.reply_text(openf("data/city/descrip/create", "create_ind_en_1"),
                                                             reply_markup=InlineKeyboardMarkup(kb.backcity))
         else:
             self.update.callback_query.message.reply_text("Средства города не способны содерждать этот объект... Пополните бюджет или увеличьте доход", 
@@ -473,7 +473,7 @@ class Create():
 
             login.city_data_change(self.uid, user_city_data)
 
-            self.update.callback_query.message.reply_text(openf("city/descrip/create", "create_ind_en_2"),
+            self.update.callback_query.message.reply_text(openf("data/city/descrip/create", "create_ind_en_2"),
                                                             reply_markup=InlineKeyboardMarkup(kb.backcity))
         else:
             self.update.callback_query.message.reply_text("Средства города не способны содерждать этот объект... Пополните бюджет или увеличьте доход", 
@@ -494,7 +494,7 @@ class Create():
 
             login.city_data_change(self.uid, user_city_data)
 
-            self.update.callback_query.message.reply_text(openf("city/descrip/create", "create_ind_en_3"),
+            self.update.callback_query.message.reply_text(openf("data/city/descrip/create", "create_ind_en_3"),
                                                             reply_markup=InlineKeyboardMarkup(kb.backcity))
         else:
             self.update.callback_query.message.reply_text("Средства города не способны содерждать этот объект... Пополните бюджет или увеличьте доход", 
@@ -520,7 +520,7 @@ class Create():
 
                 login.city_data_change(self.uid, user_city_data)
 
-                self.update.callback_query.message.reply_text(openf("city/descrip/create", "create_ind_wat_1"),
+                self.update.callback_query.message.reply_text(openf("data/city/descrip/create", "create_ind_wat_1"),
                                                             reply_markup=InlineKeyboardMarkup(kb.backcity))
             else:
                 self.update.callback_query.message.reply_text("Для постройки этого объекта нехватает электроэнергии! Постройте новые электростанции",
@@ -548,7 +548,7 @@ class Create():
 
                 login.city_data_change(self.uid, user_city_data)
 
-                self.update.callback_query.message.reply_text(openf("city/descrip/create", "create_ind_wat_2"),
+                self.update.callback_query.message.reply_text(openf("data/city/descrip/create", "create_ind_wat_2"),
                                                             reply_markup=InlineKeyboardMarkup(kb.backcity))
             else:
                 self.update.callback_query.message.reply_text("Для постройки этого объекта нехватает электроэнергии! Постройте новые электростанции",
@@ -576,7 +576,7 @@ class Create():
 
                 login.city_data_change(self.uid, user_city_data)
 
-                self.update.callback_query.message.reply_text(openf("city/descrip/create", "create_ind_wat_3"),
+                self.update.callback_query.message.reply_text(openf("data/city/descrip/create", "create_ind_wat_3"),
                                                             reply_markup=InlineKeyboardMarkup(kb.backcity))
             else:
                 self.update.callback_query.message.reply_text("Для постройки этого объекта нехватает электроэнергии! Постройте новые электростанции",
@@ -606,7 +606,7 @@ class Create():
 
                     login.city_data_change(self.uid, user_city_data)
 
-                    self.update.callback_query.message.reply_text(openf("city/descrip/create", "create_ind_mat_1"),
+                    self.update.callback_query.message.reply_text(openf("data/city/descrip/create", "create_ind_mat_1"),
                                                                   reply_markup=InlineKeyboardMarkup(kb.backcity))
                 else:
                     self.update.callback_query.message.reply_text("Для постройки этого района нехватает водоснабжения! Постройте новые станции водоснабжения",
@@ -639,7 +639,7 @@ class Create():
 
                     login.city_data_change(self.uid, user_city_data)
 
-                    self.update.callback_query.message.reply_text(openf("city/descrip/create", "create_ind_mat_2"),
+                    self.update.callback_query.message.reply_text(openf("data/city/descrip/create", "create_ind_mat_2"),
                                                                   reply_markup=InlineKeyboardMarkup(kb.backcity))
                 else:
                     self.update.callback_query.message.reply_text("Для постройки этого района нехватает водоснабжения! Постройте новые станции водоснабжения",
@@ -672,7 +672,7 @@ class Create():
 
                     login.city_data_change(self.uid, user_city_data)
 
-                    self.update.callback_query.message.reply_text(openf("city/descrip/create", "create_ind_mat_3"),
+                    self.update.callback_query.message.reply_text(openf("data/city/descrip/create", "create_ind_mat_3"),
                                                                   reply_markup=InlineKeyboardMarkup(kb.backcity))
                 else:
                     self.update.callback_query.message.reply_text("Для постройки этого района нехватает водоснабжения! Постройте новые станции водоснабжения",
@@ -735,32 +735,32 @@ class RandomTasks():
         match self.task:
 
             case "fire":
-                self.text = openf("city/descrip", "fire")
+                self.text = openf("data/city/descrip", "fire")
 
                 user_city_data['money_have'] -= 140000
 
             case "terrorism":
-                self.text = openf("city/descrip", "terrorism")
+                self.text = openf("data/city/descrip", "terrorism")
 
                 user_city['people'] -= 4000
                 user_city_data['money_have'] -= 70000
 
             case "holiday":
-                self.text = openf("city/descrip", "holiday")
+                self.text = openf("data/city/descrip", "holiday")
 
             case "hurricane":
-                self.text = openf("city/descrip", "hurricane")
+                self.text = openf("data/city/descrip", "hurricane")
 
                 user_city['people'] -= 200
                 user_city_data['money_have'] -= 80000
 
             case "flood":
-                self.text = openf("city/descrip", "flood")
+                self.text = openf("data/city/descrip", "flood")
 
                 user_city_data['money_have'] -= 30000
 
             case "earthshake":
-                self.text = openf("city/descrip", "earthshake")
+                self.text = openf("data/city/descrip", "earthshake")
 
                 user_city_data['money_have'] -= 100000
 
