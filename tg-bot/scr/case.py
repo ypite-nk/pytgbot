@@ -231,14 +231,14 @@ def echo_button(update, context):
                 new_message_id = reply_sticker(sticker_links['dog'][0],
                                                 reply_markup=InlineKeyboardMarkup(kb.rap)).message_id
 #   MENU
+            case "profile":
+                new_message_id = reply_text(openf('menu', 'profile'),
+                                            reply_markup=InlineKeyboardMarkup(kb.profile)).message_id
             case "faq":
                 new_message_id = reply_text(openf("menu/faq", "faq"),
                                             reply_markup=InlineKeyboardMarkup(kb.FAQ)).message_id
             case "info":
                 new_message_id = reply_text(openf('menu', "info"),
-                                            reply_markup=InlineKeyboardMarkup(kb.back)).message_id
-            case "commands":
-                new_message_id = reply_text(openf('menu', 'commands'),
                                             reply_markup=InlineKeyboardMarkup(kb.back)).message_id
             case "helper":
                 new_message_id = reply_text(openf("menu", "callback"),
@@ -250,7 +250,6 @@ def echo_button(update, context):
                 new_message_id = mycity(update, context)
             case "cityBack":
                 new_message_id = mycity(update, context)
-#   MORE
             case "more":
                 new_message_id = reply_text(openf("menu/more", "more"),
                                             reply_markup=InlineKeyboardMarkup(kb.more)).message_id

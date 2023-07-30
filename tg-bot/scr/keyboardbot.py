@@ -4,25 +4,39 @@ from telegram import InlineKeyboardButton as IKB
 backmenu = IKB("Меню", callback_data="/back")
 back = [[backmenu]]
 
-ypiterFAQ = [[IKB("Общее", callback_data='all'), IKB("Рецензии", callback_data='marks'), IKB("Больше..", callback_data="ypimore")],
-             [IKB("<<<", callback_data="faq"), backmenu]]
+ypiterFAQ = [
+    [IKB("Общее", callback_data='all'), IKB("Рецензии", callback_data='marks'), IKB("Больше..", callback_data="ypimore")],
+    [IKB("<<<", callback_data="faq"), backmenu]
+    ]
 
-FAQ = [[IKB("О боте", callback_data="botinfo"), IKB("О ypiter", callback_data="ypiinfo")],
-       [backmenu]]
+FAQ = [
+    [IKB("О боте", callback_data="botinfo"), IKB("О ypiter", callback_data="ypiinfo")],
+    [backmenu]
+    ]
 
-rap = [[IKB("50 Cent", callback_data="50 Cent"), IKB("Lil Peep", callback_data="Lil Peep"),
-        IKB("Egor Creed", callback_data="Egor Creed"), IKB("100 gecs", callback_data="100 gecs"),
-        IKB("Snoop Dogg", callback_data="dog")],
-       [IKB("<<<", callback_data="fun"), backmenu]]
+rap = [
+    [
+    IKB("50 Cent", callback_data="50 Cent"), IKB("Lil Peep", callback_data="Lil Peep"),
+    IKB("Egor Creed", callback_data="Egor Creed"), IKB("100 gecs", callback_data="100 gecs"),
+    IKB("Snoop Dogg", callback_data="dog")],
+    [IKB("<<<", callback_data="fun"), backmenu]
+    ]
 
-start_key = [[IKB("FAQ", callback_data="faq"), IKB("Инфо", callback_data="info"), IKB("Команды", callback_data="commands")],
-             [IKB("Проекты", callback_data="projects"), IKB("Мой город", callback_data="mycity")],
-             [IKB("Обратная связь", callback_data="helper"), IKB(">>>", callback_data="more")]
-            ]
+start_key = [
+    [IKB("Профиль", callback_data="profile"), IKB("Город", callback_data="mycity")],
+    [IKB("Инфо", callback_data="info"), IKB("FAQ", callback_data="faq"), IKB("Проекты", callback_data="projects")],
+    [IKB("Обратная связь", callback_data="helper"), IKB(">>>", callback_data="more")]
+    ]
 
-more = [[IKB("Образование", callback_data="learn"), IKB("Соцсети", callback_data="social")],
-        [IKB("Стикерпаки", callback_data="packs"), IKB("Развлечения", callback_data="fun")],
-        [IKB("<<<", callback_data="/back"), IKB("Поддержка", callback_data="donate")]
+more = [
+    [IKB("Стикерпаки", callback_data="packs"), IKB("Соцсети", callback_data="social")],
+    [IKB("Образование", callback_data="learn"), IKB("Развлечения", callback_data="fun")],
+    [IKB("<<<", callback_data="/back"), IKB("Поддержка", callback_data="donate")]
+    ]
+
+profile = [
+    [IKB("Изменить", callback_data="change_profile"), IKB("Купить VIP", callback_data="buyvip")],
+    [backmenu]
     ]
 
 def set_mark(list):

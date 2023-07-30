@@ -83,7 +83,7 @@ def authorize(user_id: str):
 
 	if not path.exists(f'base/{user_id}user.txt'):
 		with open(f'base/{user_id}user.txt', 'w', encoding='utf-8') as f:
-			f.write(f"ID:{user_id}\nНикнейм:Нет\nИмя:Нет\nДень рождения:Нет\nДеятельность:Нет\nVIP:Нет\nРейтинг:Нет\nБета-доступ:Нет\nСтатус:Нет")
+			f.write(f"ID:{user_id}\nНикнейм:Нет\nИмя:Нет\nДень рождения:Нет\nИнтересы:Нет\nVIP:Нет\nРейтинг:Нет\nБета-доступ:Нет\nСтатус:Нет")
 		with open(f'base/{user_id}user_status.txt', 'w', encoding='utf-8') as f:
 			f.write("nickname:0\nname:0\nbirthday:0\nbuisness:0")
 
@@ -103,6 +103,9 @@ def user(user_id: str):
 			user[key] = value.replace("\n", "")
 		return user
 
+def user_change(user_id: str, data: dict):
+	with open(f"base/{user_id}user.txt", "w", encoding="utf-8") as f: f.write(replaced(str(data)))
+
 def users_info():
 	with open('base/users.txt', 'r', encoding="utf-8") as f:
 		users = json_reworking(f.readlines(0))
@@ -116,17 +119,13 @@ def user_status(user_id: str):
 			user_status[key] = int(value.replace("\n", ""))
 		return user_status
 
-def user_status_change(user_id: str, user_status: dict):
-	with open(f'base/{user_id}user_status.txt', 'w', encoding='utf-8') as f: f.write(replaced(str(user_status)))
+def user_status_change(user_id: str, data: dict):
+	with open(f'base/{user_id}user_status.txt', 'w', encoding='utf-8') as f: f.write(replaced(str(data)))
 
 def city_create(user_id: str, info: str, status: str, data: str):
-	if not path.exists('base/cities/' + user_id + "city.txt"):
-		with open('base/cities/' + user_id + "city.txt", "w", encoding="utf-8") as f:
-			f.write(info)
-		with open('base/cities/' + user_id + "city_status.txt", "w", encoding="utf-8") as f:
-			f.write(status)
-		with open('base/cities/' + user_id + "city_data.txt", "w", encoding="utf-8") as f:
-			f.write(data)
+	with open('base/cities/' + user_id + "city.txt", "w", encoding="utf-8") as f: f.write(info)
+	with open('base/cities/' + user_id + "city_status.txt", "w", encoding="utf-8") as f: f.write(status)
+	with open('base/cities/' + user_id + "city_data.txt", "w", encoding="utf-8") as f: f.write(data)
 
 def authorize_city(user_id: str):
 	if not path.exists(f'base/cities/P{user_id}city.txt'): return None
