@@ -29,11 +29,9 @@ class Mem():
             Like = file.readlines()
             Like[self.id] = like_count
         with open("menu/more/fun/photo/likecount.txt", "w",  encoding="utf-8") as file:
-            print(str(Like))
             for i in range(len_data):
                 if Like[i] == like_count:
                     file.write(str(Like[i]) + "\n")
-                    print(str(Like[i]) + "\n")
                 else:
                     file.write(str(Like[i]))
 

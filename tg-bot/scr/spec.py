@@ -39,12 +39,20 @@ class Echo_Checker():
         self.menu = InlineKeyboardMarkup(kb.back)
         self.city = InlineKeyboardMarkup(kb.backcity)
 
-        self.status = { 'name':'0',
-                        'sign':'0',
-                        'gymn':'0',
-                        'history':'0',
-                        'mayor':'0'
-                      }
+        self.city_status = {
+            'name':'0',
+            'sign':'0',
+            'gymn':'0',
+            'history':'0',
+            'mayor':'0'
+            }
+
+        self.user_status = {
+            'nickname':0,
+            'name':0,
+            'birthday':0,
+            'buisness':0
+            }
 
         self.message = "Error"
         self.reply_markup = self.menu
@@ -112,23 +120,51 @@ class Echo_Checker():
 
         return False
 
-    def write_name(self, text):
-        return False
+    def clear_user_status(self):
+        login.user_status_change(self.uid, self.)
+
+    def write_nickname(self):
+        user_status = login.user_status(self.uid)
+        if user_status['nickname']:
+            return True
+        else:
+            return False
+
+    def write_name(self):
+        user_status = login.user_status(self.uid)
+        if user_status['nickname']:
+            return True
+        else:
+            return False
+
+    def write_birthday(self):
+        user_status = login.user_status(self.uid)
+        if user_status['nickname']:
+            return True
+        else:
+            return False
+
+    def write_buisness(self):
+        user_status = login.user_status(self.uid)
+        if user_status['nickname']:
+            return True
+        else:
+            return False
 
     def clear_city_status(self):
-        login.city_status_change(self.uid, self.status)
+        login.city_status_change(self.uid, self.city_status)
 
-    def write_city_name(self, text):
-        user_city_status = login.authorize_city(self.uid)
+    def write_city_name(self):
+        user_city_status = login.city_status(self.uid)
         if user_city_status is None:
             return False
-        if user_city_status['name'] and text is not None:
-            user_city = login.city_info(self.uid)
+        if user_city_status['name']:
+            user_city = login.authorize_city(self.uid)
 
             self.message = "Имя города успешно изменено!\n" + user_city['name'] + " --> " + self.update.message.text
             self.reply_markup = self.city
 
-            user_city['name'] = text
+            user_city['name'] = self.text
             login.city_change(self.uid, user_city)
 
             self.clear_city_status()
@@ -138,7 +174,7 @@ class Echo_Checker():
             return False
 
     def write_city_sign(self):
-        user_city_status = login.authorize_city(self.uid)
+        user_city_status = login.city_status(self.uid)
 
         if user_city_status is None:
             return False
@@ -161,7 +197,7 @@ class Echo_Checker():
 
                 self.clear_city_status()
 
-                user_city = login.city_info(self.uid)
+                user_city = login.authorize_city(self.uid)
                 user_city['sign'] = "Есть"
                 login.city_change(self.uid, user_city)
 
@@ -172,17 +208,17 @@ class Echo_Checker():
         else:
             return False
 
-    def write_city_gymn(self, text):
-        user_city_status = login.authorize_city(self.uid)
+    def write_city_gymn(self):
+        user_city_status = login.city_status(self.uid)
         if user_city_status is None:
             return False
-        if user_city_status['gymn'] and text is not None:
+        if user_city_status['gymn']:
 
             self.message = "Гимн города умпешно изменен!"
             self.reply_markup = self.city
 
-            user_city = login.city_info(self.uid)
-            user_city['gymn'] = text
+            user_city = login.authorize_city(self.uid)
+            user_city['gymn'] = self.text
             login.city_change(self.uid, user_city)
 
             self.clear_city_status()
@@ -191,17 +227,17 @@ class Echo_Checker():
         else:
             return False
 
-    def write_city_history(self, text):
-        user_city_status = login.authorize_city(self.uid)
+    def write_city_history(self):
+        user_city_status = login.city_status(self.uid)
         if user_city_status is None:
             return False
-        if user_city_status['history'] and text is not None:
+        if user_city_status['history']:
 
             self.message = "История города успешно изменена!"
             self.reply_markup = self.city
 
-            user_city = login.city_info(self.uid)
-            user_city['history'] = text
+            user_city = login.authorize_city(self.uid)
+            user_city['history'] = self.text
             login.city_change(self.uid, user_city)
 
             self.clear_city_status()
@@ -210,17 +246,17 @@ class Echo_Checker():
         else:
             return False
 
-    def write_city_mayor(self, text):
-        user_city_status = login.authorize_city(self.uid)
+    def write_city_mayor(self):
+        user_city_status = login.city_status(self.uid)
         if user_city_status is None:
             return False
-        if user_city_status['mayor'] and text is not None:
+        if user_city_status['mayor']:
 
             self.message = "Мэр города успешно изменен!"
             self.reply_markup = self.city
 
-            user_city = login.city_info(self.uid)
-            user_city['mayor'] = text
+            user_city = login.authorize_city(self.uid)
+            user_city['mayor'] = self.text
             login.city_change(self.uid, user_city)
 
             self.clear_city_status()
@@ -229,26 +265,26 @@ class Echo_Checker():
         else:
             return False
 
-    def echo_check(self, text):
+    def echo_check(self):
 
         ''' Check-write-status function '''
 
         if self.update.message.text is None:
             return True
-
+        self.text = self.update.message.text
         if self.write_marks():
             return True
-        if self.write_name(text):
+        if self.write_name():
             return True
-        if self.write_city_name(text):
+        if self.write_city_name():
             return True
         if self.write_city_sign():
             return True
-        if self.write_city_gymn(text):
+        if self.write_city_gymn():
             return True
-        if self.write_city_history(text):
+        if self.write_city_history():
             return True
-        if self.write_city_mayor(text):
+        if self.write_city_mayor():
             return True
         
         else:
@@ -264,7 +300,7 @@ class Create():
         self.uid = str(self.update.callback_query.message.chat_id)
 
     def house1(self):
-        user_city = login.city_info(self.uid)
+        user_city = login.authorize_city(self.uid)
         user_city_data = convert_int(login.city_data(self.uid))
 
         money_cost = 500000
@@ -304,7 +340,7 @@ class Create():
                                                           reply_markup=InlineKeyboardMarkup(kb.backcity))
 
     def house2(self):
-        user_city = login.city_info(self.uid)
+        user_city = login.authorize_city(self.uid)
         user_city_data = convert_int(login.city_data(self.uid))
 
         money_cost = 1500000
@@ -344,7 +380,7 @@ class Create():
                                                           reply_markup=InlineKeyboardMarkup(kb.backcity))
 
     def house3(self):
-        user_city = login.city_info(self.uid)
+        user_city = login.authorize_city(self.uid)
         user_city_data = convert_int(login.city_data(self.uid))
 
         money_cost = 3500000
@@ -726,7 +762,7 @@ class RandomTasks():
 
         self.text = "Error"
 
-        user_city = login.city_info(self.uid)
+        user_city = login.authorize_city(self.uid)
         user_city_data = convert_int(login.city_data(self.uid))
 
         # specific convert (can't use for or another method's)

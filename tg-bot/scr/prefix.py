@@ -95,7 +95,7 @@ def mycity(update, context):
         uid = str(update.message.chat_id)
     except:
         uid = str(update.callback_query.message.chat_id)
-    user_city_info = login.city_info(uid)
+    user_city_info = login.authorize_city(uid)
     user_city_data = login.city_data(uid)
 
     if user_city_info is None:
@@ -173,12 +173,20 @@ def change(update, context):
         prefix, *message = update.message.text.split(" ")
         match message[0].lower():
             case "профиль":
-                user = login.authorize(uid)
+                user_status = login.user_status(uid)
                 match message[1].lower():
+                    case "никнейм":
+                        pass
                     case "имя":
                         pass
+                    case "интересы":
+                        pass
+                if message[1].lower() + " " + message[2].lower() == "день рождения":
+                    pass
+                else:
+                    update.message.reply_text("Команда '/изменить' должна содержать в себе аттрибуты: '/change (профиль|город) (имя|герб|гимн|история)|(никнейм|имя|интересы|день рождения) (значение)'")
             case "город":
-                user_city_status = login.authorize_city(uid)
+                user_city_status = login.(uid)
                 if user_city_status is None:
                     update.message.reply_text("Вы еще не создали город! Для создания введите /город имягорода")
                     return
@@ -199,21 +207,9 @@ def change(update, context):
                         user_city_status['mayor'] = 1
                         login.city_status_change(uid, user_city_status)
                     case _:
-                        update.message.reply_text("Команда '/change' или '/изменить' должна содержать в себе аттрибуты: '/change (профиль|город) (имя|герб|гимн|история) (значение)'")
+                        update.message.reply_text("Команда '/изменить город' должна содержать в себе аттрибуты: '/изменить город (имя|герб|гимн|история)'")
             case _:
-                update.message.reply_text("Команда '/change' или '/изменить' должна содержать в себе аттрибуты: '/change (профиль|город) (имя|герб|гимн|история) (значение)'")
-        if len(message) > 2:
-            check_list = ['профиль', 'имя', 'город', 'имя', 'герб', 'гимн', 'история', 'мэр']
-            text = ""
-            for i in message:
-                if i not in check_list or message[1].lower() == "история" or message[1].lower() == "гимн":
-                    if i == message[-1]:
-                        text += i
-                    else:
-                        i += " "
-                        text += i
-            checker = Echo_Checker(update, context)
-            checker.echo_check(text)                    
+                update.message.reply_text("Команда '/изменить' должна содержать в себе аттрибуты: '/изменить (профиль|город) (имя|герб|гимн|история)|(никнейм|имя|интересы|день рождения)'")
     except:
         update.message.reply_text("Произошла неизвестная ошибка, попробуйте заного",
                                   reply_markup=InlineKeyboardMarkup(kb.back))

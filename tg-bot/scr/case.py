@@ -72,7 +72,6 @@ def joke_handler(update, context):
     joke = random.choice(file).replace("\n", "")
     while joke in joke_mem:
         joke = random.choice(file).replace("\n", "")
-    print(joke)
     update.callback_query.message.reply_text(joke, reply_markup=InlineKeyboardMarkup(kb.jokes), parse_mode=ParseMode.MARKDOWN_V2)
     joke_mem[4] = joke_mem[3]
     joke_mem[3] = joke_mem[2]
