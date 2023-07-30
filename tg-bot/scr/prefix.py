@@ -75,13 +75,13 @@ def city_create(update, context):
         update.message.reply_text("У вас уже есть город!",
                                   reply_markup=InlineKeyboardMarkup(kb.backcity))
         return
-    
-    prefix, *name = update.message.text.split(' ')
-    city_name = ""
-    for i in name:
-        city_name += i
-    first_part = "name:" + city_name
-    if city_name == "":
+    try:
+        prefix, *name = update.message.text.split(' ')
+        city_name = ""
+        for i in name:
+            city_name += i
+        first_part = "name:" + city_name
+    except:
         first_part = "name:" + "Город x"
     second_part = "\ncountry:Россия\nsubject:Иркутская область\ncreate_data:2023\nsize:1\npeople:0\n---optional---:---Опциональные---\nmayor:Нет\nsign:Нет\ngymn:Нет\nhistory:Нет\n"
     all_part = first_part + second_part
