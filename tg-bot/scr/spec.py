@@ -22,9 +22,6 @@ from telegram import InlineKeyboardMarkup
 from urllib.request import request as r
 
 class Echo_Checker():
-    '''
-    Класс для проверки различных статусов записи.
-    '''
     def __init__(self, update, context):
         self.update = update
         self.context = context
@@ -224,8 +221,7 @@ class Create():
         water_expenses = 1200
 
         export_people = 4000
-
-        # specific convert (can't use for or another method's)
+        
         user_city['people'] = int(user_city['people'])
 
         if user_city_data['money_have'] > money_cost and (user_city_data['money'] - user_city_data['money_need']) > money_expenses:
@@ -264,8 +260,7 @@ class Create():
         water_expenses = 2700
 
         export_people = 9000
-
-        # specific convert (can't use for or another method's)
+        
         user_city['people'] = int(user_city['people'])
 
         if user_city_data['money_have'] > money_cost and (user_city_data['money'] - user_city_data['money_need']) > money_expenses:
@@ -304,8 +299,7 @@ class Create():
         water_expenses = 6000
 
         export_people = 20000
-
-        # specific convert (can't use for or another method's)
+        
         user_city['people'] = int(user_city['people'])
 
         if user_city_data['money_have'] > money_cost and (user_city_data['money'] - user_city_data['money_need']) > money_expenses:
@@ -657,11 +651,6 @@ class RandomTasks():
         self.type = [self.house, self.weather]
 
     def generateRandomTask(self):
-        '''
-        Генератор рандомных городских (негативных) событий
-
-        Переназначение self.type и назначение self.task
-        '''
         self.type = random.choices(self.type, weights=[30, 70])[0]
         if self.type[0] == 'house':
             self.type = [self.type[1], self.type[2], self.type[3]]
@@ -679,8 +668,7 @@ class RandomTasks():
 
         user_city = login.authorize_city(self.uid)
         user_city_data = convert_int(login.city_data(self.uid))
-
-        # specific convert (can't use for or another method's)
+        
         user_city['people'] = int(user_city['people'])
 
         match self.task:
@@ -731,7 +719,6 @@ class Admins():
 
     def ban(self):
         if self.active_user['admin']:
-            
             self.active_user = self.update.message.chat_id
             self.user['ban'] = 1
 
@@ -740,12 +727,10 @@ class Admins():
             self.update.message.reply_text("User: " + self.uid + " banned. Admin: " + str(self.active_user))
             self.context.bot.send_message(chat_id=-1001955905639,
                                           text="User: " + self.uid + " banned. Admin: " + str(self.active_user))
-        else:
-            self.update.message.reply_text("You are not admin")
+        else: self.update.message.reply_text("You are not admin")
 
     def unban(self):
         if self.active_user['admin']:
-            
             self.active_user = self.update.message.chat_id
             self.user['ban'] = 0
 
@@ -754,12 +739,10 @@ class Admins():
             self.update.message.reply_text("User: " + self.uid + " unbanned. Admin: " + str(self.active_user))
             self.context.bot.send_message(chat_id=-1001955905639,
                                           text="User: " + self.uid + " unbanned. Admin: " + str(self.active_user))
-        else:
-            self.update.message.reply_text("You are not admin")
+        else: self.update.message.reply_text("You are not admin")
 
     def addbeta(self):
         if self.active_user['admin']:
-
             self.active_user = self.update.message.chat_id
             self.user['bt'] = 1
 
@@ -768,12 +751,10 @@ class Admins():
             self.update.message.reply_text("User: " + self.uid + " added to beta-test. Admin: " + str(self.active_user))
             self.context.bot.send_message(chat_id=-1001955905639,
                                           text="User: " + self.uid + " added to beta-test. Admin: " + str(self.active_user))
-        else:
-            self.update.message.reply_text("You are not admin")
+        else: self.update.message.reply_text("You are not admin")
 
     def delbeta(self):
         if self.active_user['admin']:
-
             self.active_user = self.update.message.chat_id
             self.user['bt'] = 0
 
@@ -782,21 +763,16 @@ class Admins():
             self.update.message.reply_text("User: " + self.uid + " delete from beta-test. Admin: " + str(self.active_user))
             self.context.bot.send_message(chat_id=-1001955905639,
                                           text="User: " + self.uid + " delete from beta-test. Admin: " + str(self.active_user))
-        else:
-            self.update.message.reply_text("You are not admin")
+        else: self.update.message.reply_text("You are not admin")
 
 def admin(update, context):
     admin = Admins(update, context)
     text = update.message.text
 
-    if '/ban' in text:
-        admin.ban
-    elif '/unban' in text:
-        admin.unban
-    elif '/addbeta' in text:
-        admin.addbeta
-    elif '/delbeta' in text:
-        admin.delbeta
+    if '/ban' in text: admin.ban()
+    elif '/unban' in text: admin.unban()
+    elif '/addbeta' in text: admin.addbeta()
+    elif '/delbeta' in text: admin.delbeta()
 
 from echo import echo
 
