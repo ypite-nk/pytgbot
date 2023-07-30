@@ -99,15 +99,18 @@ def mycity(update, context):
     user_city_info = login.authorize_city(uid)
     user_city_data = login.city_data(uid)
 
-    if user_city_info is None:
+    if user_city_info == None:
+        first_part = "name:Город x"
+        second_part = "\ncountry:Россия\nsubject:Иркутская область\ncreate_data:2023\nsize:1\npeople:0\n---optional---:---Опциональные---\nmayor:Нет\nsign:Нет\ngymn:Нет\nhistory:Нет\n"
+        all_part = first_part + second_part
+        status = "name:0\nsign:0\ngymn:0\nhistory:0\nmayor:0"
+        data = "money_have:1000000\nenergy_have:0\nwater_have:0\nmoney:80000\nmoney_need:0\nenergy_need:0\nwater_need:0"
         try:
             update.message.reply_text("Создаю город...")
-            city_create(update, context)
-            return
+            login.city_create(uid, all_part, status, data)
         except:
             new_message_id = update.callback_query.message.reply_text("Создаю город...").message_id
-            city_create(update.callback_query, context)
-            return new_message_id
+            login.city_create(uid, all_part, status, data)
 
     city_info = ""
     city_info_key = []
