@@ -534,7 +534,7 @@ def echo_button(update, context):
     conflict = False
 
 def echo_call(update, context):
-    #try:
-    echo_button(update, context)
-    '''except:
-        update.callback_query.message.reply_text("Error", reply_markup=InlineKeyboardMarkup(kb.back))'''
+    try:
+        echo_button(update, context)
+    except:
+        update.callback_query.message.reply_text("Error", reply_markup=InlineKeyboardMarkup(kb.back))
