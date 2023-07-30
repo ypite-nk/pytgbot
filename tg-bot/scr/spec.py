@@ -19,7 +19,7 @@ import login
 import keyboardbot as kb
 
 from telegram import InlineKeyboardMarkup
-from urllib.request import request as r
+import urllib.request
 
 class Echo_Checker():
     def __init__(self, update, context):
@@ -167,7 +167,9 @@ class Echo_Checker():
 
             if file_size.width <= 400 and file_size.height <= 400:
                 user_city['sign'] = "Есть"
-                with open("base/cities/photo/" + self.uid + "city.jpg", 'wb') as new_file: new_file.write(r.urlopen(file.file_path).read())
+
+                response = urllib.request.urlopen(file.file_path)
+                with open("base/cities/photo/" + self.uid + "city.jpg", 'wb') as new_file: new_file.write(response.read())
                 
             else:
                 self.message = "Размеры файла превышают максимальные! (400x400)"
