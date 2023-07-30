@@ -15,11 +15,11 @@ def convert_int(data: dict):
         data[i] = int(data[i])
     return data
 
-import urllib.request
 import login
 import keyboardbot as kb
 
 from telegram import InlineKeyboardMarkup
+from urllib.request import request as r
 
 class Echo_Checker():
     '''
@@ -36,7 +36,7 @@ class Echo_Checker():
 
         self.uid = str(self.update.message.chat_id)
 
-        self.menu = InlineKeyboardMarkup(kb.back)
+        self.user = InlineKeyboardMarkup(kb.profile)
         self.city = InlineKeyboardMarkup(kb.backcity)
 
         self.city_status = {
@@ -48,25 +48,23 @@ class Echo_Checker():
             }
 
         self.user_status = {
-            'nickname':0,
-            'name':0,
-            'birthday':0,
-            'buisness':0
+            'nickname':'0',
+            'name':'0',
+            'birthday':'0',
+            'buisness':'0'
             }
 
         self.message = "Error"
-        self.reply_markup = self.menu
+        self.reply_markup = InlineKeyboardMarkup(kb.back)
 
-    def write_marks(self):
+    def write_mark(self):
         stat = login.authorize(self.uid)
-        if stat['marks_collect'] == 0 or self.update.message.text is not None:
-            return False
+        if stat['marks_collect'] == 0 or self.update.message.text is not None: return False
         marks_id_memory = []
 
         with open("menu/faq/ypiter/marks/memory.txt", "r", encoding="utf-8") as file:
             file = file.readlines()
-            for i in file:
-                marks_id_memory.append(i.replace("\n", ""))
+            for i in file: marks_id_memory.append(i.replace("\n", ""))
         if self.uid in marks_id_memory:
             self.message = "Вы уже отправляли рецензию!"
             return True
@@ -74,13 +72,11 @@ class Echo_Checker():
             user_text = openf("base", self.uid + "marks")
 
             if stat['marks_collect'] == 1:
-                with open("base/" + self.uid + "marks.txt", "w+", encoding="utf-8") as f:
-                    f.write(user_text + self.update.message.text + "\n")
+                with open("base/" + self.uid + "marks.txt", "w+", encoding="utf-8") as f: f.write(user_text + self.update.message.text + "\n")
                 self.message = openf("menu/faq/ypiter/marks", "marks2")
 
             elif stat['marks_collect'] == 2:
-                with open("base/" + self.uid + "marks.txt", "w+", encoding="utf-8") as f:
-                    f.write(user_text + self.update.message.text + "\n")
+                with open("base/" + self.uid + "marks.txt", "w+", encoding="utf-8") as f: f.write(user_text + self.update.message.text + "\n")
                 self.message = openf("menu/faq/ypiter/marks", "marks3")
 
             elif stat['marks_collect'] == 3:
@@ -101,7 +97,7 @@ class Echo_Checker():
             if self.update.message.text.lower() == "да":
                 stat['marks_collect'] = 1
                 login.update(self.uid, stat)
-                self.write_marks
+                self.write_mark
                 return True
             elif self.update.message.text.lower() == "нет":
                 stat['marks_collect'] = 0
@@ -109,186 +105,105 @@ class Echo_Checker():
                 with open("menu/faq/ypiter/marks/memory.txt", "w", encoding="utf-8") as file:
                     marks_id_memory.append(str(self.update.message.chat_id))
                     for i in range(len(marks_id_memory)):
-                        if i != len(marks_id_memory):
-                            file.write(marks_id_memory[i] + "\n")
-                        else:
-                            file.write(marks_id_memory[i])
-                with open("base/"+ self.uid +"marks.txt", "w", encoding="utf-8") as file:
-                    file.write(" ")
+                        if i != len(marks_id_memory): file.write(marks_id_memory[i] + "\n")
+                        else: file.write(marks_id_memory[i])
+                with open("base/"+ self.uid +"marks.txt", "w", encoding="utf-8") as file: file.write(" ")
                 self.message = openf("menu/faq/ypiter/marks", "markssucces")
                 return False
 
         return False
 
     def clear_user_status(self):
-        login.user_status_change(self.uid, self.)
+        login.user_status_change(self.uid, self.user_status)
 
-    def write_nickname(self):
+    def write_user(self):
+        user_profile = login.user(self.uid)
         user_status = login.user_status(self.uid)
+
+        new_data = self.text
+
         if user_status['nickname']:
-            return True
+            old_data = user_profile['Никнейм']
+            user_profile['Никнейм'] = new_data
+
+        elif user_status['name']:
+            old_data = user_profile['Имя']
+            user_profile['Имя'] = new_data
+
+        elif user_status['birthday']:
+            old_data = user_profile['День рождения']
+            user_profile['День рождения'] = new_data
+
+        elif user_status['buisness']:
+            old_data = user_profile['Интересы']
+            user_profile['Интересы'] = new_data
         else:
             return False
 
-    def write_name(self):
-        user_status = login.user_status(self.uid)
-        if user_status['nickname']:
-            return True
-        else:
-            return False
+        login.user_change(self.uid, user_profile)
+        self.clear_user_status()
 
-    def write_birthday(self):
-        user_status = login.user_status(self.uid)
-        if user_status['nickname']:
-            return True
-        else:
-            return False
-
-    def write_buisness(self):
-        user_status = login.user_status(self.uid)
-        if user_status['nickname']:
-            return True
-        else:
-            return False
+        self.message = "Данные успешно обновлены!\n\n" + old_data + " >>> " + new_data
+        self.reply_markup = self.user
+        return True
 
     def clear_city_status(self):
         login.city_status_change(self.uid, self.city_status)
 
-    def write_city_name(self):
+    def write_city(self):
+        user_city = login.authorize_city(self.uid)
         user_city_status = login.city_status(self.uid)
-        if user_city_status is None:
-            return False
+
+        new_data = self.update.message.text
+
+        if user_city_status is None: return False
+
         if user_city_status['name']:
-            user_city = login.authorize_city(self.uid)
-
-            self.message = "Имя города успешно изменено!\n" + user_city['name'] + " --> " + self.update.message.text
-            self.reply_markup = self.city
-
+            old_data = user_city['name']
             user_city['name'] = self.text
-            login.city_change(self.uid, user_city)
 
-            self.clear_city_status()
+        elif user_city_status['sign'] == 1 and self.update.message.text is None:
+            old_data = None
 
-            return True
-        else:
-            return False
-
-    def write_city_sign(self):
-        user_city_status = login.city_status(self.uid)
-
-        if user_city_status is None:
-            return False
-
-        if user_city_status['sign'] == 1 and self.update.message.text is None:
-            
             file = self.context.bot.get_file(self.update.message.photo[-1])
             file_size = self.update.message.photo[-1]
-            
+
             if file_size.width <= 400 and file_size.height <= 400:
-
-                self.message = "Герб города успешно изменен!"
-                self.reply_markup = self.city
-
-                response = urllib.request.urlopen(file.file_path)
-                path = "base/cities/photo/" + self.uid + "city.jpg"
-
-                with open(path, 'wb') as new_file:
-                    new_file.write(response.read())
-
-                self.clear_city_status()
-
-                user_city = login.authorize_city(self.uid)
                 user_city['sign'] = "Есть"
-                login.city_change(self.uid, user_city)
-
-                return True
+                with open("base/cities/photo/" + self.uid + "city.jpg", 'wb') as new_file: new_file.write(r.urlopen(file.file_path).read())
+                
             else:
                 self.message = "Размеры файла превышают максимальные! (400x400)"
                 return False
-        else:
-            return False
 
-    def write_city_gymn(self):
-        user_city_status = login.city_status(self.uid)
-        if user_city_status is None:
-            return False
-        if user_city_status['gymn']:
+        elif user_city_status['gymn']: user_city['gymn'] = self.text
+        
+        elif user_city_status['history']: user_city['history'] = self.text
+        
+        elif user_city_status['mayor']: user_city['mayor'] = self.text
 
-            self.message = "Гимн города умпешно изменен!"
-            self.reply_markup = self.city
+        else: return False
 
-            user_city = login.authorize_city(self.uid)
-            user_city['gymn'] = self.text
-            login.city_change(self.uid, user_city)
+        login.city_change(self.uid, user_city)
+        self.clear_city_status()
 
-            self.clear_city_status()
-
-            return True
-        else:
-            return False
-
-    def write_city_history(self):
-        user_city_status = login.city_status(self.uid)
-        if user_city_status is None:
-            return False
-        if user_city_status['history']:
-
-            self.message = "История города успешно изменена!"
-            self.reply_markup = self.city
-
-            user_city = login.authorize_city(self.uid)
-            user_city['history'] = self.text
-            login.city_change(self.uid, user_city)
-
-            self.clear_city_status()
-
-            return True
-        else:
-            return False
-
-    def write_city_mayor(self):
-        user_city_status = login.city_status(self.uid)
-        if user_city_status is None:
-            return False
-        if user_city_status['mayor']:
-
-            self.message = "Мэр города успешно изменен!"
-            self.reply_markup = self.city
-
-            user_city = login.authorize_city(self.uid)
-            user_city['mayor'] = self.text
-            login.city_change(self.uid, user_city)
-
-            self.clear_city_status()
-
-            return True
-        else:
-            return False
+        if old_data is not None: self.message = "Данные успешно обновлены!\n\n" + old_data + " >>> " + new_data
+        
+        else: self.message = "Данные успешно обновлены!"
+        
+        self.reply_markup = self.city
+        return True
 
     def echo_check(self):
-
-        ''' Check-write-status function '''
-
-        if self.update.message.text is None:
-            return True
         self.text = self.update.message.text
-        if self.write_marks():
-            return True
-        if self.write_name():
-            return True
-        if self.write_city_name():
-            return True
-        if self.write_city_sign():
-            return True
-        if self.write_city_gymn():
-            return True
-        if self.write_city_history():
-            return True
-        if self.write_city_mayor():
-            return True
-        
-        else:
-            return False
+
+        if self.text is None: return True
+
+        if self.write_user(): return True
+        if self.write_city(): return True
+        if self.write_mark(): return True
+
+        else: return False
 
 import random
 
