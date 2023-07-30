@@ -90,12 +90,11 @@ def city_create(update, context):
     login.city_create(uid, all_part, status, data)
 
 def mycity(update, context):
-    if checkban(update, context):
-        return
-    try:
-        uid = str(update.message.chat_id)
-    except:
-        uid = str(update.callback_query.message.chat_id)
+    if checkban(update, context): return
+    
+    try: uid = str(update.message.chat_id)
+    except: uid = str(update.callback_query.message.chat_id)
+
     user_city_info = login.authorize_city(uid)
     user_city_data = login.city_data(uid)
 
@@ -111,6 +110,9 @@ def mycity(update, context):
         except:
             new_message_id = update.callback_query.message.reply_text("Создаю город...").message_id
             login.city_create(uid, all_part, status, data)
+
+    user_city_info = login.authorize_city(uid)
+    user_city_data = login.city_data(uid)
 
     city_info = ""
     city_info_key = []
