@@ -1,0 +1,4 @@
+nickname:0
+name:0
+birthday:0
+buisness:0
