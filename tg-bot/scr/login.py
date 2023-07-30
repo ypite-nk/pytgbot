@@ -128,9 +128,9 @@ def city_create(user_id: str, info: str, status: str, data: str):
 	with open('base/cities/' + user_id + "city_data.txt", "w", encoding="utf-8") as f: f.write(data)
 
 def authorize_city(user_id: str):
-	if not path.exists(f'base/cities/P{user_id}city.txt'): return None
+	if not path.exists(f'base/cities/{user_id}city.txt'): return None
 	else:
-		with open(f'base/cities/P{user_id}city.txt', "r", encoding="utf-8") as f:
+		with open(f'base/cities/{user_id}city.txt', "r", encoding="utf-8") as f:
 			user_city = {}
 			for i in f.readlines(0):
 				key, value = i.split(":")
