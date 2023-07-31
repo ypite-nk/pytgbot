@@ -1,15 +1,11 @@
 # -*- coding: utf-8 -*-
 import random
 import used_class
-
 import keyboardbot as kb
 
 from spec import checkban, openf
-
 from spec import Create
-
 from prefix import mycity
-
 from telegram import InlineKeyboardMarkup, InlineKeyboardButton, ParseMode
 
 mem_m = ['', '', '', '', '']
@@ -21,26 +17,28 @@ likestat = False
 dislikestat = False
 
 def fun_handler(update, context):
-    if checkban(update, context):
-        return
-    update.callback_query.message.reply_text(openf("menu/more/fun", "fun"),
-                                             reply_markup=InlineKeyboardMarkup(kb.key))
+    if checkban(update, context): return
+    update.callback_query.message.reply_text(openf("menu/more/fun", "fun"), reply_markup=InlineKeyboardMarkup(kb.key))
 
 def photo_handler(update, context):
-    if checkban(update, context):
-        return
+    if checkban(update, context): return
+    
     global active_mem, LikeCount, DisLikeCount, mem_m, edit_message_id
+
     mem_n = []
     LikeCount, DisLikeCount = 0, 0
     active_mem = 0
-    for i in range(len(open("menu/more/fun/photo/links.txt", "r", encoding="utf-8").readlines(0))):
-        mem_n.append(used_class.Mem(i))
+    
+    for i in range(len(open("menu/more/fun/photo/links.txt", "r", encoding="utf-8").readlines(0))): mem_n.append(used_class.Mem(i))
     active_mem = random.choice(mem_n)
-    while active_mem.data()[0] in mem_m:
-        active_mem = random.choice(mem_n)
+    
+    while active_mem.data()[0] in mem_m: active_mem = random.choice(mem_n)
+    
     LikeCount = active_mem.data()[2]
     DisLikeCount = active_mem.data()[3]
+    
     edit_message_id = update.callback_query.message.reply_photo(active_mem.data()[0], reply_markup=InlineKeyboardMarkup(kb.mem(LikeCount, DisLikeCount))).message_id
+    
     mem_m[4] = mem_m[3]
     mem_m[3] = mem_m[2]
     mem_m[2] = mem_m[1]
@@ -48,15 +46,17 @@ def photo_handler(update, context):
     mem_m[0] = active_mem.data()[0]
 
 def vid_handler(update, context):
-    if checkban(update, context):
-        return
+    if checkban(update, context): return
+    
     global video_mem
-    with open("menu/more/fun/vid/vid.txt", "r", encoding="utf-8") as file:
-        file = file.readlines()
+    
+    with open("menu/more/fun/vid/vid.txt", "r", encoding="utf-8") as file: file = file.readlines()
+
     active_video = random.choice(file).replace("\n", "")
-    while active_video in video_mem:
-        active_video = random.choice(file).replace("\n", "")
+    while active_video in video_mem: active_video = random.choice(file).replace("\n", "")
+
     update.callback_query.message.reply_video(open(active_video, 'rb'), reply_markup=InlineKeyboardMarkup(kb.vid))
+
     video_mem[4] = video_mem[3]
     video_mem[3] = video_mem[2]
     video_mem[2] = video_mem[1]
@@ -64,15 +64,17 @@ def vid_handler(update, context):
     video_mem[0] = active_video
 
 def joke_handler(update, context):
-    if checkban(update, context):
-        return
+    if checkban(update, context): return
+    
     global joke_mem
-    with open("menu/more/fun/joke/joke.txt", "r", encoding="utf-8") as file:
-        file = file.readlines()
+    
+    with open("menu/more/fun/joke/joke.txt", "r", encoding="utf-8") as file: file = file.readlines()
+
     joke = random.choice(file).replace("\n", "")
-    while joke in joke_mem:
-        joke = random.choice(file).replace("\n", "")
+    while joke in joke_mem: joke = random.choice(file).replace("\n", "")
+    
     update.callback_query.message.reply_text(joke, reply_markup=InlineKeyboardMarkup(kb.jokes), parse_mode=ParseMode.MARKDOWN_V2)
+    
     joke_mem[4] = joke_mem[3]
     joke_mem[3] = joke_mem[2]
     joke_mem[2] = joke_mem[1]
@@ -80,15 +82,17 @@ def joke_handler(update, context):
     joke_mem[0] = joke
 
 def thought_handler(update, context):
-    if checkban(update, context):
-        return
+    if checkban(update, context): return
+
     global thought_mem
-    with open("menu/more/fun/thought/thought.txt", "r", encoding="utf-8") as file:
-        file = file.readlines()
+
+    with open("menu/more/fun/thought/thought.txt", "r", encoding="utf-8") as file: file = file.readlines()
+    
     thought = random.choice(file).replace("\n", "")
-    while thought in thought_mem:
-        thought = random.choice(file).replace("\n", "")
+    while thought in thought_mem: thought = random.choice(file).replace("\n", "")
+
     update.callback_query.message.reply_text(thought, reply_markup=InlineKeyboardMarkup(kb.thought), parse_mode=ParseMode.MARKDOWN_V2)
+
     thought_mem[4] = thought_mem[3]
     thought_mem[3] = thought_mem[2]
     thought_mem[2] = thought_mem[1]
@@ -102,8 +106,8 @@ def change(update, context):
     context.bot.delete_message(chat_id, message_id)
 
 def echo_button(update, context):
-    if checkban(update, context):
-        return
+    if checkban(update, context): return
+
     global marks_namelist
     global old_message_id, likestat, dislikestat
 
@@ -170,11 +174,8 @@ def echo_button(update, context):
             case "thought":
                 thought_handler(update, context)
 
-            case _:
-                conflict = False
-
-        if not conflict:
-            change(update, context)
+            case _: conflict = False
+        if not conflict: change(update, context)
     
         match update.callback_query['data']:
 # BACK TO MENU
@@ -202,8 +203,7 @@ def echo_button(update, context):
                     marks = file.readlines()
                     marks_namelist = []
                     for i in range(int(marks[0].split(";")[0])+1):
-                        if "-" in marks[0].split(";")[i]:
-                            marks_namelist.append(marks[0].split(";")[i])
+                        if "-" in marks[0].split(";")[i]: marks_namelist.append(marks[0].split(";")[i])
                 
                 new_message_id = reply_text(openf("menu/faq/ypiter/marks", "marks"),
                                             reply_markup=InlineKeyboardMarkup(kb.set_mark(marks_namelist))).message_id
@@ -529,12 +529,9 @@ def echo_button(update, context):
                 new_message_id = reply_text(openf("data/city/descrip/create", "create")).message_id
                 Create(update, context).ind3_3()
 
-        if not conflict:
-            context.chat_data['message_id'] = new_message_id
+        if not conflict: context.chat_data['message_id'] = new_message_id
     conflict = False
 
 def echo_call(update, context):
-    try:
-        echo_button(update, context)
-    except:
-        update.callback_query.message.reply_text("Error", reply_markup=InlineKeyboardMarkup(kb.back))
+    try: echo_button(update, context)
+    except: update.callback_query.message.reply_text("Error", reply_markup=InlineKeyboardMarkup(kb.back))
