@@ -1,10 +1,8 @@
 ﻿# -*- coding: utf-8 -*-
-
 import os
 import psutil
 
 def echo(update, context):
-
     try:
         print(f"\n | Command: {update.callback_query['data']}\n | From: {update.callback_query.message.chat['username']}\n | Message_ID: {update.callback_query.message.message_id}\n | ID: {update.callback_query.message.chat_id}\n")
     except TypeError:
