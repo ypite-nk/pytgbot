@@ -1,25 +1,21 @@
 ﻿# -*- coding: utf-8 -*-
 def openf(path, name, method: int = 0):
     if method:
-        with open(path + "/" + name + ".txt", "r", encoding="utf-8") as f:
-            return "\n".join(f.readlines(0))
+        with open(path + "/" + name + ".txt", "r", encoding="utf-8") as f: return "\n".join(f.readlines(0))
     if path != "":
-        with open(path + "/" + name + ".txt", "r", encoding="utf-8") as f:
-            return "".join(f.readlines(0))
+        with open(path + "/" + name + ".txt", "r", encoding="utf-8") as f: return "".join(f.readlines(0))
     else:
-        with open(name + ".txt", "r", encoding="utf-8") as f:
-            return "".join(f.readlines(0))
+        with open(name + ".txt", "r", encoding="utf-8") as f: return "".join(f.readlines(0))
 
 def convert_int(data: dict):
-    for i in data.keys():
-        data[i] = int(data[i])
+    for i in data.keys(): data[i] = int(data[i])
     return data
 
 import login
+import urllib.request
 import keyboardbot as kb
 
 from telegram import InlineKeyboardMarkup
-import urllib.request
 
 class Echo_Checker():
     def __init__(self, update, context):
@@ -28,8 +24,7 @@ class Echo_Checker():
 
         self.prefix, *self.text = self.update.message.text.split(" ")
 
-        if len(self.text) == 3:
-            self.update.message.text = self.text[2]
+        if len(self.text) == 3: self.update.message.text = self.text[2]
 
         self.uid = str(self.update.message.chat_id)
 
@@ -134,8 +129,8 @@ class Echo_Checker():
         elif user_status['buisness']:
             old_data = user_profile['Интересы']
             user_profile['Интересы'] = new_data
-        else:
-            return False
+
+        else: return False
 
         login.user_change(self.uid, user_profile)
         self.clear_user_status()
@@ -786,8 +781,7 @@ def checkban(update, context):
         user = login.authorize(str(update.callback_query.message.chat_id))
         callback = True
     except:
-        try:
-            user = login.authorize(str(update.message.chat_id))
+        try: user = login.authorize(str(update.message.chat_id))
         except:
             user = login.authorize(str(update.inline_query.from_user_id))
             inline = True
@@ -801,19 +795,17 @@ def checkban(update, context):
             update.message.reply_text("You are not member beta-test!! If you want to test this bot --> @r_ypiter")
             context.bot.send_message(chat_id=-1001955905639, text="User: " + str(update.message.chat['username']) + " trying to use bot... (not member beta-test)")
             return True
-        else:
-            return False
+        
+        else: return False
 
     elif inline:
         if update != None:
-            if user['ban']:
-                return True
-            elif not user['bt']:
-                return True
-            else:
-                return False
-        else:
-            return False
+            
+            if user['ban']: return True
+            elif not user['bt']: return True
+            else: return False
+
+        else: return False
 
     elif callback:
         if user['ban']:
@@ -824,5 +816,5 @@ def checkban(update, context):
             update.callback_query.message.reply_text("You are not member beta-test!! If you want to test this bot --> @r_ypiter")
             context.bot.send_message(chat_id=-1001955905639, text="User: " + str(update.callback_query.message.chat['username']) + " trying to use bot... (not member beta-test)")
             return True
-        else:
-            return False
+
+        else: return False
