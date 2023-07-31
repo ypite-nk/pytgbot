@@ -47,121 +47,171 @@ def set_mark(list):
         if "-" in i:
             if not nextline:
                 marks_span.append(IKB(i.split("-")[1] + "::" + i.split("-")[0], callback_data=i))
-                if int(i.split("-")[1]) == 4:
-                    nextline = True
+                if int(i.split("-")[1]) == 4: nextline = True
             if nextline:
                 marks.append(marks_span)
                 marks_span = []
                 nextline = False
-    if not nextline:
-        marks.append(marks_span)
+    if not nextline: marks.append(marks_span)
     marks.append([IKB("<<<", callback_data="ypiinfo"), backmenu, IKB("Оставить рецензию...", callback_data="getmark")])
     return marks
 
-commands_out = [[IKB("<<<", callback_data="more"), backmenu]]
+commands_out = [
+    [IKB("<<<", callback_data="more"), backmenu]
+    ]
 
-learns = [[IKB("Образование", callback_data="learning"), IKB("Книги", callback_data="books")],
-             [IKB("<<<", callback_data="more"), backmenu]]
+learns = [
+    [IKB("Образование", callback_data="learning"), IKB("Книги", callback_data="books")],
+    [IKB("<<<", callback_data="more"), backmenu]
+    ]
 
-learn = [[IKB("IT", callback_data="it"), IKB("3D", callback_data="3d")],
-         [IKB("<<<", callback_data="learn"), backmenu]]
+learn = [
+    [IKB("IT", callback_data="it"), IKB("3D", callback_data="3d")],
+    [IKB("<<<", callback_data="learn"), backmenu]
+    ]
 
 booklist = [[IKB("<<<", callback_data="backbook1"), backmenu]]
 
-booklist1 = [[IKB("Классика", callback_data="classic"), IKB("Зарубежные", callback_data="foreign"), IKB("Русская", callback_data="rus")],
-        [IKB("Детективы", callback_data="detective"), IKB("Фэнтези", callback_data="fantasy"), IKB("Фантастика", callback_data="fantastik")],
-        [IKB("Проза", callback_data="prose"), IKB("Ужасы", callback_data="scary"), IKB("Приключения", callback_data="adv")],
-        [IKB("<<<", callback_data="learn"), IKB(">>>", callback_data="booklist2")]]
+booklist1 = [
+    [IKB("Классика", callback_data="classic"), IKB("Зарубежные", callback_data="foreign"), IKB("Русская", callback_data="rus")],
+    [IKB("Детективы", callback_data="detective"), IKB("Фэнтези", callback_data="fantasy"), IKB("Фантастика", callback_data="fantastik")],
+    [IKB("Проза", callback_data="prose"), IKB("Ужасы", callback_data="scary"), IKB("Приключения", callback_data="adv")],
+    [IKB("<<<", callback_data="learn"), IKB(">>>", callback_data="booklist2")]
+    ]
 
-booklist2 = [[IKB("Боевики", callback_data="action"), IKB("Повести", callback_data="stories"), IKB("Поэзия", callback_data="poem")],
-        [IKB("Научпоп", callback_data="science"), IKB("Психология", callback_data="psycho"), IKB("Комиксы", callback_data="comics")],
-        [IKB("Манга", callback_data="manga"), IKB("Эзотерика", callback_data="esotericism"), IKB("Культура", callback_data="culture")],
-        [IKB("<<<", callback_data="backbook1"), IKB(">>>", callback_data="booklist3")]]
+booklist2 = [
+    [IKB("Боевики", callback_data="action"), IKB("Повести", callback_data="stories"), IKB("Поэзия", callback_data="poem")],
+    [IKB("Научпоп", callback_data="science"), IKB("Психология", callback_data="psycho"), IKB("Комиксы", callback_data="comics")],
+    [IKB("Манга", callback_data="manga"), IKB("Эзотерика", callback_data="esotericism"), IKB("Культура", callback_data="culture")],
+    [IKB("<<<", callback_data="backbook1"), IKB(">>>", callback_data="booklist3")]
+    ]
 
-booklist3 = [[IKB("Романы", callback_data="romans"), IKB("Справочники", callback_data="bookfaq"), IKB("Дом", callback_data="home")],
-        [IKB("Религия", callback_data="religion"), IKB("Юмор", callback_data="funny"), IKB("Бизнес", callback_data="buisness")],
-        [IKB("<<<", callback_data="backbook2"), backmenu]]
+booklist3 = [
+    [IKB("Романы", callback_data="romans"), IKB("Справочники", callback_data="bookfaq"), IKB("Дом", callback_data="home")],
+    [IKB("Религия", callback_data="religion"), IKB("Юмор", callback_data="funny"), IKB("Бизнес", callback_data="buisness")],
+    [IKB("<<<", callback_data="backbook2"), backmenu]
+    ]
 
 genreskb = [[IKB("<<<", callback_data="backbook1"), backmenu]]
 
-it = [[IKB("Программирование", callback_data="coding")], [IKB("Веб-разработка", callback_data="web")],
-      [IKB("Сис. Администрирование", callback_data="admin"), IKB("Базы данных", callback_data="sql")],
-      [IKB("<<<", callback_data="learning"), backmenu]]
+it = [
+    [IKB("Программирование", callback_data="coding")], [IKB("Веб-разработка", callback_data="web")],
+    [IKB("Сис. Администрирование", callback_data="admin"), IKB("Базы данных", callback_data="sql")],
+    [IKB("<<<", callback_data="learning"), backmenu]
+    ]
 
-coding = [[IKB("Python", callback_data="py"), IKB("C++", callback_data="+"), IKB("JavaScript", callback_data="js")],
-          [IKB("<<<", callback_data="it"), backmenu]]
+coding = [
+    [IKB("Python", callback_data="py"), IKB("C++", callback_data="+"), IKB("JavaScript", callback_data="js")],
+    [IKB("<<<", callback_data="it"), backmenu]
+    ]
 
-python = [[IKB(text="Материалы", url="https://www.python.org/")], #                                                                                            PYTHON
-          [IKB("<<<", callback_data="coding"), backmenu]]
+python = [
+    [IKB(text="Материалы", url="https://www.python.org/")], #                                                                                            PYTHON
+    [IKB("<<<", callback_data="coding"), backmenu]
+    ]
 
-cpp = [[IKB(text="Материалы", url="https://learn.microsoft.com/ru-ru/cpp/cpp/cpp-language-reference?view=msvc-170")],#                                         C++
-          [IKB("<<<", callback_data="coding"), backmenu]]
+cpp = [
+    [IKB(text="Материалы", url="https://learn.microsoft.com/ru-ru/cpp/cpp/cpp-language-reference?view=msvc-170")],#                                         C++
+    [IKB("<<<", callback_data="coding"), backmenu]
+    ]
 
-js = [[IKB(text="Материалы", url="https://learn.javascript.ru/")],#                                                                                            JAVA SCRIPT
-          [IKB("<<<", callback_data="coding"), backmenu]]
+js = [
+    [IKB(text="Материалы", url="https://learn.javascript.ru/")],#                                                                                            JAVA SCRIPT
+    [IKB("<<<", callback_data="coding"), backmenu]
+    ]
 
-web = [[IKB("HTML&CSS", callback_data="html_m"), IKB("PHP", callback_data="php"), IKB("django", callback_data="django")],
-       [IKB("<<<", callback_data="it"), backmenu]]
+web = [
+    [IKB("HTML&CSS", callback_data="html_m"), IKB("PHP", callback_data="php"), IKB("django", callback_data="django")],
+    [IKB("<<<", callback_data="it"), backmenu]
+    ]
 
-html_m = [[IKB(text="Материалы", url="https://developer.mozilla.org/ru/docs/Learn/Getting_started_with_the_web/HTML_basics")],#                                HTML
-          [IKB("<<<", callback_data="web"), backmenu]]
+html_m = [
+    [IKB(text="Материалы", url="https://developer.mozilla.org/ru/docs/Learn/Getting_started_with_the_web/HTML_basics")],#                                HTML
+    [IKB("<<<", callback_data="web"), backmenu]
+    ]
 
-php = [[IKB(text="Материалы", url="https://developer.mozilla.org/ru/docs/Learn/Getting_started_with_the_web/HTML_basics")],#                                   PHP
-          [IKB("<<<", callback_data="web"), backmenu]]
+php = [
+    [IKB(text="Материалы", url="https://developer.mozilla.org/ru/docs/Learn/Getting_started_with_the_web/HTML_basics")],#                                   PHP
+    [IKB("<<<", callback_data="web"), backmenu]
+    ]
 
-django = [[IKB(text="Материалы", url="https://developer.mozilla.org/ru/docs/Learn/Getting_started_with_the_web/HTML_basics")],#                                DJANGO
-          [IKB("<<<", callback_data="web"), backmenu]]
+django = [
+    [IKB(text="Материалы", url="https://developer.mozilla.org/ru/docs/Learn/Getting_started_with_the_web/HTML_basics")],#                                DJANGO
+    [IKB("<<<", callback_data="web"), backmenu]
+    ]
 
-admin = [[IKB("Системный администратор", callback_data="s_admin"), IKB("Data Sciens", callback_data="data_sciens")],
-          [IKB("<<<", callback_data="it"), backmenu]]
+admin = [
+    [IKB("Системный администратор", callback_data="s_admin"), IKB("Data Sciens", callback_data="data_sciens")],
+    [IKB("<<<", callback_data="it"), backmenu]
+    ]
 
-s_admin = [[IKB(text="Материалы", url="https://habr.com/ru/companies/ruvds/articles/486204/")],#                                                               ADMIN
-           [IKB("<<<", callback_data="admin"), backmenu]]
+s_admin = [
+    [IKB(text="Материалы", url="https://habr.com/ru/companies/ruvds/articles/486204/")],#                                                               ADMIN
+    [IKB("<<<", callback_data="admin"), backmenu]
+    ]
 
-data_sciens = [[IKB(text="Материалы", url="https://habr.com/ru/articles/668428/")],#                                                                           DATA SCIENS
-          [IKB("<<<", callback_data="admin"), backmenu]]
+data_sciens = [
+    [IKB(text="Материалы", url="https://habr.com/ru/articles/668428/")],#                                                                           DATA SCIENS
+    [IKB("<<<", callback_data="admin"), backmenu]
+    ]
 
-sql = [[IKB(text="Материалы", url="https://habr.com/ru/articles/564390/")],#                                                                                   SQL
-       [IKB("<<<", callback_data="it"), backmenu]]
+sql = [
+    [IKB(text="Материалы", url="https://habr.com/ru/articles/564390/")],#                                                                                   SQL
+    [IKB("<<<", callback_data="it"), backmenu]
+    ]
 
-modeling = [[IKB(text="Материалы", url="https://habr.com/ru/companies/otus/articles/675410/")],#                                                               MODELING
-            [IKB("<<<", callback_data="learning"), backmenu]]
+modeling = [
+    [IKB(text="Материалы", url="https://habr.com/ru/companies/otus/articles/675410/")],#                                                               MODELING
+    [IKB("<<<", callback_data="learning"), backmenu]
+    ]
 
-support = [[IKB(text="Boosty", url="https://boosty.to/ypite"), IKB(text="DonationAlerts", url="https://www.donationalerts.com/r/ypiter_nk")],
-               [IKB("<<<", callback_data="more"), backmenu]]
+support = [
+    [IKB(text="Boosty", url="https://boosty.to/ypite"), IKB(text="DonationAlerts", url="https://www.donationalerts.com/r/ypiter_nk")],
+    [IKB("<<<", callback_data="more"), backmenu]
+    ]
 
-key = [[IKB("rap", callback_data="rap"), IKB("Фото мем", callback_data="photomem"),
+key = [
+    [IKB("rap", callback_data="rap"), IKB("Фото мем", callback_data="photomem"),
         IKB("Видео мем", callback_data="videomem"), IKB("Анекдоты", callback_data="jokes"),
         IKB("Мысль", callback_data="thought")],
-       [IKB("<<<", callback_data="more"), backmenu]]
+    [IKB("<<<", callback_data="more"), backmenu]
+        ]
 
-link = [[IKB(text="Канал Тг", url="https://t.me/ypite"), IKB(text="Группа Вк", url="https://vk.com/cloud_ypiter"), IKB(text="GitHub", url="https://github.com/ypite-nk")],
-        [IKB(text="Вконтакте", url="https://vk.com/ypite"), IKB(text="Телеграмм", url="https://t.me/r_ypiter")],
-        [IKB(text="Youtube", url="https://www.youtube.com/channel/UCQunVaPHyI2MvS0rU56_MhA"), IKB(text="TikTok", url="https://vm.tiktok.com/ZT81sSebh/"), IKB(text="Twitch", url="https://www.twitch.tv/ypiternk")],
-        [IKB("<<<", callback_data="more"), backmenu]]
+link = [
+    [IKB(text="Канал Тг", url="https://t.me/ypite"), IKB(text="Группа Вк", url="https://vk.com/cloud_ypiter"), IKB(text="GitHub", url="https://github.com/ypite-nk")],
+    [IKB(text="Вконтакте", url="https://vk.com/ypite"), IKB(text="Телеграмм", url="https://t.me/r_ypiter")],
+    [IKB(text="Youtube", url="https://www.youtube.com/channel/UCQunVaPHyI2MvS0rU56_MhA"), IKB(text="TikTok", url="https://vm.tiktok.com/ZT81sSebh/"), IKB(text="Twitch", url="https://www.twitch.tv/ypiternk")],
+    [IKB("<<<", callback_data="more"), backmenu]
+    ]
 
 def mem(LikeCount, DisLikeCount):
-    mem = [[IKB("Мем", callback_data="photomem"),
-        IKB("👍  " + str(LikeCount), callback_data="like-" + str(LikeCount)),
-        IKB("👎  " + str(DisLikeCount), callback_data="dislike-" + str(DisLikeCount))],
-       [IKB("<<<", callback_data="fun"), backmenu]]
+    mem = [
+        [IKB("Мем", callback_data="photomem"), IKB("👍  " + str(LikeCount), callback_data="like-" + str(LikeCount)), IKB("👎  " + str(DisLikeCount), callback_data="dislike-" + str(DisLikeCount))],
+        [IKB("<<<", callback_data="fun"), backmenu]
+        ]
     return mem
 
-vid = [[IKB("Видео", callback_data="videomem")],
-       [IKB("<<<", callback_data="fun"), backmenu]]
+vid = [
+    [IKB("Видео", callback_data="videomem")],
+    [IKB("<<<", callback_data="fun"), backmenu]
+    ]
 
-jokes = [[IKB("Анекдот", callback_data="jokes")],
-         [IKB("<<<", callback_data="fun"), backmenu]]
+jokes = [
+    [IKB("Анекдот", callback_data="jokes")],
+    [IKB("<<<", callback_data="fun"), backmenu]
+    ]
 
-thought = [[IKB("Мысль", callback_data="thought")],
-          [IKB("<<<", callback_data="fun"), backmenu]]
+thought = [
+    [IKB("Мысль", callback_data="thought")],
+    [IKB("<<<", callback_data="fun"), backmenu]
+    ]
 
-projects = [[IKB("Список проектов", callback_data="projlist"), IKB("Дополнительно...", callback_data="profmore")],
-            [backmenu]]
+projects = [
+    [IKB("Список проектов", callback_data="projlist"), IKB("Дополнительно...", callback_data="profmore")],
+    [backmenu]
+    ]
 
-city_admin = [
-              [backmenu, IKB("Постройка", callback_data="create")]
-             ]
+city_admin = [[backmenu, IKB("Постройка", callback_data="create")]]
 
 BCB = IKB("<<<", callback_data="cityBack")
 backcity = [[IKB("<<<", callback_data="cityBack")]]
