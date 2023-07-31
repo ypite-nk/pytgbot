@@ -1,6 +1,5 @@
 ﻿# -*- coding: utf-8 -*-
 import os.path as path
-import os
 import json
 
 def convert(f):
