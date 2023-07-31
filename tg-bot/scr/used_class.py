@@ -30,22 +30,17 @@ class Mem():
             Like[self.id] = like_count
         with open("menu/more/fun/photo/likecount.txt", "w",  encoding="utf-8") as file:
             for i in range(len_data):
-                if Like[i] == like_count:
-                    file.write(str(Like[i]) + "\n")
-                else:
-                    file.write(str(Like[i]))
+                if Like[i] == like_count: file.write(str(Like[i]) + "\n")
+                else: file.write(str(Like[i]))
 
         with open("menu/more/fun/photo/dislikecount.txt", "r",  encoding="utf-8") as file:
             Dislike = file.readlines()
             Dislike[self.id] = dislike_count
         with open("menu/more/fun/photo/dislikecount.txt", "w",  encoding="utf-8") as file:
             for i in range(len_data):
-                if Dislike[i] == dislike_count:
-                    file.write(str(Dislike[i]) + "\n")
-                else:
-                    file.write(str(Dislike[i]))
+                if Dislike[i] == dislike_count: file.write(str(Dislike[i]) + "\n")
+                else: file.write(str(Dislike[i]))
 
         self.like_count = like_count
         self.dislike_count = dislike_count
-
         self.raiting = int(self.like_count) - int(self.dislike_count)
