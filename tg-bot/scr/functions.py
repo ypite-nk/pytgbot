@@ -18,7 +18,7 @@ from spec import Echo_Checker
 def echo_handler(update, context):
     if checkban(update, context): return
     Checker = Echo_Checker(update, context)
-    if Checker.echo_check(update.message.text):
+    if Checker.echo_check():
         update.message.reply_text(Checker.message,
                                   reply_markup=Checker.reply_markup)
         return
