@@ -4,8 +4,8 @@ import used_class
 import keyboardbot as kb
 
 from spec import checkban, openf
-from spec import Create
-from prefix import mycity
+from spec import Create, Status_changer
+from prefix import mycity, myprofile
 from telegram import InlineKeyboardMarkup, InlineKeyboardButton, ParseMode
 
 mem_m = ['', '', '', '', '']
@@ -158,25 +158,32 @@ def echo_button(update, context):
                                                      reply_markup=InlineKeyboardMarkup(kb.set_mark(marks_namelist)))
 
     else:
+        if "#changer" in update.callback_query['data']:
+            callback = update.callback_query['data'].split("_")[1]
+            changer = Status_changer(update, context)
+            changer.change(callback)
+            reply_text(changer.message, changer.keyboard)
+            return
+
         match update.callback_query['data']:
+            case "discard":
+                Status_changer(update, context).clear_status()
+                reply_text("Изменения отменены", reply_markup=InlineKeyboardMarkup(kb.profile_change))
+
             case "fun":
                 fun_handler(update, context)
-
             case "photomem":
                 photo_handler(update, context)
-
             case "videomem":
                 vid_handler(update, context)
-
             case "jokes":
                 joke_handler(update, context)
-
             case "thought":
                 thought_handler(update, context)
-
             case _: conflict = False
+
         if not conflict: change(update, context)
-    
+
         match update.callback_query['data']:
 # BACK TO MENU
             case "/back":
@@ -199,6 +206,9 @@ def echo_button(update, context):
                                             reply_markup=InlineKeyboardMarkup(kb.back))
 #   РЕЦЕНЗИИ
             case "marks":
+                new_message_id = reply_text("Этот раздел пока недоступен, вернитесь позже",
+                                            reply_markup=InlineKeyboardMarkup(kb.back)).message_id
+                return
                 with open("menu/faq/ypiter/marks/markslist.txt", "r", encoding="utf-8") as file:
                     marks = file.readlines()
                     marks_namelist = []
@@ -232,8 +242,7 @@ def echo_button(update, context):
                                                 reply_markup=InlineKeyboardMarkup(kb.rap)).message_id
 #   MENU
             case "profile":
-                new_message_id = reply_text(openf('menu', 'profile'),
-                                            reply_markup=InlineKeyboardMarkup(kb.profile)).message_id
+                new_message_id = myprofile(update, context)
             case "faq":
                 new_message_id = reply_text(openf("menu/faq", "faq"),
                                             reply_markup=InlineKeyboardMarkup(kb.FAQ)).message_id
@@ -251,7 +260,7 @@ def echo_button(update, context):
             case "cityBack":
                 new_message_id = mycity(update, context)
             case "more":
-                new_message_id = reply_text(openf("menu/more", "more"),
+                new_message_id = reply_text(openf("menu", "menu"),
                                             reply_markup=InlineKeyboardMarkup(kb.more)).message_id
             case "social":
                 new_message_id = reply_text(openf("menu/more", "social"),
@@ -528,6 +537,29 @@ def echo_button(update, context):
             case "3indmat":
                 new_message_id = reply_text(openf("data/city/descrip/create", "create")).message_id
                 Create(update, context).ind3_3()
+# PROFILE
+            case "profile_change":
+                new_message_id = reply_text(openf("menu/profile", "change"),
+                                            reply_markup=InlineKeyboardMarkup(kb.profile_change)).message_id
+            case "city_change":
+                new_message_id = reply_text(openf("data/city/descrip", "change"),
+                                            reply_markup=InlineKeyboardMarkup(kb.city_change)).message_id
+# LEARNING LANGUAGE
+            case "lang":
+                new_message_id = reply_text(openf("learn", "language"),
+                                            reply_markup=InlineKeyboardMarkup(kb.lang)).message_id
+            case "learn_eng":
+                new_message_id = reply_text(openf("learn/language/English"),
+                                            reply_markup=InlineKeyboardMarkup(InlineKeyboardButton(text="Изучать", url="https://dzen.ru/ypite")),
+                                            parse_mode=ParseMode.HTML).message_id
+            case "learn_pol":
+                new_message_id = reply_text(openf("learn/language/Polski"),
+                                            reply_markup=InlineKeyboardMarkup(InlineKeyboardButton(text="Изучать", url="https://dzen.ru/ypite")),
+                                            parse_mode=ParseMode.HTML).message_id
+            case "learn_dts":
+                new_message_id = reply_text(openf("learn/language/Deutsch"),
+                                            reply_markup=InlineKeyboardMarkup(InlineKeyboardButton(text="Изучать", url="https://dzen.ru/a/ZMopgZwfFQI9ROVm")),
+                                            parse_mode=ParseMode.HTML).message_id
 
         if not conflict: context.chat_data['message_id'] = new_message_id
     conflict = False
