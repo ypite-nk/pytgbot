@@ -105,14 +105,11 @@ class Echo_Checker():
 
         return False
 
-    def clear_user_status(self):
-        login.user_status_change(self.uid, self.user_status)
-
     def write_user(self):
         user_profile = login.user(self.uid)
         user_status = login.user_status(self.uid)
 
-        new_data = self.text
+        new_data = self.text.replace("\n", "")
 
         if user_status['nickname']:
             old_data = user_profile['Никнейм']
@@ -133,28 +130,25 @@ class Echo_Checker():
         else: return False
 
         login.user_change(self.uid, user_profile)
-        self.clear_user_status()
+        login.user_status_change(self.uid, self.user_status)
 
         self.message = "Данные успешно обновлены!\n\n" + old_data + " >>> " + new_data
         self.reply_markup = self.user
         return True
 
-    def clear_city_status(self):
-        login.city_status_change(self.uid, self.city_status)
-
     def write_city(self):
         user_city = login.authorize_city(self.uid)
         user_city_status = login.city_status(self.uid)
 
-        new_data = self.update.message.text
+        new_data = self.text.replace("\n", "")
 
         if user_city_status is None: return False
 
         if user_city_status['name']:
             old_data = user_city['name']
-            user_city['name'] = self.text
+            user_city['name'] = new_data
 
-        elif user_city_status['sign'] == 1 and self.update.message.text is None:
+        elif user_city_status['sign'] == 1 and self.text is None:
             old_data = None
 
             file = self.context.bot.get_file(self.update.message.photo[-1])
@@ -170,19 +164,16 @@ class Echo_Checker():
                 self.message = "Размеры файла превышают максимальные! (400x400)"
                 return False
 
-        elif user_city_status['gymn']: user_city['gymn'] = self.text
-        
-        elif user_city_status['history']: user_city['history'] = self.text
-        
-        elif user_city_status['mayor']: user_city['mayor'] = self.text
+        elif user_city_status['gymn']: user_city['gymn'] = new_data
+        elif user_city_status['history']: user_city['history'] = new_data
+        elif user_city_status['mayor']: user_city['mayor'] = new_data
 
         else: return False
 
         login.city_change(self.uid, user_city)
-        self.clear_city_status()
+        login.city_status_change(self.uid, self.city_status)
 
         if old_data is not None: self.message = "Данные успешно обновлены!\n\n" + old_data + " >>> " + new_data
-        
         else: self.message = "Данные успешно обновлены!"
         
         self.reply_markup = self.city
@@ -198,6 +189,56 @@ class Echo_Checker():
         if self.write_mark(): return True
 
         else: return False
+
+class Status_changer():
+    def __init__(self, update, context):
+        self.update = update
+        self.context = context
+
+        self.uid = str(self.update.callback_query.chat_id)
+
+        self.user_data_list = ['nickname', 'name', 'buisness', 'birthday']
+        self.city_data_list = ['name', 'sign', 'gymn', 'history', 'mayor']
+
+        self.user_status = {
+            'nickname':'0',
+            'name':'0',
+            'birthday':'0',
+            'buisness':'0'
+            }
+
+        self.city_status = {
+            'name':'0',
+            'sign':'0',
+            'gymn':'0',
+            'history':'0',
+            'mayor':'0'
+            }
+
+        self.message = "Введите новое значение"
+        self.keyboard = InlineKeyboardMarkup(kb.changerback)
+
+    def profile(self):
+        user_status = login.user_status(self.uid)
+        user_status[self.value] = 1    
+
+    def city(self):
+        user_city_status = login.city_status(self.uid)
+        user_city_status[self.value] = 1
+        if self.value == "sign":
+            self.message = "Отправьте изображение вашего герба, не превышающее размеры 400*400 пикселей"
+
+    def change(self, value: str):
+        self.value = value
+
+        if self.value in self.user_data_list: self.profile()
+        elif self.value in self.city_data_list: self.city()
+
+        else: self.message = "Error"
+
+    def clear_status(self):
+        login.user_status_change(self.uid, self.user_status)
+        login.city_status_change(self.uid, self.city_status)
 
 import random
 
