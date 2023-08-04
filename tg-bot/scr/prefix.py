@@ -1,11 +1,8 @@
 ﻿# -*- coding: utf-8 -*-
-
 from telegram import InlineKeyboardMarkup
-
 from spec import checkban, openf
 
 import login
-
 import keyboardbot as kb
 
 def prefix_marks(update, context):
@@ -16,7 +13,8 @@ def prefix_marks(update, context):
         file = file.readlines()
         for i in file: marks_id_memory.append(i.replace("\n", ""))
 
-    if str(update.message.chat_id) in marks_id_memory: update.message.reply_text("Вы уже отправляли рецензию!")
+    if str(update.message.chat_id) in marks_id_memory: update.message.reply_text("Вы уже отправляли рецензию!",
+                                                                                 reply_markup = InlineKeyboardMarkup(kb.back))
     else:
         user = login.authorize(update.message.chat_id)
         user['marks_collect'] = 1
@@ -54,35 +52,6 @@ def prefix_weather(update, context, city = None):
                                       reply_markup=InlineKeyboardMarkup(kb.back))
         except: update.message.reply_text("Такого города не существует! Возможно, вы ошиблись в написании или у OpenWeatherMap нету таких данных.",
                                       reply_markup=InlineKeyboardMarkup(kb.back))
-
-def city_create(update, context):
-    if checkban(update, context): return
-    
-    uid = str(update.message.chat_id)
-    user = login.authorize(uid)
-    
-    if not user['city']:
-        update.message.reply_text("Город успешно создан!",
-                                  reply_markup=InlineKeyboardMarkup(kb.backcity))
-        user['city'] = 1
-        login.update(uid, user)
-    else:
-        update.message.reply_text("У вас уже есть город!",
-                                  reply_markup=InlineKeyboardMarkup(kb.backcity))
-        return
-    try:
-        prefix, *name = update.message.text.split(' ')
-        city_name = ""
-        for i in name:
-            city_name += i
-        first_part = "name:" + city_name
-    except:
-        first_part = "name:" + "Город x"
-    second_part = "\ncountry:Россия\nsubject:Иркутская область\ncreate_data:2023\nsize:1\npeople:0\n---optional---:---Опциональные---\nmayor:Нет\nsign:Нет\ngymn:Нет\nhistory:Нет\n"
-    all_part = first_part + second_part
-    status = "name:0\nsign:0\ngymn:0\nhistory:0\nmayor:0"
-    data = "money_have:1000000\nenergy_have:0\nwater_have:0\nmoney:80000\nmoney_need:0\nenergy_need:0\nwater_need:0"
-    login.city_create(uid, all_part, status, data)
 
 def mycity(update, context):
     if checkban(update, context): return
@@ -171,74 +140,11 @@ def myprofile(update, context):
     for i in range(len(keys)): profile += str(keys[i]) + " : " + str(values[i])
 
     try: update.message.reply_text("===Ваш профиль===\n" + profile +
-                                  "\nДля изменения данных используйте: /изменить профиль никнейм|имя|интересы|день рождения",
-                                  reply_markup = InlineKeyboardMarkup(kb.back))
-    except: update.callback_query.message.reply_text("===Ваш профиль===\n" + profile +
-                                  "\nДля изменения данных используйте: /изменить профиль никнейм|имя|интересы|день рождения",
-                                  reply_markup = InlineKeyboardMarkup(kb.back))
-
-def change(update, context):
-    if checkban(update, context):
-        return
-    try:
-        uid = str(update.message.chat_id)
-        prefix, *message = update.message.text.split(" ")
-        reply_text = update.message.reply_text
-        menu = InlineKeyboardMarkup(kb.start_key)
-        match message[0].lower():
-            case "профиль":
-                user_status = login.user_status(uid)
-                try:
-                    if message[1].lower() + " " + message[2].lower() == "день рождения":
-                        user_status['birthday'] = 1
-                        reply_text("Напишите ваш день рождения в формате день.месяц.год, например 30.07.2023", reply_markup=menu)
-                except:
-                    pass
-                    match message[1].lower():
-                        case "никнейм":
-                            user_status['nickname'] = 1
-                            reply_text("Введите новый никнейм",
-                                       reply_markup=menu)
-                        case "имя":
-                            user_status['name'] = 1
-                            reply_text("Введите новое имя",
-                                       reply_markup=menu)
-                        case "интересы":
-                            user_status['buisness'] = 1
-                            reply_text("Напишите ваши интересы",
-                                       reply_markup=menu)
-                        case _:
-                            reply_text("Команда '/изменить профиль' должна содержать в себе аттрибуты: '/изменить профиль никнейм|имя|интересы|день рождения'")
-                login.user_status_change(uid, user_status)
-            case "город":
-                user_city_status = login.city_status(uid)
-                if user_city_status is None:
-                    reply_text("Вы еще не создали город! Для создания введите /город имягорода")
-                    return
-                match message[1].lower():
-                    case "имя":
-                        user_city_status['name'] = 1
-                        reply_text("Введите новое имя для вашего города")
-                    case "герб":
-                        user_city_status['sign'] = 1
-                        reply_text("Отправьте изображение вашего герба (не более 400*400)")
-                    case "гимн":
-                        user_city_status['gymn'] = 1
-                        reply_text("Отправьте текст гимна")
-                    case "история":
-                        user_city_status['history'] = 1
-                        reply_text("Отправьте текст истории")
-                    case "мэр":
-                        user_city_status['mayor'] = 1
-                        reply_text("Отправьте ФИО нового мэра")
-                    case _:
-                        update.message.reply_text("Команда '/изменить город' должна содержать в себе аттрибуты: '/изменить город имя|герб|гимн|история'")
-                login.city_status_change(uid, user_city_status)
-            case _:
-                update.message.reply_text("Команда '/изменить' должна содержать в себе аттрибуты: '/изменить (профиль|город) (имя|герб|гимн|история)|(никнейм|имя|интересы|день рождения)'")
-    except:
-        update.message.reply_text("Произошла неизвестная ошибка, попробуйте заного",
-                                  reply_markup=InlineKeyboardMarkup(kb.back))
+                                  "\nДля изменения данных воспользуйтесь кнопками ниже",
+                                  reply_markup = InlineKeyboardMarkup(kb.profile))
+    except: return update.callback_query.message.reply_text("===Ваш профиль===\n" + profile +
+                                  "\nДля изменения данных воспользуйтесь кнопками ниже",
+                                  reply_markup = InlineKeyboardMarkup(kb.profile)).message_id
 
 def update(update, context):
     users_uid = login.users_info()
