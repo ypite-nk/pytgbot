@@ -35,9 +35,17 @@ more = [
     ]
 
 profile = [
-    [IKB("Изменить", callback_data="change_profile"), IKB("Купить VIP", callback_data="buyvip")],
+    [IKB("Изменить", callback_data="profile_change"), IKB("Купить VIP", callback_data="buyvip")],
     [backmenu]
     ]
+
+profile_change = [
+    [IKB("Никнейм", callback_data="#changer_nickname"), IKB("Имя", callback_data="#changer_name")],
+    [IKB("Интересы", callback_data="#changer_buisness"), IKB("День рождения", callback_data="#changer_birthday")]
+    [IKB("<<<", callback_data="profile"), [backmenu]]
+    ]
+
+changerback = [[IKB("❌Отмена❌", callback_data="discard")]]
 
 def set_mark(list):
     marks = []
@@ -66,9 +74,12 @@ learns = [
     ]
 
 learn = [
-    [IKB("IT", callback_data="it"), IKB("3D", callback_data="3d")],
+    [IKB("IT", callback_data="it"), IKB("3D", callback_data="3d"), IKB("Языки", callback_data="lang")],
     [IKB("<<<", callback_data="learn"), backmenu]
     ]
+
+lang = [[IKB("Английский", callback_data="learn_eng"), IKB("Польский", callback_data="learn_pol")],
+        [IKB("<<<", callback_data="learn"), IKB("Немецкий", callback_data="learn_dts")]]
 
 booklist = [[IKB("<<<", callback_data="backbook1"), backmenu]]
 
@@ -211,10 +222,16 @@ projects = [
     [backmenu]
     ]
 
-city_admin = [[backmenu, IKB("Постройка", callback_data="create")]]
+city_admin = [[IKB("Изменить", callback_data="city_change"), IKB("Постройка", callback_data="create")],
+              [backmenu]]
 
 BCB = IKB("<<<", callback_data="cityBack")
 backcity = [[IKB("<<<", callback_data="cityBack")]]
+
+city_change = [
+    [IKB("Имя", callback_data="#changer_name"), IKB("Герб", callback_data="#changer_sign"), IKB("Гимн", callback_data="#changer_gymn")],
+    [BCB, IKB("Мэра", callback_data="#changer_mayor"), IKB("Историю", callback_data="#changer_history")]
+    ]
 
 city_createtypes = [
                     [IKB("Жилье", callback_data="house"), IKB("Коммерция", callback_data="commercical")],
