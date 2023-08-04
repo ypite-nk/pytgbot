@@ -20,11 +20,7 @@ ud.add_handler(CommandHandler("back", func.back_handler))#       any command-lin
 import prefix
 ud.add_handler(PrefixHandler('/', 'рецензия', prefix.prefix_marks))#     any-func
 ud.add_handler(PrefixHandler('/', 'погода', prefix.prefix_weather))#     any-func
-ud.add_handler(PrefixHandler('/', 'город', prefix.city_create))#         create game
 ud.add_handler(PrefixHandler('/', 'мойгород', prefix.mycity))#           info game
-ud.add_handler(PrefixHandler('/', 'mycity', prefix.mycity))#             info game
-ud.add_handler(PrefixHandler('/', 'change', prefix.change))#             control game
-ud.add_handler(PrefixHandler('/', 'изменить', prefix.change))#           control game
 ud.add_handler(PrefixHandler('/', 'update', prefix.update))#             update time-game
 ud.add_handler(PrefixHandler('/', 'update_event', prefix.update_event))# update time-game
 # filters for spam
