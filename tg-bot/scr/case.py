@@ -243,9 +243,9 @@ def echo_button(update, context):
 #   MENU
             case "profile":
                 new_message_id = myprofile(update, context)
-            case "faq":
-                new_message_id = reply_text(openf("menu/faq", "faq"),
-                                            reply_markup=InlineKeyboardMarkup(kb.FAQ)).message_id
+            #case "faq":
+             #   new_message_id = reply_text(openf("menu/faq", "faq"),
+              #                              reply_markup=InlineKeyboardMarkup(kb.FAQ)).message_id
             case "info":
                 new_message_id = reply_text(openf('menu', "info"),
                                             reply_markup=InlineKeyboardMarkup(kb.back)).message_id

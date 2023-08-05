@@ -24,13 +24,13 @@ rap = [
 
 start_key = [
     [IKB("Профиль", callback_data="profile"), IKB("Город", callback_data="mycity")],
-    [IKB("Инфо", callback_data="info"), IKB("FAQ", callback_data="faq"), IKB("Проекты", callback_data="projects")],
+    [IKB("Инфо", callback_data="info"), IKB("Проекты", callback_data="projects"), IKB("Соцсети", callback_data="social")],
     [IKB("Обратная связь", callback_data="helper"), IKB(">>>", callback_data="more")]
     ]
 
 more = [
-    [IKB("Стикерпаки", callback_data="packs"), IKB("Соцсети", callback_data="social")],
-    [IKB("Образование", callback_data="learn"), IKB("Развлечения", callback_data="fun")],
+    [IKB("Стикерпаки", callback_data="packs"), IKB("Развлечения", callback_data="fun")],
+    [IKB("Образование", callback_data="learn")],
     [IKB("<<<", callback_data="/back"), IKB("Поддержка", callback_data="donate")]
     ]
 
