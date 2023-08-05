@@ -158,7 +158,7 @@ def echo_button(update, context):
                                                      reply_markup=InlineKeyboardMarkup(kb.set_mark(marks_namelist)))
 
     else:
-        if "#changer" in update.callback_query['data']:
+        if "!changer" in update.callback_query['data']:
             callback = update.callback_query['data'].split("_")[1]
             changer = Status_changer(update, context)
             changer.change(callback)

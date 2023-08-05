@@ -40,8 +40,8 @@ profile = [
     ]
 
 profile_change = [
-    [IKB("Никнейм", callback_data="#changer_nickname"), IKB("Имя", callback_data="#changer_name")],
-    [IKB("Интересы", callback_data="#changer_buisness"), IKB("День рождения", callback_data="#changer_birthday")]
+    [IKB("Никнейм", callback_data="!changer_nickname"), IKB("Имя", callback_data="!changer_name")],
+    [IKB("Интересы", callback_data="!changer_buisness"), IKB("День рождения", callback_data="!changer_birthday")]
     [IKB("<<<", callback_data="profile"), [backmenu]]
     ]
 
@@ -229,8 +229,8 @@ BCB = IKB("<<<", callback_data="cityBack")
 backcity = [[IKB("<<<", callback_data="cityBack")]]
 
 city_change = [
-    [IKB("Имя", callback_data="#changer_name"), IKB("Герб", callback_data="#changer_sign"), IKB("Гимн", callback_data="#changer_gymn")],
-    [BCB, IKB("Мэра", callback_data="#changer_mayor"), IKB("Историю", callback_data="#changer_history")]
+    [IKB("Имя", callback_data="!changer_name"), IKB("Герб", callback_data="!changer_sign"), IKB("Гимн", callback_data="!changer_gymn")],
+    [BCB, IKB("Мэра", callback_data="!changer_mayor"), IKB("Историю", callback_data="!changer_history")]
     ]
 
 city_createtypes = [
