@@ -1,4 +1,4 @@
-name:Жумайсынбек
+cityname:Усть-Илимск
 country:Россия
 subject:Иркутская область
 create_data:2023
@@ -6,6 +6,6 @@ size:10
 people:4000
 ---optional---:---Опциональные---
 mayor:Нет
-sign:Нет
+sign:Есть
 gymn:Нет
 history:Нет
