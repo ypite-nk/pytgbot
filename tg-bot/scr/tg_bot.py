@@ -10,29 +10,34 @@ logger = logging.getLogger(__name__)
 bot = telegram.Bot(token="6143246892:AAEQGuhkqKZ-6Hsn7cvvbUMwOW0rNOHHGSE")
 updater = Updater(token="6143246892:AAEQGuhkqKZ-6Hsn7cvvbUMwOW0rNOHHGSE", use_context=True)
 ud = updater.dispatcher
-# UPDATER NOT UD ; UD - updater.dispatcher FROM add_handler!!!
-from case import echo_call, fun_handler
-ud.add_handler(CallbackQueryHandler(echo_call))#                 base check-callback-query
+# UPDATER NOT UD ; UD - updater.dispatcher TO add_handler!!!
+
+from case import echo_call
+ud.add_handler(CallbackQueryHandler(echo_call))
+
 import functions as func
-ud.add_handler(CommandHandler('start', func.start_handler))#     command
-ud.add_handler(CommandHandler('menu', func.back_handler))#       any command-line
-ud.add_handler(CommandHandler("back", func.back_handler))#       any command-line
+ud.add_handler(CommandHandler('start', func.start_handler))
+ud.add_handler(CommandHandler('menu', func.back_handler))
+ud.add_handler(CommandHandler("back", func.back_handler))
+
 import prefix
-ud.add_handler(PrefixHandler('/', 'рецензия', prefix.prefix_marks))#     any-func
-ud.add_handler(PrefixHandler('/', 'погода', prefix.prefix_weather))#     any-func
-ud.add_handler(PrefixHandler('/', 'мойгород', prefix.mycity))#           info game
-ud.add_handler(PrefixHandler('/', 'update', prefix.update))#             update time-game
-ud.add_handler(PrefixHandler('/', 'update_event', prefix.update_event))# update time-game
+ud.add_handler(PrefixHandler('/', 'рецензия', prefix.prefix_marks))
+ud.add_handler(PrefixHandler('/', 'погода', prefix.prefix_weather))
+ud.add_handler(PrefixHandler('/', 'update', prefix.update))
+ud.add_handler(PrefixHandler('/', 'update_event', prefix.update_event))
 # filters for spam
 ud.add_handler(MessageHandler(Filters.text & (~Filters.command), func.echo_handler))
 ud.add_handler(MessageHandler(Filters.photo, func.echo_handler))
-from inline import inline_query
-ud.add_handler(InlineQueryHandler(inline_query))# inline-mode
+
+#from inline import inline_query
+#ud.add_handler(InlineQueryHandler(inline_query))
+
 import spec
-ud.add_handler(PrefixHandler('/', 'ban', spec.admin))#     ADMIN COMMAND
-ud.add_handler(PrefixHandler('/', 'unban', spec.admin))#   ADMIN COMMAND
-ud.add_handler(PrefixHandler('/', 'addbeta', spec.admin))# ADMIN COMMAND
-ud.add_handler(PrefixHandler('/', 'delbeta', spec.admin))# ADMIN COMMAND
+ud.add_handler(PrefixHandler('/', 'ban', spec.admin))
+ud.add_handler(PrefixHandler('/', 'unban', spec.admin))
+ud.add_handler(PrefixHandler('/', 'addbeta', spec.admin))
+ud.add_handler(PrefixHandler('/', 'delbeta', spec.admin))
+
 import logg
 ud.add_handler(CommandHandler(logg.password[0], logg.clear))
 
@@ -40,6 +45,4 @@ while True:
     try:
         updater.start_polling()
         updater.idle()
-    except ZeroDivisionError as err:
-        logger.error(err)
-        continue
+    except ZeroDivisionError as err: logger.error(err)
