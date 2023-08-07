@@ -1,13 +1,12 @@
 ﻿# -*- coding: utf-8 -*-
-from telegram import InlineKeyboardMarkup
-from spec import checkban, openf
-
 import login
 import keyboardbot as kb
+from telegram import InlineKeyboardMarkup
+from spec import check_acces
+from spec import openfile
 
+@check_acces
 def prefix_marks(update, context):
-    if checkban(update, context): return
-
     marks_id_memory = []
     with open("info/ypiter/marks/memory.txt", "r", encoding="utf-8") as file:
         file = file.readlines()
@@ -20,7 +19,7 @@ def prefix_marks(update, context):
         user['marks_collect'] = 1
         login.update(update.message.chat_id, user)
 
-        update.message.reply_text(openf("descriptext", "marks1"))
+        update.message.reply_text(openfile("descriptext", "marks1"))
 
 from pyowm import OWM
 from pyowm.utils.config import get_default_config
@@ -28,9 +27,8 @@ config_dict = get_default_config()
 config_dict['language'] = 'ru'
 owm = OWM('e8d3ccc3b3a95bec547a312f27610381', config_dict).weather_manager().weather_at_place
 
+@check_acces
 def prefix_weather(update, context, city = None):
-    if checkban(update, context): return
-
     if update is None:
         try:
             w = owm(city).weather
@@ -50,30 +48,20 @@ def prefix_weather(update, context, city = None):
             result = [w.temperature('celsius')['temp'], w.detailed_status, w.wind()['speed']]
             update.message.reply_text("Город: " + city + "\nТемпература: " + str(result[0]) + "\nНебо: " + str(result[1]) + "\nВетер: " + str(result[2]) + " м/с",
                                       reply_markup=InlineKeyboardMarkup(kb.back))
-        except: update.message.reply_text("Такого города не существует! Возможно, вы ошиблись в написании или у OpenWeatherMap нету таких данных.",
+        except: update.message.reply_text("Такого города не существует! Возможно, вы ошиблись в названии или у OpenWeatherMap нету таких данных.",
                                       reply_markup=InlineKeyboardMarkup(kb.back))
 
+from os import path
 def mycity(update, context):
-    if checkban(update, context): return
-    
-    try: uid = str(update.message.chat_id)
-    except: uid = str(update.callback_query.message.chat_id)
+    uid = str(update.callback_query.message.chat_id)
 
-    user_city_info = login.authorize_city(uid)
-    user_city_data = login.city_data(uid)
-
-    if user_city_info == None:
-        first_part = "name:Город x"
+    if login.authorize_city(uid) == None:
+        first_part = "cityname:Город x"
         second_part = "\ncountry:Россия\nsubject:Иркутская область\ncreate_data:2023\nsize:1\npeople:0\n---optional---:---Опциональные---\nmayor:Нет\nsign:Нет\ngymn:Нет\nhistory:Нет\n"
         all_part = first_part + second_part
-        status = "name:0\nsign:0\ngymn:0\nhistory:0\nmayor:0"
+        status = "cityname:0\nsign:0\ngymn:0\nhistory:0\nmayor:0"
         data = "money_have:1000000\nenergy_have:0\nwater_have:0\nmoney:80000\nmoney_need:0\nenergy_need:0\nwater_need:0"
-        try:
-            update.message.reply_text("Создаю город...")
-            login.city_create(uid, all_part, status, data)
-        except:
-            new_message_id = update.callback_query.message.reply_text("Создаю город...").message_id
-            login.city_create(uid, all_part, status, data)
+        login.city_create(uid, all_part, status, data)
 
     user_city_info = login.authorize_city(uid)
     user_city_data = login.city_data(uid)
@@ -82,7 +70,7 @@ def mycity(update, context):
     city_data, city_data_key, city_data_value = "", [], []
 
     city_info_tr = {
-                    "name": "Имя",
+                    "cityname": "Имя",
                     "country": "Страна",
                     "subject": "Область",
                     "create_data": "Дата создания",
@@ -112,44 +100,30 @@ def mycity(update, context):
     for value in user_city_data.values(): city_data_value.append(value)
     for i in range(len(city_data_key)): city_data += str(city_data_tr[city_data_key[i]]) + " : " + str(city_data_value[i]) + "\n"
 
-    try: update.message.reply_text("===Ваш город===\n" + city_info +
-                              "\nДля изменения опциональных данных города введите:\n" + 
-                              "/изменить город 'имя/герб/гимн/история' 'ваш текст'" + "\n" +
-                              "\n===Управление===\n"+
-                              city_data, reply_markup=InlineKeyboardMarkup(kb.city_admin))
-    except:
-        new_message_id = update.callback_query.message.reply_text("===Ваш город===" + "\n" + city_info +
-                              "\nДля изменения опциональных данных города введите:\n" + 
-                              "/изменить город 'имя/герб/гимн/история' 'ваш текст'" + "\n" +
-                              "\n===Управление===\n"+
-                              city_data, reply_markup=InlineKeyboardMarkup(kb.city_admin)).message_id
-        return new_message_id
+    path_logo = "base/cities/photo/" + uid + "city.jpg"
+    if path.exists(path_logo): update.callback_query.message.reply_photo(open(path_logo, 'rb'))
+    
+    return update.callback_query.message.reply_text("===Ваш город===" + "\n" + city_info + "\n===Управление===\n" + city_data,
+                                                    reply_markup=InlineKeyboardMarkup(kb.city_admin)).message_id
 
 def myprofile(update, context):
-    if checkban(update, context): return
-
-    try: uid = str(update.message.chat_id)
-    except: uid = str(update.callback_query.message.chat_id)
-
-    user = login.user(uid)
+    user = login.user(str(update.callback_query.message.chat_id))
     keys, values = [], []
     profile = ""
 
     for key in user.keys(): keys.append(key)
     for value in user.values(): values.append(value)
-    for i in range(len(keys)): profile += str(keys[i]) + " : " + str(values[i])
+    for i in range(len(keys)): profile += str(keys[i]) + " : " + str(values[i]) + "\n"
 
-    try: update.message.reply_text("===Ваш профиль===\n" + profile +
-                                  "\nДля изменения данных воспользуйтесь кнопками ниже",
-                                  reply_markup = InlineKeyboardMarkup(kb.profile))
-    except: return update.callback_query.message.reply_text("===Ваш профиль===\n" + profile +
-                                  "\nДля изменения данных воспользуйтесь кнопками ниже",
-                                  reply_markup = InlineKeyboardMarkup(kb.profile)).message_id
+    return update.callback_query.message.reply_text("===Ваш профиль===\n" + profile,
+                                                    reply_markup = InlineKeyboardMarkup(kb.profile)).message_id
 
 def update(update, context):
     users_uid = login.users_info()
+
     for i in users_uid:
         user = login.city_data(i)
+
         if user is not None:
             money = (user['money'] - user['money_need'])
             user['money_have'] += money
@@ -159,11 +133,12 @@ def update(update, context):
                                      reply_markup=InlineKeyboardMarkup(kb.backcity))
 
 from spec import RandomTasks
-
 def update_event(update, context):
     users_uid = login.users_info()
+
     for i in users_uid:
         user = login.city_data(i)
+
         if user is not None:
             task = RandomTasks(i)
             task.taskUpdate()
