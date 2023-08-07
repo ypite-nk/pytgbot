@@ -2,18 +2,15 @@
 from telegram import InlineQueryResultPhoto, InlineQueryResultArticle, InputTextMessageContent
 from uuid import uuid4
 from prefix import prefix_weather
-from spec import checkban
+from spec import check_acces
 
 linkslist = []
 result = []
 
+@check_acces
 def inline_query(update, context):
     if not update.inline_query.query: return
     global linkslist, result
-    if checkban(update, context):
-        result = [InlineQueryResultArticle(id=str(uuid4()), title="You can't use this bot", input_message_content=InputTextMessageContent("Error - ban or not mbt"))]
-        update.inline_query.answer(result)
-        return
     
     if "-" in update.inline_query.query and "w" not in update.inline_query.query:
         command, value = update.inline_query.query.split("-")
