@@ -2,6 +2,7 @@
 from telegram import InlineKeyboardButton as IKB
 
 backmenu = IKB("Меню", callback_data="/back")
+backmenu2 = IKB("Меню", callback_data="more")
 back = [[backmenu]]
 
 ypiterFAQ = [
@@ -35,15 +36,17 @@ more = [
     ]
 
 profile = [
-    [IKB("Изменить", callback_data="profile_change"), IKB("Купить VIP", callback_data="buyvip")],
+    [IKB("Изменить", callback_data="profile_change"), IKB("Купить VIP", callback_data="buyvip"), IKB("Рейтинг", callback_data="raiting")],
     [backmenu]
     ]
 
 profile_change = [
     [IKB("Никнейм", callback_data="!changer_nickname"), IKB("Имя", callback_data="!changer_name")],
-    [IKB("Интересы", callback_data="!changer_buisness"), IKB("День рождения", callback_data="!changer_birthday")]
-    [IKB("<<<", callback_data="profile"), [backmenu]]
+    [IKB("Интересы", callback_data="!changer_buisness"), IKB("День рождения", callback_data="!changer_birthday")],
+    [IKB("<<<", callback_data="profile"), backmenu]
     ]
+
+profile_back = [[IKB("<<<", callback_data="profile")]]
 
 changerback = [[IKB("❌Отмена❌", callback_data="discard")]]
 
@@ -192,7 +195,7 @@ link = [
     [IKB(text="Канал Тг", url="https://t.me/ypite"), IKB(text="Группа Вк", url="https://vk.com/cloud_ypiter"), IKB(text="GitHub", url="https://github.com/ypite-nk")],
     [IKB(text="Вконтакте", url="https://vk.com/ypite"), IKB(text="Телеграмм", url="https://t.me/r_ypiter")],
     [IKB(text="Youtube", url="https://www.youtube.com/channel/UCQunVaPHyI2MvS0rU56_MhA"), IKB(text="TikTok", url="https://vm.tiktok.com/ZT81sSebh/"), IKB(text="Twitch", url="https://www.twitch.tv/ypiternk")],
-    [IKB("<<<", callback_data="more"), backmenu]
+    [IKB("<<<", callback_data="/back")]
     ]
 
 def mem(LikeCount, DisLikeCount):
@@ -229,7 +232,7 @@ BCB = IKB("<<<", callback_data="cityBack")
 backcity = [[IKB("<<<", callback_data="cityBack")]]
 
 city_change = [
-    [IKB("Имя", callback_data="!changer_name"), IKB("Герб", callback_data="!changer_sign"), IKB("Гимн", callback_data="!changer_gymn")],
+    [IKB("Имя", callback_data="!changer_cityname"), IKB("Герб", callback_data="!changer_sign"), IKB("Гимн", callback_data="!changer_gymn")],
     [BCB, IKB("Мэра", callback_data="!changer_mayor"), IKB("Историю", callback_data="!changer_history")]
     ]
 
