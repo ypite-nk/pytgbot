@@ -1,22 +1,22 @@
 ﻿# -*- coding: utf-8 -*-
 import keyboardbot as kb
 from telegram import InlineKeyboardMarkup
-from spec import checkban, openf
+from spec import check_acces, openfile
 
+@check_acces
 def start_handler(update, context):
-    if checkban(update, context): return
-    context.bot.send_message(chat_id=update.message.chat_id, text=openf("data", "start"),
+    context.bot.send_message(chat_id=update.message.chat_id, text=openfile("data", "start"),
                              reply_markup=InlineKeyboardMarkup(kb.start_key))
 
+@check_acces
 def back_handler(update, context):
-    if checkban(update, context): return
-    update.message.reply_text(openf("menu", "menu"),
+    update.message.reply_text(openfile("menu", "menu"),
                               reply_markup=InlineKeyboardMarkup(kb.start_key))
 
 from spec import Echo_Checker
 
+@check_acces
 def echo_handler(update, context):
-    if checkban(update, context): return
     Checker = Echo_Checker(update, context)
     if Checker.echo_check():
         update.message.reply_text(Checker.message,
@@ -27,8 +27,8 @@ def echo_handler(update, context):
     hi = True
     for i in file:
         if i.replace("\n", "").lower() in update.message.text.lower() and hi == True:
-            update.message.reply_text(openf("data/echo", "echohi"),
+            update.message.reply_text(openfile("data/echo", "echohi"),
                                       reply_markup=InlineKeyboardMarkup(kb.back))
             hi = False
-    if hi == True: update.message.reply_text(openf("data/echo", "echo"),
+    if hi == True: update.message.reply_text(openfile("data/echo", "echo"),
                                              reply_markup=InlineKeyboardMarkup(kb.back))
