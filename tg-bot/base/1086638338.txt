@@ -1,1 +1,1 @@
-{"ban":0,"bt":1,"wordly":0,"admin":0,"marks_collect":0,"city":0}
+{"pr_ID": "1086638338", "pr_Nickname": "ypite", "pr_Name": "\u041d\u0438\u043a\u0438\u0442\u0430", "pr_Birthday": "21.08.2007", "pr_Buisness": "\u0422\u0430\u043a\u0441\u0438, \u043f\u0440\u043e\u0447\u0435\u0435", "pr_city": "None", "pr_VIP": "None", "pr_Rait": "None", "pr_Beta-acc": "None", "ct_ban": 0, "ct_beta": 1, "ct_admin": 0, "st_nickname": "0", "st_name": "0", "st_birthday": "0", "st_buisness": "0"}
