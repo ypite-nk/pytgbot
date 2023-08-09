@@ -21,7 +21,7 @@ ud.add_handler(CommandHandler('menu', func.back_handler))
 ud.add_handler(CommandHandler("back", func.back_handler))
 
 import prefix
-ud.add_handler(PrefixHandler('/', 'рецензия', prefix.prefix_marks))
+#ud.add_handler(PrefixHandler('/', 'рецензия', prefix.prefix_marks))
 ud.add_handler(PrefixHandler('/', 'погода', prefix.prefix_weather))
 ud.add_handler(PrefixHandler('/', 'update', prefix.update))
 ud.add_handler(PrefixHandler('/', 'update_event', prefix.update_event))

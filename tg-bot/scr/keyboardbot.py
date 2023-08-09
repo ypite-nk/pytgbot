@@ -31,8 +31,8 @@ start_key = [
 
 more = [
     [IKB("Стикерпаки", callback_data="packs"), IKB("Развлечения", callback_data="fun")],
-    [IKB("Образование", callback_data="learn")],
-    [IKB("<<<", callback_data="/back"), IKB("Поддержка", callback_data="donate")]
+    [IKB("Образование", callback_data="learn"), IKB("Боты", callback_data="bots")],
+    [IKB("<<<", callback_data="/back"), IKB("Поддержать", callback_data="donate")]
     ]
 
 profile = [
@@ -50,6 +50,11 @@ profile_back = [[IKB("<<<", callback_data="profile")]]
 
 changerback = [[IKB("❌Отмена❌", callback_data="discard")]]
 
+bots = [
+    [IKB("ch:помощник", url="https://t.me/ch_helper_bot"), IKB("ChatGPT", url="https://t.me/chatgpt_tgm_bot?start=1086638338"), IKB("LeakedCheck", url="https://t.me/LeackedCheck_bot?start=qgSPpU")],
+    [IKB("<<<", callback_data="more")],
+    ]
+'''
 def set_mark(list):
     marks = []
     marks_span = []
@@ -65,7 +70,7 @@ def set_mark(list):
                 nextline = False
     if not nextline: marks.append(marks_span)
     marks.append([IKB("<<<", callback_data="ypiinfo"), backmenu, IKB("Оставить рецензию...", callback_data="getmark")])
-    return marks
+    return marks'''
 
 commands_out = [
     [IKB("<<<", callback_data="more"), backmenu]
@@ -185,11 +190,9 @@ support = [
     ]
 
 key = [
-    [IKB("rap", callback_data="rap"), IKB("Фото мем", callback_data="photomem"),
-        IKB("Видео мем", callback_data="videomem"), IKB("Анекдоты", callback_data="jokes"),
-        IKB("Мысль", callback_data="thought")],
+    [IKB("rap", callback_data="rap"), IKB("Фото мем", callback_data="photomem"), IKB("Текстовые квесты", callback_data="quests")],
     [IKB("<<<", callback_data="more"), backmenu]
-        ]
+    ]
 
 link = [
     [IKB(text="Канал Тг", url="https://t.me/ypite"), IKB(text="Группа Вк", url="https://vk.com/cloud_ypiter"), IKB(text="GitHub", url="https://github.com/ypite-nk")],
