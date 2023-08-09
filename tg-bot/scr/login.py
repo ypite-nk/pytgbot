@@ -2,175 +2,349 @@
 import os.path as path
 import json
 
-def convert(f):
-	user = {}
+class User():
+	"""
+	Класс Дата-базы, регулирует:
+		Профиль (Profile)- pr_
+		Control time - ct_
+		Статусы (Status) - st_
+	"""
+	def __init__(self, uid: str):
+		self.uid = uid
+		self.path = f"base/{self.uid}.txt"
 
-	f = f.readlines(0)
-	f = f[0].replace("{", "")
-	f = f.replace("}", "")
+		self.translate_pr_to_dict = {
+			"pr_ID":"ID",
+			"pr_Nickname":"Никнейм",
+			"pr_Name":"Имя",
+			"pr_Birthday":"День рождения",
+			"pr_Buisness":"Интересы",
+			"pr_city":"Город",
+			"pr_VIP":"VIP",
+			"pr_Rait":"Рейтинг",
+			"pr_Beta-acc":"Бета-доступ"
+			}
 
-	list = f.split(",")
+		self.translate_dict_to_pr = {
+			"ID":"pr_ID",
+			"Никнейм":"pr_Nickname",
+			"Имя":"pr_Name",
+			"День рождения":"pr_Birthday",
+			"Интересы":"pr_Buisness",
+			"Город":"pr_city",
+			"VIP":"pr_VIP",
+			"Рейтинг":"pr_Rait",
+			"Бета-доступ":"pr_Beta-acc"
+			}
 
-	for i in list:
+		self.translate_ct_to_dict = {
+			"ct_ban":"ban",
+			"ct_beta":"beta",
+			"ct_admin":"admin"
+			}
 
-		key_val = i.split(":")
-		m = key_val[0].strip('\'')
-		m = m.replace("\"", "")
+		self.translate_dict_to_ct = {
+			"ban":"ct_ban",
+			"beta":"ct_beta",
+			"admin":"ct_admin"
+			}
 
-		try: user[m] = int(key_val[1].strip('"\''))
-		except: user[m] = key_val[1].strip('"\'')
+		self.translate_st_to_dict = {
+			"st_nickname":"nickname",
+			"st_name":"name",
+			"st_birthday":"birthday",
+			"st_buisness":"buisness"
+			}
 
-	return user
+		self.translate_dict_to_st = {
+			"nickname":"st_nickname",
+			"name":"st_name",
+			"birthday":"st_birthday",
+			"buisness":"st_buisness"
+			}
 
-def replaced(info):
-	info = info.replace("{", "").replace("}", "")
-	infos = info.split(", ")
+		self.user_dict = {
+			"pr_ID":self.uid,
+			"pr_Nickname":"None",
+			"pr_Name":"None",
+			"pr_Birthday":"None",
+			"pr_Buisness":"None",
+			"pr_city":"None",
+			"pr_VIP":"None",
+			"pr_Rait":"None",
+			"pr_Beta-acc":"None",
+			"ct_ban":"0",
+			"ct_beta":"1",
+			"ct_admin":"0",
+			"st_nickname":"0",
+			"st_name":"0",
+			"st_birthday":"0",
+			"st_buisness":"0"
+			}
 
-	all_info = []
-	return_info = ""
+	def authorize(self) -> None:
+		if not path.exists(self.path):
+			with open(self.path, "w", encoding="utf-8") as f: f.write(json.dumps(self.user_dict))
 
-	for i in infos:
-		ni = i.split(": ")
+	def get_user_profile(self) -> dict:
+		if not path.exists(self.path): self.authorize()
+		
+		self.dict = {}
 
-		for i in ni:
-			all_info.append(i.replace("'", "").replace('"', ''))
+		with open(self.path, "r", encoding="utf-8") as file:
+			file = json.loads("".join(file.readlines(0)))
 
-	for i in range(len(all_info)):
-		i += 1
+			for i in file.keys():
+				if "pr_" in i:
+					self.dict[self.translate_pr_to_dict[i]] = file[i]
 
-		if i//2 != 0 and i//2 != (i-1)//2: return_info += all_info[i-1] + "\n"
-		else: return_info += all_info[i-1] + ":"
+			return self.dict
 
-	return return_info
+	def get_user_control(self) -> dict:
+		if not path.exists(self.path):
+			self.authorize()
+		if path.exists(self.path):
+			self.dict = {}
 
-def json_reworking(info: list, uid: str = '0'):
-	users = []
-	for i in info: users.append(i.replace("\n", ""))
-	if uid not in users: users.append(uid)
+			with open(self.path, "r", encoding="utf-8") as file:
+				file = json.loads("".join(file.readlines(0)))
 
-	return users
+				for i in file.keys():
+					if "ct_" in i:
+						self.dict[self.translate_ct_to_dict[i]] = int(file[i])
 
-def authorize(user_id: str):
-	user_id = str(user_id)
-	user_base_dict = {
-		'ban': 0,
-		'bt': 0,
-		'wordly': 0,
-		'admin': 0,
-		'marks_collect': 0,
-		'city': 0
-		}
+				return self.dict
 
-	if not path.exists(f'base/{user_id}.txt'):
-		with open(f'base/{user_id}.txt', 'w', encoding="utf-8") as f:
-			f.write(json.dumps(user_base_dict).replace(" ", ""))
+	def get_user_status(self) -> dict:
+		if not path.exists(self.path):
+			self.authorize()
+		if path.exists(self.path):
+			self.dict = {}
 
-	if not path.exists(f'base/{user_id}marks.txt'):
-		with open(f'base/{user_id}marks.txt', 'w', encoding="utf-8") as f: pass
+			with open(self.path, "r", encoding="utf-8") as file:
+				file = json.loads("".join(file.readlines(0)))
 
-	with open(f'base/{user_id}.txt', 'r', encoding="utf-8") as f: user = convert(f)
-	with open('base/users.txt', 'r', encoding="utf-8") as f: users = f.readlines(0)
+				for i in file.keys():
+					if "st_" in i:
+						self.dict[self.translate_st_to_dict[i]] = int(file[i])
 
-	users = json_reworking(users, user_id)
-	users = '\n'.join(users)
+				return self.dict
 
-	with open('base/users.txt', 'w', encoding="utf-8") as f: f.write(users)
+	def write_user_profile(self, user_profile_dict: dict) -> None:
+		if path.exists(self.path):
+			output = {}
 
-	if not path.exists(f'base/{user_id}user.txt'):
-		with open(f'base/{user_id}user.txt', 'w', encoding='utf-8') as f:
-			f.write(f"ID:{user_id}\nНикнейм:Отсутствует\nИмя:Отсутствует\nДень рождения:Отсутствует\nИнтересы:Отсутствуют\nVIP:Нет\nРейтинг:0\nБета-доступ:Отсутствует\nСтатус:Отсутствует")
-		with open(f'base/{user_id}user_status.txt', 'w', encoding='utf-8') as f:
-			f.write("nickname:0\nname:0\nbirthday:0\nbuisness:0")
+			for i in user_profile_dict.keys(): output[self.translate_dict_to_pr[i]] = str(user_profile_dict[i])
+			for i in self.get_user_control().keys(): output[self.translate_dict_to_ct[i]] = self.get_user_control()[i]
+			for i in self.get_user_status().keys(): output[self.translate_dict_to_st[i]] = self.get_user_status()[i]
 
-	return user
+			with open(self.path, "w", encoding="utf-8") as file:
+				file.write(json.dumps(output))
 
-def update(user_id: str, data: dict = None):
-	if data is None: data = authorize(str(user_id))
+	def write_user_control(self, user_control_dict: dict) -> None:
+		if path.exists(self.path):
+			output = {}
 
-	with open('base/' + str(user_id) + '.txt', 'w', encoding="utf-8") as f:
-		f.write(json.dumps(data).replace(" ", ""))
+			for i in self.get_user_profile().keys(): output[self.translate_dict_to_pr[i]] = self.get_user_profile()[i]
+			for i in user_control_dict.keys(): output[self.translate_dict_to_ct[i]] = str(user_control_dict[i])
+			for i in self.get_user_status().keys(): output[self.translate_dict_to_st[i]] = self.get_user_status()[i]
 
-def user(user_id: str):
-	with open(f'base/{user_id}user.txt', 'r', encoding='utf-8') as f:
-		user = {}
+			with open(self.path, "w", encoding="utf-8") as file:
+				file.write(json.dumps(output))
 
-		for i in f.readlines(0):
-			key, value = i.split(":")
-			user[key] = value.replace("\n", "")
+	def write_user_status(self, user_status_dict: dict) -> None:
+		if path.exists(self.path):
+			output = {}
 
-		return user
+			for i in self.get_user_profile().keys(): output[self.translate_dict_to_pr[i]] = self.get_user_profile()[i]
+			for i in self.get_user_control().keys(): output[self.translate_dict_to_ct[i]] = self.get_user_control()[i]
+			for i in user_status_dict.keys(): output[self.translate_dict_to_st[i]] = str(user_status_dict[i])
 
-def user_change(user_id: str, data: dict):
-	with open(f"base/{user_id}user.txt", "w", encoding="utf-8") as f: f.write(replaced(str(data)))
+			with open(self.path, "w", encoding="utf-8") as file:
+				file.write(json.dumps(output))
 
-def users_info():
+def users_info() -> list:
 	with open('base/users.txt', 'r', encoding="utf-8") as f:
-		users = json_reworking(f.readlines(0))
+		users = f.readlines(0)
+		info = []
+		for i in users: info.append(i.replace("\n", ""))
+		return info
 
-		return users
+class City():
+	"""
+	Класс Дата-базы, регулирует:
+		Профиль (Profile)- pr_
+		Статусы изменений (Status) - st_
+		Управление (data) - dt_
+	"""
+	def __init__(self, uid: str):
+		self.uid = uid
+		self.path = f"base/cities/{uid}.txt"
 
-def user_status(user_id: str):
-	with open(f'base/{user_id}user_status.txt', 'r', encoding='utf-8') as f:
-		user_status = {}
+		self.city_dict = {
+			"pr_cityname":"None",
+			"pr_country":"None",
+			"pr_subject":"None",
+			"pr_create_data":"2023",
+			"pr_size":"1",
+			"pr_people":"0",
+			"pr_mayor":"None",
+			"pr_sign":"None",
+			"pr_gymn":"None",
+			"pr_history":"None",
+			"st_cityname":"0",
+			"st_sign":"0",
+			"st_gymn":"0",
+			"st_history":"0",
+			"st_mayor":"0",
+			"dt_budget":"70000",
+			"dt_energyhave":"0",
+			"dt_waterhave":"0",
+			"dt_profit":"50000",
+			"dt_expense":"0",
+			"dt_energyexpense":"0",
+			"dt_waterexpense":"0"
+			}
 
-		for i in f.readlines(0):
-			key, value = i.split(":")
-			user_status[key] = int(value.replace("\n", ""))
+		self.translate_pr_to_dict = {
+			"pr_cityname":"Имя",
+			"pr_country":"Страна",
+			"pr_subject":"Субъект",
+			"pr_create_data":"Дата создания",
+			"pr_size":"Размер",
+			"pr_people":"Население",
+			"pr_mayor":"Мэр",
+			"pr_sign":"Герб",
+			"pr_gymn":"Гимн",
+			"pr_history":"История"
+			}
 
-		return user_status
+		self.translate_dict_to_pr = {
+			"Имя":"pr_cityname",
+			"Страна":"pr_country",
+			"Субъект":"pr_subject",
+			"Дата создания":"pr_create_data",
+			"Размер":"pr_size",
+			"Население":"pr_people",
+			"Мэр":"pr_mayor",
+			"Герб":"pr_sign",
+			"Гимн":"pr_gymn",
+			"История":"pr_history"
+			}
 
-def user_status_change(user_id: str, data: dict):
-	with open(f'base/{user_id}user_status.txt', 'w', encoding='utf-8') as f: f.write(replaced(str(data)))
+		self.translate_st_to_dict = {
+			"st_cityname":"cityname",
+			"st_sign":"sign",
+			"st_gymn":"gymn",
+			"st_history":"history",
+			"st_mayor":"mayor"
+			}
 
-def city_create(user_id: str, info: str, status: str, data: str):
-	with open('base/cities/' + user_id + "city.txt", "w", encoding="utf-8") as f: f.write(info)
-	with open('base/cities/' + user_id + "city_status.txt", "w", encoding="utf-8") as f: f.write(status)
-	with open('base/cities/' + user_id + "city_data.txt", "w", encoding="utf-8") as f: f.write(data)
+		self.translate_dict_to_st = {
+			"cityname":"st_cityname",
+			"sign":"st_sign",
+			"gymn":"st_gymn",
+			"history":"st_history",
+			"mayor":"st_mayor"
+			}
 
-def authorize_city(user_id: str):
-	if not path.exists(f'base/cities/{user_id}city.txt'): return None
+		self.translate_dt_to_dict = {
+			"dt_budget":"Бюджет",
+			"dt_energyhave":"Электроэнергия",
+			"dt_waterhave":"Водоснабжение",
+			"dt_profit":"Доход",
+			"dt_expense":"Расходы",
+			"dt_energyexpense":"Электропотребление",
+			"dt_waterexpense":"Водопотребление"
+			}
 
-	else:
-		with open(f'base/cities/{user_id}city.txt', "r", encoding="utf-8") as f:
-			user_city = {}
+		self.translate_dict_to_dt = {
+			"Бюджет":"dt_budget",
+			"Электроэнергия":"dt_energyhave",
+			"Водоснабжение":"dt_waterhave",
+			"Доход":"dt_profit",
+			"Расходы":"dt_expense",
+			"Электропотребление":"dt_energyexpense",
+			"Водопотребление":"dt_waterexpense"
+			}
 
-			for i in f.readlines(0):
-				key, value = i.split(":")
-				user_city[key] = value.replace("\n", "")
+	def authorize(self) -> bool:
+		if not path.exists(self.path):
+			with open(self.path, "w", encoding="utf-8") as f: f.write(json.dumps(self.city_dict))
+			return False
+		return True
 
-			return user_city
+	def get_city_info(self) -> dict:
+		if not path.exists(self.path): return None
 
-def city_status(user_id: str):
-	if not path.exists(f'base/cities/{user_id}city_status.txt'): return None
+		output = {}
 
-	else:
-		with open(f'base/cities/{user_id}city_status.txt', "r", encoding="utf-8") as f:
-			user_city = {}
+		with open(self.path, "r", encoding="utf-8") as file:
+			file = json.loads("".join(file.readlines(0)))
 
-			for i in f.readlines(0):
-				key, value = i.split(":")
-				user_city[key] = int(value.replace("\n", ""))
+			for i in file.keys():
+				if "pr_" in i:
+					output[self.translate_pr_to_dict[i]] = file[i]
 
-			return user_city
+			return output
 
-def city_data(user_id: str):
-	if not path.exists(f'base/cities/{user_id}city_data.txt'): return None
+	def get_city_status(self) -> dict:
+		if not path.exists(self.path): return None
 
-	else:
-		with open(f'base/cities/{user_id}city_data.txt', 'r', encoding='utf-8') as f:
-			city_data = {}
+		output = {}
 
-			for i in f.readlines(0):
-				key, value = i.split(":")
-				city_data[key] = int(value.replace("\n", ""))
+		with open(self.path, "r", encoding="utf-8") as file:
+			file = json.loads("".join(file.readlines(0)))
 
-			return city_data
+			for i in file.keys():
+				if "st_" in i:
+					output[self.translate_st_to_dict[i]] = int(file[i])
 
-def city_change(user_id: str, city: dict):
-	with open(f'base/cities/{user_id}city.txt', 'w', encoding='utf-8') as f: f.write(replaced(str(city)))
+			return output
 
-def city_status_change(user_id: str, status: dict):
-	with open(f'base/cities/{user_id}city_status.txt', 'w', encoding='utf-8') as f: f.write(replaced(str(status)))
+	def get_city_data(self) -> dict:
+		if not path.exists(self.path): return None
 
-def city_data_change(user_id: str, data: dict):
-	with open(f'base/cities/{user_id}city_data.txt', 'w', encoding='utf-8') as f: f.write(replaced(str(data)))
+		output = {}
+
+		with open(self.path, "r", encoding="utf-8") as file:
+			file = json.loads("".join(file.readlines(0)))
+
+			for i in file.keys():
+				if "dt_" in i:
+					output[self.translate_dt_to_dict[i]] = int(file[i])
+
+			return output
+
+	def write_city_profile(self, city_profile_dict: dict) -> None:
+		if path.exists(self.path):
+			output = {}
+
+			for i in city_profile_dict.keys(): output[self.translate_dict_to_pr[i]] = str(city_profile_dict[i])
+			for i in self.get_city_status().keys(): output[self.translate_dict_to_st[i]] = self.get_city_status()[i]
+			for i in self.get_city_data().keys(): output[self.translate_dict_to_dt[i]] = self.get_city_data()[i]
+
+			with open(self.path, "w", encoding="utf-8") as file:
+				file.write(json.dumps(output))
+
+	def write_city_status(self, city_status_dict: dict) -> None:
+		if path.exists(self.path):
+			output = {}
+
+			for i in self.get_city_info().keys(): output[self.translate_dict_to_pr[i]] = self.get_city_info()[i]
+			for i in city_status_dict.keys(): output[self.translate_dict_to_st[i]] = str(city_status_dict[i])
+			for i in self.get_city_data().keys(): output[self.translate_dict_to_dt[i]] = self.get_city_data()[i]
+
+			with open(self.path, "w", encoding="utf-8") as file:
+				file.write(json.dumps(output))
+
+	def write_city_data(self, city_data_dict: dict) -> None:
+		if path.exists(self.path):
+			output = {}
+
+			for i in self.get_city_info().keys(): output[self.translate_dict_to_pr[i]] = self.get_city_info()[i]
+			for i in self.get_city_status().keys(): output[self.translate_dict_to_st[i]] = self.get_city_status()[i]
+			for i in city_data_dict.keys(): output[self.translate_dict_to_dt[i]] = str(city_data_dict[i])
+
+			with open(self.path, "w", encoding="utf-8") as file:
+				file.write(json.dumps(output))

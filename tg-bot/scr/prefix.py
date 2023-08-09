@@ -54,60 +54,33 @@ def prefix_weather(update, context, city = None):
 from os import path
 def mycity(update, context):
     uid = str(update.callback_query.message.chat_id)
+    City = login.City(uid)
+    City.authorize()
 
-    if login.authorize_city(uid) == None:
-        first_part = "cityname:Город x"
-        second_part = "\ncountry:Россия\nsubject:Иркутская область\ncreate_data:2023\nsize:1\npeople:0\n---optional---:---Опциональные---\nmayor:Нет\nsign:Нет\ngymn:Нет\nhistory:Нет\n"
-        all_part = first_part + second_part
-        status = "cityname:0\nsign:0\ngymn:0\nhistory:0\nmayor:0"
-        data = "money_have:1000000\nenergy_have:0\nwater_have:0\nmoney:80000\nmoney_need:0\nenergy_need:0\nwater_need:0"
-        login.city_create(uid, all_part, status, data)
+    user_city_info = City.get_city_info()
+    user_city_data = City.get_city_data()
 
-    user_city_info = login.authorize_city(uid)
-    user_city_data = login.city_data(uid)
+    info_keys, info_values, info = [], [], ""
+    data_keys, data_values, data = [], [], ""
 
-    city_info, city_info_key, city_info_value = "", [], []
-    city_data, city_data_key, city_data_value = "", [], []
+    for key in user_city_info.keys(): info_keys.append(key)
+    for value in user_city_info.values(): info_values.append(value)
 
-    city_info_tr = {
-                    "cityname": "Имя",
-                    "country": "Страна",
-                    "subject": "Область",
-                    "create_data": "Дата создания",
-                    "size": "Площадь",
-                    "people": "Количество людей",
-                    "mayor": "Мэр",
-                    "---optional---": "\n---Опциональные---",
-                    "sign": "Герб",
-                    "gymn": "Гимн",
-                    "history": "История"
-               }
-    city_data_tr = {
-                    "money_have":"Бюджет",
-                    "energy_have":"Электроэнергия",
-                    "water_have":"Водоснабжение",
-                    "money":"Доход",
-                    "money_need":"Расход бюджета",
-                    "energy_need":"Расход электроэнергии",
-                    "water_need":"Расход водоснабжения"
-                    }
+    for i in range(len(info_keys)): info += str(info_keys[i]) + " : " + str(info_values[i]) + "\n"
 
-    for key in user_city_info.keys(): city_info_key.append(key)
-    for value in user_city_info.values(): city_info_value.append(value)
-    for i in range(len(city_info_key)): city_info += str(city_info_tr[city_info_key[i]]) + " : " + str(city_info_value[i]) + "\n"
+    for key in user_city_data.keys(): data_keys.append(key)
+    for value in user_city_data.values(): data_values.append(value)
 
-    for key in user_city_data.keys(): city_data_key.append(key)
-    for value in user_city_data.values(): city_data_value.append(value)
-    for i in range(len(city_data_key)): city_data += str(city_data_tr[city_data_key[i]]) + " : " + str(city_data_value[i]) + "\n"
+    for i in range(len(data_keys)): data += str(data_keys[i]) + " : " + str(data_values[i]) + "\n"
 
     path_logo = "base/cities/photo/" + uid + "city.jpg"
     if path.exists(path_logo): update.callback_query.message.reply_photo(open(path_logo, 'rb'))
     
-    return update.callback_query.message.reply_text("===Ваш город===" + "\n" + city_info + "\n===Управление===\n" + city_data,
+    return update.callback_query.message.reply_text("===Ваш город===" + "\n" + info + "\n===Управление===\n" + data,
                                                     reply_markup=InlineKeyboardMarkup(kb.city_admin)).message_id
 
 def myprofile(update, context):
-    user = login.user(str(update.callback_query.message.chat_id))
+    user = login.User(str(update.callback_query.message.chat_id)).get_user_profile()
     keys, values = [], []
     profile = ""
 
@@ -122,14 +95,14 @@ def update(update, context):
     users_uid = login.users_info()
 
     for i in users_uid:
-        user = login.city_data(i)
+        city = login.City(str(i)).get_city_data()
 
-        if user is not None:
-            money = (user['money'] - user['money_need'])
-            user['money_have'] += money
-            login.city_data_change(i, user)
+        if city is not None:
+            money = (city['Доход'] - city['Расходы'])
+            city['Бюджет'] += money
+            login.City(str(i)).write_city_data(city)
             context.bot.send_message(chat_id=i, text="💰payday💰\n\nТвой город заработал - " + str(money) +
-                                     "\nБюджет: " + str(user['money_have']),
+                                     "\nБюджет: " + str(city['Бюджет']),
                                      reply_markup=InlineKeyboardMarkup(kb.backcity))
 
 from spec import RandomTasks
@@ -137,9 +110,9 @@ def update_event(update, context):
     users_uid = login.users_info()
 
     for i in users_uid:
-        user = login.city_data(i)
+        city = login.City(str(i)).get_city_info()
 
-        if user is not None:
+        if city is not None:
             task = RandomTasks(i)
             task.taskUpdate()
             context.bot.send_message(chat_id=i,

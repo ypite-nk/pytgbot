@@ -7,6 +7,8 @@ from spec import check_acces, openfile
 def start_handler(update, context):
     context.bot.send_message(chat_id=update.message.chat_id, text=openfile("data", "start"),
                              reply_markup=InlineKeyboardMarkup(kb.start_key))
+    from login import User
+    User(str(update.message.chat_id)).authorize()
 
 @check_acces
 def back_handler(update, context):
