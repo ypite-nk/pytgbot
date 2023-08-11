@@ -3,12 +3,6 @@ import os.path as path
 import json
 
 class User():
-	"""
-	Класс Дата-базы, регулирует:
-		Профиль (Profile)- pr_
-		Control time - ct_
-		Статусы (Status) - st_
-	"""
 	def __init__(self, uid: str):
 		self.uid = uid
 		self.path = f"base/{self.uid}.txt"
@@ -63,6 +57,20 @@ class User():
 			"buisness":"st_buisness"
 			}
 
+		self.translate_ch_to_dict = {
+			"ch_nickname":"nickname",
+			"ch_name":"name",
+			"ch_birthday":"birthday",
+			"ch_buisness":"buisness"
+			}
+
+		self.translate_dict_to_ch = {
+			"nickname":"ch_nickname",
+			"name":"ch_name",
+			"birthday":"ch_birthday",
+			"buisness":"ch_buisness"
+			}
+
 		self.user_dict = {
 			"pr_ID":self.uid,
 			"pr_Nickname":"None",
@@ -71,15 +79,20 @@ class User():
 			"pr_Buisness":"None",
 			"pr_city":"None",
 			"pr_VIP":"None",
-			"pr_Rait":"None",
+			"pr_Rait":"0",
 			"pr_Beta-acc":"None",
 			"ct_ban":"0",
-			"ct_beta":"1",
+			"ct_beta":"0",
 			"ct_admin":"0",
 			"st_nickname":"0",
 			"st_name":"0",
 			"st_birthday":"0",
-			"st_buisness":"0"
+			"st_buisness":"0",
+			"st_daychange":"0",
+			"ch_nickname":"0",
+			"ch_name":"0",
+			"ch_birthday":"0",
+			"ch_buisness":"0"
 			}
 
 	def authorize(self) -> None:
@@ -101,8 +114,8 @@ class User():
 			return self.dict
 
 	def get_user_control(self) -> dict:
-		if not path.exists(self.path):
-			self.authorize()
+		if not path.exists(self.path): self.authorize()
+
 		if path.exists(self.path):
 			self.dict = {}
 
@@ -116,8 +129,8 @@ class User():
 				return self.dict
 
 	def get_user_status(self) -> dict:
-		if not path.exists(self.path):
-			self.authorize()
+		if not path.exists(self.path): self.authorize()
+
 		if path.exists(self.path):
 			self.dict = {}
 
@@ -130,6 +143,21 @@ class User():
 
 				return self.dict
 
+	def get_user_change(self) -> dict:
+		if not path.exists(self.path): self.authorize()
+
+		if path.exists(self.path):
+			self.dict = {}
+
+			with open(self.path, "r", encoding="utf-8") as file:
+				file = json.loads("".join(file.readlines(0)))
+
+				for i in file.keys():
+					if "ch_" in i:
+						self.dict[self.translate_ch_to_dict[i]] = int(file[i])
+
+				return self.dict
+
 	def write_user_profile(self, user_profile_dict: dict) -> None:
 		if path.exists(self.path):
 			output = {}
@@ -137,6 +165,7 @@ class User():
 			for i in user_profile_dict.keys(): output[self.translate_dict_to_pr[i]] = str(user_profile_dict[i])
 			for i in self.get_user_control().keys(): output[self.translate_dict_to_ct[i]] = self.get_user_control()[i]
 			for i in self.get_user_status().keys(): output[self.translate_dict_to_st[i]] = self.get_user_status()[i]
+			for i in self.get_user_change().keys(): output[self.translate_dict_to_ch[i]] = self.get_user_change()[i]
 
 			with open(self.path, "w", encoding="utf-8") as file:
 				file.write(json.dumps(output))
@@ -148,6 +177,7 @@ class User():
 			for i in self.get_user_profile().keys(): output[self.translate_dict_to_pr[i]] = self.get_user_profile()[i]
 			for i in user_control_dict.keys(): output[self.translate_dict_to_ct[i]] = str(user_control_dict[i])
 			for i in self.get_user_status().keys(): output[self.translate_dict_to_st[i]] = self.get_user_status()[i]
+			for i in self.get_user_change().keys(): output[self.translate_dict_to_ch[i]] = self.get_user_change()[i]
 
 			with open(self.path, "w", encoding="utf-8") as file:
 				file.write(json.dumps(output))
@@ -159,6 +189,19 @@ class User():
 			for i in self.get_user_profile().keys(): output[self.translate_dict_to_pr[i]] = self.get_user_profile()[i]
 			for i in self.get_user_control().keys(): output[self.translate_dict_to_ct[i]] = self.get_user_control()[i]
 			for i in user_status_dict.keys(): output[self.translate_dict_to_st[i]] = str(user_status_dict[i])
+			for i in self.get_user_change().keys(): output[self.translate_dict_to_ch[i]] = self.get_user_change()[i]
+
+			with open(self.path, "w", encoding="utf-8") as file:
+				file.write(json.dumps(output))
+
+	def write_user_change(self, user_change_dict) -> None:
+		if path.exists(self.path):
+			output = {}
+
+			for i in self.get_user_profile().keys(): output[self.translate_dict_to_pr[i]] = self.get_user_profile()[i]
+			for i in self.get_user_control().keys(): output[self.translate_dict_to_ct[i]] = self.get_user_control()[i]
+			for i in self.get_user_status().keys(): output[self.translate_dict_to_st[i]] = self.get_user_status()[i]
+			for i in user_change_dict.keys(): output[self.translate_dict_to_ch[i]] = str(user_change_dict[i])
 
 			with open(self.path, "w", encoding="utf-8") as file:
 				file.write(json.dumps(output))
@@ -171,12 +214,6 @@ def users_info() -> list:
 		return info
 
 class City():
-	"""
-	Класс Дата-базы, регулирует:
-		Профиль (Profile)- pr_
-		Статусы изменений (Status) - st_
-		Управление (data) - dt_
-	"""
 	def __init__(self, uid: str):
 		self.uid = uid
 		self.path = f"base/cities/{uid}.txt"
@@ -203,7 +240,12 @@ class City():
 			"dt_profit":"50000",
 			"dt_expense":"0",
 			"dt_energyexpense":"0",
-			"dt_waterexpense":"0"
+			"dt_waterexpense":"0",
+			"ch_cityname":"0",
+			"ch_sign":"0",
+			"ch_gymn":"0",
+			"ch_history":"0",
+			"ch_mayor":"0"
 			}
 
 		self.translate_pr_to_dict = {
@@ -268,6 +310,20 @@ class City():
 			"Водопотребление":"dt_waterexpense"
 			}
 
+		self.translate_ch_to_dict = {
+			"ch_cityname":"cityname",
+			"ch_sign":"sign",
+			"ch_gymn":"gymn",
+			"ch_history":"history"
+			}
+
+		self.translate_dict_to_ch = {
+			"cityname":"ch_cityname",
+			"sign":"ch_sign",
+			"gymn":"ch_gymn",
+			"history":"ch_history"
+			}
+
 	def authorize(self) -> bool:
 		if not path.exists(self.path):
 			with open(self.path, "w", encoding="utf-8") as f: f.write(json.dumps(self.city_dict))
@@ -316,6 +372,20 @@ class City():
 
 			return output
 
+	def get_city_change(self) -> dict:
+		if not path.exists(self.path): return None
+
+		output = {}
+
+		with open(self.path, "r", encoding="utf-8") as file:
+			file = json.loads("".join(file.readlines(0)))
+
+			for i in file.keys():
+				if "ch_" in i:
+					output[self.translate_ch_to_dict[i]] = int(file[i])
+
+			return output
+
 	def write_city_profile(self, city_profile_dict: dict) -> None:
 		if path.exists(self.path):
 			output = {}
@@ -323,6 +393,7 @@ class City():
 			for i in city_profile_dict.keys(): output[self.translate_dict_to_pr[i]] = str(city_profile_dict[i])
 			for i in self.get_city_status().keys(): output[self.translate_dict_to_st[i]] = self.get_city_status()[i]
 			for i in self.get_city_data().keys(): output[self.translate_dict_to_dt[i]] = self.get_city_data()[i]
+			for i in self.get_city_change().keys(): output[self.translate_dict_to_ch[i]] = self.get_city_change()[i]
 
 			with open(self.path, "w", encoding="utf-8") as file:
 				file.write(json.dumps(output))
@@ -334,6 +405,7 @@ class City():
 			for i in self.get_city_info().keys(): output[self.translate_dict_to_pr[i]] = self.get_city_info()[i]
 			for i in city_status_dict.keys(): output[self.translate_dict_to_st[i]] = str(city_status_dict[i])
 			for i in self.get_city_data().keys(): output[self.translate_dict_to_dt[i]] = self.get_city_data()[i]
+			for i in self.get_city_change().keys(): output[self.translate_dict_to_ch[i]] = self.get_city_change()[i]
 
 			with open(self.path, "w", encoding="utf-8") as file:
 				file.write(json.dumps(output))
@@ -345,6 +417,19 @@ class City():
 			for i in self.get_city_info().keys(): output[self.translate_dict_to_pr[i]] = self.get_city_info()[i]
 			for i in self.get_city_status().keys(): output[self.translate_dict_to_st[i]] = self.get_city_status()[i]
 			for i in city_data_dict.keys(): output[self.translate_dict_to_dt[i]] = str(city_data_dict[i])
+			for i in self.get_city_change().keys(): output[self.translate_dict_to_ch[i]] = self.get_city_change()[i]
+
+			with open(self.path, "w", encoding="utf-8") as file:
+				file.write(json.dumps(output))
+
+	def write_city_change(self, city_change_dict: dict) -> None:
+		if path.exists(self.path):
+			output = {}
+
+			for i in self.get_city_info().keys(): output[self.translate_dict_to_pr[i]] = self.get_city_info()[i]
+			for i in self.get_city_status().keys(): output[self.translate_dict_to_st[i]] = self.get_city_status()[i]
+			for i in self.get_city_data().keys(): output[self.translate_dict_to_dt[i]] = self.get_city_data()[i]
+			for i in city_change_dict.keys(): output[self.translate_dict_to_ch[i]] = str(city_change_dict[i])
 
 			with open(self.path, "w", encoding="utf-8") as file:
 				file.write(json.dumps(output))

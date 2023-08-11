@@ -7,10 +7,6 @@ def openfile(path: str, name: str, method: int = 0):
     else:
         with open(name + ".txt", "r", encoding="utf-8") as f: return "".join(f.readlines(0))
 
-def convert_int(data: dict):
-    for i in data.keys(): data[i] = int(data[i])
-    return data
-
 import login
 import urllib.request
 import keyboardbot as kb
@@ -20,9 +16,12 @@ from telegram import InlineKeyboardMarkup
 def raiting(update, context):
     uid = str(update.callback_query.message.chat_id)
     user = login.User(uid).get_user_profile()
-
-    return update.callback_query.message.reply_text("Ваш рейтинг: " + str(user['Рейтинг']),
-                                             reply_markup = InlineKeyboardMarkup(kb.profile_back)).message_id
+    if user['VIP'] == 'None':
+        return update.callback_query.message.reply_text("🌏 Ваш рейтинг: " + str(user['Рейтинг']),
+                                                        reply_markup = InlineKeyboardMarkup(kb.profile_back)).message_id
+    else:
+        return update.callback_query.message.reply_text("🌏 Ваш рейтинг: ♳" + str(user['Рейтинг']),
+                                                        reply_markup = InlineKeyboardMarkup(kb.profile_back)).message_id
 
 class Echo_Checker():
     def __init__(self, update, context):
@@ -34,9 +33,10 @@ class Echo_Checker():
 
         self.uid = str(self.update.message.chat_id)
 
-        self.user = InlineKeyboardMarkup(kb.profile_back)
+        self.userkb = InlineKeyboardMarkup(kb.profile_back)
         self.citykb = InlineKeyboardMarkup(kb.backcity)
 
+        self.user = login.User(self.uid)
         self.city = login.City(self.uid)
 
         self.city_status = {
@@ -58,128 +58,148 @@ class Echo_Checker():
 
         self.message = "Error"
         self.reply_markup = InlineKeyboardMarkup(kb.back)
-   
-    def write_mark(self):
-        stat = login.authorize(self.uid)
-        if stat['marks_collect'] == 0 or self.update.message.text is not None: return False
-        marks_id_memory = []
-
-        with open("menu/faq/ypiter/marks/memory.txt", "r", encoding="utf-8") as file:
-            file = file.readlines()
-            for i in file: marks_id_memory.append(i.replace("\n", ""))
-        if self.uid in marks_id_memory:
-            self.message = "Вы уже отправляли рецензию!"
-            return True
-        if stat['marks_collect'] > 0 and stat['marks_collect'] < 5:
-            user_text = openfile("base", self.uid + "marks")
-
-            if stat['marks_collect'] == 1:
-                with open("base/" + self.uid + "marks.txt", "w+", encoding="utf-8") as f: f.write(user_text + self.update.message.text + "\n")
-                self.message = openfile("menu/faq/ypiter/marks", "marks2")
-
-            elif stat['marks_collect'] == 2:
-                with open("base/" + self.uid + "marks.txt", "w+", encoding="utf-8") as f: f.write(user_text + self.update.message.text + "\n")
-                self.message = openfile("menu/faq/ypiter/marks", "marks3")
-
-            elif stat['marks_collect'] == 3:
-                if self.update.message.text.lower() == "да":
-                    self.message = openfile("menu/faq/ypiter/marks", "marks4_5")
-                    stat['marks_collect'] = stat['marks_collect'] + 1
-                elif self.update.message.text.lower() == "нет":
-                    self.message = openfile("menu/faq/ypiter/marks", "marks4")
-
-            if stat['marks_collect'] == 4:
-                self.message = str(openfile("menu/faq/ypiter/marks", "marks_complete") + "\n" +
-                    openfile("base", self.uid + "marks") + "\nХотите изменить?(Да/нет)")
-            stat['marks_collect'] = stat['marks_collect'] + 1
-            login.update(self.update.message.chat_id, stat)
-            return True
-
-        if stat['marks_collect'] == 5:
-            if self.update.message.text.lower() == "да":
-                stat['marks_collect'] = 1
-                login.update(self.uid, stat)
-                self.write_mark
-                return True
-            elif self.update.message.text.lower() == "нет":
-                stat['marks_collect'] = 0
-                login.update(self.uid, stat)
-                with open("menu/faq/ypiter/marks/memory.txt", "w", encoding="utf-8") as file:
-                    marks_id_memory.append(str(self.update.message.chat_id))
-                    for i in range(len(marks_id_memory)):
-                        if i != len(marks_id_memory): file.write(marks_id_memory[i] + "\n")
-                        else: file.write(marks_id_memory[i])
-                with open("base/"+ self.uid +"marks.txt", "w", encoding="utf-8") as file: file.write(" ")
-                self.message = openfile("menu/faq/ypiter/marks", "markssucces")
-                return False
-            
-        return False
 
     def write_user(self):
-        User = login.User(self.uid)
-        user_profile = User.get_user_profile()
-        user_status = User.get_user_status()
+        user_profile = self.user.get_user_profile()
+        user_status = self.user.get_user_status()
+        user_change = self.user.get_user_change()
+
         if self.text is not None: new_data = self.text.replace("\n", "")
 
         if user_status['nickname']:
-            self.old_data = user_profile['Никнейм']
-            user_profile['Никнейм'] = new_data
+            if user_change['nickname'] >= 2 and user_profile['VIP'] == 'None':
+                self.message = "Вы достигли дневного лимита изменения данного значения!!\n\nЧтобы снять лимиты на изменения --> купите VIP♳"
+                self.reply_markup = self.userkb
+
+                return True
+            else:
+                self.old_data = user_profile['Никнейм']
+                user_profile['Никнейм'] = new_data
+                user_change['nickname'] += 1
 
         elif user_status['name']:
-            self.old_data = user_profile['Имя']
-            user_profile['Имя'] = new_data
+            if user_change['name'] >= 2 and user_profile['VIP'] == 'None':
+                self.message = "Вы достигли дневного лимита изменения данного значения!!\n\nЧтобы снять лимиты на изменения --> купите VIP♳"
+                self.reply_markup = self.userkb
+
+                return True
+            else:
+                self.old_data = user_profile['Имя']
+                user_profile['Имя'] = new_data
+                user_change['name'] += 1
 
         elif user_status['birthday']:
-            self.old_data = user_profile['День рождения']
-            user_profile['День рождения'] = new_data
+            if user_change['birthday'] >= 2 and user_profile['VIP'] == 'None':
+                self.message = "Вы достигли дневного лимита изменения данного значения!!\n\nЧтобы снять лимиты на изменения --> купите VIP♳"
+                self.reply_markup = self.userkb
+
+                return True
+            else:
+                self.old_data = user_profile['День рождения']
+                user_profile['День рождения'] = new_data
+                user_change['birthday'] += 1
 
         elif user_status['buisness']:
-            self.old_data = user_profile['Интересы']
-            user_profile['Интересы'] = new_data
+            if user_change['buisness'] >= 2 and user_profile['VIP'] == 'None':
+                self.message = "Вы достигли дневного лимита изменения данного значения!!\n\nЧтобы снять лимиты на изменения --> купите VIP♳"
+                self.reply_markup = self.userkb
+
+                return True
+            else:
+                self.old_data = user_profile['Интересы']
+                user_profile['Интересы'] = new_data
+                user_change['buisness'] += 1
 
         else: return False
 
-        User.write_user_profile(user_profile)
-        User.write_user_status(self.user_status)
+        self.user.write_user_profile(user_profile)
+        self.user.write_user_change(user_change)
 
         self.message = "Данные успешно обновлены!\n\n" + self.old_data + " >>> " + new_data
-        self.reply_markup = self.user
+        self.reply_markup = self.userkb
+
         return True
 
     def write_city(self):
+        user = self.user.get_user_profile()
         user_city = self.city.get_city_info()
         user_city_status = self.city.get_city_status()
+        user_city_change = self.city.get_city_change()
+
         if self.text is not None: new_data = self.text.replace("\n", "").replace(",", "‚")
 
         if user_city_status is None: return False
 
         if user_city_status['cityname']:
-            self.old_data = user_city['Имя']
-            user_city['Имя'] = new_data
+            if user_city_change['cityname'] >=2 and user['VIP'] == 'None':
+                self.message = "Вы достигли дневного лимита изменения данного значения!!\n\nЧтобы снять лимиты на изменения --> купите VIP♳"
+                self.reply_markup = self.citykb
+
+                return True
+
+            else:
+                self.old_data = user_city['Имя']
+                user_city['Имя'] = new_data
+                user_city_change['cityname'] += 1
 
         elif user_city_status['sign'] == 1 and self.text is None:
+            if user_city_change['sign'] >= 2 and user['VIP'] == 'None':
+                self.message = "Вы достигли дневного лимита изменения данного значения!!\n\nЧтобы снять лимиты на изменения --> купите VIP♳"
+                self.reply_markup = self.citykb
 
-            file = self.context.bot.get_file(self.update.message.photo[-1])
-            file_size = self.update.message.photo[-1]
+                return True
 
-            if file_size.width <= 400 and file_size.height <= 400:
-                user_city['Герб'] = "Есть"
-
-                response = urllib.request.urlopen(file.file_path)
-                with open("base/cities/photo/" + self.uid + "city.jpg", 'wb') as new_file: new_file.write(response.read())
-                self.message = "Данные успешно обновлены!"
             else:
-                self.message = "Размеры файла превышают максимальные! (400x400)"
-                return False
+                file = self.context.bot.get_file(self.update.message.photo[-1])
+                file_size = self.update.message.photo[-1]
 
-        elif user_city_status['gymn']: user_city['Гимн'] = new_data
-        elif user_city_status['history']: user_city['История'] = new_data
-        elif user_city_status['mayor']: user_city['Мэр'] = new_data
+                if file_size.width <= 400 and file_size.height <= 400:
+                    user_city['Герб'] = "Есть"
+                    user_city_change['sign'] += 1
+
+                    response = urllib.request.urlopen(file.file_path)
+                    with open("base/cities/photo/" + self.uid + "city.jpg", 'wb') as new_file: new_file.write(response.read())
+                    self.message = "Данные успешно обновлены!"
+                else:
+                    self.message = "Размеры файла превышают максимальные! (400x400)"
+                    return False
+
+        elif user_city_status['gymn']:
+            if user_city_change['gymn'] >= 2 and user['VIP'] == 'None':
+                self.message = "Вы достигли дневного лимита изменения данного значения!!\n\nЧтобы снять лимиты на изменения --> купите VIP♳"
+                self.reply_markup = self.citykb
+
+                return True
+
+            else:
+                user_city['Гимн'] = new_data
+                user_city_change['gymn'] += 1
+
+        elif user_city_status['history']:
+            if user_city_change['history'] >= 2 and user['VIP'] == 'None':
+                self.message = "Вы достигли дневного лимита изменения данного значения!!\n\nЧтобы снять лимиты на изменения --> купите VIP♳"
+                self.reply_markup = self.citykb
+
+                return True
+
+            else:
+                user_city['История'] = new_data
+                user_city_change['history'] += 1
+
+        elif user_city_status['mayor']:
+            if user_city_change['mayor'] >= 2 and user['VIP'] == 'None':
+                self.message = "Вы достигли дневного лимита изменения данного значения!!\n\nЧтобы снять лимиты на изменения --> купите VIP♳"
+                self.reply_markup = self.citykb
+
+                return True
+
+            else:
+                user_city['Мэр'] = new_data
+                user_city_change['mayor'] += 1
 
         else: return False
 
         self.city.write_city_profile(user_city)
-        self.city.write_city_status(user_city_status)
 
         self.message = "Данные успешно обновлены!"
         self.reply_markup = self.citykb
@@ -188,12 +208,17 @@ class Echo_Checker():
         
         return True
 
+    def update(self):
+        self.user.write_user_status(self.user_status)
+        self.city.write_city_status(self.city_status)
+
     def echo_check(self):
         self.text = self.update.message.text
 
-        if self.write_user(): return True
-        elif self.write_city(): return True
-        #elif self.write_mark(): return True
+        if self.write_user() or self.write_city():
+            self.update()
+            
+            return True
 
         else: return False
 
