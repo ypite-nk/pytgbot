@@ -67,49 +67,41 @@ def echo_button(update, context):
     if "-" in update.callback_query['data']:
 
         action, value = update.callback_query.data.split("-")
+        
+        if "m_" in action:
+            prefix, action = action.split("_")
 
-        if action == "like":
-            if str(edit_message_id) != str(old_message_id) and dislikestat is not True:
+            if action == "like":
+                if str(edit_message_id) != str(old_message_id) and dislikestat is not True:
+                    active_mem.change_raiting(int(value) + 1, int(DisLikeCount))
 
-                active_mem.change_raiting(int(value) + 1, int(DisLikeCount))
-                context.bot.edit_message_reply_markup(chat_id=update.callback_query.message.chat_id,
-                                                      message_id=edit_message_id,
-                                                      reply_markup=InlineKeyboardMarkup(kb.mem(active_mem.data()[2],
-                                                                                               active_mem.data()[3])))
-                old_message_id, likestat = edit_message_id, True
+                    old_message_id, likestat = edit_message_id, True
 
-            elif str(edit_message_id) == str(old_message_id) and dislikestat is not True:
-
-                active_mem.change_raiting(int(value) - 1, int(DisLikeCount))
-                context.bot.edit_message_reply_markup(chat_id=update.callback_query.message.chat_id,
-                                                      message_id=edit_message_id,
-                                                      reply_markup=InlineKeyboardMarkup(kb.mem(active_mem.data()[2],
-                                                                                               active_mem.data()[3])))
-                old_message_id, likestat = "", False
-
+                elif str(edit_message_id) == str(old_message_id) and dislikestat is not True:
+                    active_mem.change_raiting(int(value) - 1, int(DisLikeCount))
+                
+                    old_message_id, likestat = "", False
             
-        elif action == "dislike":
-            if str(edit_message_id) != str(old_message_id) and likestat is not True:
+            elif action == "dislike":
+                if str(edit_message_id) != str(old_message_id) and likestat is not True:
+                    active_mem.change_raiting(int(LikeCount), int(value) + 1)
 
-                active_mem.change_raiting(int(LikeCount), int(value) + 1)
-                context.bot.edit_message_reply_markup(chat_id=update.callback_query.message.chat_id,
-                                                      message_id=edit_message_id,
-                                                      reply_markup=InlineKeyboardMarkup(kb.mem(active_mem.data()[2],
-                                                                                               active_mem.data()[3])))
-                old_message_id, dislikestat = edit_message_id, True
+                    old_message_id, dislikestat = edit_message_id, True
 
-            elif str(edit_message_id) == str(old_message_id) and likestat is not True:
+                elif str(edit_message_id) == str(old_message_id) and likestat is not True:
+                    active_mem.change_raiting(int(LikeCount), int(value) - 1)
+                
+                    old_message_id, dislikestat = "", False
 
-                active_mem.change_raiting(int(LikeCount), int(value) - 1)
-                context.bot.edit_message_reply_markup(chat_id=update.callback_query.message.chat_id,
-                                                      message_id=edit_message_id,
-                                                      reply_markup=InlineKeyboardMarkup(kb.mem(active_mem.data()[2],
-                                                                                               active_mem.data()[3])))
-                old_message_id, dislikestat = "", False
-
-        '''if action == "А" or action == "П":
-            reply_text(openfile("menu/faq/ypiter/marks/marks", "MARKS-" + value + "-" + action),
-                       reply_markup=InlineKeyboardMarkup(kb.set_mark(marks_namelist)))'''
+        context.bot.edit_message_reply_markup(chat_id=update.callback_query.message.chat_id,
+                                                  message_id=edit_message_id,
+                                                  reply_markup=InlineKeyboardMarkup(
+                                                      kb.mem(
+                                                          active_mem.data()[2],
+                                                          active_mem.data()[3]
+                                                          )
+                                                      )
+                                                  )
 
     else:
         if "!changer" in update.callback_query['data']:
@@ -143,34 +135,12 @@ def echo_button(update, context):
             case "botinfo":
                 new_message_id = reply_text(openfile("menu/faq", "bot"),
                                             reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("<<<", callback_data="faq"), kb.backmenu]])).message_id
-            case "ypiinfo":
-                new_message_id = reply_text(openfile("menu/faq/ypiter", "faq"),
-                                            reply_markup=InlineKeyboardMarkup(kb.ypiterFAQ)).message_id
 #   О YPITER
             case "all":
                  new_message_id = reply_text(openfile("menu/faq/ypiter", "all"),
                                              reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("<<<", callback_data="ypiinfo"), kb.backmenu]]),
                                              parse_mode=ParseMode.HTML).message_id
-            case "ypimore":
-                new_message_id = reply_text(openfile("menu/faq/ypiter", "more"),
-                                            reply_markup=InlineKeyboardMarkup(kb.back))
-#   РЕЦЕНЗИИ
-#            case "marks":
- #               new_message_id = reply_text("Этот раздел пока недоступен, вернитесь позже",
-  #                                          reply_markup=InlineKeyboardMarkup(kb.back)).message_id
-   #             return
-    #            with open("menu/faq/ypiter/marks/markslist.txt", "r", encoding="utf-8") as file:
-     #               marks = file.readlines()
-      #              marks_namelist = []
-       #             for i in range(int(marks[0].split(";")[0])+1):
-        #                if "-" in marks[0].split(";")[i]: marks_namelist.append(marks[0].split(";")[i])
-         #       
-          #      new_message_id = reply_text(openfile("menu/faq/ypiter/marks", "marks"),
-           #                                 reply_markup=InlineKeyboardMarkup(kb.set_mark(marks_namelist))).message_id
-           #
-           # case "getmark":
-           #     new_message_id = reply_text(openfile("menu/faq/ypiter/marks", "marksget"),
-           #                                 reply_markup=InlineKeyboardMarkup(kb.ypiterFAQ)).message_id
+
 #   GAME:RAP
             case "rap":
                 new_message_id = reply_text(openfile('menu/more/fun/rap', "Game_Description1"),
@@ -193,9 +163,6 @@ def echo_button(update, context):
 #   MENU
             case "profile":
                 new_message_id = myprofile(update, context)
-            #case "faq":
-             #   new_message_id = reply_text(openfile("menu/faq", "faq"),
-              #                              reply_markup=InlineKeyboardMarkup(kb.FAQ)).message_id
             case "info":
                 new_message_id = reply_text(openfile('menu', "info"),
                                             reply_markup=InlineKeyboardMarkup(kb.back)).message_id
@@ -233,7 +200,7 @@ def echo_button(update, context):
                                             reply_markup=InlineKeyboardMarkup(kb.learns)).message_id
 
             case "learning":
-                new_message_id = reply_text(openfile("learn", "learning"),
+                new_message_id = reply_text("К сожалению, данный раздел пока не доступен",#openfile("learn", "learning"
                                             reply_markup=InlineKeyboardMarkup(kb.learn)).message_id
 #       GENRES
             case "books":
@@ -519,7 +486,10 @@ def echo_button(update, context):
 
             case "quests":
                 new_message_id = reply_text(openfile("menu/more/fun/quests", "quests"),
-                                            reply_markup=InlineKeyboardMarkup())
+                                            reply_markup=InlineKeyboardMarkup(kb.quests))
+            case "buyvip":
+                new_message_id = reply_text(openfile("menu/profile", "buyvip"),
+                                            reply_markup=InlineKeyboardMarkup(kb.profile_back))
 
         if not conflict: context.chat_data['message_id'] = new_message_id
     conflict = False
