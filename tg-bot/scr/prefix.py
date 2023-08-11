@@ -1,25 +1,7 @@
 ﻿# -*- coding: utf-8 -*-
-import login
 import keyboardbot as kb
 from telegram import InlineKeyboardMarkup
 from spec import check_acces
-from spec import openfile
-
-@check_acces
-def prefix_marks(update, context):
-    marks_id_memory = []
-    with open("info/ypiter/marks/memory.txt", "r", encoding="utf-8") as file:
-        file = file.readlines()
-        for i in file: marks_id_memory.append(i.replace("\n", ""))
-
-    if str(update.message.chat_id) in marks_id_memory: update.message.reply_text("Вы уже отправляли рецензию!",
-                                                                                 reply_markup = InlineKeyboardMarkup(kb.back))
-    else:
-        user = login.authorize(update.message.chat_id)
-        user['marks_collect'] = 1
-        login.update(update.message.chat_id, user)
-
-        update.message.reply_text(openfile("descriptext", "marks1"))
 
 from pyowm import OWM
 from pyowm.utils.config import get_default_config
@@ -51,6 +33,7 @@ def prefix_weather(update, context, city = None):
         except: update.message.reply_text("Такого города не существует! Возможно, вы ошиблись в названии или у OpenWeatherMap нету таких данных.",
                                       reply_markup=InlineKeyboardMarkup(kb.back))
 
+import login
 from os import path
 def mycity(update, context):
     uid = str(update.callback_query.message.chat_id)
@@ -81,32 +64,46 @@ def mycity(update, context):
 
 def myprofile(update, context):
     user = login.User(str(update.callback_query.message.chat_id)).get_user_profile()
-    keys, values = [], []
-    profile = ""
+    keys, values, profile = [], [], ""
 
     for key in user.keys(): keys.append(key)
     for value in user.values(): values.append(value)
     for i in range(len(keys)): profile += str(keys[i]) + " : " + str(values[i]) + "\n"
 
-    return update.callback_query.message.reply_text("===Ваш профиль===\n" + profile,
-                                                    reply_markup = InlineKeyboardMarkup(kb.profile)).message_id
+    return update.callback_query.message.reply_text(
+        "===Ваш профиль===\n" + profile,
+        reply_markup=InlineKeyboardMarkup(kb.profile)
+        ).message_id
 
 def update(update, context):
     users_uid = login.users_info()
 
     for i in users_uid:
-        city = login.City(str(i)).get_city_data()
+        city_data = login.City(str(i)).get_city_data()
+        user = login.User(str(i)).get_user_profile()
 
-        if city is not None:
-            money = (city['Доход'] - city['Расходы'])
-            city['Бюджет'] += money
-            login.City(str(i)).write_city_data(city)
-            context.bot.send_message(chat_id=i, text="💰payday💰\n\nТвой город заработал - " + str(money) +
-                                     "\nБюджет: " + str(city['Бюджет']),
-                                     reply_markup=InlineKeyboardMarkup(kb.backcity))
+        if city_data is not None:
+            money = (city_data['Доход'] - city_data['Расходы'])
+            city_data['Бюджет'] += money
+            
+            if user['VIP'] == 'None': login.City(str(i)).write_city_data(city_data)
+            else:
+                city_data['Бюджет'] += money
+                login.City(str(i)).write_city_data(city_data)
 
-from spec import RandomTasks
+                context.bot.send_message(
+                    chat_id=i,
+                    text="Дополнительный заработок с VIP: " + str(money)
+                    )
+
+            context.bot.send_message(
+                chat_id=i,
+                text="💰payday💰\n\nТвой город заработал - " + str(money) + "\nБюджет: " + str(city_data['Бюджет']),
+                reply_markup=InlineKeyboardMarkup(kb.backcity)
+                )
+
 def update_event(update, context):
+    from spec import RandomTasks
     users_uid = login.users_info()
 
     for i in users_uid:
