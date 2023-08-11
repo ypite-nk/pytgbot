@@ -5,16 +5,6 @@ backmenu = IKB("Меню", callback_data="/back")
 backmenu2 = IKB("Меню", callback_data="more")
 back = [[backmenu]]
 
-ypiterFAQ = [
-    [IKB("Общее", callback_data='all'), IKB("Рецензии", callback_data='marks'), IKB("Больше..", callback_data="ypimore")],
-    [IKB("<<<", callback_data="faq"), backmenu]
-    ]
-
-FAQ = [
-    [IKB("О боте", callback_data="botinfo"), IKB("О ypiter", callback_data="ypiinfo")],
-    [backmenu]
-    ]
-
 rap = [
     [
     IKB("50 Cent", callback_data="50 Cent"), IKB("Lil Peep", callback_data="Lil Peep"),
@@ -51,26 +41,9 @@ profile_back = [[IKB("<<<", callback_data="profile")]]
 changerback = [[IKB("❌Отмена❌", callback_data="discard")]]
 
 bots = [
-    [IKB("ch:помощник", url="https://t.me/ch_helper_bot"), IKB("ChatGPT", url="https://t.me/chatgpt_tgm_bot?start=1086638338"), IKB("LeakedCheck", url="https://t.me/LeackedCheck_bot?start=qgSPpU")],
+    [IKB("ch:помощник", url="https://t.me/ch_helper_bot"), IKB("ChatGPT", url="https://t.me/gptdevbot?start=1086638338"), IKB("LeakedCheck", url="https://t.me/LeackedCheck_bot?start=qgSPpU")],
     [IKB("<<<", callback_data="more")],
     ]
-'''
-def set_mark(list):
-    marks = []
-    marks_span = []
-    nextline = False
-    for i in list:
-        if "-" in i:
-            if not nextline:
-                marks_span.append(IKB(i.split("-")[1] + "::" + i.split("-")[0], callback_data=i))
-                if int(i.split("-")[1]) == 4: nextline = True
-            if nextline:
-                marks.append(marks_span)
-                marks_span = []
-                nextline = False
-    if not nextline: marks.append(marks_span)
-    marks.append([IKB("<<<", callback_data="ypiinfo"), backmenu, IKB("Оставить рецензию...", callback_data="getmark")])
-    return marks'''
 
 commands_out = [
     [IKB("<<<", callback_data="more"), backmenu]
@@ -203,29 +176,19 @@ link = [
 
 def mem(LikeCount, DisLikeCount):
     mem = [
-        [IKB("Мем", callback_data="photomem"), IKB("👍  " + str(LikeCount), callback_data="like-" + str(LikeCount)), IKB("👎  " + str(DisLikeCount), callback_data="dislike-" + str(DisLikeCount))],
+        [IKB("Мем", callback_data="photomem"), IKB("👍  " + str(LikeCount), callback_data="m_like-" + str(LikeCount)), IKB("👎  " + str(DisLikeCount), callback_data="m_dislike-" + str(DisLikeCount))],
         [IKB("<<<", callback_data="fun"), backmenu]
         ]
     return mem
 
-vid = [
-    [IKB("Видео", callback_data="videomem")],
-    [IKB("<<<", callback_data="fun"), backmenu]
-    ]
-
-jokes = [
-    [IKB("Анекдот", callback_data="jokes")],
-    [IKB("<<<", callback_data="fun"), backmenu]
-    ]
-
-thought = [
-    [IKB("Мысль", callback_data="thought")],
-    [IKB("<<<", callback_data="fun"), backmenu]
-    ]
-
 projects = [
     [IKB("Список проектов", callback_data="projlist"), IKB("Дополнительно...", callback_data="profmore")],
     [backmenu]
+    ]
+
+quests = [
+    [IKB("Квест 1", callback_data="none"), IKB("квест 2", callback_data="none")],
+    [IKB("<<<", callback_data="fun")]
     ]
 
 city_admin = [[IKB("Изменить", callback_data="city_change"), IKB("Постройка", callback_data="create")],
