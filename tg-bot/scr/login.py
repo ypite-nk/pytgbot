@@ -6,6 +6,7 @@ class User():
 	def __init__(self, uid: str):
 		self.uid = uid
 		self.path = f"base/{self.uid}.txt"
+		self.user_path = f"base/users_profile.txt"
 
 		self.translate_pr_to_dict = {
 			"pr_ID":"ID",
@@ -16,6 +17,7 @@ class User():
 			"pr_city":"Город",
 			"pr_VIP":"VIP",
 			"pr_Rait":"Рейтинг",
+			"pr_money":"Юшки",
 			"pr_Beta-acc":"Бета-доступ"
 			}
 
@@ -28,6 +30,7 @@ class User():
 			"Город":"pr_city",
 			"VIP":"pr_VIP",
 			"Рейтинг":"pr_Rait",
+			"Юшки":"pr_money",
 			"Бета-доступ":"pr_Beta-acc"
 			}
 
@@ -80,6 +83,7 @@ class User():
 			"pr_city":"None",
 			"pr_VIP":"None",
 			"pr_Rait":"0",
+			"pr_money":"0",
 			"pr_Beta-acc":"None",
 			"ct_ban":"0",
 			"ct_beta":"0",
@@ -88,7 +92,6 @@ class User():
 			"st_name":"0",
 			"st_birthday":"0",
 			"st_buisness":"0",
-			"st_daychange":"0",
 			"ch_nickname":"0",
 			"ch_name":"0",
 			"ch_birthday":"0",
@@ -98,6 +101,16 @@ class User():
 	def authorize(self) -> None:
 		if not path.exists(self.path):
 			with open(self.path, "w", encoding="utf-8") as f: f.write(json.dumps(self.user_dict))
+
+			users_uid = users_profile_info()
+			users_uid_str = ""
+			for i in users_uid:
+				users_uid_str += f"{str(i)}\n"
+
+			if self.uid not in users_uid:
+				users_uid_str += self.uid
+
+			with open(self.user_path, "w", encoding="utf-8") as f: f.write(users_uid_str)
 
 	def get_user_profile(self) -> dict:
 		if not path.exists(self.path): self.authorize()
@@ -206,8 +219,15 @@ class User():
 			with open(self.path, "w", encoding="utf-8") as file:
 				file.write(json.dumps(output))
 
-def users_info() -> list:
-	with open('base/users.txt', 'r', encoding="utf-8") as f:
+def users_profile_info() -> list:
+	with open('base/users_profile.txt', 'r', encoding="utf-8") as f:
+		users = f.readlines(0)
+		info = []
+		for i in users: info.append(i.replace("\n", ""))
+		return info
+
+def users_city_info() -> list:
+	with open('base/users_city.txt', 'r', encoding="utf-8") as f:
 		users = f.readlines(0)
 		info = []
 		for i in users: info.append(i.replace("\n", ""))
@@ -217,6 +237,7 @@ class City():
 	def __init__(self, uid: str):
 		self.uid = uid
 		self.path = f"base/cities/{uid}.txt"
+		self.user_path = f"base/users_city.txt"
 
 		self.city_dict = {
 			"pr_cityname":"None",
@@ -227,10 +248,12 @@ class City():
 			"pr_people":"0",
 			"pr_mayor":"None",
 			"pr_sign":"None",
+			"pr_flag":"None",
 			"pr_gymn":"None",
 			"pr_history":"None",
 			"st_cityname":"0",
 			"st_sign":"0",
+			"st_flag":"0",
 			"st_gymn":"0",
 			"st_history":"0",
 			"st_mayor":"0",
@@ -243,6 +266,7 @@ class City():
 			"dt_waterexpense":"0",
 			"ch_cityname":"0",
 			"ch_sign":"0",
+			"ch_flag":"0",
 			"ch_gymn":"0",
 			"ch_history":"0",
 			"ch_mayor":"0"
@@ -257,6 +281,7 @@ class City():
 			"pr_people":"Население",
 			"pr_mayor":"Мэр",
 			"pr_sign":"Герб",
+			"pr_flag":"Флаг",
 			"pr_gymn":"Гимн",
 			"pr_history":"История"
 			}
@@ -270,6 +295,7 @@ class City():
 			"Население":"pr_people",
 			"Мэр":"pr_mayor",
 			"Герб":"pr_sign",
+			"Флаг":"pr_flag",
 			"Гимн":"pr_gymn",
 			"История":"pr_history"
 			}
@@ -277,6 +303,7 @@ class City():
 		self.translate_st_to_dict = {
 			"st_cityname":"cityname",
 			"st_sign":"sign",
+			"st_flag":"flag",
 			"st_gymn":"gymn",
 			"st_history":"history",
 			"st_mayor":"mayor"
@@ -285,6 +312,7 @@ class City():
 		self.translate_dict_to_st = {
 			"cityname":"st_cityname",
 			"sign":"st_sign",
+			"flag":"st_flag",
 			"gymn":"st_gymn",
 			"history":"st_history",
 			"mayor":"st_mayor"
@@ -313,22 +341,34 @@ class City():
 		self.translate_ch_to_dict = {
 			"ch_cityname":"cityname",
 			"ch_sign":"sign",
+			"ch_flag":"flag",
 			"ch_gymn":"gymn",
-			"ch_history":"history"
+			"ch_history":"history",
+			"ch_mayor":"mayor"
 			}
 
 		self.translate_dict_to_ch = {
 			"cityname":"ch_cityname",
 			"sign":"ch_sign",
+			"flag":"ch_flag",
 			"gymn":"ch_gymn",
-			"history":"ch_history"
+			"history":"ch_history",
+			"mayor":"ch_mayor"
 			}
 
 	def authorize(self) -> bool:
 		if not path.exists(self.path):
 			with open(self.path, "w", encoding="utf-8") as f: f.write(json.dumps(self.city_dict))
-			return False
-		return True
+
+			users_uid = users_city_info()
+			users_uid_str = ""
+			for i in users_uid:
+				users_uid_str += f"{str(i)}\n"
+
+			if self.uid not in users_uid:
+				users_uid_str += self.uid
+
+			with open(self.user_path, "w", encoding="utf-8") as f: f.write(users_uid_str)
 
 	def get_city_info(self) -> dict:
 		if not path.exists(self.path): return None
