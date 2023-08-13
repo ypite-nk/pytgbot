@@ -45,7 +45,7 @@ def change(update, context):
     chat_id = update.callback_query.message.chat_id
     context.bot.delete_message(chat_id, message_id)
 
-from spec import check_acces, openfile, raiting
+from spec import check_acces, openfile, raiting, global_raiting
 from spec import Create, Status_changer
 from prefix import mycity, myprofile
 
@@ -482,7 +482,7 @@ def echo_button(update, context):
                                             reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text="Изучать", url="https://dzen.ru/ypiter")], [kb.backmenu2]]),
                                             parse_mode=ParseMode.HTML).message_id
             case "raiting":
-                new_message_id = raiting(update, context)
+                new_message_id = global_raiting(update, context)
 
             case "quests":
                 new_message_id = reply_text(openfile("menu/more/fun/quests", "quests"),
