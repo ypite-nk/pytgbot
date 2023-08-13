@@ -199,7 +199,7 @@ backcity = [[IKB("<<<", callback_data="cityBack")]]
 
 city_change = [
     [IKB("Имя", callback_data="!changer_cityname"), IKB("Герб", callback_data="!changer_sign"), IKB("Гимн", callback_data="!changer_gymn")],
-    [BCB, IKB("Мэра", callback_data="!changer_mayor"), IKB("Историю", callback_data="!changer_history")]
+    [BCB, IKB("Мэра", callback_data="!changer_mayor"), IKB("Историю", callback_data="!changer_history"), IKB("Флаг", callback_data="!changer_flag")]
     ]
 
 city_createtypes = [
