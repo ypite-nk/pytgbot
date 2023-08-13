@@ -28,7 +28,7 @@ def prefix_weather(update, context, city = None):
         try:
             w = owm(city).weather
             result = [w.temperature('celsius')['temp'], w.detailed_status, w.wind()['speed']]
-            update.message.reply_text("Город: " + city + "\nТемпература: " + str(result[0]) + "\nНебо: " + str(result[1]) + "\nВетер: " + str(result[2]) + " м/с",
+            update.message.reply_text(f"Город: {city}\nТемпература: {str(result[0])}\nНебо: {str(result[1])}\nВетер: {str(result[2])} м/с",
                                       reply_markup=InlineKeyboardMarkup(kb.back))
         except: update.message.reply_text("Такого города не существует! Возможно, вы ошиблись в названии или у OpenWeatherMap нету таких данных.",
                                       reply_markup=InlineKeyboardMarkup(kb.back))
@@ -56,10 +56,13 @@ def mycity(update, context):
 
     for i in range(len(data_keys)): data += str(data_keys[i]) + " : " + str(data_values[i]) + "\n"
 
-    path_logo = "base/cities/photo/" + uid + "city.jpg"
+    path_flag = f"base/cities/photo/{uid}flag.jpg"
+    if path.exists(path_flag): update.callback_query.message.reply_photo(open(path_flag, 'rb'))
+
+    path_logo = f"base/cities/photo/{uid}sign.jpg"
     if path.exists(path_logo): update.callback_query.message.reply_photo(open(path_logo, 'rb'))
     
-    return update.callback_query.message.reply_text("===Ваш город===" + "\n" + info + "\n===Управление===\n" + data,
+    return update.callback_query.message.reply_text(f"===Ваш город===\n{info}\n===Управление===\n{data}",
                                                     reply_markup=InlineKeyboardMarkup(kb.city_admin)).message_id
 
 def myprofile(update, context):
@@ -70,48 +73,82 @@ def myprofile(update, context):
     for value in user.values(): values.append(value)
     for i in range(len(keys)): profile += str(keys[i]) + " : " + str(values[i]) + "\n"
 
-    return update.callback_query.message.reply_text(
-        "===Ваш профиль===\n" + profile,
-        reply_markup=InlineKeyboardMarkup(kb.profile)
-        ).message_id
+    return update.callback_query.message.reply_text(f"===Ваш профиль===\n{profile}",
+                                                    reply_markup=InlineKeyboardMarkup(kb.profile)).message_id
+
+def inline_profile(update, context):
+    user = login.User(str(update.inline_query.from_user.id)).get_user_profile()
+    keys, values, profile = [], [], ""
+
+    keylist = ['ID', 'Никнейм', 'День рождения', 'Интересы','Город', 'Рейтинг', 'Юшки']
+
+    for key in user.keys():
+        if key in keylist: keys.append(key)
+
+    for i in keys: values.append(user[i])
+
+    for i in range(len(keys)): profile += str(keys[i]) + " : " + str(values[i]) + "\n"
+
+    return profile
+
+def inline_city(update, context):
+    uid = str(update.inline_query.from_user.id)
+    City = login.City(uid)
+    City.authorize()
+
+    user_city_info = City.get_city_info()
+
+    info_keys, info_values, info = [], [], ""
+
+    for key in user_city_info.keys(): info_keys.append(key)
+    for value in user_city_info.values(): info_values.append(value)
+
+    for i in range(len(info_keys)): info += str(info_keys[i]) + " : " + str(info_values[i]) + "\n"
+
+    return info
 
 def update(update, context):
-    users_uid = login.users_info()
+    users_uid = login.users_city_info()
 
     for i in users_uid:
-        city_data = login.City(str(i)).get_city_data()
+        city = login.City(str(i))
         user = login.User(str(i)).get_user_profile()
 
-        if city_data is not None:
-            money = (city_data['Доход'] - city_data['Расходы'])
-            city_data['Бюджет'] += money
+        city_data = city.get_city_data()
+
+        money = (city_data['Доход'] - city_data['Расходы'])
+        city_data['Бюджет'] += money
             
-            if user['VIP'] == 'None': login.City(str(i)).write_city_data(city_data)
-            else:
-                city_data['Бюджет'] += money
-                login.City(str(i)).write_city_data(city_data)
+        if user['VIP'] == 'None':
+            context.bot.send_message(chat_id=i,
+                                     text=f"💰payday💰\n\nТвой город заработал - {str(money)}\nБюджет: {str(city_data['Бюджет'])}",
+                                     reply_markup=InlineKeyboardMarkup(kb.backcity)
+                                     )
+        else:
+            city_data['Бюджет'] += money
 
-                context.bot.send_message(
-                    chat_id=i,
-                    text="Дополнительный заработок с VIP: " + str(money)
-                    )
+            context.bot.send_message(chat_id=i,
+                                     text=f"💰VIP payday💰\n\nТвой город заработал - {str(money*2)}\nБюджет: {str(city_data['Бюджет'])}",
+                                     reply_markup=InlineKeyboardMarkup(kb.backcity)
+                                     )
 
-            context.bot.send_message(
-                chat_id=i,
-                text="💰payday💰\n\nТвой город заработал - " + str(money) + "\nБюджет: " + str(city_data['Бюджет']),
-                reply_markup=InlineKeyboardMarkup(kb.backcity)
-                )
+        city.write_city_data(city_data)
 
 def update_event(update, context):
     from spec import RandomTasks
-    users_uid = login.users_info()
+    users_uid = login.users_city_info()
 
     for i in users_uid:
-        city = login.City(str(i)).get_city_info()
+        city = login.City(str(i))
+        city_change = city.get_city_change()
 
-        if city is not None:
-            task = RandomTasks(i)
-            task.taskUpdate()
-            context.bot.send_message(chat_id=i,
-                                     text=task.text,
-                                     reply_markup=InlineKeyboardMarkup(kb.backcity))
+        for key in city_change.keys(): city_change[key] = 0
+        city.write_city_change(city_change)
+
+        task = RandomTasks(i)
+        task.taskUpdate()
+        
+        context.bot.send_message(chat_id=i,
+                                 text=task.text,
+                                 reply_markup=InlineKeyboardMarkup(kb.backcity)
+                                 )
