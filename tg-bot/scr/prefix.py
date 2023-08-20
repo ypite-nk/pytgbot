@@ -3,14 +3,15 @@ import keyboardbot as kb
 from telegram import InlineKeyboardMarkup
 from spec import check_acces
 
-from pyowm import OWM
-from pyowm.utils.config import get_default_config
-config_dict = get_default_config()
-config_dict['language'] = 'ru'
-owm = OWM('e8d3ccc3b3a95bec547a312f27610381', config_dict).weather_manager().weather_at_place
-
 @check_acces
 def prefix_weather(update, context, city = None):
+    from pyowm import OWM
+    from pyowm.utils.config import get_default_config
+
+    config_dict = get_default_config()
+    config_dict['language'] = 'ru'
+    owm = OWM('e8d3ccc3b3a95bec547a312f27610381', config_dict).weather_manager().weather_at_place
+
     if update is None:
         try:
             w = owm(city).weather
@@ -73,11 +74,32 @@ def myprofile(update, context):
     for value in user.values(): values.append(value)
     for i in range(len(keys)): profile += str(keys[i]) + " : " + str(values[i]) + "\n"
 
-    return update.callback_query.message.reply_text(f"===Ваш профиль===\n{profile}",
+    return update.callback_query.message.reply_text(f"===Ваш профиль===\n🪪\n{profile}",
                                                     reply_markup=InlineKeyboardMarkup(kb.profile)).message_id
+
+def mybank(update, context):
+    balance = login.User(str(update.callback_query.message.chat_id)).get_user_profile()['Юшки']
+    user_bank = login.Bank(str(update.callback_query.message.chat_id)).get_user_bank()
+    user_bank['Balance'] = balance
+    
+    no_access_list = ['test', 'test_lvl']
+    access_list_key, access_list_value = [], []
+    info = ""
+    
+    for key in user_bank.keys():
+        if key not in no_access_list: access_list_key.append(key)
+        
+    for key in access_list_key: str(access_list_value.append(user_bank[key]))
+    for i in range(len(access_list_key)): info += f"{access_list_key[i]} : {access_list_value[i]}\n"
+    
+    return update.callback_query.message.reply_text(f"===Банк Юпитер===\n{info}",
+                                                    reply_markup=InlineKeyboardMarkup(kb.bank)).message_id
 
 def inline_profile(update, context):
     user = login.User(str(update.inline_query.from_user.id)).get_user_profile()
+
+    if user is None: return False
+
     keys, values, profile = [], [], ""
 
     keylist = ['ID', 'Никнейм', 'День рождения', 'Интересы','Город', 'Рейтинг', 'Юшки']
@@ -85,7 +107,7 @@ def inline_profile(update, context):
     for key in user.keys():
         if key in keylist: keys.append(key)
 
-    for i in keys: values.append(user[i])
+    for key in keys: values.append(user[key])
 
     for i in range(len(keys)): profile += str(keys[i]) + " : " + str(values[i]) + "\n"
 
@@ -93,17 +115,20 @@ def inline_profile(update, context):
 
 def inline_city(update, context):
     uid = str(update.inline_query.from_user.id)
-    City = login.City(uid)
-    City.authorize()
+    user_city_info = login.City(uid).get_city_info()
 
-    user_city_info = City.get_city_info()
+    if user_city_info is None: return False
 
-    info_keys, info_values, info = [], [], ""
+    keys, values, info = [], [], ""
 
-    for key in user_city_info.keys(): info_keys.append(key)
-    for value in user_city_info.values(): info_values.append(value)
+    keylist = ['Имя', 'Страна', 'Мэр', 'Субъект', 'Дата создания', 'Население', 'История', 'Гимн']
 
-    for i in range(len(info_keys)): info += str(info_keys[i]) + " : " + str(info_values[i]) + "\n"
+    for key in user_city_info.keys():
+        if key in keylist: keys.append(key)
+
+    for key in keys: values.append(user_city_info[key])
+
+    for i in range(len(keys)): info += str(keys[i]) + " : " + str(values[i]) + "\n"
 
     return info
 
@@ -135,6 +160,13 @@ def update(update, context):
         city.write_city_data(city_data)
 
 def update_event(update, context):
+    
+    # update action's cost every day
+    from login import actions_update
+    actions_update("fast$")
+    context.bot.send_message(chat_id=-1001955905639,
+                             text="Action's cost was update [FAST]")
+
     from spec import RandomTasks
     users_uid = login.users_city_info()
 
@@ -152,3 +184,11 @@ def update_event(update, context):
                                  text=task.text,
                                  reply_markup=InlineKeyboardMarkup(kb.backcity)
                                  )
+        
+def update_week(update, context):# special func for
+    
+    # update action's cost every week
+    from login import actions_update
+    actions_update("slow$")
+    context.bot.send_message(chat_id=-1001955905639,
+                             text="Action's cost was update [SLOW]")
