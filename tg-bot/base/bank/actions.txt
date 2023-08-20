@@ -1,0 +1,1 @@
+{"JxSpeed": "50", "MacroMotor": "70"}
