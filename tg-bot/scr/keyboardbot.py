@@ -14,14 +14,15 @@ rap = [
     ]
 
 start_key = [
-    [IKB("Профиль", callback_data="profile"), IKB("Город", callback_data="mycity")],
-    [IKB("Инфо", callback_data="info"), IKB("Проекты", callback_data="projects"), IKB("Соцсети", callback_data="social")],
-    [IKB("Обратная связь", callback_data="helper"), IKB(">>>", callback_data="more")]
+    [IKB("Профиль", callback_data="profile"), IKB("Город", callback_data="mycity"), IKB("Магазин", callback_data="shop")],
+    [IKB("Банк", callback_data="bank")],
+    [IKB("Проекты", callback_data="projects"), IKB("Соцсети", callback_data="social")],
+    [IKB("Обратная связь", callback_data="helper"), IKB("Версия", callback_data="info"), IKB(">>>", callback_data="more")]
     ]
 
 more = [
-    [IKB("Стикерпаки", callback_data="packs"), IKB("Развлечения", callback_data="fun")],
-    [IKB("Образование", callback_data="learn"), IKB("Боты", callback_data="bots")],
+    [IKB("Стикерпаки", callback_data="packs"), IKB("Развлечения", callback_data="fun"), IKB("Боты", callback_data="bots")],
+    [IKB("Образование", callback_data="learn")],
     [IKB("<<<", callback_data="/back"), IKB("Поддержать", callback_data="donate")]
     ]
 
@@ -169,8 +170,8 @@ key = [
 
 link = [
     [IKB(text="Канал Тг", url="https://t.me/ypite"), IKB(text="Группа Вк", url="https://vk.com/cloud_ypiter"), IKB(text="GitHub", url="https://github.com/ypite-nk")],
-    [IKB(text="Вконтакте", url="https://vk.com/ypite"), IKB(text="Телеграмм", url="https://t.me/r_ypiter")],
-    [IKB(text="Youtube", url="https://www.youtube.com/channel/UCQunVaPHyI2MvS0rU56_MhA"), IKB(text="TikTok", url="https://vm.tiktok.com/ZT81sSebh/"), IKB(text="Twitch", url="https://www.twitch.tv/ypiternk")],
+    [IKB(text="Вконтакте", url="https://vk.com/ypite"), IKB(text="Телеграмм", url="https://t.me/r_ypite")],
+    [IKB(text="Youtube", url="https://www.youtube.com/channel/UCQunVaPHyI2MvS0rU56_MA"), IKB(text="TikTok", url="https://vm.tiktok.com/ZT81sSebh/"), IKB(text="Twitch", url="https://www.twitch.tv/ypiternk")],
     [IKB("<<<", callback_data="/back")]
     ]
 
@@ -187,7 +188,7 @@ projects = [
     ]
 
 quests = [
-    [IKB("Квест 1", callback_data="none"), IKB("квест 2", callback_data="none")],
+    [IKB("Квест 1", callback_data="quest1"), IKB("квест 2", callback_data="quest2")],
     [IKB("<<<", callback_data="fun")]
     ]
 
@@ -249,3 +250,58 @@ city_create_ind3 = [
                      [IKB("Большой район", callback_data="3indmat")],
                      [BCB, backmenu]
                     ]
+
+def shops(callback):
+    return [
+            [IKB("За рубли", callback_data=f"buy=R={callback}"), IKB("За Юшки", callback_data=f"buy=Y={callback}")],
+            [IKB("<<<", callback_data="shop")]
+            ]
+
+def buy_R(callback, cost):
+    return [
+        [IKB(f"Купить {callback} за {cost}₽ с помощью DonationAlerts",
+             url="https://www.donationalerts.com/r/ypiter_nk")],
+        [IKB("<<<", callback_data=f"shop={callback}")]
+        ]
+
+def buy_Y(callback, cost):
+    return [
+        [IKB(f"Купить {callback} за {cost}Ю",
+             callback_data=f"shopbuy:{callback}:{cost}")],
+        [IKB("<<<", callback_data=f"shop={callback}")]
+        ]
+
+shop = [
+    [IKB("VIP", callback_data="shop=VIP"), IKB("JxSpeed", callback_data="shop=JxSpeed"), IKB("MacroMotor", callback_data="shop=MacroMotor"), IKB("LifeX10", callback_data="shop=LifeX10")],
+    [backmenu]
+    ]
+
+bankstart = [
+    [IKB("Начать тест! (19Ю)", callback_data="start_test_19")],
+    [backmenu]
+    ]
+
+test1 = [
+    [IKB("Вариант 1", callback_data="1#1"), IKB("Вариант 2", callback_data="1#2")],
+    [IKB("❌Отмена теста❌", callback_data="discard_test")]
+    ]
+
+test2 = [
+    [IKB("Вариант 1", callback_data="2#1"), IKB("Вариант 2", callback_data="2#2")],
+    [IKB("Вариант 3", callback_data="2#3"), IKB("Вариант 4", callback_data="2#4")],
+    [IKB("❌Отмена теста❌", callback_data="discard_test")]
+    ]
+
+test3 = [
+    [IKB("Вариант 1", callback_data="3#1"), IKB("Вариант 2", callback_data="3#2")],
+    [IKB("Вариант 3", callback_data="3#3"), IKB("Вариант 4", callback_data="3#4")],
+    [IKB("❌Отмена теста❌", callback_data="discard_test")]
+    ]
+
+testC = [
+    [IKB("Перейти в банк...", callback_data="bank")]
+    ]
+
+bank = [[IKB("Профиль", callback_data="mybank"), IKB("Графики", callback_data="bank_graphic")],
+        [IKB("Информация", callback_data="bank_stat"), IKB("Акции", callback_data="bank_actions")],
+        [backmenu, IKB("Конвертер", callback_data="bank_convert")]]
