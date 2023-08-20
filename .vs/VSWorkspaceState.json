@@ -1,7 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\tg-bot",
+    "\\tg-bot\\scr"
   ],
-  "SelectedNode": "\\tg-bot.sln",
+  "SelectedNode": "\\tg-bot\\scr\\tg_bot.py",
   "PreviewInSolutionExplorer": false
 }
