@@ -25,9 +25,9 @@ def global_raiting(update, context):
         if "-" not in user_id:
             user = login.User(user_id).get_user_profile()
             if user['VIP'] != "None":
-                user_dict[user['Никнейм'] + "♳"] = int(user['Рейтинг'])
+                user_dict[user['Никнейм'] + "♳"] = user['Рейтинг']
             else:
-                user_dict[user['Никнейм']] = int(user['Рейтинг'])
+                user_dict[user['Никнейм']] = user['Рейтинг']
 
     user_dict = sorted(user_dict.items(), key=lambda x: x[1], reverse=True)
     for i in range(len(user_dict)):
@@ -40,6 +40,106 @@ def global_raiting(update, context):
     else:
         return update.callback_query.message.reply_text(f"🌏 Ваш рейтинг: ♳{str(user_active['Рейтинг'])}\n\nГлобальный рейтинг:\n{output}",
                                                         reply_markup=InlineKeyboardMarkup(kb.profile_back)).message_id
+    
+def buy(callback, cost: int, uid: str):
+    user = login.User(uid)
+    user_bank = login.Bank(uid)
+    
+    profile = user.get_user_profile()
+    actions = user_bank.get_user_bank()
+    
+    autobuy = ['VIP', 'JxSpeed', 'MacroMotor', 'LifeX10']
+    bank_buy = ['JxSpeed', 'MacroMotor']
+
+    if profile['Юшки'] >= cost:
+        
+        profile['Юшки'] -= cost
+        
+        if callback in autobuy:
+
+            if callback in bank_buy:
+                if actions is None: return None
+                
+                if actions["have_"+callback] == "False": actions[callback] == "True"
+                else: return True
+                
+            else:
+                if callback != 'LifeX10' and profile[callback] == "None":
+                    profile[callback] = "Есть"
+        
+        login.Bank(user_identificator=uid).write_user_bank(actions)
+        user.write_user_profile(profile)
+        login.budget_write("spend", cost)
+        return True
+    
+    return False
+
+def bank_test(update, context, test: any = 0):
+    new_message_id = 0
+    userBank = login.Bank(str(update.callback_query.message.chat_id))
+    userBank.authorize()
+    bank = userBank.get_user_bank()
+    
+    if bank['test'] == 0 and test == 0:
+        new_message_id = update.callback_query.message.reply_text(
+            openfile("base/bank", "bank"),
+            reply_markup=InlineKeyboardMarkup(kb.bankstart)).message_id
+        
+    if bank['test'] == 0 and test == 1:
+        user = login.User(str(update.callback_query.message.chat_id))
+        user_profile = user.get_user_profile()
+        if user_profile['Юшки'] >= 19:
+            user_profile['Юшки'] -= 19
+        
+            user.write_user_profile(user_profile)
+        
+            bank['test'] = 1
+            bank['test_lvl'] = 1
+        
+            login.budget_write("spend", 19)
+        else:
+            new_message_id = update.callback_query.message.reply_text(
+                "На вашем счету недостаточно средств!",
+                reply_markup=InlineKeyboardMarkup(kb.bankstart))
+        
+    if test > 1:
+        bank['test_lvl'] = test
+        if test == 4: bank['test'] = 2
+            
+    if bank['test'] == 2:
+        new_message_id = update.callback_query.message.reply_text(
+            openfile("base/bank", "access"),
+            reply_markup=InlineKeyboardMarkup(kb.bank)
+            )
+        
+    if bank['test'] == 1:
+        if bank['test_lvl'] == 1:
+            new_message_id = update.callback_query.message.reply_text(
+                openfile("base/bank/test", "test_1"),
+                reply_markup=InlineKeyboardMarkup(kb.test1)
+                ).message_id
+        
+        elif bank['test_lvl'] == 2:
+            new_message_id = update.callback_query.message.reply_text(
+                openfile("base/bank/test", "test_2"),
+                reply_markup=InlineKeyboardMarkup(kb.test2)
+                ).message_id
+        
+        elif bank['test_lvl'] == 3:
+            new_message_id = update.callback_query.message.reply_text(
+                openfile("base/bank/test", "test_3"),
+                reply_markup=InlineKeyboardMarkup(kb.test3)
+                ).message_id
+        
+    userBank.write_user_bank(bank)
+    return new_message_id
+
+def bank_test_back(update, context):
+    userBank = login.Bank(str(update.callback_query.message.chat_id))
+    bank = userBank.get_user_bank()
+    bank['test'] = 0
+    bank['test_lvl'] = 0
+    userBank.write_user_bank(bank)
 
 class Echo_Checker():
     def __init__(self, update, context):
@@ -58,18 +158,18 @@ class Echo_Checker():
         self.city = login.City(self.uid)
 
         self.city_status = {
-            'cityname':'0',
-            'sign':'0',
-            'gymn':'0',
-            'history':'0',
-            'mayor':'0'
+            'cityname':0,
+            'sign':0,
+            'gymn':0,
+            'history':0,
+            'mayor':0
             }
 
         self.user_status = {
-            'nickname':'0',
-            'name':'0',
-            'birthday':'0',
-            'buisness':'0'
+            'nickname':0,
+            'name':0,
+            'birthday':0,
+            'buisness':0
             }
 
         self.old_data = None
@@ -294,15 +394,18 @@ class Status_changer():
     def profile(self):
         user_status = login.User(self.uid).get_user_status()
         user_status[self.value] = 1
+        
         login.User(self.uid).write_user_status(user_status)
 
     def city(self):
         user_city_status = login.City(self.uid).get_city_status()
         user_city_status[self.value] = 1
+        
         if self.value == "sign":
             self.message = "Отправьте изображение вашего герба, не превышающее размеры 400*400 пикселей"
         elif self.value == "flag":
             self.message = "Отправьте изображение вашего флага, не превышающее размеры 400*200 пикселей"
+            
         login.City(self.uid).write_city_status(user_city_status)
 
     def change(self, value: str):
@@ -335,8 +438,6 @@ class Create():
         water_expenses = 1200
 
         export_people = 4000
-        
-        user_city['Население'] = int(user_city['Население'])
 
         if user_city_data['Бюджет'] > money_cost and (user_city_data['Доход'] - user_city_data['Расходы']) > money_expenses:
             if (user_city_data['Электроэнергия'] - user_city_data['Электропотребление']) > energy_expenses:
@@ -374,8 +475,6 @@ class Create():
         water_expenses = 2700
 
         export_people = 9000
-        
-        user_city['Население'] = int(user_city['Население'])
 
         if user_city_data['Бюджет'] > money_cost and (user_city_data['Доход'] - user_city_data['Расходы']) > money_expenses:
             if (user_city_data['Электроэнергия'] - user_city_data['Электропотребление']) > energy_expenses:
@@ -413,8 +512,6 @@ class Create():
         water_expenses = 6000
 
         export_people = 20000
-        
-        user_city['Население'] = int(user_city['Население'])
 
         if user_city_data['Бюджет'] > money_cost and (user_city_data['Доход'] - user_city_data['Расходы']) > money_expenses:
             if (user_city_data['Электроэнергия'] - user_city_data['Электропотребление']) > energy_expenses:
@@ -785,8 +882,6 @@ class RandomTasks():
 
         user_city = self.city.get_city_info()
         user_city_data = self.city.get_city_data()
-        
-        user_city['Население'] = int(user_city['Население'])
 
         match self.task:
 
@@ -941,17 +1036,23 @@ def checkban(update, context):
 
     try:
         user, callback = login.User(str(update.callback_query.message.chat_id)).get_user_control(), True
-        if user is None: user = login.User(str(update.callback_query.message.chat_id)).authorize()
+        if user is None: 
+            login.User(str(update.callback_query.message.chat_id)).authorize()
+            user = login.User(str(update.callback_query.message.chat_id)).get_user_control()
 
     except:
 
         try:
             user = login.User(str(update.message.chat_id)).get_user_control()
-            if user is None: user = login.User(str(update.message.chat_id)).authorize()
+            if user is None: 
+                login.User(str(update.message.chat_id)).authorize()
+                user = login.User(str(update.message.chat_id)).get_user_control()
 
         except:
             user, inline = login.User(str(update.inline_query.from_user.id)).get_user_control(), True
-            if user is None: user = login.User(str(update.inline_query.from_user_id)).authorize()
+            if user is None: 
+                login.User(str(update.inline_query.from_user_id)).authorize()
+                user = login.User(str(update.inline_query.from_user_id)).get_user_control()
 
     if not callback and not inline:
         if user['ban']:
@@ -960,14 +1061,14 @@ def checkban(update, context):
                                      text=f"User: {str(update.message.chat['username'])} trying to use bot... (banned)")
             return True
 
-        elif checkbeta(update, context, user): return True
+        #elif checkbeta(update, context, user): return True
         else: return False
 
     elif inline:
         if update != None:
             
             if user['ban']: return True
-            elif not user['beta']: return True
+            #elif not user['beta']: return True
             else: return False
 
         else: return False
@@ -979,7 +1080,7 @@ def checkban(update, context):
                                      text=f"User: {str(update.callback_query.message.chat['username'])} trying to use bot... (banned)")
             return True
 
-        elif checkbeta(update, context, user): return True
+        #elif checkbeta(update, context, user): return True
         else: return False
 
 def check_acces(func):
