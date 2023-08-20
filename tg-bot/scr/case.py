@@ -43,14 +43,18 @@ def change(update, context):
     global message_id
     message_id = update.callback_query.message.message_id
     chat_id = update.callback_query.message.chat_id
-    context.bot.delete_message(chat_id, message_id)
+    try:
+        context.bot.delete_message(chat_id, message_id)
+        return True
+    except: return None
 
-from spec import check_acces, openfile, raiting, global_raiting
+from spec import check_acces, openfile, global_raiting, buy
+from spec import bank_test, bank_test_back
 from spec import Create, Status_changer
-from prefix import mycity, myprofile
+from prefix import mycity, myprofile, mybank
+from login import cost_rubles, cost_youshk
 
 def echo_button(update, context):
-    #global marks_namelist
     global old_message_id, likestat, dislikestat
 
     reply_text = update.callback_query.message.reply_text
@@ -102,7 +106,7 @@ def echo_button(update, context):
                                                           )
                                                       )
                                                   )
-
+            
     else:
         if "!changer" in update.callback_query['data']:
             callback = update.callback_query['data'].split("_")[1]
@@ -122,9 +126,95 @@ def echo_button(update, context):
 
             case "fun": fun_handler(update, context)
             case "photomem": photo_handler(update, context)
+
+            case "discard_test":
+                bank_test_back(update, context)
+                reply_text("Тест отменен",
+                           reply_markup=InlineKeyboardMarkup(kb.bankstart))
+
             case _: conflict = False
 
-        if not conflict: change(update, context)
+        if "#" in update.callback_query['data']:
+            match update.callback_query['data']:
+                case "1#1":
+                    reply_text("Неверный ответ!",
+                               reply_markup=InlineKeyboardMarkup(kb.back))
+                    bank_test_back(update, context)
+                case "1#2":
+                    reply_text("Верный ответ!")
+                    bank_test(update, context, 2)
+                case "2#1":
+                    reply_text("Неверный ответ!",
+                               reply_markup=InlineKeyboardMarkup(kb.back))
+                    bank_test_back(update, context)
+                case "2#2":
+                    reply_text("Неверный ответ!",
+                               reply_markup=InlineKeyboardMarkup(kb.back))
+                    bank_test_back(update, context)
+                case "2#3":
+                    reply_text("Неверный ответ!",
+                               reply_markup=InlineKeyboardMarkup(kb.back))
+                    bank_test_back(update, context)
+                case "2#4":
+                    reply_text("Верный ответ!")
+                    bank_test(update, context, 3)
+                case "3#1":
+                    reply_text("Неверный ответ!",
+                               reply_markup=InlineKeyboardMarkup(kb.back))
+                    bank_test_back(update, context)
+                case "3#2":
+                    reply_text("Неверный ответ!",
+                               reply_markup=InlineKeyboardMarkup(kb.back))
+                    bank_test_back(update, context)
+                case "3#3":
+                    reply_text("Неверный ответ!",
+                               reply_markup=InlineKeyboardMarkup(kb.back))
+                    bank_test_back(update, context)
+                case "3#4":
+                    reply_text("Верный ответ!")
+                    bank_test(update, context, 4)
+            return
+            
+        if "shop=" in update.callback_query['data']:
+            text = update.callback_query['data'].split("=")[1]
+            
+            reply_text(f"Выберите способ покупки {text}",
+                       reply_markup=InlineKeyboardMarkup(kb.shops(text)))
+            return
+            
+        if "buy=" in update.callback_query['data']:
+            command, typ, text = update.callback_query['data'].split("=")
+            
+            if typ == "R": 
+                costs = cost_rubles()
+                reply_text(f"Чтобы купить {text}, оплатите стоимость товара по ссылке ниже, подписав сообщение текстом b/{text} и выбрав 'Бот' в качестве цели, и отправьте скриншот оплаты и текст b/{text} @r_ypite\n\nК сожалению, более удобные способы оплаты пока что не доступны",
+                           reply_markup=InlineKeyboardMarkup(kb.buy_R(text, costs[text])))
+                    
+            elif typ == "Y":
+                costs = cost_youshk()
+                
+                reply_text(f"Стоимость {text}: {costs[text]}",
+                           reply_markup=InlineKeyboardMarkup(kb.buy_Y(text, costs[text])))
+            return
+
+        if "shopbuy:" in update.callback_query['data']:
+            command, text, cost = update.callback_query['data'].split(":")
+            shopbuy = buy(text, int(cost), str(update.callback_query.message.chat_id))
+            
+            if shopbuy:
+                reply_text(f"Вы успешно приобрели {text}",
+                           reply_markup=InlineKeyboardMarkup(kb.shop))
+            elif shopbuy is None:
+                reply_text(f"У вас не зарегестрирован банк!\nДля его регестрации пройдите в Меню -> Банк",
+                           reply_markup=InlineKeyboardMarkup(kb.backmenu))
+            else:
+                reply_text(f"Вам нехватило Юшек для приобретения {text} или у вас уже есть этот товар!",
+                           reply_markup=InlineKeyboardMarkup(kb.shop))
+            return
+            
+        if not conflict:
+            if change(update, context) is None:
+                return
 
         match update.callback_query['data']:
 # BACK TO MENU
@@ -163,6 +253,8 @@ def echo_button(update, context):
 #   MENU
             case "profile":
                 new_message_id = myprofile(update, context)
+            case "bank":
+                new_message_id = bank_test(update, context)
             case "info":
                 new_message_id = reply_text(openfile('menu', "info"),
                                             reply_markup=InlineKeyboardMarkup(kb.back)).message_id
@@ -196,12 +288,12 @@ def echo_button(update, context):
                                             parse_mode=ParseMode.HTML).message_id
 #   LEARN
             case "learn":
-                new_message_id = reply_text(openfile("learn", "description"),
-                                            reply_markup=InlineKeyboardMarkup(kb.learns)).message_id
+                new_message_id = reply_text("К сожалению, данный раздел пока не доступен",#openfile("learn", "description"),
+                                            reply_markup=InlineKeyboardMarkup(kb.back)).message_id#kb.learns
 
             case "learning":
-                new_message_id = reply_text("К сожалению, данный раздел пока не доступен",#openfile("learn", "learning"
-                                            reply_markup=InlineKeyboardMarkup(kb.learn)).message_id
+                new_message_id = reply_text("К сожалению, данный раздел пока не доступен",#openfile("learn", "learning")
+                                            reply_markup=InlineKeyboardMarkup(kb.back)).message_id#kb.learn
 #       GENRES
             case "books":
                 new_message_id = reply_text(openfile("learn", "booklist"),
@@ -486,10 +578,32 @@ def echo_button(update, context):
 
             case "quests":
                 new_message_id = reply_text(openfile("menu/more/fun/quests", "quests"),
-                                            reply_markup=InlineKeyboardMarkup(kb.quests))
+                                            reply_markup=InlineKeyboardMarkup(kb.quests),
+                                            parse_mode=ParseMode.HTML).message_id
             case "buyvip":
                 new_message_id = reply_text(openfile("menu/profile", "buyvip"),
-                                            reply_markup=InlineKeyboardMarkup(kb.profile_back))
+                                            reply_markup=InlineKeyboardMarkup(kb.profile_back),
+                                            parse_mode=ParseMode.HTML).message_id
+            case "shop":
+                new_message_id = reply_text(openfile("menu/shop", "shop"),
+                                            reply_markup=InlineKeyboardMarkup(kb.shop),
+                                            parse_mode=ParseMode.HTML).message_id
+            case "mybank":
+                new_message_id = mybank(update, context)
+            case "projlist":
+                new_message_id = reply_text("None",
+                                            reply_markup=InlineKeyboardMarkup(kb.back)).message_id
+            case "profmore":
+                new_message_id = reply_text("None",
+                                            reply_markup=InlineKeyboardMarkup(kb.back)).message_id
+            case "quest1":
+                new_message_id = reply_text("None",
+                                            reply_markup=InlineKeyboardMarkup(kb.back)).message_id
+            case "quest2":
+                new_message_id = reply_text("None",
+                                            reply_markup=InlineKeyboardMarkup(kb.back)).message_id
+            case "start_test_19":
+                new_message_id = bank_test(update, context, 1)
 
         if not conflict: context.chat_data['message_id'] = new_message_id
     conflict = False
