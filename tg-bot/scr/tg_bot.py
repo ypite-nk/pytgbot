@@ -20,10 +20,10 @@ ud.add_handler(CommandHandler('menu', func.back_handler))
 ud.add_handler(CommandHandler("back", func.back_handler))
 
 import prefix
-#ud.add_handler(PrefixHandler('/', 'рецензия', prefix.prefix_marks))
 ud.add_handler(PrefixHandler('/', 'погода', prefix.prefix_weather))
 ud.add_handler(PrefixHandler('/', 'update', prefix.update))
 ud.add_handler(PrefixHandler('/', 'update_event', prefix.update_event))
+ud.add_handler(PrefixHandler('/', 'update_week', prefix.update_week))
 
 ud.add_handler(MessageHandler(Filters.text & (~Filters.command), func.echo_handler))
 ud.add_handler(MessageHandler(Filters.photo, func.echo_handler))
