@@ -3,4 +3,4 @@
 
 1 day work = +0.05 version bot
 
-bot v.: 2.50
+bot v.: 2.65
