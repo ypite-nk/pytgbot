@@ -124,14 +124,16 @@ class User():
 			"st_nickname":"nickname",
 			"st_name":"name",
 			"st_birthday":"birthday",
-			"st_buisness":"buisness"
+			"st_buisness":"buisness",
+			"st_wordly":"wordly"
 			}
 
 		self.translate_dict_to_st = {
 			"nickname":"st_nickname",
 			"name":"st_name",
 			"birthday":"st_birthday",
-			"buisness":"st_buisness"
+			"buisness":"st_buisness",
+			"wordly":"st_wordly"
 			}
 
 		self.translate_ch_to_dict = {
@@ -167,6 +169,7 @@ class User():
 			"st_name":0,
 			"st_birthday":0,
 			"st_buisness":0,
+			"st_wordly":0,
 			"ch_nickname":0,
 			"ch_name":0,
 			"ch_birthday":0,

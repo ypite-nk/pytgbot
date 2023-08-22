@@ -153,6 +153,7 @@ class Echo_Checker():
 
         self.userkb = InlineKeyboardMarkup(kb.profile_back)
         self.citykb = InlineKeyboardMarkup(kb.backcity)
+        self.wordlykb = InlineKeyboardMarkup(kb.back)
 
         self.user = login.User(self.uid)
         self.city = login.City(self.uid)
@@ -169,7 +170,8 @@ class Echo_Checker():
             'nickname':0,
             'name':0,
             'birthday':0,
-            'buisness':0
+            'buisness':0,
+            'wordly':0
             }
 
         self.old_data = None
@@ -182,7 +184,7 @@ class Echo_Checker():
         user_status = self.user.get_user_status()
         user_change = self.user.get_user_change()
 
-        if self.text is not None: new_data = self.text.replace("\n", "")
+        if self.text is not None: new_data = self.text.replace("\n", "").replace(",", "‚")
 
         if user_status['nickname']:
             if user_change['nickname'] >= 2 and user_profile['VIP'] == 'None':
@@ -237,6 +239,23 @@ class Echo_Checker():
         self.reply_markup = self.userkb
 
         return True
+    
+    def wordly(self):
+        user_status = self.user.get_user_status()
+        if user_status['wordly']:
+            from wordly import Wordly
+            
+            wordly = Wordly(self.uid)
+            wordly.check_word(self.text.replace("\n", "").replace(",", "‚"))
+            self.message = wordly.output
+            self.reply_markup = self.wordlykb
+            
+            if "!" in self.message:
+                return True
+            else:
+                return False
+        else:
+            return None
 
     def write_city(self):
         user = self.user.get_user_profile()
@@ -360,7 +379,14 @@ class Echo_Checker():
             
             return True
 
-        else: return False
+        dash = self.wordly()
+        if dash:
+            self.user.write_user_status(self.user_status)
+            return True
+        elif not dash:
+            return True
+        else:
+            return False
 
 class Status_changer():
     def __init__(self, update, context):
@@ -369,23 +395,24 @@ class Status_changer():
 
         self.uid = str(self.update.callback_query.message.chat_id)
 
-        self.user_data_list = ['nickname', 'name', 'buisness', 'birthday']
+        self.user_data_list = ['nickname', 'name', 'buisness', 'birthday', 'wordly']
         self.city_data_list = ['cityname', 'sign', 'flag', 'gymn', 'history', 'mayor']
 
         self.user_status = {
-            'nickname':'0',
-            'name':'0',
-            'birthday':'0',
-            'buisness':'0'
+            'nickname':0,
+            'name':0,
+            'birthday':0,
+            'buisness':0,
+            'wordly':0
             }
 
         self.city_status = {
-            'cityname':'0',
-            'sign':'0',
-            'flag':'0',
-            'gymn':'0',
-            'history':'0',
-            'mayor':'0'
+            'cityname':0,
+            'sign':0,
+            'flag':0,
+            'gymn':0,
+            'history':0,
+            'mayor':0
             }
 
         self.message = "Введите новое значение"
@@ -990,7 +1017,6 @@ class Admins():
         else: self.update.message.reply_text("You are not admin")
 
     def message(self):
-        print(self.active_user)
         if self.active_user['admin']:
             if " : " in self.update.message.text:
                 command, text = self.update.message.text.split(":")
@@ -1002,11 +1028,58 @@ class Admins():
                 self.context.bot.send_message(chat_id=-1001955905639,
                                               text=f"Admin: {str(self.update.message.chat_id)} wrong send_message")
         else: self.update.message.reply_text("You are not admin")
+        
+    def wordly(self):
+        if self.active_user['admin']:
+            if " : " in self.update.message.text:
+                command, word_id = self.update.message.text.split(" : ")
+                from wordly import Wordly
+                classW = Wordly(str(self.update.message.chat_id))
+                classW.set_word(word_id)
+                self.context.bot.send_message(chat_id=-1001955905639,
+                                              text=f"Word was setted --> {word_id}")
+            else:
+                self.context.bot.send_message(chat_id=-1001955905639,
+                                              text=f"Admin: {str(self.update.message.chat_id)} wrong wordly_day_change")
+        else: self.update.message.reply_text("You are not admin")
+        
+    def Gvip(self):
+        if self.active_user['admin']:
+            self.command, self.uid = self.update.message.text.split(" ")
+            self.user = login.User(str(self.uid)).get_user_profile()
+            
+            self.active_user = self.update.message.chat_id
+            self.user['VIP'] = "Есть"
+
+            login.User(self.uid).write_user_profile(self.user)
+
+            self.update.message.reply_text(f"User: {self.uid} gived VIP. Admin: {str(self.active_user)}")
+            self.context.bot.send_message(chat_id=-1001955905639,
+                                          text=f"User: {self.uid} gived VIP. Admin: {str(self.active_user)}")
+        else: self.update.message.reply_text("You are not admin")
+        
+    def Dvip(self):
+        if self.active_user['admin']:
+            self.command, self.uid = self.update.message.text.split(" ")
+            self.user = login.User(str(self.uid)).get_user_profile()
+            
+            self.active_user = self.update.message.chat_id
+            self.user['VIP'] = "None"
+
+            login.User(self.uid).write_user_profile(self.user)
+
+            self.update.message.reply_text(f"User: {self.uid} lost VIP. Admin: {str(self.active_user)}")
+            self.context.bot.send_message(chat_id=-1001955905639,
+                                          text=f"User: {self.uid} lost VIP. Admin: {str(self.active_user)}")
+        else: self.update.message.reply_text("You are not admin")
 
 def admin(update, context):
     admin = Admins(update, context)
 
     if '/message' in update.message.text: admin.message()
+    elif '/givevip' in update.message.text: admin.Gvip()
+    elif '/delvip' in update.message.text: admin.Dvip()
+    elif '/wordly' in update.message.text: admin.wordly()
     elif '/ban' in update.message.text: admin.ban()
     elif '/unban' in update.message.text: admin.unban()
     elif '/addbeta' in update.message.text: admin.addbeta()
