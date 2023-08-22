@@ -32,6 +32,7 @@
     <Compile Include="scr\spec.py" />
     <Compile Include="scr\used_class.py" />
     <Compile Include="scr\tg_bot.py" />
+    <Compile Include="scr\wordly.py" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="scr\" />
