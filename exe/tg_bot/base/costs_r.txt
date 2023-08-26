@@ -1,0 +1,1 @@
+{"VIP": "399", "JxSpeed": "50", "MacroMotor": "70", "LifeX10": "100"}
