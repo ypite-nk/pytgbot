@@ -29,10 +29,9 @@ def prefix_weather(update, context, city = None):
         try:
             w = owm(city).weather
             result = [w.temperature('celsius')['temp'], w.detailed_status, w.wind()['speed']]
-            update.message.reply_text(f"Город: {city}\nТемпература: {str(result[0])}\nНебо: {str(result[1])}\nВетер: {str(result[2])} м/с",
-                                      reply_markup=InlineKeyboardMarkup(kb.back))
-        except: update.message.reply_text("Такого города не существует! Возможно, вы ошиблись в названии или у OpenWeatherMap нету таких данных.",
-                                      reply_markup=InlineKeyboardMarkup(kb.back))
+            return f"Город: {city}\nТемпература: {str(result[0])}\nНебо: {str(result[1])}\nВетер: {str(result[2])} м/с"
+        except: 
+            return "Такого города не существует! Возможно, вы ошиблись в названии или у OpenWeatherMap нету таких данных."
 
 import login
 from os import path
@@ -63,8 +62,7 @@ def mycity(update, context):
     path_logo = f"base/cities/photo/{uid}sign.jpg"
     if path.exists(path_logo): update.callback_query.message.reply_photo(open(path_logo, 'rb'))
     
-    return update.callback_query.message.reply_text(f"===Ваш город===\n{info}\n===Управление===\n{data}",
-                                                    reply_markup=InlineKeyboardMarkup(kb.city_admin)).message_id
+    return f"===Ваш город===\n{info}\n===Управление===\n{data}"
 
 def myprofile(update, context):
     user = login.User(str(update.callback_query.message.chat_id)).get_user_profile()
@@ -73,11 +71,10 @@ def myprofile(update, context):
     for key in user.keys(): keys.append(key)
     for value in user.values(): values.append(value)
     for i in range(len(keys)): profile += str(keys[i]) + " : " + str(values[i]) + "\n"
+    
+    return f"===Ваш профиль===\n🪪{profile}"
 
-    return update.callback_query.message.reply_text(f"===Ваш профиль===\n🪪\n{profile}",
-                                                    reply_markup=InlineKeyboardMarkup(kb.profile)).message_id
-
-def mybank(update, context):
+def mybank(update, context): # NONE
     balance = login.User(str(update.callback_query.message.chat_id)).get_user_profile()['Юшки']
     user_bank = login.Bank(str(update.callback_query.message.chat_id)).get_user_bank()
     user_bank['Balance'] = balance
@@ -92,8 +89,7 @@ def mybank(update, context):
     for key in access_list_key: str(access_list_value.append(user_bank[key]))
     for i in range(len(access_list_key)): info += f"{access_list_key[i]} : {access_list_value[i]}\n"
     
-    return update.callback_query.message.reply_text(f"===Банк Юпитер===\n{info}",
-                                                    reply_markup=InlineKeyboardMarkup(kb.bank)).message_id
+    return f"===Банк Юпитер===\n{info}"
 
 def inline_profile(update, context):
     user = login.User(str(update.inline_query.from_user.id)).get_user_profile()
@@ -160,12 +156,14 @@ def update(update, context):
         city.write_city_data(city_data)
 
 def update_event(update, context):
-    
-    # update action's cost every day
     from login import actions_update
     actions_update("fast$")
     context.bot.send_message(chat_id=-1001955905639,
                              text="Action's cost was update [FAST]")
+    
+    from wordly import Wordly
+    wordly = Wordly(None, None)
+    wordly.update_word()
 
     from spec import RandomTasks
     users_uid = login.users_city_info()
@@ -185,9 +183,7 @@ def update_event(update, context):
                                  reply_markup=InlineKeyboardMarkup(kb.backcity)
                                  )
         
-def update_week(update, context):# special func for
-    
-    # update action's cost every week
+def update_week(update, context):
     from login import actions_update
     actions_update("slow$")
     context.bot.send_message(chat_id=-1001955905639,
