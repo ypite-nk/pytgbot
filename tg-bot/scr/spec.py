@@ -35,11 +35,9 @@ def global_raiting(update, context):
         output += f"{str(i+1)}) {str(key)} : {str(value)}\n"
     
     if user_active['VIP'] == 'None':
-        return update.callback_query.message.reply_text(f"🌏 Ваш рейтинг: {str(user_active['Рейтинг'])}\n\nГлобальный рейтинг:\n{output}",
-                                                        reply_markup=InlineKeyboardMarkup(kb.profile_back)).message_id
+        return f"🌏 Ваш рейтинг: {str(user_active['Рейтинг'])}\n\nГлобальный рейтинг:\n{output}"
     else:
-        return update.callback_query.message.reply_text(f"🌏 Ваш рейтинг: ♳{str(user_active['Рейтинг'])}\n\nГлобальный рейтинг:\n{output}",
-                                                        reply_markup=InlineKeyboardMarkup(kb.profile_back)).message_id
+        return f"🌏 Ваш рейтинг: ♳{str(user_active['Рейтинг'])}\n\nГлобальный рейтинг:\n{output}"
     
 def buy(callback, cost: int, uid: str):
     user = login.User(uid)
@@ -59,16 +57,17 @@ def buy(callback, cost: int, uid: str):
 
             if callback in bank_buy:
                 if actions is None: return None
-                
-                if actions["have_"+callback] == "False": actions[callback] == "True"
+                if actions[callback] == "False": actions[callback] == "True"
                 else: return True
                 
             else:
+                if callback == 'LifeX10':
+                    profile['Попытки'] += 10
                 if callback != 'LifeX10' and profile[callback] == "None":
                     profile[callback] = "Есть"
         
-        login.Bank(user_identificator=uid).write_user_bank(actions)
         user.write_user_profile(profile)
+        user_bank.write_user_bank(actions)
         login.budget_write("spend", cost)
         return True
     
@@ -81,9 +80,7 @@ def bank_test(update, context, test: any = 0):
     bank = userBank.get_user_bank()
     
     if bank['test'] == 0 and test == 0:
-        new_message_id = update.callback_query.message.reply_text(
-            openfile("base/bank", "bank"),
-            reply_markup=InlineKeyboardMarkup(kb.bankstart)).message_id
+        return [openfile("base/bank", "bank"), InlineKeyboardMarkup(kb.bank['start'])]
         
     if bank['test'] == 0 and test == 1:
         user = login.User(str(update.callback_query.message.chat_id))
@@ -97,42 +94,30 @@ def bank_test(update, context, test: any = 0):
             bank['test_lvl'] = 1
         
             login.budget_write("spend", 19)
+            userBank.write_user_bank(bank)
+            
         else:
-            new_message_id = update.callback_query.message.reply_text(
-                "На вашем счету недостаточно средств!",
-                reply_markup=InlineKeyboardMarkup(kb.bankstart))
+            return ["На вашем счету недостаточно средств!", InlineKeyboardMarkup(kb.bank['start'])]
         
     if test > 1:
         bank['test_lvl'] = test
-        if test == 4: bank['test'] = 2
+        if test == 4:
+            bank['test'] = 2
+            userBank.write_user_bank(bank)
             
     if bank['test'] == 2:
-        new_message_id = update.callback_query.message.reply_text(
-            openfile("base/bank", "access"),
-            reply_markup=InlineKeyboardMarkup(kb.bank)
-            )
+        return [openfile("base/bank", "access"), InlineKeyboardMarkup(kb.First_menu().menu['bank'])]
         
     if bank['test'] == 1:
         if bank['test_lvl'] == 1:
-            new_message_id = update.callback_query.message.reply_text(
-                openfile("base/bank/test", "test_1"),
-                reply_markup=InlineKeyboardMarkup(kb.test1)
-                ).message_id
+            return [openfile("base/bank/test", "test_1"), InlineKeyboardMarkup(kb.bank['test1'])]
         
-        elif bank['test_lvl'] == 2:
-            new_message_id = update.callback_query.message.reply_text(
-                openfile("base/bank/test", "test_2"),
-                reply_markup=InlineKeyboardMarkup(kb.test2)
-                ).message_id
+        if bank['test_lvl'] == 2:
+            return [openfile("base/bank/test", "test_2"), InlineKeyboardMarkup(kb.bank['test2'])]
         
-        elif bank['test_lvl'] == 3:
-            new_message_id = update.callback_query.message.reply_text(
-                openfile("base/bank/test", "test_3"),
-                reply_markup=InlineKeyboardMarkup(kb.test3)
-                ).message_id
-        
+        if bank['test_lvl'] == 3:
+            return [openfile("base/bank/test", "test_3"), InlineKeyboardMarkup(kb.bank['test3'])]
     userBank.write_user_bank(bank)
-    return new_message_id
 
 def bank_test_back(update, context):
     userBank = login.Bank(str(update.callback_query.message.chat_id))
@@ -140,6 +125,10 @@ def bank_test_back(update, context):
     bank['test'] = 0
     bank['test_lvl'] = 0
     userBank.write_user_bank(bank)
+    
+def quest_start(update, context):
+    quest = login.Quest(str(update.callback_query.message.chat_id))
+    quest.authorize()
 
 class Echo_Checker():
     def __init__(self, update, context):
@@ -152,8 +141,8 @@ class Echo_Checker():
         self.uid = str(self.update.message.chat_id)
 
         self.userkb = InlineKeyboardMarkup(kb.profile_back)
-        self.citykb = InlineKeyboardMarkup(kb.backcity)
-        self.wordlykb = InlineKeyboardMarkup(kb.back)
+        self.citykb = InlineKeyboardMarkup(kb.backcity_kb)
+        self.wordlykb = InlineKeyboardMarkup(kb.back_to_menu_second)
 
         self.user = login.User(self.uid)
         self.city = login.City(self.uid)
@@ -162,6 +151,7 @@ class Echo_Checker():
             'cityname':0,
             'sign':0,
             'gymn':0,
+            'flag':0,
             'history':0,
             'mayor':0
             }
@@ -177,7 +167,7 @@ class Echo_Checker():
         self.old_data = None
 
         self.message = "Error"
-        self.reply_markup = InlineKeyboardMarkup(kb.back)
+        self.reply_markup = InlineKeyboardMarkup(kb.back_to_menu_first)
 
     def write_user(self):
         user_profile = self.user.get_user_profile()
@@ -454,6 +444,9 @@ class Create():
 
         self.uid = str(self.update.callback_query.message.chat_id)
         self.city = login.City(self.uid)
+        
+        self.keyboard = InlineKeyboardMarkup(kb.backcity_kb)
+        self.message = "Error #CREATE=0.5.1"
 
     def house1(self):
         user_city = self.city.get_city_info()
@@ -480,17 +473,13 @@ class Create():
                     self.city.write_city_data(user_city_data)
                     self.city.write_city_profile(user_city)
 
-                    self.update.callback_query.message.reply_text(openfile("data/city/descrip/create", "create_house_1"),
-                                                                  reply_markup=InlineKeyboardMarkup(kb.backcity))
-                else:
-                    self.update.callback_query.message.reply_text("Для постройки этого района нехватает водоснабжения! Постройте новые станции водоснабжения", 
-                                                          reply_markup=InlineKeyboardMarkup(kb.backcity))
-            else:
-                self.update.callback_query.message.reply_text("Для постройки этого района нехватает электроэнергии! Постройте новые электростанции", 
-                                                          reply_markup=InlineKeyboardMarkup(kb.backcity))
-        else:
-            self.update.callback_query.message.reply_text("Средства города не способны содерждать этот район... Пополните бюджет или увеличьте доход", 
-                                                          reply_markup=InlineKeyboardMarkup(kb.backcity))
+                    self.message = openfile("data/city/descrip/create", "create_house_1")
+
+                else: self.message = "Для постройки этого района нехватает водоснабжения! Постройте новые станции водоснабжения"
+
+            else: self.message =  "Для постройки этого района нехватает электроэнергии! Постройте новые электростанции"
+
+        else: self.message = "Средства города не способны содерждать этот район... Пополните бюджет или увеличьте доход"
 
     def house2(self):
         user_city = self.city.get_city_info()
@@ -517,17 +506,13 @@ class Create():
                     self.city.write_city_data(user_city_data)
                     self.city.write_city_profile(user_city)
 
-                    self.update.callback_query.message.reply_text(openfile("data/city/descrip/create", "create_house_2"),
-                                                                  reply_markup=InlineKeyboardMarkup(kb.backcity))
-                else:
-                    self.update.callback_query.message.reply_text("Для постройки этого района нехватает водоснабжения! Постройте новые станции водоснабжения", 
-                                                          reply_markup=InlineKeyboardMarkup(kb.backcity))
-            else:
-                self.update.callback_query.message.reply_text("Для постройки этого района нехватает электроэнергии! Постройте новые электростанции", 
-                                                          reply_markup=InlineKeyboardMarkup(kb.backcity))
-        else:
-            self.update.callback_query.message.reply_text("Средства города не способны содерждать этот район... Пополните бюджет или увеличьте доход", 
-                                                          reply_markup=InlineKeyboardMarkup(kb.backcity))
+                    self.message = openfile("data/city/descrip/create", "create_house_2")
+                    
+                else: self.message = "Для постройки этого района нехватает водоснабжения! Постройте новые станции водоснабжения"
+
+            else: self.message =  "Для постройки этого района нехватает электроэнергии! Постройте новые электростанции"
+
+        else: self.message = "Средства города не способны содерждать этот район... Пополните бюджет или увеличьте доход"
 
     def house3(self):
         user_city = self.city.get_city_info()
@@ -554,17 +539,13 @@ class Create():
                     self.city.write_city_data(user_city_data)
                     self.city.write_city_profile(user_city)
 
-                    self.update.callback_query.message.reply_text(openfile("data/city/descrip/create", "create_house_3"),
-                                                                  reply_markup=InlineKeyboardMarkup(kb.backcity))
-                else:
-                    self.update.callback_query.message.reply_text("Для постройки этого района нехватает водоснабжения! Постройте новые станции водоснабжения", 
-                                                          reply_markup=InlineKeyboardMarkup(kb.backcity))
-            else:
-                self.update.callback_query.message.reply_text("Для постройки этого района нехватает электроэнергии! Постройте новые электростанции", 
-                                                          reply_markup=InlineKeyboardMarkup(kb.backcity))
-        else:
-            self.update.callback_query.message.reply_text("Средства города не способны содерждать этот район... Пополните бюджет или увеличьте доход", 
-                                                          reply_markup=InlineKeyboardMarkup(kb.backcity))
+                    self.message = openfile("data/city/descrip/create", "create_house_3")
+                    
+                else: self.message = "Для постройки этого района нехватает водоснабжения! Постройте новые станции водоснабжения"
+
+            else: self.message =  "Для постройки этого района нехватает электроэнергии! Постройте новые электростанции"
+
+        else: self.message = "Средства города не способны содерждать этот район... Пополните бюджет или увеличьте доход"
 
     def comm1(self):
         user_city_data = self.city.get_city_data()
@@ -578,11 +559,9 @@ class Create():
 
             self.city.write_city_data(user_city_data)
 
-            self.update.callback_query.message.reply_text(openfile("data/city/descrip/create", "create_comm_1"),
-                                                            reply_markup=InlineKeyboardMarkup(kb.backcity))
-        else:
-            self.update.callback_query.message.reply_text("Средства города не способны содерждать этот район... Пополните бюджет или увеличьте доход", 
-                                                          reply_markup=InlineKeyboardMarkup(kb.backcity))
+            self.message = openfile("data/city/descrip/create", "create_comm_1")
+
+        else: self.message = "Средства города не способны содерждать этот район... Пополните бюджет или увеличьте доход"
 
     def comm2(self):
         user_city_data = self.city.get_city_data()
@@ -596,11 +575,9 @@ class Create():
 
             self.city.write_city_data(user_city_data)
 
-            self.update.callback_query.message.reply_text(openfile("data/city/descrip/create", "create_comm_2"),
-                                                            reply_markup=InlineKeyboardMarkup(kb.backcity))
-        else:
-            self.update.callback_query.message.reply_text("Средства города не способны содерждать этот район... Пополните бюджет или увеличьте доход", 
-                                                          reply_markup=InlineKeyboardMarkup(kb.backcity))
+            self.message = openfile("data/city/descrip/create", "create_comm_2")
+
+        else: self.message = "Средства города не способны содерждать этот район... Пополните бюджет или увеличьте доход"
 
     def comm3(self):
         user_city_data = self.city.get_city_data()
@@ -614,11 +591,9 @@ class Create():
 
             self.city.write_city_data(user_city_data)
 
-            self.update.callback_query.message.reply_text(openfile("data/city/descrip/create", "create_comm_3"),
-                                                            reply_markup=InlineKeyboardMarkup(kb.backcity))
-        else:
-            self.update.callback_query.message.reply_text("Средства города не способны содерждать этот район... Пополните бюджет или увеличьте доход", 
-                                                          reply_markup=InlineKeyboardMarkup(kb.backcity))
+            self.message = openfile("data/city/descrip/create", "create_comm_3")
+
+        else: self.message = "Средства города не способны содерждать этот район... Пополните бюджет или увеличьте доход"
 
     def ind1_1(self):
         user_city_data = self.city.get_city_data()
@@ -635,11 +610,9 @@ class Create():
 
             self.city.write_city_data(user_city_data)
 
-            self.update.callback_query.message.reply_text(openfile("data/city/descrip/create", "create_ind_en_1"),
-                                                            reply_markup=InlineKeyboardMarkup(kb.backcity))
-        else:
-            self.update.callback_query.message.reply_text("Средства города не способны содерждать этот объект... Пополните бюджет или увеличьте доход", 
-                                                          reply_markup=InlineKeyboardMarkup(kb.backcity))
+            self.message = openfile("data/city/descrip/create", "create_ind_en_1")
+            
+        else: self.message = "Средства города не способны содерждать этот объект... Пополните бюджет или увеличьте доход"
 
     def ind1_2(self):
         user_city_data = self.city.get_city_data()
@@ -656,11 +629,9 @@ class Create():
 
             self.city.write_city_data(user_city_data)
 
-            self.update.callback_query.message.reply_text(openfile("data/city/descrip/create", "create_ind_en_2"),
-                                                            reply_markup=InlineKeyboardMarkup(kb.backcity))
-        else:
-            self.update.callback_query.message.reply_text("Средства города не способны содерждать этот объект... Пополните бюджет или увеличьте доход", 
-                                                          reply_markup=InlineKeyboardMarkup(kb.backcity))
+            self.message = openfile("data/city/descrip/create", "create_ind_en_2")
+            
+        else: self.message = "Средства города не способны содерждать этот объект... Пополните бюджет или увеличьте доход"
 
     def ind1_3(self):
         user_city_data = self.city.get_city_data()
@@ -677,11 +648,9 @@ class Create():
 
             self.city.write_city_data(user_city_data)
 
-            self.update.callback_query.message.reply_text(openfile("data/city/descrip/create", "create_ind_en_3"),
-                                                            reply_markup=InlineKeyboardMarkup(kb.backcity))
-        else:
-            self.update.callback_query.message.reply_text("Средства города не способны содерждать этот объект... Пополните бюджет или увеличьте доход", 
-                                                          reply_markup=InlineKeyboardMarkup(kb.backcity))
+            self.message = openfile("data/city/descrip/create", "create_ind_en_3")
+
+        else: self.message = "Средства города не способны содерждать этот объект... Пополните бюджет или увеличьте доход"
 
     def ind2_1(self):
         user_city_data = self.city.get_city_data()
@@ -703,14 +672,11 @@ class Create():
 
                 self.city.write_city_data(user_city_data)
 
-                self.update.callback_query.message.reply_text(openfile("data/city/descrip/create", "create_ind_wat_1"),
-                                                            reply_markup=InlineKeyboardMarkup(kb.backcity))
-            else:
-                self.update.callback_query.message.reply_text("Для постройки этого объекта нехватает электроэнергии! Постройте новые электростанции",
-                                                              reply_markup=InlineKeyboardMarkup(kb.backcity))
-        else:
-            self.update.callback_query.message.reply_text("Средства города не способны содерждать этот объект... Пополните бюджет или увеличьте доход", 
-                                                          reply_markup=InlineKeyboardMarkup(kb.backcity))
+                self.message = openfile("data/city/descrip/create", "create_ind_wat_1")
+                
+            else: self.message = "Для постройки этого объекта нехватает электроэнергии! Постройте новые электростанции"
+
+        else: self.message = "Средства города не способны содерждать этот объект... Пополните бюджет или увеличьте доход"
 
     def ind2_2(self):
         user_city_data = self.city.get_city_data()
@@ -731,14 +697,11 @@ class Create():
 
                 self.city.write_city_data(user_city_data)
 
-                self.update.callback_query.message.reply_text(openfile("data/city/descrip/create", "create_ind_wat_2"),
-                                                            reply_markup=InlineKeyboardMarkup(kb.backcity))
-            else:
-                self.update.callback_query.message.reply_text("Для постройки этого объекта нехватает электроэнергии! Постройте новые электростанции",
-                                                              reply_markup=InlineKeyboardMarkup(kb.backcity))
-        else:
-            self.update.callback_query.message.reply_text("Средства города не способны содерждать этот объект... Пополните бюджет или увеличьте доход", 
-                                                          reply_markup=InlineKeyboardMarkup(kb.backcity))
+                self.message = openfile("data/city/descrip/create", "create_ind_wat_2")
+                
+            else: self.message = "Для постройки этого объекта нехватает электроэнергии! Постройте новые электростанции"
+
+        else: self.message = "Средства города не способны содерждать этот объект... Пополните бюджет или увеличьте доход"
 
     def ind2_3(self):
         user_city_data = self.city.get_city_data()
@@ -759,14 +722,11 @@ class Create():
 
                 self.city.write_city_data(user_city_data)
 
-                self.update.callback_query.message.reply_text(openfile("data/city/descrip/create", "create_ind_wat_3"),
-                                                            reply_markup=InlineKeyboardMarkup(kb.backcity))
-            else:
-                self.update.callback_query.message.reply_text("Для постройки этого объекта нехватает электроэнергии! Постройте новые электростанции",
-                                                              reply_markup=InlineKeyboardMarkup(kb.backcity))
-        else:
-            self.update.callback_query.message.reply_text("Средства города не способны содерждать этот объект... Пополните бюджет или увеличьте доход", 
-                                                          reply_markup=InlineKeyboardMarkup(kb.backcity))
+                self.message = openfile("data/city/descrip/create", "create_ind_wat_3")
+                
+            else: self.message = "Для постройки этого объекта нехватает электроэнергии! Постройте новые электростанции"
+
+        else: self.message = "Средства города не способны содерждать этот объект... Пополните бюджет или увеличьте доход"
 
     def ind3_1(self):
         user_city_data = self.city.get_city_data()
@@ -789,17 +749,13 @@ class Create():
 
                     self.city.write_city_data(user_city_data)
 
-                    self.update.callback_query.message.reply_text(openfile("data/city/descrip/create", "create_ind_mat_1"),
-                                                                  reply_markup=InlineKeyboardMarkup(kb.backcity))
-                else:
-                    self.update.callback_query.message.reply_text("Для постройки этого района нехватает водоснабжения! Постройте новые станции водоснабжения",
-                                                                  reply_markup=InlineKeyboardMarkup(kb.backcity))
-            else:
-                self.update.callback_query.message.reply_text("Для постройки этого района нехватает электроэнергии! Постройте новые электростанции",
-                                                              reply_markup=InlineKeyboardMarkup(kb.backcity))
-        else:
-            self.update.callback_query.message.reply_text("Средства города не способны содерждать этот район... Пополните бюджет или увеличьте доход", 
-                                                          reply_markup=InlineKeyboardMarkup(kb.backcity))
+                    self.message = openfile("data/city/descrip/create", "create_ind_mat_1")
+
+                else: self.message = "Для постройки этого района нехватает водоснабжения! Постройте новые станции водоснабжения"
+
+            else: self.message = "Для постройки этого района нехватает электроэнергии! Постройте новые электростанции"
+
+        else: self.message = "Средства города не способны содерждать этот район... Пополните бюджет или увеличьте доход"
 
     def ind3_2(self):
         user_city_data = self.city.get_city_data()
@@ -822,17 +778,13 @@ class Create():
 
                     self.city.write_city_data(user_city_data)
 
-                    self.update.callback_query.message.reply_text(openfile("data/city/descrip/create", "create_ind_mat_2"),
-                                                                  reply_markup=InlineKeyboardMarkup(kb.backcity))
-                else:
-                    self.update.callback_query.message.reply_text("Для постройки этого района нехватает водоснабжения! Постройте новые станции водоснабжения",
-                                                                  reply_markup=InlineKeyboardMarkup(kb.backcity))
-            else:
-                self.update.callback_query.message.reply_text("Для постройки этого района нехватает электроэнергии! Постройте новые электростанции",
-                                                              reply_markup=InlineKeyboardMarkup(kb.backcity))
-        else:
-            self.update.callback_query.message.reply_text("Средства города не способны содерждать этот район... Пополните бюджет или увеличьте доход", 
-                                                          reply_markup=InlineKeyboardMarkup(kb.backcity))
+                    self.message = openfile("data/city/descrip/create", "create_ind_mat_2")
+
+                else: self.message = "Для постройки этого района нехватает водоснабжения! Постройте новые станции водоснабжения"
+
+            else: self.message = "Для постройки этого района нехватает электроэнергии! Постройте новые электростанции"
+
+        else: self.message = "Средства города не способны содерждать этот район... Пополните бюджет или увеличьте доход"
 
     def ind3_3(self):
         user_city_data = self.city.get_city_data()
@@ -855,17 +807,13 @@ class Create():
 
                     self.city.write_city_data(user_city_data)
 
-                    self.update.callback_query.message.reply_text(openfile("data/city/descrip/create", "create_ind_mat_3"),
-                                                                  reply_markup=InlineKeyboardMarkup(kb.backcity))
-                else:
-                    self.update.callback_query.message.reply_text("Для постройки этого района нехватает водоснабжения! Постройте новые станции водоснабжения",
-                                                                  reply_markup=InlineKeyboardMarkup(kb.backcity))
-            else:
-                self.update.callback_query.message.reply_text("Для постройки этого района нехватает электроэнергии! Постройте новые электростанции",
-                                                              reply_markup=InlineKeyboardMarkup(kb.backcity))
-        else:
-            self.update.callback_query.message.reply_text("Средства города не способны содерждать этот район... Пополните бюджет или увеличьте доход", 
-                                                          reply_markup=InlineKeyboardMarkup(kb.backcity))
+                    self.message = openfile("data/city/descrip/create", "create_ind_mat_3")
+
+                else: self.message = "Для постройки этого района нехватает водоснабжения! Постройте новые станции водоснабжения"
+
+            else: self.message = "Для постройки этого района нехватает электроэнергии! Постройте новые электростанции"
+
+        else: self.message = "Средства города не способны содерждать этот район... Пополните бюджет или увеличьте доход"
 
 import random
 
@@ -1134,14 +1082,14 @@ def checkban(update, context):
                                      text=f"User: {str(update.message.chat['username'])} trying to use bot... (banned)")
             return True
 
-        #elif checkbeta(update, context, user): return True
+        elif checkbeta(update, context, user): return True
         else: return False
 
     elif inline:
         if update != None:
             
             if user['ban']: return True
-            #elif not user['beta']: return True
+            elif not user['beta']: return True
             else: return False
 
         else: return False
@@ -1153,7 +1101,7 @@ def checkban(update, context):
                                      text=f"User: {str(update.callback_query.message.chat['username'])} trying to use bot... (banned)")
             return True
 
-        #elif checkbeta(update, context, user): return True
+        elif checkbeta(update, context, user): return True
         else: return False
 
 def check_acces(func):
