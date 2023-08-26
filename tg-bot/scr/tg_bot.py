@@ -11,8 +11,8 @@ bot = telegram.Bot(token="6143246892:AAEQGuhkqKZ-6Hsn7cvvbUMwOW0rNOHHGSE")
 updater = Updater(token="6143246892:AAEQGuhkqKZ-6Hsn7cvvbUMwOW0rNOHHGSE", use_context=True)
 ud = updater.dispatcher
 
-from case import echo_call
-ud.add_handler(CallbackQueryHandler(echo_call))
+from case import Callback_checker
+ud.add_handler(CallbackQueryHandler(Callback_checker))
 
 import functions as func
 ud.add_handler(CommandHandler('start', func.start_handler))
@@ -37,6 +37,9 @@ ud.add_handler(PrefixHandler('/', 'unban', spec.admin))
 ud.add_handler(PrefixHandler('/', 'addbeta', spec.admin))
 ud.add_handler(PrefixHandler('/', 'delbeta', spec.admin))
 ud.add_handler(PrefixHandler('/', 'message', spec.admin))
+ud.add_handler(PrefixHandler('/', 'givevip', spec.admin))
+ud.add_handler(PrefixHandler('/', 'delvip', spec.admin))
+ud.add_handler(PrefixHandler('/', 'wordly', spec.admin))
 
 import logg
 ud.add_handler(CommandHandler(logg.password[0], logg.clear))
