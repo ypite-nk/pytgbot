@@ -1,291 +1,7 @@
 # -*- coding: utf-8 -*-
-import keyboardbot as kb
-from telegram import InlineKeyboardMarkup, InlineKeyboardButton, ParseMode
 
-mem_m = ['', '', '', '', '']
-old_message_id = 0
-
-likestat, dislikestat = False, False
-
-def fun_handler(update, context): update.callback_query.message.reply_text(openfile("menu/more/fun", "fun"),
-                                                                           reply_markup=InlineKeyboardMarkup(kb.key))
-
-def photo_handler(update, context):
-    global mem_m, active_mem, LikeCount, DisLikeCount
-    global edit_message_id
-    
-    import random
-    from used_class import MemPhoto
-    
-    mem_n = []
-    LikeCount, DisLikeCount = 0, 0
-    active_mem = 0
-    
-    for i in range(len(
-                   open("menu/more/fun/photo/links.txt", "r", encoding="utf-8").readlines(0))):
-        mem_n.append(MemPhoto(i))
-
-    active_mem = random.choice(mem_n)
-    while active_mem.data()[0] in mem_m: active_mem = random.choice(mem_n)
-    
-    LikeCount = active_mem.data()[2]
-    DisLikeCount = active_mem.data()[3]
-    
-    edit_message_id = update.callback_query.message.reply_photo(active_mem.data()[0],
-                                                                reply_markup=InlineKeyboardMarkup(kb.mem(LikeCount,
-                                                                                                         DisLikeCount)
-                                                                                                  )).message_id
-    
-    mem_m[4], mem_m[3], mem_m[2], mem_m[1] = mem_m[3], mem_m[2], mem_m[1], mem_m[0]
-    mem_m[0] = active_mem.data()[0]
-
-def change(update, context):
-    global message_id
-    message_id = update.callback_query.message.message_id
-    chat_id = update.callback_query.message.chat_id
-    try:
-        context.bot.delete_message(chat_id, message_id)
-        return True
-    except: return None
-
-from spec import check_acces, openfile, global_raiting, buy
-from spec import bank_test, bank_test_back
-from spec import Create, Status_changer
-from prefix import mycity, myprofile, mybank
-from login import cost_rubles, cost_youshk
-
+'''
 def echo_button(update, context):
-    global old_message_id, likestat, dislikestat
-
-    reply_text = update.callback_query.message.reply_text
-    reply_sticker = update.callback_query.message.reply_sticker
-
-    sticker_links = {
-        'fifticent' : open("menu/more/fun/rap/fifticent.txt").readlines(0),
-        'lilpeep' : open("menu/more/fun/rap/lilpeep.txt").readlines(0),
-        'gecs' : open("menu/more/fun/rap/100gecs.txt").readlines(0),
-        'egorcreed' : open("menu/more/fun/rap/egorcreed.txt").readlines(0),
-        'dog' : open("menu/more/fun/rap/dog.txt").readlines(0)
-        }
-    conflict = True
-    if "-" in update.callback_query['data']:
-
-        action, value = update.callback_query.data.split("-")
-        
-        if "m_" in action:
-            prefix, action = action.split("_")
-
-            if action == "like":
-                if str(edit_message_id) != str(old_message_id) and dislikestat is not True:
-                    active_mem.change_raiting(int(value) + 1, int(DisLikeCount))
-
-                    old_message_id, likestat = edit_message_id, True
-
-                elif str(edit_message_id) == str(old_message_id) and dislikestat is not True:
-                    active_mem.change_raiting(int(value) - 1, int(DisLikeCount))
-                
-                    old_message_id, likestat = "", False
-            
-            elif action == "dislike":
-                if str(edit_message_id) != str(old_message_id) and likestat is not True:
-                    active_mem.change_raiting(int(LikeCount), int(value) + 1)
-
-                    old_message_id, dislikestat = edit_message_id, True
-
-                elif str(edit_message_id) == str(old_message_id) and likestat is not True:
-                    active_mem.change_raiting(int(LikeCount), int(value) - 1)
-                
-                    old_message_id, dislikestat = "", False
-
-        context.bot.edit_message_reply_markup(chat_id=update.callback_query.message.chat_id,
-                                                  message_id=edit_message_id,
-                                                  reply_markup=InlineKeyboardMarkup(
-                                                      kb.mem(
-                                                          active_mem.data()[2],
-                                                          active_mem.data()[3]
-                                                          )
-                                                      )
-                                                  )
-            
-    else:
-        if "!changer" in update.callback_query['data']:
-            callback = update.callback_query['data'].split("_")[1]
-
-            changer = Status_changer(update, context)
-            changer.change(callback)
-            
-            reply_text(changer.message,
-                       reply_markup=changer.keyboard)
-            
-            return
-
-        match update.callback_query['data']:
-            case "discard":
-                Status_changer(update, context).clear_status()
-                reply_text("Изменения отменены", reply_markup=InlineKeyboardMarkup(kb.back))
-
-            case "fun": fun_handler(update, context)
-            case "photomem": photo_handler(update, context)
-
-            case "discard_test":
-                bank_test_back(update, context)
-                reply_text("Тест отменен",
-                           reply_markup=InlineKeyboardMarkup(kb.bankstart))
-
-            case _: conflict = False
-
-        if "#" in update.callback_query['data']:
-            match update.callback_query['data']:
-                case "1#1":
-                    reply_text("Неверный ответ!",
-                               reply_markup=InlineKeyboardMarkup(kb.back))
-                    bank_test_back(update, context)
-                case "1#2":
-                    reply_text("Верный ответ!")
-                    bank_test(update, context, 2)
-                case "2#1":
-                    reply_text("Неверный ответ!",
-                               reply_markup=InlineKeyboardMarkup(kb.back))
-                    bank_test_back(update, context)
-                case "2#2":
-                    reply_text("Неверный ответ!",
-                               reply_markup=InlineKeyboardMarkup(kb.back))
-                    bank_test_back(update, context)
-                case "2#3":
-                    reply_text("Неверный ответ!",
-                               reply_markup=InlineKeyboardMarkup(kb.back))
-                    bank_test_back(update, context)
-                case "2#4":
-                    reply_text("Верный ответ!")
-                    bank_test(update, context, 3)
-                case "3#1":
-                    reply_text("Неверный ответ!",
-                               reply_markup=InlineKeyboardMarkup(kb.back))
-                    bank_test_back(update, context)
-                case "3#2":
-                    reply_text("Неверный ответ!",
-                               reply_markup=InlineKeyboardMarkup(kb.back))
-                    bank_test_back(update, context)
-                case "3#3":
-                    reply_text("Неверный ответ!",
-                               reply_markup=InlineKeyboardMarkup(kb.back))
-                    bank_test_back(update, context)
-                case "3#4":
-                    reply_text("Верный ответ!")
-                    bank_test(update, context, 4)
-            return
-            
-        if "shop=" in update.callback_query['data']:
-            text = update.callback_query['data'].split("=")[1]
-            
-            reply_text(f"Выберите способ покупки {text}",
-                       reply_markup=InlineKeyboardMarkup(kb.shops(text)))
-            return
-            
-        if "buy=" in update.callback_query['data']:
-            command, typ, text = update.callback_query['data'].split("=")
-            
-            if typ == "R": 
-                costs = cost_rubles()
-                reply_text(f"Чтобы купить {text}, оплатите стоимость товара по ссылке ниже, подписав сообщение текстом b/{text} и выбрав 'Бот' в качестве цели, и отправьте скриншот оплаты и текст b/{text} @r_ypite\n\nК сожалению, более удобные способы оплаты пока что не доступны",
-                           reply_markup=InlineKeyboardMarkup(kb.buy_R(text, costs[text])))
-                    
-            elif typ == "Y":
-                costs = cost_youshk()
-                
-                reply_text(f"Стоимость {text}: {costs[text]}",
-                           reply_markup=InlineKeyboardMarkup(kb.buy_Y(text, costs[text])))
-            return
-
-        if "shopbuy:" in update.callback_query['data']:
-            command, text, cost = update.callback_query['data'].split(":")
-            shopbuy = buy(text, int(cost), str(update.callback_query.message.chat_id))
-            
-            if shopbuy:
-                reply_text(f"Вы успешно приобрели {text}",
-                           reply_markup=InlineKeyboardMarkup(kb.shop))
-            elif shopbuy is None:
-                reply_text(f"У вас не зарегестрирован банк!\nДля его регестрации пройдите в Меню -> Банк",
-                           reply_markup=InlineKeyboardMarkup(kb.backmenu))
-            else:
-                reply_text(f"Вам нехватило Юшек для приобретения {text} или у вас уже есть этот товар!",
-                           reply_markup=InlineKeyboardMarkup(kb.shop))
-            return
-            
-        if not conflict:
-            if change(update, context) is None:
-                return
-
-        match update.callback_query['data']:
-# BACK TO MENU
-            case "/back":
-                new_message_id = reply_text(openfile('menu', 'menu'), 
-                                            reply_markup=InlineKeyboardMarkup(kb.start_key)).message_id
-#   FAQ
-            case "botinfo":
-                new_message_id = reply_text(openfile("menu/faq", "bot"),
-                                            reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("<<<", callback_data="faq"), kb.backmenu]])).message_id
-#   О YPITER
-            case "all":
-                 new_message_id = reply_text(openfile("menu/faq/ypiter", "all"),
-                                             reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("<<<", callback_data="ypiinfo"), kb.backmenu]]),
-                                             parse_mode=ParseMode.HTML).message_id
-
-#   GAME:RAP
-            case "rap":
-                new_message_id = reply_text(openfile('menu/more/fun/rap', "Game_Description1"),
-                                            reply_markup=InlineKeyboardMarkup(kb.rap)).message_id
-            case "50 Cent":
-                new_message_id = reply_sticker(sticker_links['fifticent'][0],
-                                               reply_markup=InlineKeyboardMarkup(kb.rap)).message_id
-            case "Lil Peep":
-                new_message_id = reply_sticker(sticker_links['lilpeep'][0],
-                                               reply_markup=InlineKeyboardMarkup(kb.rap)).message_id
-            case "Egor Creed":
-                new_message_id = reply_sticker(sticker_links['egorcreed'][0],
-                                               reply_markup=InlineKeyboardMarkup(kb.rap)).message_id
-            case "100 gecs":
-                new_message_id = reply_sticker(sticker_links['gecs'][0],
-                                               reply_markup=InlineKeyboardMarkup(kb.rap)).message_id 
-            case "dog":
-                new_message_id = reply_sticker(sticker_links['dog'][0],
-                                                reply_markup=InlineKeyboardMarkup(kb.rap)).message_id
-#   MENU
-            case "profile":
-                new_message_id = myprofile(update, context)
-            case "bank":
-                new_message_id = bank_test(update, context)
-            case "info":
-                new_message_id = reply_text(openfile('menu', "info"),
-                                            reply_markup=InlineKeyboardMarkup(kb.back)).message_id
-            case "helper":
-                new_message_id = reply_text(openfile("menu", "callback"),
-                                            reply_markup=InlineKeyboardMarkup(kb.back)).message_id
-            case "projects":
-                new_message_id = reply_text(openfile("menu", "projects"),
-                                            reply_markup=InlineKeyboardMarkup(kb.projects)).message_id
-            case "mycity":
-                new_message_id = mycity(update, context)
-            case "cityBack":
-                new_message_id = mycity(update, context)
-            case "more":
-                new_message_id = reply_text(openfile("menu", "menu"),
-                                            reply_markup=InlineKeyboardMarkup(kb.more)).message_id
-            case "social":
-                new_message_id = reply_text(openfile("menu/more", "social"),
-                                            reply_markup=InlineKeyboardMarkup(kb.link)).message_id
-            case "packs":
-                new_message_id = reply_text(openfile("menu/more", "pack"),
-                                            reply_markup=InlineKeyboardMarkup(kb.commands_out),
-                                            parse_mode=ParseMode.HTML).message_id
-            case "donate":
-                new_message_id = reply_text(openfile("menu/more", "donate"),
-                                            reply_markup=InlineKeyboardMarkup(kb.support),
-                                            parse_mode=ParseMode.HTML).message_id
-            case "bots":
-                new_message_id = reply_text(openfile("menu/more/bots", "bots"),
-                                            reply_markup=InlineKeyboardMarkup(kb.bots),
-                                            parse_mode=ParseMode.HTML).message_id
 #   LEARN
             case "learn":
                 new_message_id = reply_text("К сожалению, данный раздел пока не доступен",#openfile("learn", "description"),
@@ -479,84 +195,6 @@ def echo_button(update, context):
             case "3d":
                 new_message_id = reply_text(openfile("learn/descriptext", "3d"),
                                             reply_markup=InlineKeyboardMarkup(kb.modeling)).message_id
-#   CITY_GAME
-#       CREATE
-            case "create":
-                new_message_id = reply_text(openfile("data/city/descrip", "create"),
-                                            reply_markup=InlineKeyboardMarkup(kb.city_createtypes)).message_id
-#       CREATE-HOUSE
-            case "house":
-                new_message_id = reply_text(openfile("data/city/descrip", "create_house"),
-                                            reply_markup=InlineKeyboardMarkup(kb.city_create_house)).message_id
-            case "house1":
-                new_message_id = reply_text(openfile("data/city/descrip/create", "create")).message_id
-                Create(update, context).house1()
-            case "house2":
-                new_message_id = reply_text(openfile("data/city/descrip/create", "create")).message_id
-                Create(update, context).house2()
-            case "house3":
-                new_message_id = reply_text(openfile("data/city/descrip/create", "create")).message_id
-                Create(update, context).house3()
-#       CREATE-COMMERCICAL
-            case "commercical":
-                new_message_id = reply_text(openfile("data/city/descrip", "create_commercical"),
-                                            reply_markup=InlineKeyboardMarkup(kb.city_create_commercical)).message_id
-            case "comm1":
-                new_message_id = reply_text(openfile("data/city/descrip/create", "create")).message_id
-                Create(update, context).comm1()
-            case "comm2":
-                new_message_id = reply_text(openfile("data/city/descrip/create", "create")).message_id
-                Create(update, context).comm2()
-            case "comm3":
-                new_message_id = reply_text(openfile("data/city/descrip/create", "create")).message_id
-                Create(update, context).comm3()
-#       CREATE-INDUSTRY
-            case "industry":
-                new_message_id = reply_text(openfile("data/city/descrip", "create_industry"),
-                                            reply_markup=InlineKeyboardMarkup(kb.city_create_industry)).message_id
-            case "ind1":
-                new_message_id = reply_text(openfile("data/city/descrip/create", "create_ind_1"),
-                                            reply_markup=InlineKeyboardMarkup(kb.city_create_ind1)).message_id
-            case "1indenergy":
-                new_message_id = reply_text(openfile("data/city/descrip/create", "create")).message_id
-                Create(update, context).ind1_1()
-            case "2indenergy":
-                new_message_id = reply_text(openfile("data/city/descrip/create", "create")).message_id
-                Create(update, context).ind1_2()
-            case "3indenergy":
-                new_message_id = reply_text(openfile("data/city/descrip/create", "create")).message_id
-                Create(update, context).ind1_3()
-            case "ind2":
-                new_message_id = reply_text(openfile("data/city/descrip/create", "create_ind_2"),
-                                            reply_markup=InlineKeyboardMarkup(kb.city_create_ind2)).message_id
-            case "1indwater":
-                new_message_id = reply_text(openfile("data/city/descrip/create", "create")).message_id
-                Create(update, context).ind2_1()
-            case "2indwater":
-                new_message_id = reply_text(openfile("data/city/descrip/create", "create")).message_id
-                Create(update, context).ind2_2()
-            case "3indwater":
-                new_message_id = reply_text(openfile("data/city/descrip/create", "create")).message_id
-                Create(update, context).ind2_3()
-            case "ind3":
-                new_message_id = reply_text(openfile("data/city/descrip/create", "create_ind_3"),
-                                            reply_markup=InlineKeyboardMarkup(kb.city_create_ind3)).message_id
-            case "1indmat":
-                new_message_id = reply_text(openfile("data/city/descrip/create", "create")).message_id
-                Create(update, context).ind3_1()
-            case "2indmat":
-                new_message_id = reply_text(openfile("data/city/descrip/create", "create")).message_id
-                Create(update, context).ind3_2()
-            case "3indmat":
-                new_message_id = reply_text(openfile("data/city/descrip/create", "create")).message_id
-                Create(update, context).ind3_3()
-# PROFILE
-            case "profile_change":
-                new_message_id = reply_text(openfile("menu/profile", "change"),
-                                            reply_markup=InlineKeyboardMarkup(kb.profile_change)).message_id
-            case "city_change":
-                new_message_id = reply_text(openfile("data/city/descrip", "change"),
-                                            reply_markup=InlineKeyboardMarkup(kb.city_change)).message_id
 # LEARNING LANGUAGE
             case "lang":
                 new_message_id = reply_text(openfile("learn", "language"),
@@ -573,43 +211,543 @@ def echo_button(update, context):
                 new_message_id = reply_text(openfile("learn/language", "deutsch"),
                                             reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text="Изучать", url="https://dzen.ru/ypiter")], [kb.backmenu2]]),
                                             parse_mode=ParseMode.HTML).message_id
-            case "raiting":
-                new_message_id = global_raiting(update, context)
+'''
+import keyboardbot as kb
+from telegram import InlineKeyboardMarkup, ParseMode
+from scr.wordly import Wordly
 
-            case "quests":
-                new_message_id = reply_text(openfile("menu/more/fun/quests", "quests"),
-                                            reply_markup=InlineKeyboardMarkup(kb.quests),
-                                            parse_mode=ParseMode.HTML).message_id
-            case "buyvip":
-                new_message_id = reply_text(openfile("menu/profile", "buyvip"),
-                                            reply_markup=InlineKeyboardMarkup(kb.profile_back),
-                                            parse_mode=ParseMode.HTML).message_id
-            case "shop":
-                new_message_id = reply_text(openfile("menu/shop", "shop"),
-                                            reply_markup=InlineKeyboardMarkup(kb.shop),
-                                            parse_mode=ParseMode.HTML).message_id
-            case "mybank":
-                new_message_id = mybank(update, context)
-            case "projlist":
-                new_message_id = reply_text("None",
-                                            reply_markup=InlineKeyboardMarkup(kb.back)).message_id
-            case "profmore":
-                new_message_id = reply_text("None",
-                                            reply_markup=InlineKeyboardMarkup(kb.back)).message_id
-            case "quest1":
-                new_message_id = reply_text("None",
-                                            reply_markup=InlineKeyboardMarkup(kb.back)).message_id
-            case "quest2":
-                new_message_id = reply_text("None",
-                                            reply_markup=InlineKeyboardMarkup(kb.back)).message_id
-            case "start_test_19":
-                new_message_id = bank_test(update, context, 1)
+from spec import check_acces, openfile, global_raiting, buy
+from spec import bank_test, bank_test_back
 
-        if not conflict: context.chat_data['message_id'] = new_message_id
-    conflict = False
+from spec import Create, Status_changer
 
-@check_acces
-def echo_call(update, context):
-    echo_button(update, context)
-    #update.callback_query.message.reply_text("Error",
-     #                                                reply_markup=InlineKeyboardMarkup(kb.back))
+from prefix import mycity, myprofile, mybank
+
+from login import cost_rubles, cost_youshk
+
+mem_m, old_message_id = ['', '', '', '', ''], 0
+likestat, dislikestat = False, False
+
+Message_idd = None
+
+def photo_handler(update, context):
+    global mem_m, active_mem, LikeCount, DisLikeCount
+    
+    import random
+    from used_class import MemPhoto
+    
+    mem_n = []
+    LikeCount, DisLikeCount = 0, 0
+    active_mem = 0
+    
+    for i in range(len(
+                   open("menu/more/fun/photo/links.txt", "r", encoding="utf-8").readlines(0))):
+        mem_n.append(MemPhoto(i))
+
+    active_mem = random.choice(mem_n)
+    while active_mem.data()[0] in mem_m: active_mem = random.choice(mem_n)
+    
+    LikeCount = active_mem.data()[2]
+    DisLikeCount = active_mem.data()[3]
+    
+    messageId = update.callback_query.message.reply_photo(active_mem.data()[0],
+                                                                reply_markup=InlineKeyboardMarkup(kb.mem(LikeCount,
+                                                                                                         DisLikeCount)
+                                                                                                  )).message_id
+    
+    mem_m[4], mem_m[3], mem_m[2], mem_m[1] = mem_m[3], mem_m[2], mem_m[1], mem_m[0]
+    mem_m[0] = active_mem.data()[0]
+    
+    return messageId
+
+class Callback_checker():
+    #@check_acces
+    def __init__(self, update, context):
+
+        self.update = update
+        self.context = context
+        
+        self.reply_text = self.update.callback_query.message.reply_text
+        self.callback = self.update.callback_query['data']
+        self._uid = str(self.update.callback_query.message.chat_id)
+        
+        self.message_id = self.update.callback_query.message.message_id
+        self.status = False
+        
+        from keyboardbot import First_menu, Second_menu
+        self.first_menu = First_menu()
+        self.second_menu = Second_menu()
+        
+        self.any_checker = ["raiting"]
+        
+        self.checker = [
+            self.change_menu,
+            self.check_first_menu,
+            self.check_second_menu,
+            self.check_bank,
+            self.check_test,
+            self.check_changers,
+            self.check_discards,
+            self.check_game,
+            self.check_likes,
+            self.check_shop,
+            self.check_quests,
+            self.check_create,
+            self.anycheck,
+            self.close
+            ]
+
+        self.i = 0
+        while not self.status and self.i < len(self.checker):
+            self.checker[self.i]()
+            self.i += 1
+        
+    def edit_message(self, text: str = "None", reply_markup: object = None):
+        try:
+            self.message_id = self.context.bot.edit_message_text(
+                text = text,
+                chat_id = int(self._uid),
+                message_id = self.message_id,
+                reply_markup = reply_markup,
+                parse_mode = ParseMode.HTML
+                ).message_id
+        except:
+            self.context.bot.send_message(chat_id = self._uid,
+                                          text = text,
+                                          reply_markup = reply_markup,
+                                          parse_mode = ParseMode.HTML)
+
+        self.status = True
+        
+    def change_menu(self):
+        keys = ['menu1', 'menu2']
+        
+        if self.callback in keys:
+            match self.callback:
+                case "menu1":
+                    self.edit_message(text = openfile('menu', 'menu'),
+                                      reply_markup = InlineKeyboardMarkup(self.first_menu.menu[self.callback])
+                                      )
+                case "menu2":
+                    self.edit_message(text = openfile('menu', 'menu'),
+                                      reply_markup = InlineKeyboardMarkup(self.second_menu.menu[self.callback])
+                                      )
+                
+    def check_first_menu(self):
+        keys = self.first_menu.keys
+
+        if self.callback in keys:
+            match self.callback:
+                case "profile":
+                    self.edit_message(text = myprofile(self.update, self.context),
+                                      reply_markup = InlineKeyboardMarkup(self.first_menu.menu[self.callback])
+                                      )
+                case "city":
+                    self.edit_message(text = mycity(self.update, self.context),
+                                      reply_markup = InlineKeyboardMarkup(self.first_menu.menu[self.callback])
+                                      )
+                case "shop":
+                    self.edit_message(text = openfile("menu/shop", "shop"),
+                                      reply_markup = InlineKeyboardMarkup(self.first_menu.menu[self.callback])
+                                      )
+                case "bank":
+                    list = bank_test(self.update, self.context)
+                    self.edit_message(text = list[0],
+                                      reply_markup = list[1]
+                                      )
+                case "project":
+                    self.edit_message(text = openfile("menu", "projects"),
+                                      reply_markup = InlineKeyboardMarkup(self.first_menu.menu[self.callback])
+                                      )
+                case "social":
+                    self.edit_message(text = openfile("menu/more", "social"),
+                                      reply_markup = InlineKeyboardMarkup(self.first_menu.menu[self.callback])
+                                      )
+                case "callback":
+                    self.edit_message(text = openfile("menu", "callback"),
+                                      reply_markup = InlineKeyboardMarkup(self.first_menu.menu[self.callback])
+                                      )
+                case "version":
+                    self.edit_message(text = openfile('menu', "info"),
+                                      reply_markup = InlineKeyboardMarkup(self.first_menu.menu[self.callback])
+                                      )
+                
+    def check_second_menu(self):
+        keys = self.second_menu.keys
+
+        if self.callback in keys:
+            match self.callback:
+                case "packs": 
+                    self.edit_message(text = openfile("menu/more", "pack"),
+                                      reply_markup = InlineKeyboardMarkup(self.second_menu.menu[self.callback])
+                                      )
+                case "fun": 
+                    self.edit_message(text = openfile("menu/more/fun", "fun"),
+                                      reply_markup = InlineKeyboardMarkup(self.second_menu.menu[self.callback])
+                                      )
+                case "bots": 
+                    self.edit_message(text = openfile("menu/more/bots", "bots"),
+                                      reply_markup = InlineKeyboardMarkup(self.second_menu.menu[self.callback])
+                                      )
+                case "learn": 
+                    self.edit_message(text = openfile("learn", "description"),
+                                      reply_markup = InlineKeyboardMarkup(self.second_menu.menu[self.callback])
+                                      )
+                case "donate": 
+                    self.edit_message(text = openfile("menu/more", "donate"),
+                                      reply_markup = InlineKeyboardMarkup(self.second_menu.menu[self.callback])
+                                      )
+                    
+    def check_bank(self):
+        if "bank_" in self.callback:
+            bank, command = self.callback.split("_")
+            match command:
+                case "my":
+                    self.edit_message(text = mybank(self.update, self.context),
+                                      reply_markup = InlineKeyboardMarkup(self.first_menu.menu['bank'])
+                                      )
+                case "graphic": pass # NOT REALESE
+                case "stat": pass # NOT REALESE
+                case "actions": pass # NOT REALESE
+                case "convert": pass # NOT REALESE
+                    
+    def check_test(self):
+        if "#" in self.callback:
+            match self.callback:
+                case "0#0":
+                    list = bank_test(self.update, self.context, 1)
+                    self.edit_message(text = list[0],
+                                      reply_markup = list[1]
+                                      )
+                case "1#1":
+                    self.edit_message(text = "Неверный ответ!",
+                                      reply_markup=InlineKeyboardMarkup(kb.back_to_menu_first)
+                                      )
+                    bank_test_back(self.update, self.context)
+                case "1#2":
+                    data = bank_test(self.update, self.context, 2)
+                    self.edit_message(text = data[0],
+                                      reply_markup = data[1]
+                                      )
+                case "2#1":
+                    self.edit_message(text = "Неверный ответ!",
+                                      reply_markup=InlineKeyboardMarkup(kb.back_to_menu_first)
+                                      )
+                    bank_test_back(self.update, self.context)
+                case "2#2":
+                    self.edit_message(text = "Неверный ответ!",
+                                      reply_markup=InlineKeyboardMarkup(kb.back_to_menu_first)
+                                      )
+                    bank_test_back(self.update, self.context)
+                case "2#3":
+                    self.edit_message(text = "Неверный ответ!",
+                                      reply_markup=InlineKeyboardMarkup(kb.back_to_menu_first)
+                                      )
+                    bank_test_back(self.update, self.context)
+                case "2#4":
+                    data = bank_test(self.update, self.context, 3)
+                    self.edit_message(text = data[0],
+                                      reply_markup = data[1]
+                                      )
+                case "3#1":
+                    self.edit_message(text = "Неверный ответ!",
+                                      reply_markup=InlineKeyboardMarkup(kb.back_to_menu_first)
+                                      )
+                    bank_test_back(self.update, self.context)
+                case "3#2":
+                    self.edit_message(text = "Неверный ответ!",
+                                      reply_markup=InlineKeyboardMarkup(kb.back_to_menu_first)
+                                      )
+                    bank_test_back(self.update, self.context)
+                case "3#3":
+                    self.edit_message(text = "Неверный ответ!",
+                                      reply_markup=InlineKeyboardMarkup(kb.back_to_menu_first)
+                                      )
+                    bank_test_back(self.update, self.context)
+                case "3#4":
+                    data = bank_test(self.update, self.context, 4)
+                    self.edit_message(text = data[0],
+                                      reply_markup = data[1]
+                                      )
+                    
+    def check_changers(self):
+        if "change" in self.callback:
+            if "_change" in self.callback:
+                change_obj, postfix = self.callback.split("_")
+                if change_obj == "profile":
+                    self.edit_message(text = openfile("menu/profile", "change"),
+                                      reply_markup = InlineKeyboardMarkup(kb.profile_change)
+                                      )
+                elif change_obj == "city":
+                    self.edit_message(text = openfile("data/city/descrip", "change"),
+                                      reply_markup = InlineKeyboardMarkup(kb.city_change)
+                                      )
+            elif "!changer" in self.callback:
+                callback = self.callback.split("_")[1]
+
+                changer = Status_changer(self.update, self.context)
+                changer.change(callback)
+            
+                self.edit_message(text = changer.message,
+                                  reply_markup = changer.keyboard
+                                  )
+                    
+    def check_discards(self):
+        if "discard" in self.callback:
+            match self.callback:
+                case "discard":
+                    Status_changer(self.update, self.context).clear_status()
+                    self.edit_message(text = "Изменения отменены",
+                                      reply_markup = InlineKeyboardMarkup(kb.back_to_menu_first)
+                                      )
+                case "discard_test":
+                    bank_test_back(self.update, self.context)
+                    self.edit_message(text = "Тест отменен",
+                                      reply_markup = InlineKeyboardMarkup(kb.bank['start'])
+                                      )
+                    
+    def check_game(self):
+        if "game_" in self.callback:
+            prefix, callback = self.callback.split("_")
+            sticker_links = {'50 Cent' : open("menu/more/fun/rap/fifticent.txt").readlines(0),
+                             'Lil Peep' : open("menu/more/fun/rap/lilpeep.txt").readlines(0),
+                             '100 gecs' : open("menu/more/fun/rap/100gecs.txt").readlines(0),
+                             'Egor Creed' : open("menu/more/fun/rap/egorcreed.txt").readlines(0),
+                             'dog' : open("menu/more/fun/rap/dog.txt").readlines(0)
+                             }
+            match callback:
+                case "rap":
+                    self.edit_message(text = openfile('menu/more/fun/rap', "Game_Description1"),
+                                      reply_markup = InlineKeyboardMarkup(kb.game_rap)
+                                      )
+                case "50 Cent":
+                    self.update.callback_query.message.reply_sticker(sticker_links[self.callback][0],
+                                                                     reply_markup=InlineKeyboardMarkup(kb.game_rap))
+                case "Lil Peep":
+                    self.update.callback_query.message.reply_sticker(sticker_links[self.callback][0],
+                                                                     reply_markup=InlineKeyboardMarkup(kb.game_rap))
+                case "Egor Creed":
+                    self.update.callback_query.message.reply_sticker(sticker_links[self.callback][0],
+                                                                     reply_markup=InlineKeyboardMarkup(kb.game_rap))
+                case "100 gecs":
+                    self.update.callback_query.message.reply_sticker(sticker_links[self.callback][0],
+                                                                     reply_markup=InlineKeyboardMarkup(kb.game_rap))
+                case "dog":
+                    self.update.callback_query.message.reply_sticker(sticker_links[self.callback][0],
+                                                                     reply_markup=InlineKeyboardMarkup(kb.game_rap))
+                case "wordly":
+                    changer = Status_changer(self.update, self.context)
+                    changer.change(callback)
+                    
+                    self.edit_message(text = "Напишите предпологаемое слово, состоящее из 5 букв:\n\n",
+                                      reply_markup = changer.keyboard
+                                      )
+                case "photomem": self.message_id = photo_handler(self.update, self.context)
+                
+                case "quests": 
+                    self.edit_message(text = openfile("menu/more/fun/quests", "quests"),
+                                      reply_markup = InlineKeyboardMarkup(kb.quests)
+                                      )
+                
+    def check_quests(self):
+        if "quest" in self.callback:
+            
+            from login import Quest
+            prefix, number = self.callback.split("_")
+
+            quest = Quest(self._uid)
+            quest.authorize()
+
+            profile = quest.get_user_quest()
+            
+            match number:
+                case "1":
+                    if profile['Первый квест'] == "Не пройден":
+                        self.edit_message(text = "Error: 4.0.4 - no quest found",
+                                          reply_markup = InlineKeyboardMarkup(kb.back_to_menu_first)
+                                          )
+                        profile['Первый квест'] == "В процессе"
+                        
+                    elif profile['Первый квест'] == "В процессе":
+                        self.edit_message(text = "Вы уже начинали этот квест! Прогресс сброшен.",
+                                          reply_markup = InlineKeyboardMarkup(kb.back_to_menu_first)
+                                          )
+                        profile['Первый квест'] == "Не пройден"
+
+                    elif profile['Первый квест'] == "Пройден":
+                        self.edit_message(text = "Вы уже проходили первый квест",
+                                          reply_markup = InlineKeyboardMarkup(kb.quests)
+                                          )
+
+                case "2":
+                    if profile['Второй квест'] == "Не пройден":
+                        self.edit_message(text = "Error: 4.0.4 - no quest found",
+                                          reply_markup = InlineKeyboardMarkup(kb.back_to_menu_first)
+                                          )
+                        profile['Второй квест'] == "В процессе"
+                        
+                    elif profile['Второй квест'] == "В процессе":
+                        self.edit_message(text = "Вы уже начинали этот квест! Прогресс сброшен.",
+                                          reply_markup = InlineKeyboardMarkup(kb.back_to_menu_first)
+                                          )
+                        profile['Второй квест'] == "Не пройден"
+
+                    elif profile['Второй квест'] == "Пройден":
+                        self.edit_message(text = "Вы уже проходили второй квест",
+                                          reply_markup = InlineKeyboardMarkup(kb.quests)
+                                          )
+                        
+    def check_project(self):
+        if "proj" in self.callback:
+            if self.callback == "projlist":
+                self.edit_message(text = "Error project=0.5.5",
+                                  reply_markup = InlineKeyboardMarkup(kb.back_to_menu_first)
+                                  )
+                
+            elif self.callback == "projmore":
+                self.edit_message(text = "Error project=0.5.6",
+                                  reply_markup = InlineKeyboardMarkup(kb.back_to_menu_first)
+                                  )
+                    
+    def check_likes(self):
+        global old_message_id, likestat, dislikestat
+        
+        if "-" in self.callback:
+            action, value = self.callback.split("-")
+            if "m_" in action:
+                prefix, action = action.split("_")
+
+                if action == "like":
+                    if str(self.message_id) != str(old_message_id) and dislikestat is not True:
+                        active_mem.change_raiting(int(value) + 1, int(DisLikeCount))
+
+                        old_message_id, likestat = self.message_id, True
+
+                    elif str(self.message_id) == str(old_message_id) and dislikestat is not True:
+                        active_mem.change_raiting(int(value) - 1, int(DisLikeCount))
+                
+                        old_message_id, likestat = "", False
+            
+                elif action == "dislike":
+                    if str(self.message_id) != str(old_message_id) and likestat is not True:
+                        active_mem.change_raiting(int(LikeCount), int(value) + 1)
+
+                        old_message_id, dislikestat = self.message_id, True
+
+                    elif str(self.message_id) == str(old_message_id) and likestat is not True:
+                        active_mem.change_raiting(int(LikeCount), int(value) - 1)
+                
+                        old_message_id, dislikestat = "", False
+
+                self.context.bot.edit_message_reply_markup(chat_id=self.update.callback_query.message.chat_id,
+                                                           message_id=self.message_id,
+                                                           reply_markup=InlineKeyboardMarkup(kb.mem(
+                                                                                                    active_mem.data()[2],
+                                                                                                    active_mem.data()[3]
+                                                                                                    )
+                                                                                             )
+                                                           )
+                
+    def check_shop(self):
+        if "shop" in self.callback:
+            if "shop=" in self.callback:
+                text = self.callback.split("=")[1]
+                self.edit_message(text = f"Выберите способ покупки {text}",
+                                  reply_markup = InlineKeyboardMarkup(kb.shops(text))
+                                  )
+            elif "shopbuy:" in self.callback:
+                command, text, cost = self.callback.split(":")
+                shopbuy = buy(text, int(cost), self._uid)
+            
+                if shopbuy:
+                    self.edit_message(text = f"Вы успешно приобрели {text}",
+                                      reply_markup = InlineKeyboardMarkup(self.first_menu.menu['shop'])
+                                      )
+                elif shopbuy is None:
+                    self.edit_message(text = f"У вас не зарегестрирован банк!\nДля его регестрации пройдите в Меню -> Банк",
+                                      reply_markup = InlineKeyboardMarkup(kb.back_to_menu_first)
+                                      )
+                else:
+                    self.edit_message(text = f"Вам нехватило Юшек для приобретения {text} или у вас уже есть этот товар!",
+                                      reply_markup = InlineKeyboardMarkup(self.first_menu.menu['shop'])
+                                      )
+        if "buy=" in self.callback:
+            command, typ, text = self.callback.split("=")
+            
+            if typ == "R": 
+                costs = cost_rubles()
+                self.edit_message(text = f"Чтобы купить {text}, оплатите стоимость товара по ссылке ниже, подписав сообщение текстом b/{text} и выбрав 'Бот' в качестве цели, и отправьте скриншот оплаты и текст b/{text} @r_ypite\n\nК сожалению, более удобные способы оплаты пока что не доступны",
+                                  reply_markup = InlineKeyboardMarkup(kb.buy_R(text,
+                                                                               costs[text]
+                                                                               )
+                                                                      )
+                                  )
+                    
+            elif typ == "Y":
+                costs = cost_youshk()
+                
+                self.edit_message(text = f"Стоимость {text}: {costs[text]}",
+                                  reply_markup = InlineKeyboardMarkup(kb.buy_Y(text,
+                                                                               costs[text]
+                                                                               )
+                                                                      )
+                                  )
+                
+    def check_create(self):
+        if "create_" in self.callback:
+            create, typed = self.callback.split("_")
+            
+            if typed in ['house', 'commercical', 'industry']:
+                self.edit_message(text = openfile("data/city/descrip", f"create_{typed}"),
+                                  reply_markup = InlineKeyboardMarkup(kb.create[create][typed])
+                                  )
+            else:
+                if create == '!create':
+                    self.edit_message(text = openfile("data/city/descrip/create", self.callback),
+                                      reply_markup = InlineKeyboardMarkup(kb.create[self.callback])
+                                      )
+                else:
+                    #self.edit_message(text = openfile("data/city/descrip/create", "create"),
+                    #                  reply_markup = InlineKeyboardMarkup(kb.backcity_kb)
+                    #                  )
+                    create = Create(self.update, self.context)
+                    
+                    match typed:
+                        case "house1": create.house1()
+                        case "house2": create.house2()
+                        case "house3": create.house3()
+
+                        case "commercical1": create.comm1()
+                        case "commercical2": create.comm2()
+                        case "commercical3": create.comm3()
+
+                        case "energy1": create.ind1_1()
+                        case "energy2": create.ind1_2()
+                        case "energy3": create.ind1_3()
+                        
+                        case "water1": create.ind2_1()
+                        case "water2": create.ind2_2()
+                        case "water3": create.ind2_3()
+
+                        case "material1": create.ind3_1()
+                        case "material2": create.ind3_2()
+                        case "material3": create.ind3_3()
+                            
+                    self.edit_message(text = create.message,
+                                      reply_markup = create.keyboard
+                                      )
+        elif self.callback == "create":
+            self.edit_message(text = openfile("data/city/descrip", "create"),
+                              reply_markup = InlineKeyboardMarkup(kb.create['create']['types'])
+                              )
+                    
+    def anycheck(self):
+        if self.callback in self.any_checker:
+            if self.callback == "raiting":
+                message = global_raiting(self.update, self.context)
+                self.edit_message(text = message,
+                                  reply_markup = InlineKeyboardMarkup(kb.profile_back)
+                                  )
+                
+    def close(self):
+        self.status = True
