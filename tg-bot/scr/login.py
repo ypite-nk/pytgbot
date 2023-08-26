@@ -571,3 +571,34 @@ class Bank():
 			with open(self.path, "w", encoding="utf-8") as file: file.write(json.dumps(new_bank_info))
 			
 		else: return None
+		
+class Quest():
+	def __init__(self, user_identificator: str):
+		self._uid = user_identificator
+		self.path = f'menu/more/fun/quests/{self._uid}.txt'
+		
+		self.profile = User(self._uid).get_user_profile()
+		
+		self.quest_profile = {
+			"ID" : self._uid,
+			"Первый квест" : "Не пройден",
+			"Второй квест" : "Не пройден"
+			}
+		
+	def authorize(self) -> None:
+		if not path.exists(self.path):
+			with open(self.path, "w", encoding="utf-8") as file: file.write(json.dumps(self.quest_profile))
+			
+		else: return None
+		
+	def get_user_quest(self) -> dict:
+		if path.exists(self.path):
+			with open(self.path, "r", encoding="utf-8") as file: return json.loads("".join(file.readlines(0)))
+			
+		else: return None
+		
+	def write_user_quest(self, new_quest_info: dict) -> None:
+		if path.exists(self.path):
+			with open(self.path, "w", encoding="utf-8") as file: file.write(json.dumps(new_quest_info))
+			
+		else: return None
