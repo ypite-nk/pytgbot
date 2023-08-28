@@ -7,8 +7,10 @@ logging.basicConfig(filename="tmp/info.log", level=logging.DEBUG,
                     format='%(asctime)s %(levelname)s %(name)s %(message)s')
 logger = logging.getLogger(__name__)
 
-bot = telegram.Bot(token="6143246892:AAEQGuhkqKZ-6Hsn7cvvbUMwOW0rNOHHGSE")
-updater = Updater(token="6143246892:AAEQGuhkqKZ-6Hsn7cvvbUMwOW0rNOHHGSE", use_context=True)
+with open("token.txt", "r", encoding="utf-8") as token: token = token.readlines(0)[0]
+
+bot = telegram.Bot(token=token)
+updater = Updater(token=token, use_context=True)
 ud = updater.dispatcher
 
 from case import Callback_checker
