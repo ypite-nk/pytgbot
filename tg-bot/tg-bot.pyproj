@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>eefcc1d4-c69d-49fb-8345-69c38f7c565a</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>scr\tg_bot.py</StartupFile>
+    <StartupFile>src\tg_bot.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -21,21 +21,22 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="scr\case.py" />
-    <Compile Include="scr\echo.py" />
-    <Compile Include="scr\functions.py" />
-    <Compile Include="scr\inline.py" />
-    <Compile Include="scr\keyboardbot.py" />
-    <Compile Include="scr\logg.py" />
-    <Compile Include="scr\login.py" />
-    <Compile Include="scr\prefix.py" />
-    <Compile Include="scr\spec.py" />
-    <Compile Include="scr\used_class.py" />
-    <Compile Include="scr\tg_bot.py" />
-    <Compile Include="scr\wordly.py" />
+    <Compile Include="src\bank_math.py" />
+    <Compile Include="src\case.py" />
+    <Compile Include="src\echo.py" />
+    <Compile Include="src\functions.py" />
+    <Compile Include="src\inline.py" />
+    <Compile Include="src\keyboardbot.py" />
+    <Compile Include="src\logg.py" />
+    <Compile Include="src\login.py" />
+    <Compile Include="src\prefix.py" />
+    <Compile Include="src\spec.py" />
+    <Compile Include="src\used_class.py" />
+    <Compile Include="src\tg_bot.py" />
+    <Compile Include="src\wordly.py" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="scr\" />
+    <Folder Include="src\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
