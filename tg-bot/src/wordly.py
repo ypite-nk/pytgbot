@@ -14,6 +14,7 @@ class Wordly():
 
         with open("base/wordly/words.txt", "r", encoding="utf-8") as file: self.words = file.readlines(0)
         with open("base/wordly/daily.txt", "r", encoding="utf-8") as file: self.daily = file.readlines(0)
+        with open("base/wordly/memory.txt", "r", encoding="utf-8") as file: self.memory = file.readlines(0)
 
         if self._uid is not None:
             from login import User

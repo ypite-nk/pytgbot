@@ -6,12 +6,6 @@ back_to_menu_second_kb = IKB("Меню", callback_data="menu2")
 back_to_menu_first = [[back_to_menu_first_kb]]
 back_to_menu_second = [[back_to_menu_second_kb]]
 
-start_key = [[IKB("Профиль", callback_data="profile"), IKB("Город", callback_data="city")],
-                        [IKB("Магазин", callback_data="shop"), IKB("Банк", callback_data="bank")],
-                        [IKB("Проекты", callback_data="project"), IKB("Соцсети", callback_data="social")],
-                        [IKB("Обратная связь", callback_data="callback"), IKB("Версия", callback_data="version"), IKB(">>>", callback_data="menu2")]
-                        ]
-
 class First_menu():
     def __init__(self):
         self.menu = {
@@ -20,30 +14,37 @@ class First_menu():
                         [IKB("Проекты", callback_data="project"), IKB("Соцсети", callback_data="social")],
                         [IKB("Обратная связь", callback_data="callback"), IKB("Версия", callback_data="version"), IKB(">>>", callback_data="menu2")]
                         ],
+
             'profile': [[IKB("Изменить профиль", callback_data="profile_change"), IKB("Глобальный Рейтинг", callback_data="raiting")],
                         [back_to_menu_first_kb]
                         ],
-            'city': [[IKB("Изменить", callback_data="city_change"), IKB("Постройка", callback_data="create")],
+
+            'city': [[IKB("Изменить", callback_data="city_change"), IKB("Постройка", callback_data="!city_create")],
                      [back_to_menu_first_kb]
                      ],
+
             'shop': [[IKB("VIP", callback_data="shop=VIP"), IKB("JxSpeed", callback_data="shop=JxSpeed"), IKB("MacroMotor", callback_data="shop=MacroMotor"), IKB("LifeX10", callback_data="shop=LifeX10")],
                      [back_to_menu_first_kb]
                      ],
+
             'bank': [[IKB("Профиль", callback_data="bank_my"), IKB("Графики", callback_data="bank_graphic")],
                      [IKB("Информация", callback_data="bank_stat"), IKB("Акции", callback_data="bank_actions")],
                      [back_to_menu_first_kb, IKB("Конвертер", callback_data="bank_convert")]
                      ],
+
             'project': [[IKB("Список проектов", callback_data="projlist"), IKB("Дополнительно...", callback_data="projmore")],
                         [back_to_menu_first_kb]
                         ],
+
             'social': [[IKB(text="Канал Тг", url="https://t.me/ypite"), IKB(text="Группа Вк", url="https://vk.com/cloud_ypiter"), IKB(text="GitHub", url="https://github.com/ypite-nk")],
                        [IKB(text="Вконтакте", url="https://vk.com/ypite"), IKB(text="Телеграмм", url="https://t.me/r_ypite")],
                        [IKB(text="Youtube", url="https://www.youtube.com/channel/UCQunVaPHyI2MvS0rU56_MA"), IKB(text="TikTok", url="https://vm.tiktok.com/ZT81sSebh/"), IKB(text="Twitch", url="https://www.twitch.tv/ypiternk")],
                        [back_to_menu_first_kb]
                        ],
+
             'callback': back_to_menu_first,
-            'version': back_to_menu_first,
-            'menu1to2': back_to_menu_second
+
+            'version': back_to_menu_first
             }
         
         self.keys = []
@@ -53,25 +54,28 @@ class Second_menu():
     def __init__(self):
         self.menu = {
             'menu2': [[IKB("Стикерпаки", callback_data="packs"), IKB("Развлечения", callback_data="fun"), IKB("Боты", callback_data="bots")],
-                      [IKB("Образование", callback_data="learn")],
+                      [IKB("Образование", callback_data="science")],
                       [IKB("<<<", callback_data="menu1"), IKB("Поддержать", callback_data="donate")]
                       ],
+
             'packs': [[IKB("<<<", callback_data="menu2"), back_to_menu_first_kb]
                       ],
+
             'fun': [[IKB("rap", callback_data="game_rap"), IKB("Фото мем", callback_data="game_photomem"), IKB("Текстовые квесты", callback_data="game_quests")],
                     [IKB("Wordly", callback_data="game_wordly")],
                     [IKB("<<<", callback_data="menu2"), back_to_menu_first_kb]
                     ],
+
             'bots': [[IKB("ch:помощник", url="https://t.me/ch_helper_bot"), IKB("ChatGPT", url="https://t.me/gptdevbot?start=1086638338"), IKB("LeakedCheck", url="https://t.me/LeackedCheck_bot?start=qgSPpU")],
                      [IKB("<<<", callback_data="menu2")]
                      ],
-            'learn': [[back_to_menu_second_kb]],#[[IKB("Образование", callback_data="learning"), IKB("Книги", callback_data="books")],
-                     # [IKB("<<<", callback_data="menu2"), back_to_menu_second_kb]
-                     # ],
+
+            'science': [[IKB("Обучение", callback_data="science_learn_menu"), IKB("Книги", callback_data="science_books_list1")],
+                        [IKB("<<<", callback_data="menu2"), back_to_menu_first_kb]],
+                        
             'donate': [[IKB(text="Boosty", url="https://boosty.to/ypite"), IKB(text="DonationAlerts", url="https://www.donationalerts.com/r/ypiter_nk")],
                        [IKB("<<<", callback_data="menu2"), back_to_menu_first_kb]
-                       ],
-            'menu2to1': back_to_menu_first
+                       ]
             }
         
         self.keys = []
@@ -94,110 +98,117 @@ profile_change = [
 profile_back = [[IKB("<<<", callback_data="profile")]]
 
 changerback = [[IKB("❌Отмена❌", callback_data="discard")]]
-'''
-learn = [
-    [IKB("IT", callback_data="it"), IKB("3D", callback_data="3d"), IKB("Языки", callback_data="lang")],
-    [IKB("<<<", callback_data="learn"), back_to_menu_first_kb]
-    ]
 
-lang = [[IKB("Английский", callback_data="learn_eng"), IKB("Польский", callback_data="learn_pol")],
-        [IKB("<<<", callback_data="learn"), IKB("Немецкий", callback_data="learn_dts")]]
+science = {
+    'menu' : [[IKB("Обучение", callback_data="science_learn_menu"),
+               IKB("Книги", callback_data="science_books_list1")],
+              [IKB("<<<", callback_data="menu2")]],
+              
+    'learn' : {
+        'menu': [[IKB("IT", callback_data="science_learn_computer_it_menu"),
+                  IKB("3D", callback_data="science_learn_computer_3d"),
+                  IKB("Языки", callback_data="science_learn_language_menu")],
+                 [IKB("<<<", callback_data="science_menu"), back_to_menu_first_kb]],
+                 
+        'computer' : {
+            'it' : {
+                'menu' : [[IKB("Программирование", callback_data="science_learn_computer_it_prog_menu")],
+                          [IKB("Системное администрирование", callback_data="science_learn_computer_it_adm")],
+                          [IKB("Веб-разработка", callback_data="science_learn_computer_it_web_menu"),
+                           IKB("SQLite3", callback_data="science_learn_computer_it_sql")],
+                          [IKB("<<<", callback_data="science_learn_menu"), back_to_menu_first_kb]],
+                          
+                'prog' : {
+                    'menu' : [[IKB("Python", callback_data="science_learn_computer_it_prog_python"),
+                               IKB("C++", callback_data="science_learn_computer_it_prog_c++")],
+                              [IKB("<<<", callback_data="science_learn_computer_it_menu"), back_to_menu_first_kb]],
 
-booklist = [[IKB("<<<", callback_data="backbook1"), back_to_menu_first_kb]]
+                    'python' : [[IKB(text = "Изучать", url = "https://clck.ru/35WiHL")],
+                                [IKB("<<<", callback_data="science_learn_computer_it_prog_menu")]],
 
-booklist1 = [
-    [IKB("Классика", callback_data="classic"), IKB("Зарубежные", callback_data="foreign"), IKB("Русская", callback_data="rus")],
-    [IKB("Детективы", callback_data="detective"), IKB("Фэнтези", callback_data="fantasy"), IKB("Фантастика", callback_data="fantastik")],
-    [IKB("Проза", callback_data="prose"), IKB("Ужасы", callback_data="scary"), IKB("Приключения", callback_data="adv")],
-    [IKB("<<<", callback_data="learn"), IKB(">>>", callback_data="booklist2")]
-    ]
+                    'c++' : [[IKB(text = "Изучать", url = "https://clck.ru/yTjJf")],
+                             [IKB("<<<", callback_data="science_learn_computer_it_prog_menu")]]
+                    },
 
-booklist2 = [
-    [IKB("Боевики", callback_data="action"), IKB("Повести", callback_data="stories"), IKB("Поэзия", callback_data="poem")],
-    [IKB("Научпоп", callback_data="science"), IKB("Психология", callback_data="psycho"), IKB("Комиксы", callback_data="comics")],
-    [IKB("Манга", callback_data="manga"), IKB("Эзотерика", callback_data="esotericism"), IKB("Культура", callback_data="culture")],
-    [IKB("<<<", callback_data="backbook1"), IKB(">>>", callback_data="booklist3")]
-    ]
+                'adm' : [[IKB(text = "Изучать", url = "https://stepik.org/course/176437/promo")],
+                         [IKB("<<<", callback_data="science_learn_computer_it_menu"), back_to_menu_first_kb]],
 
-booklist3 = [
-    [IKB("Романы", callback_data="romans"), IKB("Справочники", callback_data="bookfaq"), IKB("Дом", callback_data="home")],
-    [IKB("Религия", callback_data="religion"), IKB("Юмор", callback_data="funny"), IKB("Бизнес", callback_data="buisness")],
-    [IKB("<<<", callback_data="backbook2"), back_to_menu_first_kb]
-    ]
+                'web' : {
+                    'menu' : [[IKB("HTML", callback_data="science_learn_computer_it_web_html"),
+                               IKB("PHP", callback_data="science_learn_computer_it_web_php"),
+                               IKB("Django", callback_data="science_learn_computer_it_web_django")],
+                              [IKB("<<<", callback_data="science_learn_computer_it_menu"), back_to_menu_first_kb]],
 
-genreskb = [[IKB("<<<", callback_data="backbook1"), back_to_menu_first_kb]]
+                    'html' : [[IKB(text = "Изучать", url = "https://clck.ru/35WiGG")],
+                              [IKB("<<<", callback_data="science_learn_computer_it_web_menu")]],
 
-it = [
-    [IKB("Программирование", callback_data="coding")], [IKB("Веб-разработка", callback_data="web")],
-    [IKB("Сис. Администрирование", callback_data="admin"), IKB("Базы данных", callback_data="sql")],
-    [IKB("<<<", callback_data="learning"), back_to_menu_first_kb]
-    ]
+                    'php' : [[IKB(text = "Изучать", url = "https://clck.ru/35WiFC")],
+                             [IKB("<<<", callback_data="science_learn_computer_it_web_menu")]],
 
-coding = [
-    [IKB("Python", callback_data="py"), IKB("C++", callback_data="+"), IKB("JavaScript", callback_data="js")],
-    [IKB("<<<", callback_data="it"), back_to_menu_first_kb]
-    ]
+                    'django' : [[IKB(text = "Изучать", url = "https://clck.ru/35WiEf")],
+                                [IKB("<<<", callback_data="science_learn_computer_it_web_menu")]]
+                    },
 
-python = [
-    [IKB(text="Материалы", url="https://www.python.org/")], #                                                                                            PYTHON
-    [IKB("<<<", callback_data="coding"), back_to_menu_first_kb]
-    ]
+                'sql' : [[IKB(text = "Изучать", url = "https://clck.ru/35WiDf")],
+                         [IKB("<<<", callback_data="science_learn_computer_it_menu"), back_to_menu_first_kb]]
+                },
+                
+            '3d' : [[IKB(text = "Изучать", url = "https://clck.ru/35WiCW")],
+                    [IKB("<<<", callback_data="science_learn_menu"), back_to_menu_first_kb]]
 
-cpp = [
-    [IKB(text="Материалы", url="https://learn.microsoft.com/ru-ru/cpp/cpp/cpp-language-reference?view=msvc-170")],#                                         C++
-    [IKB("<<<", callback_data="coding"), back_to_menu_first_kb]
-    ]
+            },
+            
+        'language' : {
+            'menu' : [[IKB("Английский", callback_data="science_learn_language_english"),
+                       IKB("Польский", callback_data="science_learn_language_polski"),
+                       IKB("Немецкий", callback_data="science_learn_language_deutsch")],
+                      [IKB("<<<", callback_data="science_learn_menu"), back_to_menu_first_kb]],
+                       
+            'english' : [[IKB(text = "Изучать", url = "https://clck.ru/35WiKz")],
+                         [IKB("<<<", callback_data = "science_learn_language_menu"), back_to_menu_first_kb]],
 
-js = [
-    [IKB(text="Материалы", url="https://learn.javascript.ru/")],#                                                                                            JAVA SCRIPT
-    [IKB("<<<", callback_data="coding"), back_to_menu_first_kb]
-    ]
+            'polski' : [[IKB(text = "Изучать", url = "https://dzen.ru/ypiter")],
+                        [IKB("<<<", callback_data = "science_learn_language_menu"), back_to_menu_first_kb]],
 
-web = [
-    [IKB("HTML&CSS", callback_data="html_m"), IKB("PHP", callback_data="php"), IKB("django", callback_data="django")],
-    [IKB("<<<", callback_data="it"), back_to_menu_first_kb]
-    ]
+            'deutsch' : [[IKB(text = "Изучать", url = "https://dzen.ru/ypiter")],
+                         [IKB("<<<", callback_data = "science_learn_language_menu"), back_to_menu_first_kb]]
+            }
+        },
+    'books' : {
+        'list1': [[IKB("Классика", callback_data="!science_classic"),
+                   IKB("Зарубежные", callback_data="!science_foreign"),
+                   IKB("Русская", callback_data="!science_rus")],
+                  [IKB("Детективы", callback_data="!science_detective"),
+                   IKB("Фэнтези", callback_data="!science_fantasy"),
+                   IKB("Фантастика", callback_data="!science_fantastik")],
+                  [IKB("Проза", callback_data="!science_prose"),
+                   IKB("Ужасы", callback_data="!science_scary"),
+                   IKB("Приключения", callback_data="!science_adv")],
+                  [IKB("<<<", callback_data="science_menu"), IKB(">>>", callback_data="science_books_list2")]],
 
-html_m = [
-    [IKB(text="Материалы", url="https://developer.mozilla.org/ru/docs/Learn/Getting_started_with_the_web/HTML_basics")],#                                HTML
-    [IKB("<<<", callback_data="web"), back_to_menu_first_kb]
-    ]
+        'list2': [[IKB("Боевики", callback_data="!science_action"),
+                   IKB("Повести", callback_data="!science_stories"),
+                   IKB("Поэзия", callback_data="!science_poem")],
+                  [IKB("Научпоп", callback_data="!science_science"),
+                   IKB("Психология", callback_data="!science_psycho"),
+                   IKB("Комиксы", callback_data="!science_comics")],
+                  [IKB("Манга", callback_data="!science_manga"),
+                   IKB("Эзотерика", callback_data="!science_esotericism"),
+                   IKB("Культура", callback_data="!science_culture")],
+                  [IKB("<<<", callback_data="science_books_list1"), IKB(">>>", callback_data="science_books_list3")]],
 
-php = [
-    [IKB(text="Материалы", url="https://developer.mozilla.org/ru/docs/Learn/Getting_started_with_the_web/HTML_basics")],#                                   PHP
-    [IKB("<<<", callback_data="web"), back_to_menu_first_kb]
-    ]
+        'list3': [[IKB("Романы", callback_data="!science_romans"),
+                   IKB("Справочники", callback_data="!science_bookfaq"),
+                   IKB("Дом", callback_data="!science_home")],
+                  [IKB("Религия", callback_data="!science_religion"),
+                   IKB("Юмор", callback_data="!science_funny"),
+                   IKB("Бизнес", callback_data="!science_buisness")],
+                  [IKB("<<<", callback_data="science_books_list2"), back_to_menu_first_kb]],
+        
+        'back': [[IKB("<<<", callback_data="science_books_list1"), back_to_menu_first_kb]]
+        }
+    }
 
-django = [
-    [IKB(text="Материалы", url="https://developer.mozilla.org/ru/docs/Learn/Getting_started_with_the_web/HTML_basics")],#                                DJANGO
-    [IKB("<<<", callback_data="web"), back_to_menu_first_kb]
-    ]
-
-admin = [
-    [IKB("Системный администратор", callback_data="s_admin"), IKB("Data Sciens", callback_data="data_sciens")],
-    [IKB("<<<", callback_data="it"), back_to_menu_first_kb]
-    ]
-
-s_admin = [
-    [IKB(text="Материалы", url="https://habr.com/ru/companies/ruvds/articles/486204/")],#                                                               ADMIN
-    [IKB("<<<", callback_data="admin"), back_to_menu_first_kb]
-    ]
-
-data_sciens = [
-    [IKB(text="Материалы", url="https://habr.com/ru/articles/668428/")],#                                                                           DATA SCIENS
-    [IKB("<<<", callback_data="admin"), back_to_menu_first_kb]
-    ]
-
-sql = [
-    [IKB(text="Материалы", url="https://habr.com/ru/articles/564390/")],#                                                                                   SQL
-    [IKB("<<<", callback_data="it"), back_to_menu_first_kb]
-    ]
-
-modeling = [
-    [IKB(text="Материалы", url="https://habr.com/ru/companies/otus/articles/675410/")],#                                                               MODELING
-    [IKB("<<<", callback_data="learning"), back_to_menu_first_kb]
-    ]
-'''
 def mem(LikeCount, DisLikeCount):
     mem = [
         [IKB("Мем", callback_data="game_photomem"), IKB("👍  " + str(LikeCount), callback_data="m_like-" + str(LikeCount)), IKB("👎  " + str(DisLikeCount), callback_data="m_dislike-" + str(DisLikeCount))],
@@ -263,8 +274,7 @@ def shops(callback):
 
 def buy_R(callback, cost):
     return [
-        [IKB(f"Купить {callback} за {cost}₽ с помощью DonationAlerts",
-             url="https://www.donationalerts.com/r/ypiter_nk")],
+        [IKB(f"Купить {callback} за {cost}₽ с помощью DonationAlerts", url="https://www.donationalerts.com/r/ypiter_nk")],
         [IKB("<<<", callback_data=f"shop={callback}")]
         ]
 
@@ -290,5 +300,10 @@ bank = {
               [IKB("Вариант 3", callback_data="3#3"), IKB("Вариант 4", callback_data="3#4")],
               [IKB("❌Отмена теста❌", callback_data="discard_test")]],
 
-    "complete": [[IKB("Перейти в банк...", callback_data="bank")]]
+    "complete": [[IKB("Перейти в банк...", callback_data="bank")]],
+
+    "actions" : [[IKB("JxSpeed", callback_data="graphic_JxSpeed"), IKB("MacroMotor", callback_data="graphic_MacroMotor")],
+                 [IKB("<<<", callback_data="bank")]
+                 ]
+
     }

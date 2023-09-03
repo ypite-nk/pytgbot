@@ -26,7 +26,7 @@ def cost_youshk() -> dict:
 		return json.loads("".join(file.readlines(0)))
 
 def budget_get() -> dict:
-	if not path.exists("base/bank/budget.txt"):
+	if path.exists("base/bank/budget.txt"):
 		with open("base/bank/budget.txt", "r", encoding="utf-8") as file:
 			return json.loads("".join(file.readlines(0)))
 
@@ -49,7 +49,7 @@ def budget_write(type_write: str = None, value: any = None) -> None:
 			with open("base/bank/budget.txt", "w", encoding="utf-8") as budget: budget.write(json.dumps(file))
 
 def actions_update(type_update: str) -> None:
-	new_key = type_update + datetime.datetime.now(pytz.timezone('Asia/Irkutsk')).date() # 2023-08-15
+	new_key = type_update + str(datetime.datetime.now(pytz.timezone('Asia/Irkutsk')).date()) # 2023-08-15
 		
 	keys, values = [], []
 	inflation = 4
@@ -59,20 +59,27 @@ def actions_update(type_update: str) -> None:
 	for key in actions.keys(): keys.append(key)
 	for value in actions.values(): values.append(value)
 	
-	for name, cost in keys, values:
+	for i in range(len(keys)):
+		name = keys[i]
+		cost = int(values[i])
+		
 		budget = budget_get()
-		budget_write()
 		
 		# set cost for action
-		cost = cost*( (1+inflation) / 100 ) * ( int(budget['get']) - int(budget['spend']) / 100 )
+		cost = int(cost*((1+inflation) / 100) * (int(budget['get']) - int(budget['spend']) / 100)) + 1
 		#
 		# re-write function
 		with open(f"base/bank/{name}_Memory.txt", "r", encoding="utf-8") as file:
 			memory = json.loads("".join(file.readlines(0)))
-			memory[new_key] = cost
+		
+		memory[new_key] = cost
 			
 		with open(f"base/bank/{name}_Memory.txt", "w", encoding="utf-8") as file:
 			file.write(json.dumps(memory))
+			
+def get_memory(name) -> list:
+	with open(f"base/bank/{name}_Memory.txt", "r", encoding="utf-8") as file:
+		return json.loads("".join(file.readlines(0)))
 
 class User():
 	def __init__(self, uid: str):

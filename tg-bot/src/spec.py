@@ -16,59 +16,52 @@ from telegram import InlineKeyboardMarkup
 def global_raiting(update, context):
     uid = str(update.callback_query.message.chat_id)
 
-    user_active = login.User(uid).get_user_profile()
-    user_id_list = login.users_profile_info()
-    user_dict = {}
-    output = ""
+    user_active, user_id_list = login.User(uid).get_user_profile(), login.users_profile_info()
+    user_dict, output = {}, ""
 
     for user_id in user_id_list:
         if "-" not in user_id:
             user = login.User(user_id).get_user_profile()
-            if user['VIP'] != "None":
-                user_dict[user['Никнейм'] + "♳"] = user['Рейтинг']
-            else:
-                user_dict[user['Никнейм']] = user['Рейтинг']
+
+            if user['VIP'] != "None": user_dict[user['Никнейм'] + "♳"] = user['Рейтинг']
+            else: user_dict[user['Никнейм']] = user['Рейтинг']
 
     user_dict = sorted(user_dict.items(), key=lambda x: x[1], reverse=True)
     for i in range(len(user_dict)):
         key, value = str(user_dict[i]).replace("(", "").replace(")", "").replace("'", "").split(", ")
         output += f"{str(i+1)}) {str(key)} : {str(value)}\n"
     
-    if user_active['VIP'] == 'None':
-        return f"🌏 Ваш рейтинг: {str(user_active['Рейтинг'])}\n\nГлобальный рейтинг:\n{output}"
-    else:
-        return f"🌏 Ваш рейтинг: ♳{str(user_active['Рейтинг'])}\n\nГлобальный рейтинг:\n{output}"
+    if user_active['VIP'] == 'None': return f"🌏 Ваш рейтинг: {str(user_active['Рейтинг'])}\n\nГлобальный рейтинг:\n{output}"
+
+    else: return f"🌏 Ваш рейтинг: ♳{str(user_active['Рейтинг'])}\n\nГлобальный рейтинг:\n{output}"
     
 def buy(callback, cost: int, uid: str):
-    user = login.User(uid)
-    user_bank = login.Bank(uid)
+    user, user_bank = login.User(uid), login.Bank(uid)
     
-    profile = user.get_user_profile()
-    actions = user_bank.get_user_bank()
+    profile, actions = user.get_user_profile(), user_bank.get_user_bank()
     
-    autobuy = ['VIP', 'JxSpeed', 'MacroMotor', 'LifeX10']
-    bank_buy = ['JxSpeed', 'MacroMotor']
+    autobuy, bank_buy = ['VIP', 'JxSpeed', 'MacroMotor', 'LifeX10'], ['JxSpeed', 'MacroMotor']
 
-    if profile['Юшки'] >= cost:
+    if profile['Юшки'] >= cost and callback in autobuy:
         
         profile['Юшки'] -= cost
-        
-        if callback in autobuy:
 
-            if callback in bank_buy:
-                if actions is None: return None
-                if actions[callback] == "False": actions[callback] == "True"
-                else: return True
-                
-            else:
-                if callback == 'LifeX10':
-                    profile['Попытки'] += 10
-                if callback != 'LifeX10' and profile[callback] == "None":
-                    profile[callback] = "Есть"
+        if callback in bank_buy:
+
+            if actions is None:
+                return None
+            elif actions[callback] == "False": actions[callback] = "True"
+
+            else: return True    
+        else:
+            if callback == 'LifeX10': profile['Попытки'] += 10
+            elif callback != 'LifeX10' and profile[callback] == "None": profile[callback] = "Есть"
         
         user.write_user_profile(profile)
         user_bank.write_user_bank(actions)
+        
         login.budget_write("spend", cost)
+        
         return True
     
     return False
@@ -96,17 +89,16 @@ def bank_test(update, context, test: any = 0):
             login.budget_write("spend", 19)
             userBank.write_user_bank(bank)
             
-        else:
-            return ["На вашем счету недостаточно средств!", InlineKeyboardMarkup(kb.bank['start'])]
+        else: return ["На вашем счету недостаточно средств!", InlineKeyboardMarkup(kb.bank['start'])]
         
     if test > 1:
         bank['test_lvl'] = test
+
         if test == 4:
             bank['test'] = 2
             userBank.write_user_bank(bank)
             
-    if bank['test'] == 2:
-        return [openfile("base/bank", "access"), InlineKeyboardMarkup(kb.First_menu().menu['bank'])]
+    if bank['test'] == 2: return [openfile("base/bank", "access"), InlineKeyboardMarkup(kb.First_menu().menu['bank'])]
         
     if bank['test'] == 1:
         if bank['test_lvl'] == 1:
@@ -117,6 +109,7 @@ def bank_test(update, context, test: any = 0):
         
         if bank['test_lvl'] == 3:
             return [openfile("base/bank/test", "test_3"), InlineKeyboardMarkup(kb.bank['test3'])]
+        
     userBank.write_user_bank(bank)
 
 def bank_test_back(update, context):
@@ -233,19 +226,18 @@ class Echo_Checker():
     def wordly(self):
         user_status = self.user.get_user_status()
         if user_status['wordly']:
-            from wordly import Wordly
             
+            from wordly import Wordly
             wordly = Wordly(self.uid)
             wordly.check_word(self.text.replace("\n", "").replace(",", "‚"))
+
             self.message = wordly.output
             self.reply_markup = self.wordlykb
             
-            if "!" in self.message:
-                return True
-            else:
-                return False
-        else:
-            return None
+            if "!" in self.message: return True
+            else: return False
+
+        else: return None
 
     def write_city(self):
         user = self.user.get_user_profile()
@@ -348,6 +340,7 @@ class Echo_Checker():
         else: return False
 
         self.city.write_city_profile(user_city)
+        self.city.write_city_change(user_city_change)
 
         self.message = "Данные успешно обновлены!"
         self.reply_markup = self.citykb
@@ -373,10 +366,10 @@ class Echo_Checker():
         if dash:
             self.user.write_user_status(self.user_status)
             return True
-        elif not dash:
-            return True
-        else:
-            return False
+        
+        elif dash is None: return False
+        
+        else: return True
 
 class Status_changer():
     def __init__(self, update, context):
@@ -418,10 +411,8 @@ class Status_changer():
         user_city_status = login.City(self.uid).get_city_status()
         user_city_status[self.value] = 1
         
-        if self.value == "sign":
-            self.message = "Отправьте изображение вашего герба, не превышающее размеры 400*400 пикселей"
-        elif self.value == "flag":
-            self.message = "Отправьте изображение вашего флага, не превышающее размеры 400*200 пикселей"
+        if self.value == "sign": self.message = "Отправьте изображение вашего герба, не превышающее размеры 400*400 пикселей"
+        elif self.value == "flag": self.message = "Отправьте изображение вашего флага, не превышающее размеры 400*200 пикселей"
             
         login.City(self.uid).write_city_status(user_city_status)
 
@@ -841,9 +832,11 @@ class RandomTasks():
 
     def generateRandomTask(self):
         self.type = random.choices(self.type, weights=[30, 70])[0]
+
         if self.type[0] == 'house':
             self.type = [self.type[1], self.type[2], self.type[3]]
             self.task = random.choices(self.type, weights=[30, 10, 60])[0]
+
         elif self.type[0] == 'weather':
             self.type = [self.type[1], self.type[2], self.type[3]]
             self.task = random.choices(self.type, weights=[20, 40, 40])[0]
@@ -901,211 +894,212 @@ class Admins():
         self.active_user = login.User(str(update.message.chat_id)).get_user_control()
 
     def ban(self):
-
-        self.command, self.uid = self.update.message.text.split(" ")
-        self.user = login.User(str(self.uid)).get_user_control()
-
         if self.active_user['admin']:
-            self.active_user = self.update.message.chat_id
-            self.user['ban'] = 1
+            command, uid = self.update.message.text.split(" ")
+            
+            aid = str(self.update.message.chat_id)
+            user = login.User(uid)
 
-            login.User(self.uid).write_user_control(self.user)
+            control = user.get_user_control()
+            control['ban'] = 1
+            
+            login.User(uid).write_user_control(control)
 
-            self.update.message.reply_text(f"User: {self.uid} banned. Admin: {str(self.active_user)}")
-            self.context.bot.send_message(chat_id=-1001955905639,
-                                          text=f"User: {self.uid} banned. Admin: {str(self.active_user)}")
+            self.update.message.reply_text(f"User: {uid} unbanned. Admin: {aid}")
+            self.context.bot.send_message(chat_id=-1001955905639, text=f"User: {uid} unbanned. Admin: {aid}")
+
         else: self.update.message.reply_text("You are not admin")
 
     def unban(self):
-
-        self.command, self.uid = self.update.message.text.split(" ")
-        self.user = login.User(str(self.uid)).get_user_control()
-
         if self.active_user['admin']:
-            self.active_user = self.update.message.chat_id
-            self.user['ban'] = 0
+            command, uid = self.update.message.text.split(" ")
+            
+            aid = str(self.update.message.chat_id)
+            user = login.User(uid)
 
-            login.User(self.uid).write_user_control(self.user)
+            control = user.get_user_control()
+            control['ban'] = 0
+            
+            login.User(uid).write_user_control(control)
 
-            self.update.message.reply_text(f"User: {self.uid} unbanned. Admin: {str(self.active_user)}")
-            self.context.bot.send_message(chat_id=-1001955905639,
-                                          text=f"User: {self.uid} unbanned. Admin: {str(self.active_user)}")
+            self.update.message.reply_text(f"User: {uid} unbanned. Admin: {aid}")
+            self.context.bot.send_message(chat_id=-1001955905639, text=f"User: {uid} unbanned. Admin: {aid}")
+
         else: self.update.message.reply_text("You are not admin")
 
     def addbeta(self):
-
-        self.command, self.uid = self.update.message.text.split(" ")
-        self.user = login.User(str(self.uid)).get_user_control()
-
         if self.active_user['admin']:
-            self.active_user = self.update.message.chat_id
-            self.user['beta'] = 1
+            command, uid = self.update.message.text.split(" ")
+            
+            aid = str(self.update.message.chat_id)
+            user = login.User(uid)
 
-            login.User(self.uid).write_user_control(self.user)
+            control = user.get_user_control()
+            control['beta'] = 1
+            
+            login.User(uid).write_user_control(control)
 
-            self.update.message.reply_text(f"User: {self.uid} added to beta-test. Admin: {str(self.active_user)}")
-            self.context.bot.send_message(chat_id=-1001955905639,
-                                          text=f"User: {self.uid} added to beta-test. Admin: {str(self.active_user)}")
+            self.update.message.reply_text(f"User: {uid} added from beta-test. Admin: {aid}")
+            self.context.bot.send_message(chat_id=-1001955905639, text=f"User: {uid} added from beta-test. Admin: {aid}")
+
         else: self.update.message.reply_text("You are not admin")
 
     def delbeta(self):
-
-        self.command, self.uid = self.update.message.text.split(" ")
-        self.user = login.User(str(self.uid)).get_user_control()
-
         if self.active_user['admin']:
-            self.active_user = self.update.message.chat_id
-            self.user['beta'] = 0
+            command, uid = self.update.message.text.split(" ")
+            
+            aid = str(self.update.message.chat_id)
+            user = login.User(uid)
 
-            login.User(self.uid).write_user_control(self.user)
+            control = user.get_user_control()
+            control['beta'] = 0
+            
+            login.User(uid).write_user_control(control)
 
-            self.update.message.reply_text(f"User: {self.uid} delete from beta-test. Admin: {str(self.active_user)}")
-            self.context.bot.send_message(chat_id=-1001955905639,
-                                          text=f"User: {self.uid} delete from beta-test. Admin: {str(self.active_user)}")
+            self.update.message.reply_text(f"User: {uid} delete from beta-test. Admin: {aid}")
+            self.context.bot.send_message(chat_id=-1001955905639, text=f"User: {uid} delete from beta-test. Admin: {aid}")
+
         else: self.update.message.reply_text("You are not admin")
 
     def message(self):
         if self.active_user['admin']:
+            aid = str(self.update.message.chat_id)
+            
             if " : " in self.update.message.text:
-                command, text = self.update.message.text.split(":")
-
+                command, text = self.update.message.text.split(" : ")
                 users = login.users_profile_info()
-                for i in users:
-                    self.context.bot.send_message(chat_id=str(i), text=text)
-            else:
-                self.context.bot.send_message(chat_id=-1001955905639,
-                                              text=f"Admin: {str(self.update.message.chat_id)} wrong send_message")
+                
+                for i in users: self.context.bot.send_message(chat_id=str(i), text=text)
+
+            else: self.context.bot.send_message(chat_id=-1001955905639, text=f"Admin: {aid} wrong send_message")
         else: self.update.message.reply_text("You are not admin")
         
     def wordly(self):
         if self.active_user['admin']:
             if " : " in self.update.message.text:
-                command, word_id = self.update.message.text.split(" : ")
+                command, word = self.update.message.text.split(" : ")
+
                 from wordly import Wordly
                 classW = Wordly(str(self.update.message.chat_id))
-                classW.set_word(word_id)
-                self.context.bot.send_message(chat_id=-1001955905639,
-                                              text=f"Word was setted --> {word_id}")
-            else:
-                self.context.bot.send_message(chat_id=-1001955905639,
-                                              text=f"Admin: {str(self.update.message.chat_id)} wrong wordly_day_change")
+                classW.set_word(word)
+                
+                self.context.bot.send_message(chat_id=-1001955905639, text=f"Word was setted --> {word}")
+                
+            else: self.context.bot.send_message(chat_id=-1001955905639, text=f"Admin: {str(self.update.message.chat_id)} wrong wordly_day_change")
         else: self.update.message.reply_text("You are not admin")
         
     def Gvip(self):
         if self.active_user['admin']:
-            self.command, self.uid = self.update.message.text.split(" ")
-            self.user = login.User(str(self.uid)).get_user_profile()
+            command, uid = self.update.message.text.split(" ")
+            active_user = self.update.message.chat_id
             
-            self.active_user = self.update.message.chat_id
-            self.user['VIP'] = "Есть"
+            user = login.User(uid)
+            profile = user.get_user_profile()
+            
+            profile['VIP'] = "Есть"
 
-            login.User(self.uid).write_user_profile(self.user)
+            user.write_user_profile(profile)
 
-            self.update.message.reply_text(f"User: {self.uid} gived VIP. Admin: {str(self.active_user)}")
-            self.context.bot.send_message(chat_id=-1001955905639,
-                                          text=f"User: {self.uid} gived VIP. Admin: {str(self.active_user)}")
+            self.update.message.reply_text(f"User: {uid} lost VIP. Admin: {str(active_user)}")
+            self.context.bot.send_message(chat_id=-1001955905639, text=f"User: {uid} lost VIP. Admin: {str(active_user)}")
+
         else: self.update.message.reply_text("You are not admin")
         
     def Dvip(self):
         if self.active_user['admin']:
-            self.command, self.uid = self.update.message.text.split(" ")
-            self.user = login.User(str(self.uid)).get_user_profile()
+            command, uid = self.update.message.text.split(" ")
+            active_user = self.update.message.chat_id
             
-            self.active_user = self.update.message.chat_id
-            self.user['VIP'] = "None"
+            user = login.User(uid)
+            profile = user.get_user_profile()
+            
+            profile['VIP'] = "None"
 
-            login.User(self.uid).write_user_profile(self.user)
+            user.write_user_profile(profile)
 
-            self.update.message.reply_text(f"User: {self.uid} lost VIP. Admin: {str(self.active_user)}")
-            self.context.bot.send_message(chat_id=-1001955905639,
-                                          text=f"User: {self.uid} lost VIP. Admin: {str(self.active_user)}")
+            self.update.message.reply_text(f"User: {uid} lost VIP. Admin: {str(active_user)}")
+            self.context.bot.send_message(chat_id=-1001955905639, text=f"User: {uid} lost VIP. Admin: {str(active_user)}")
+
+        else: self.update.message.reply_text("You are not admin")
+        
+    def money_1(self):
+        if self.active_user['admin']:
+            if " : " in self.update.message.text:
+                command, uid, count = self.update.message.text.split(" : ")
+                active_user = str(self.update.message.chat_id)
+                
+                user = login.User(uid)
+                profile = user.get_user_profile()
+            
+                profile['Юшки'] += int(count)
+    
+                user.write_user_profile(profile)
+
+                self.update.message.reply_text(f"User: {uid} get {count} Y. Admin: {active_user}")
+                self.context.bot.send_message(chat_id=-1001955905639, text=f"User: {uid} get {count} Y. Admin: {active_user}")
+                
+            else: self.update.message.reply_text("Wrong admin command")
+        else: self.update.message.reply_text("You are not admin")
+        
+    def money_2(self):
+        if self.active_user['admin']:
+            if " : " in self.update.message.text:
+                command, uid, count = self.update.message.text.split(" : ")
+                active_user = str(self.update.message.chat_id)
+                
+                user = login.User(uid)
+                profile = user.get_user_profile()
+            
+                profile['Юшки'] -= int(count)
+    
+                user.write_user_profile(profile)
+
+                self.update.message.reply_text(f"User: {uid} lost {count} Y. Admin: {active_user}")
+                self.context.bot.send_message(chat_id=-1001955905639, text=f"User: {uid} lost {count} Y. Admin: {active_user}")
+                
+            else: self.update.message.reply_text("Wrong admin command")
         else: self.update.message.reply_text("You are not admin")
 
 def admin(update, context):
     admin = Admins(update, context)
-
+    # MESSAGE
     if '/message' in update.message.text: admin.message()
+    # MONEY
+    elif '/give_money' in update.message.text: admin.money_1()
+    elif '/del_money' in update.message.text: admin.money_2()
+    # VIP
     elif '/givevip' in update.message.text: admin.Gvip()
     elif '/delvip' in update.message.text: admin.Dvip()
+    # WORDLY
     elif '/wordly' in update.message.text: admin.wordly()
+    # BAN
     elif '/ban' in update.message.text: admin.ban()
     elif '/unban' in update.message.text: admin.unban()
+    # BETA
     elif '/addbeta' in update.message.text: admin.addbeta()
     elif '/delbeta' in update.message.text: admin.delbeta()
-
-from echo import echo
-
-def checkbeta(update, context, user):
-    try:
-        if not user['beta']:
-            update.message.reply_text("You are not member beta-test!! If you want to test this bot --> buy VIP")
-            context.bot.send_message(chat_id=-1001955905639,
-                                     text=f"User: {str(update.message.chat['username'])} trying to use bot... (not member beta-test)")
-            return True
-    except:
-        if not user['beta']:
-            update.callback_query.message.reply_text("You are not member beta-test!! If you want to test this bot --> buy VIP")
-            context.bot.send_message(chat_id=-1001955905639,
-                                     text=f"User: {str(update.callback_query.message.chat['username'])} trying to use bot... (not member beta-test)")
-            return True
-    return False
-
-def checkban(update, context):
-    echo(update, context)
-    callback = False
-    inline = False
-
-    try:
-        user, callback = login.User(str(update.callback_query.message.chat_id)).get_user_control(), True
-        if user is None: 
-            login.User(str(update.callback_query.message.chat_id)).authorize()
-            user = login.User(str(update.callback_query.message.chat_id)).get_user_control()
-
-    except:
-
-        try:
-            user = login.User(str(update.message.chat_id)).get_user_control()
-            if user is None: 
-                login.User(str(update.message.chat_id)).authorize()
-                user = login.User(str(update.message.chat_id)).get_user_control()
-
-        except:
-            user, inline = login.User(str(update.inline_query.from_user.id)).get_user_control(), True
-            if user is None: 
-                login.User(str(update.inline_query.from_user_id)).authorize()
-                user = login.User(str(update.inline_query.from_user_id)).get_user_control()
-
-    if not callback and not inline:
-        if user['ban']:
-            update.message.reply_text("You are banned in this place")
-            context.bot.send_message(chat_id=-1001955905639,
-                                     text=f"User: {str(update.message.chat['username'])} trying to use bot... (banned)")
-            return True
-
-        elif checkbeta(update, context, user): return True
-        else: return False
-
-    elif inline:
-        if update != None:
-            
-            if user['ban']: return True
-            elif not user['beta']: return True
-            else: return False
-
-        else: return False
-
-    elif callback:
-        if user['ban']:
-            update.callback_query.message.reply_text("You are banned in this place")
-            context.bot.send_message(chat_id=-1001955905639,
-                                     text=f"User: {str(update.callback_query.message.chat['username'])} trying to use bot... (banned)")
-            return True
-
-        elif checkbeta(update, context, user): return True
-        else: return False
-
-def check_acces(func):
-    def _checker(update, context):
-        if checkban(update, context): return
-        else: func(update, context)
-    return _checker
+    
+class Checker():
+    def __init__(self, uid: str, check_type: str = None):
+        self._uid = uid
+        self.type = check_type
+        
+        self.text = None
+        
+        self.user = login.User(self._uid)
+        self.user.authorize()
+        self.control = self.user.get_user_control()
+        
+    def check(self):
+        if self.control['ban']:
+            self.text = "У вас нету доступа к данной функции"
+            return [self.text, True]
+        
+        else: return [self.text, False]
+        
+    def check_beta(self):
+        if self.control['beta']:
+            self.text = "У вас нету доступа к данной функции"
+            return [self.text, True]
+        
+        else: return [self.text, False]

@@ -22,10 +22,12 @@ ud.add_handler(CommandHandler('menu', func.back_handler))
 ud.add_handler(CommandHandler("back", func.back_handler))
 
 import prefix
-ud.add_handler(PrefixHandler('/', 'погода', prefix.prefix_weather))
+#ud.add_handler(PrefixHandler('/', 'погода', prefix.prefix_weather))
 ud.add_handler(PrefixHandler('/', 'update', prefix.update))
 ud.add_handler(PrefixHandler('/', 'update_event', prefix.update_event))
 ud.add_handler(PrefixHandler('/', 'update_week', prefix.update_week))
+#from login import get_graph
+#ud.add_handler(PrefixHandler('/', 'graph', get_graph))
 
 ud.add_handler(MessageHandler(Filters.text & (~Filters.command), func.echo_handler))
 ud.add_handler(MessageHandler(Filters.photo, func.echo_handler))
@@ -42,6 +44,8 @@ ud.add_handler(PrefixHandler('/', 'message', spec.admin))
 ud.add_handler(PrefixHandler('/', 'givevip', spec.admin))
 ud.add_handler(PrefixHandler('/', 'delvip', spec.admin))
 ud.add_handler(PrefixHandler('/', 'wordly', spec.admin))
+ud.add_handler(PrefixHandler('/', 'give_money', spec.admin))
+ud.add_handler(PrefixHandler('/', 'del_money', spec.admin))
 
 import logg
 ud.add_handler(CommandHandler(logg.password[0], logg.clear))

@@ -1,10 +1,19 @@
 ﻿# -*- coding: utf-8 -*-
 from telegram import InlineQueryResultArticle, InputTextMessageContent
-from spec import check_acces
+from spec import Checker
 
-@check_acces
 def inline_query(update, context):
     if not update.inline_query.query: return
+    
+    data = Checker(str(update.inline_query.from_user.id))
+    if data[1]:
+        result = [InlineQueryResultArticle(id=str(uuid4()),
+                                           title=f"Access denied",
+                                           input_message_content=InputTextMessageContent(data[0])
+                                           )
+                  ]
+        update.inline_query.answer(result)
+        return
     
     from uuid import uuid4
 

@@ -1,8 +1,7 @@
 ﻿# -*- coding: utf-8 -*-
 import keyboardbot as kb
 from telegram import InlineKeyboardMarkup
-from spec import check_acces
-
+'''
 @check_acces
 def prefix_weather(update, context, city = None):
     from pyowm import OWM
@@ -17,6 +16,7 @@ def prefix_weather(update, context, city = None):
             w = owm(city).weather
             return [w.temperature('celsius')['temp'], w.detailed_status, w.wind()['speed']]
         except: return None
+
     else:
         try: prefix, city = update.message.text.split(" ")
         except:
@@ -30,8 +30,9 @@ def prefix_weather(update, context, city = None):
             w = owm(city).weather
             result = [w.temperature('celsius')['temp'], w.detailed_status, w.wind()['speed']]
             return f"Город: {city}\nТемпература: {str(result[0])}\nНебо: {str(result[1])}\nВетер: {str(result[2])} м/с"
-        except: 
-            return "Такого города не существует! Возможно, вы ошиблись в названии или у OpenWeatherMap нету таких данных."
+
+        except: return "Такого города не существует! Возможно, вы ошиблись в названии или у OpenWeatherMap нету таких данных."
+'''
 
 import login
 from os import path
@@ -64,8 +65,8 @@ def mycity(update, context):
     
     return f"===Ваш город===\n{info}\n===Управление===\n{data}"
 
-def myprofile(update, context):
-    user = login.User(str(update.callback_query.message.chat_id)).get_user_profile()
+def myprofile(_uid):
+    user = login.User(_uid).get_user_profile()
     keys, values, profile = [], [], ""
 
     for key in user.keys(): keys.append(key)
@@ -74,9 +75,9 @@ def myprofile(update, context):
     
     return f"===Ваш профиль===\n🪪{profile}"
 
-def mybank(update, context): # NONE
-    balance = login.User(str(update.callback_query.message.chat_id)).get_user_profile()['Юшки']
-    user_bank = login.Bank(str(update.callback_query.message.chat_id)).get_user_bank()
+def mybank(_uid): # NONE
+    balance = login.User(_uid).get_user_profile()['Юшки']
+    user_bank = login.Bank(_uid).get_user_bank()
     user_bank['Balance'] = balance
     
     no_access_list = ['test', 'test_lvl']
@@ -143,14 +144,14 @@ def update(update, context):
         if user['VIP'] == 'None':
             context.bot.send_message(chat_id=i,
                                      text=f"💰payday💰\n\nТвой город заработал - {str(money)}\nБюджет: {str(city_data['Бюджет'])}",
-                                     reply_markup=InlineKeyboardMarkup(kb.backcity)
+                                     reply_markup=InlineKeyboardMarkup(kb.backcity_kb)
                                      )
         else:
             city_data['Бюджет'] += money
 
             context.bot.send_message(chat_id=i,
                                      text=f"💰VIP payday💰\n\nТвой город заработал - {str(money*2)}\nБюджет: {str(city_data['Бюджет'])}",
-                                     reply_markup=InlineKeyboardMarkup(kb.backcity)
+                                     reply_markup=InlineKeyboardMarkup(kb.backcity_kb)
                                      )
 
         city.write_city_data(city_data)
@@ -158,8 +159,10 @@ def update(update, context):
 def update_event(update, context):
     from login import actions_update
     actions_update("fast$")
-    context.bot.send_message(chat_id=-1001955905639,
-                             text="Action's cost was update [FAST]")
+    context.bot.send_message(chat_id=-1001955905639, text="Action's cost was update [FAST]")
+    
+    from login import budget_write
+    budget_write()
     
     from wordly import Wordly
     wordly = Wordly(None, None)
@@ -175,16 +178,15 @@ def update_event(update, context):
         for key in city_change.keys(): city_change[key] = 0
         city.write_city_change(city_change)
 
-        task = RandomTasks(i)
+        task = RandomTasks(str(i))
         task.taskUpdate()
         
-        context.bot.send_message(chat_id=i,
+        context.bot.send_message(chat_id=int(i),
                                  text=task.text,
-                                 reply_markup=InlineKeyboardMarkup(kb.backcity)
+                                 reply_markup=InlineKeyboardMarkup(kb.backcity_kb)
                                  )
         
 def update_week(update, context):
     from login import actions_update
     actions_update("slow$")
-    context.bot.send_message(chat_id=-1001955905639,
-                             text="Action's cost was update [SLOW]")
+    context.bot.send_message(chat_id=-1001955905639, text="Action's cost was update [SLOW]")
